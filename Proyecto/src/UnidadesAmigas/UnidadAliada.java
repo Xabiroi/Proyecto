@@ -117,12 +117,20 @@ public class UnidadAliada {
 			 * 
 			 * 
 			 */
+			
+			int x1=this.getCordX();
+			int y1=this.getCordY();
+			//Coordenadas del soldado aliado
+			
 			if(this.getArma().equals("Fusil")){
 			
+			
+				
+				//Si la distancia a la que esta el otro soldado es menor que la del alcance, se añade a la lista de enemigos
 				int x=ue.getCordX();
 				int y=ue.getCordY();
-				if(x<100){
-					if(y<100){this.enemigos.add(ue);
+				if(x1-x<100){
+					if(y1-y<100){this.enemigos.add(ue);
 					
 					}	
 				}
@@ -133,11 +141,12 @@ public class UnidadAliada {
 				
 				int x=ue.getCordX();
 				int y=ue.getCordY();
-				if(x<100){
-					if(y<100){this.enemigos.add(ue);
+				if(x1-x<100){
+					if(y1-y<100){this.enemigos.add(ue);
 					
 					}	
 				}
+			
 			
 			}
 			
@@ -145,8 +154,8 @@ public class UnidadAliada {
 				
 				int x=ue.getCordX();
 				int y=ue.getCordY();
-				if(x<100){
-					if(y<100){this.enemigos.add(ue);
+				if(x1-x<100){
+					if(y1-y<100){this.enemigos.add(ue);
 					
 					}	
 				}
@@ -157,8 +166,8 @@ public class UnidadAliada {
 				
 				int x=ue.getCordX();
 				int y=ue.getCordY();
-				if(x<100){
-					if(y<100){this.enemigos.add(ue);
+				if(x1-x<100){
+					if(y1-y<100){this.enemigos.add(ue);
 					
 					}	
 				}
@@ -169,8 +178,8 @@ public class UnidadAliada {
 				
 				int x=ue.getCordX();
 				int y=ue.getCordY();
-				if(x<100){
-					if(y<100){this.enemigos.add(ue);
+				if(x1-x<100){
+					if(y1-y<100){this.enemigos.add(ue);
 					
 					}	
 				}
@@ -181,11 +190,12 @@ public class UnidadAliada {
 				
 				int x=ue.getCordX();
 				int y=ue.getCordY();
-				if(x<100){
-					if(y<100){this.enemigos.add(ue);
+				if(x1-x<100){
+					if(y1-y<100){this.enemigos.add(ue);
 					
 					}	
 				}
+			
 			
 			}
 			
@@ -193,8 +203,8 @@ public class UnidadAliada {
 				
 				int x=ue.getCordX();
 				int y=ue.getCordY();
-				if(x<100){
-					if(y<100){this.enemigos.add(ue);
+				if(x1-x<100){
+					if(y1-y<100){this.enemigos.add(ue);
 					
 					}	
 				}
