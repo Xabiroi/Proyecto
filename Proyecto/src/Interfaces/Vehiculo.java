@@ -7,9 +7,7 @@ public interface Vehiculo {
 	 * 
 	 */
 	int explotar();
-	void Atacar();
-	void Mover();
-	void CambiarArma();
+
 	
 	
 }

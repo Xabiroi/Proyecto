@@ -3,11 +3,7 @@ package UnidadesAmigas;
 
 
 import java.awt.Image;
-import java.util.ArrayList;
-
-
 import Interfaces.Persona;
-import UnidadesEnemigas.UnidadEnemiga;
 
 public class SoldadoRaso extends UnidadAliada implements Persona{
 
@@ -19,31 +15,31 @@ public class SoldadoRaso extends UnidadAliada implements Persona{
 	 * Icono
 	 * 
 	 */
-	private String[] armas= new String[] {"Rifle", "Pistola", "CQC" }; //Rango medio, corto y cuerpo a cuerpo
-	private ArrayList<UnidadEnemiga> enemigos=new ArrayList<UnidadEnemiga>();//Lista que se actualizara cada vez que se haga un movimiento
-	private int Salud=100;//Salud base de los soldados raso
-	private Image image;//Icono que tendra en el juego cada soldado raso (sin variacion de momento)
-	protected int cordX;//Coordenadas de la situacion del soldado
-	protected int cordY;
+
+
+
+	//private Image image;
+	//Cada unidad tiene que tener su propio icono en el juego
+	//Hay que asignar en el constructor a cada unidad su icono
+
 	
-	//Getters y setters
-	
-	
-	
-	public String[] getArmas() {
-		return armas;
+	public SoldadoRaso(int salud,int cordX, int cordY) {
+		super();
+		//Un set image aqui(?)
+		arma="Rifle";
+		this.armas= new String[] {"Rifle", "Pistola", "CQC" };
+		Salud = salud;
+		this.cordX = cordX;
+		this.cordY = cordY;
 	}
-	public void setArmas(String[] armas) {
-		this.armas = armas;
-	}
-	public Image getImage() {
-		return image;
-	}
-	public void setImage(Image image) {
-		this.image = image;
-	}
+
+
 	
 
+	public static void main(String[] args) {
+		SoldadoRaso x=new SoldadoRaso(100,0,0);
+		System.out.println("Patata");
+	}
 	
 
 }

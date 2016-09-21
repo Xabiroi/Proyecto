@@ -1,6 +1,8 @@
 package UnidadesAmigas;
 
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import LogicaBatallas.LogicaPartida;
@@ -11,7 +13,7 @@ public class UnidadAliada {
 	protected String[] armas= new String[5]; 
 	protected String arma;
 	protected ArrayList<UnidadEnemiga> enemigos=new ArrayList<UnidadEnemiga>();
-	protected int Salud=0;
+	protected int Salud;
 	protected Image image;
 	protected int cordX;
 	protected int cordY;
@@ -99,7 +101,11 @@ public class UnidadAliada {
 		
 		
 		for(UnidadEnemiga ue:LogicaPartida.getListaUnidadesEnemigas()){
-			
+			/**
+			 * Cada vez que vaya a atacar, se enumeran los enemigos al alcance, y a continuacion se muestran en una lista con sus puntos de salud
+			 * A continuacion se procedera a restar puntos dependiendo del arma con la que se le haya atacado
+			 * (Debilidades y multiplicadores de daño hay que aplicarlos mas tarde)
+			 */
 			
 			
 		///////////////////////////////////////////////////////////////
@@ -224,27 +230,83 @@ public class UnidadAliada {
 	}
 
 
-	public void Mover() {
+	public boolean Mover(Point P) {
 		/**Mover básico que se cambiara por un algoritmo de pathfinding mas complicado en caso de tener tiempo, sino--->
 		 * Comprobar que 
 		 * 
 		 * Obtener coordenadas de donde esta y a donde se clicka con el mouse
 		 * El movimiento estara limitado dependiendo de la unidad, permitiendo solo mover una cantidad de x y de y
-		 * 
+		 * Habria que ajustar el hitbox dependiendo de las dimensiones de las imagenes de los soldados y reajustar los calculos de movimiento en base a las coordenadas
 		 * 
 		 * 
 		 * 
 		 */
-		
+		//Se obtienen coordenadas de la actual posicion
 		int x=this.getCordX();
 		int y=this.getCordY();
 		
+		//Se clicka en la posicion donde se quiere mover
+		
+		
+		/*
+	    public void mousePressed(MouseEvent e)
+	      {
+	        this.Puntoclickado = e.getPoint();
+	      }
+	      
+		*/
+		
+		//Se restan para saber si el moviemiento esta permitidio o no
 		
 		
 		
+			//Este punto p sera creado al clickar en un sitio en el mapa
 		
 		
+		/**
+		 * 
+		 * 
+		 * PROVISIONAL
+		 */
 		
+	
+			int x1=(int) P.getX();
+			int y1=(int) P.getY();
+			if(x1-x<100){
+				if(y1-y<100){
+					for(UnidadEnemiga ue:LogicaPartida.getListaUnidadesEnemigas()){
+						if(this.getCordX()==ue.getCordX() && this.getCordY()==ue.getCordY()){
+							
+							/**
+							 * Panel auxiliar de mensajes ingame (estaria bien)
+							 * Aqui iria el mensaje de que no se puede mover a tal sitio
+							 * 
+							 * Devolveria falso si las coordenadas coincidieran
+							 */
+							return false;
+						}
+						
+					}
+					for(UnidadAliada ua:LogicaPartida.getListaUnidadesAmigas()){
+						if(this.getCordX()==ua.getCordX() && this.getCordY()==ua.getCordY()){
+							
+							/**
+							 * 
+							 * Aqui iria el mensaje de que no se puede mover a tal sitio
+							 * 
+							 * Devolveria falso si las coordenadas coincidieran
+							 */
+							return false;
+						}
+						
+					}
+					
+					//las coordenadas se devuelven al comprobar que no hay ningun objeto en ese lugar
+					this.setCordX(x1);this.setCordY(y1);//Movimiento de la unidad con su respectivo cambio de coordenadas
+					return true;
+				}	
+			}
+			return false;
 		
 		
 		
@@ -255,9 +317,17 @@ public class UnidadAliada {
 		
 		
 	}
-
-	public void CambiarArma() {
-		
+/**
+ * Parte de ventanas:
+ * -Mostrar la lista de armas
+ * -Elegir una
+ * -Pasar por parametro el string
+ * -Cambiar arma
+ * 
+ */
+	public void CambiarArma(String arma) {
+		this.setArma(arma);
+	
 		
 	}
 }
