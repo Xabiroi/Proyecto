@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import LogicaBatallas.LogicaPartida;
+import UnidadesEnemigas.SoldadoRasoEnemigo;
 import UnidadesEnemigas.UnidadEnemiga;
 
 public class UnidadAliada {
@@ -254,7 +255,7 @@ public class UnidadAliada {
 		for(UnidadEnemiga ue:LogicaPartida.getListaEnemigos()){
 			if(P.getX()==ue.getCordX()&&P.getY()==ue.getCordY()){
 				
-				if(ue instanceof SoldadoRaso){//Hay que crear las mismas clases de soldadorasoenemigo y asi en otra clase
+				if(ue instanceof SoldadoRasoEnemigo){//Hay que crear las mismas clases de soldadorasoenemigo y asi en otra clase
 					
 				
 				
