@@ -5,6 +5,7 @@ package UnidadesAmigas;
 import java.awt.Image;
 import Interfaces.Persona;
 
+
 public class SoldadoRaso extends UnidadAliada implements Persona{
 
 	/**
@@ -23,21 +24,23 @@ public class SoldadoRaso extends UnidadAliada implements Persona{
 	//Hay que asignar en el constructor a cada unidad su icono
 
 	
-	public SoldadoRaso(int salud,int cordX, int cordY) {
+	public SoldadoRaso(int cordX, int cordY) {
 		super();
-		//Un set image aqui(?)
-		arma="Rifle";
-		this.armas= new String[] {"Rifle", "Pistola", "CQC" };
-		Salud = salud;
+		//FIXME Un set image aqui(?)
+		Nombre="Soldado";
+		arma="Fusil";
+		this.armas= new String[] {"Fusil", "Pistola", "CCC" };//CCC=combate cuerpo a cuerpo
+		Salud = 100;
 		this.cordX = cordX;
 		this.cordY = cordY;
+		
 	}
 
 
 	
-
+//TODO Prueba
 	public static void main(String[] args) {
-		SoldadoRaso x=new SoldadoRaso(100,0,0);
+		SoldadoRaso x=new SoldadoRaso(0,0);
 		System.out.println("Patata");
 	}
 	

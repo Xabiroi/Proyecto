@@ -6,9 +6,10 @@ import UnidadesAmigas.UnidadAliada;
 import UnidadesEnemigas.UnidadEnemiga;
 
 public class LogicaPartida {
-	public ArrayList<UnidadEnemiga> ListaEnemigos=new ArrayList<UnidadEnemiga>();
-	public ArrayList<UnidadAliada> ListaAliados=new ArrayList<UnidadAliada>();
-	
+	public static ArrayList<UnidadEnemiga> ListaEnemigos=new ArrayList<UnidadEnemiga>();
+	public static ArrayList<UnidadAliada> ListaAliados=new ArrayList<UnidadAliada>();
+	public static int dineroAliado;
+	public static int dineroEnemigo;
 	
 	
 	/**
@@ -21,14 +22,33 @@ public class LogicaPartida {
 	 * @return
 	 */
 	
+	
 
-	public static ArrayList<UnidadEnemiga> getListaUnidadesEnemigas() {
-		// TODO Auto-generated method stub
-		return null;
+	public static ArrayList<UnidadEnemiga> getListaEnemigos() {
+		return ListaEnemigos;
 	}
-	public static ArrayList<UnidadAliada> getListaUnidadesAmigas() {
-		// TODO Auto-generated method stub
-		return null;
+	public static void setListaEnemigos(ArrayList<UnidadEnemiga> listaEnemigos) {
+		ListaEnemigos = listaEnemigos;
 	}
+	public static ArrayList<UnidadAliada> getListaAliados() {
+		return ListaAliados;
+	}
+	public static void setListaAliados(ArrayList<UnidadAliada> listaAliados) {
+		ListaAliados = listaAliados;
+	}
+	public static int getDineroAliado() {
+		return dineroAliado;
+	}
+	public static void setDineroAliado(int dineroAliado) {
+		LogicaPartida.dineroAliado = dineroAliado;
+	}
+	public static int getDineroEnemigo() {
+		return dineroEnemigo;
+	}
+	public static void setDineroEnemigo(int dineroEnemigo) {
+		LogicaPartida.dineroEnemigo = dineroEnemigo;
+	}
+	
+	
 
 }

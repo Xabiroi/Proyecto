@@ -84,7 +84,7 @@ public class UnidadEnemiga {
 	
 
 	public void Atacar() {
-		for(UnidadAliada ua:LogicaPartida.getListaUnidadesAmigas()){
+		for(UnidadAliada ua:LogicaPartida.getListaAliados()){
 			this.enemigos.add(ua);
 		}
 		

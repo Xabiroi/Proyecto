@@ -2,14 +2,14 @@ package UnidadesAmigas;
 
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.event.MouseEvent;
+
 import java.util.ArrayList;
 
 import LogicaBatallas.LogicaPartida;
 import UnidadesEnemigas.UnidadEnemiga;
 
 public class UnidadAliada {
-	
+	protected String Nombre;
 	protected String[] armas= new String[5]; 
 	protected String arma;
 	protected ArrayList<UnidadEnemiga> enemigos=new ArrayList<UnidadEnemiga>();
@@ -19,10 +19,23 @@ public class UnidadAliada {
 	protected int cordY;
 	
 	
+	
 	//Getters y setters
 ///////////////////////////////////////////////
+	
+	
+	
+	
 	public String getArma() {
 		return arma;
+	}
+
+	public String getNombre() {
+		return Nombre;
+	}
+
+	public void setNombre(String nombre) {
+		Nombre = nombre;
 	}
 
 	public void setArma(String arma) {
@@ -91,16 +104,20 @@ public class UnidadAliada {
 	
 	///////////////////////////////////////////
 	
-	
+	public void Nombre(){
+		
+		
+		
+	}
 	
 	
 
-	public void Atacar() {
+	public void Objetivos() {
 		
 
 		
 		
-		for(UnidadEnemiga ue:LogicaPartida.getListaUnidadesEnemigas()){
+		for(UnidadEnemiga ue:LogicaPartida.getListaEnemigos()){
 			/**
 			 * Cada vez que vaya a atacar, se enumeran los enemigos al alcance, y a continuacion se muestran en una lista con sus puntos de salud
 			 * A continuacion se procedera a restar puntos dependiendo del arma con la que se le haya atacado
@@ -119,7 +136,7 @@ public class UnidadAliada {
 			 * Bazooka
 			 * Misil tanque
 			 * Ametralladora ligera
-			 * CQC (melee)
+			 * CCC (melee)
 			 * 
 			 * 
 			 */
@@ -205,7 +222,7 @@ public class UnidadAliada {
 			
 			}
 			
-			else if(this.getArma().equals("CQC")){
+			else if(this.getArma().equals("CCC")){
 				
 				int x=ue.getCordX();
 				int y=ue.getCordY();
@@ -218,17 +235,97 @@ public class UnidadAliada {
 			}
 			
 			
-		////////////////////////////////////////
+		
 			
 			
 		}
 
-
+		
 		
 		
 		
 	}
-
+	
+	
+	
+	
+	public void atacar(Point P){
+		
+		for(UnidadEnemiga ue:LogicaPartida.getListaEnemigos()){
+			if(P.getX()==ue.getCordX()&&P.getY()==ue.getCordY()){
+				
+				if(ue instanceof SoldadoRaso){//Hay que crear las mismas clases de soldadorasoenemigo y asi en otra clase
+					
+				
+				
+				if(this.getArma().equals("Fusil")){
+					ue.setSalud(ue.getSalud()-40);
+					
+					
+					
+				}
+				if(this.getArma().equals("Rifle")){
+					ue.setSalud(ue.getSalud()-70);
+					
+					
+					
+				}
+				if(this.getArma().equals("Pistola")){
+					ue.setSalud(ue.getSalud()-40);
+					
+					
+					
+				}
+				if(this.getArma().equals("Bazooka")){
+					ue.setSalud(ue.getSalud()-40);
+					
+					
+					
+				}
+				if(this.getArma().equals("Misil")){
+					ue.setSalud(ue.getSalud()-40);
+					
+					
+					
+				}
+				if(this.getArma().equals("Ametralladora")){
+					ue.setSalud(ue.getSalud()-40);
+					
+					
+					
+				}
+				if(this.getArma().equals("CCC")){
+					ue.setSalud(ue.getSalud()-40);
+					
+					
+					
+				}
+				
+				
+				}
+				
+				
+				
+				
+				
+				//////////////////
+			}
+			
+		}
+	////////////////	
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 
 	public boolean Mover(Point P) {
 		/**Mover básico que se cambiara por un algoritmo de pathfinding mas complicado en caso de tener tiempo, sino--->
@@ -274,7 +371,7 @@ public class UnidadAliada {
 			int y1=(int) P.getY();
 			if(x1-x<100){
 				if(y1-y<100){
-					for(UnidadEnemiga ue:LogicaPartida.getListaUnidadesEnemigas()){
+					for(UnidadEnemiga ue:LogicaPartida.getListaEnemigos()){
 						if(this.getCordX()==ue.getCordX() && this.getCordY()==ue.getCordY()){
 							
 							/**
@@ -287,7 +384,7 @@ public class UnidadAliada {
 						}
 						
 					}
-					for(UnidadAliada ua:LogicaPartida.getListaUnidadesAmigas()){
+					for(UnidadAliada ua:LogicaPartida.getListaAliados()){
 						if(this.getCordX()==ua.getCordX() && this.getCordY()==ua.getCordY()){
 							
 							/**

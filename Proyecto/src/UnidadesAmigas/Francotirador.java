@@ -5,4 +5,16 @@ import Interfaces.Persona;
 
 public class Francotirador extends UnidadAliada implements Persona{
 
+	public Francotirador(int cordX, int cordY) {
+		super();
+		//Un set image aqui(?)
+		Nombre="Francotirador";
+		arma="Rifle";
+		this.armas= new String[] {"Rifle", "Pistola"};
+		Salud = 70;
+		this.cordX = cordX;
+		this.cordY = cordY;
+		
+	}
+
 }
