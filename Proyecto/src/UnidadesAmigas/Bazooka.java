@@ -12,8 +12,9 @@ public class Bazooka extends UnidadAliada implements Persona{
 		arma="Bazooka";
 		this.armas= new String[] {"Bazooka", "Pistola"};
 		Salud = 60;
-		this.cordX = cordX;
-		this.cordY = cordY;
+		this.x = cordX;
+		this.y = cordY;
+		this.coste =50;
 		
 	}
 

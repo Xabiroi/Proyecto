@@ -31,8 +31,9 @@ public class SoldadoRaso extends UnidadAliada implements Persona{
 		arma="Fusil";
 		this.armas= new String[] {"Fusil", "Pistola", "CCC" };//CCC=combate cuerpo a cuerpo
 		Salud = 100;
-		this.cordX = cordX;
-		this.cordY = cordY;
+		this.x = cordX;
+		this.y = cordY;
+		this.coste =35;
 		
 	}
 

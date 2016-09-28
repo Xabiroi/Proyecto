@@ -11,8 +11,9 @@ public class Semioruga extends UnidadAliada implements Vehiculo{
 		arma="Ametralladora";
 		this.armas= new String[] {"Ametralladora" };
 		Salud = 120;
-		this.cordX = cordX;
-		this.cordY = cordY;
+		this.x = cordX;
+		this.y = cordY;
+		this.coste =70;
 		
 	}
 

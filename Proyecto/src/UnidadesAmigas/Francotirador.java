@@ -12,8 +12,9 @@ public class Francotirador extends UnidadAliada implements Persona{
 		arma="Rifle";
 		this.armas= new String[] {"Rifle", "Pistola"};
 		Salud = 70;
-		this.cordX = cordX;
-		this.cordY = cordY;
+		this.x = cordX;
+		this.y = cordY;
+		this.coste =50;
 		
 	}
 

@@ -6,7 +6,11 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import LogicaBatallas.LogicaPartida;
+import UnidadesEnemigas.BazookaEnemigo;
+import UnidadesEnemigas.FrancotiradorEnemigo;
+import UnidadesEnemigas.SemiorugaEnemigo;
 import UnidadesEnemigas.SoldadoRasoEnemigo;
+import UnidadesEnemigas.TanqueEnemigo;
 import UnidadesEnemigas.UnidadEnemiga;
 
 public class UnidadAliada {
@@ -16,8 +20,94 @@ public class UnidadAliada {
 	protected ArrayList<UnidadEnemiga> enemigos=new ArrayList<UnidadEnemiga>();
 	protected int Salud;
 	protected Image image;
-	protected int cordX;
-	protected int cordY;
+	protected int x;
+	protected int y;
+	protected int coste;
+	protected int dx;
+	protected int dy;
+
+	
+	
+	////FIXME 
+	/* Ejemplo
+	 * private void initSoldado() {
+        
+        ImageIcon ii = new ImageIcon("SoldadoRaso.png");
+        image = ii.getImage();
+        x = 40;
+        y = 60;        
+    }
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 *  public void move() {
+        x += dx;
+        y += dy;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void keyPressed(KeyEvent e) {
+
+        int key = e.getKeyCode();
+
+        if (key == KeyEvent.VK_LEFT) {
+            dx = -1;
+        }
+
+        if (key == KeyEvent.VK_RIGHT) {
+            dx = 1;
+        }
+
+        if (key == KeyEvent.VK_UP) {
+            dy = -1;
+        }
+
+        if (key == KeyEvent.VK_DOWN) {
+            dy = 1;
+        }
+    }
+
+    public void keyReleased(KeyEvent e) {
+        
+        int key = e.getKeyCode();
+
+        if (key == KeyEvent.VK_LEFT) {
+            dx = 0;
+        }
+
+        if (key == KeyEvent.VK_RIGHT) {
+            dx = 0;
+        }
+
+        if (key == KeyEvent.VK_UP) {
+            dy = 0;
+        }
+
+        if (key == KeyEvent.VK_DOWN) {
+            dy = 0;
+        }
+    }
+}
+	 * 
+	 */
+	
+	
+	
+	
+	
 	
 	
 	
@@ -83,37 +173,33 @@ public class UnidadAliada {
 	}
 	
 	public int getCordX() {
-		return cordX;
+		return x;
 	}
 
 
 	public void setCordX(int cordX) {
-		this.cordX = cordX;
+		this.x = cordX;
 	}
 
 
 	public int getCordY() {
-		return cordY;
+		return y;
 	}
 
 
 	public void setCordY(int cordY) {
-		this.cordY = cordY;
+		this.y = cordY;
 	}
 
 
 	
 	///////////////////////////////////////////
 	
-	public void Nombre(){
-		
-		
-		
-	}
+	
 	
 	
 
-	public void Objetivos() {
+	public void Objetivos() {//ArrayList<UnidadEnemiga>(?)
 		
 
 		
@@ -240,6 +326,7 @@ public class UnidadAliada {
 			
 			
 		}
+		
 
 		
 		
@@ -248,19 +335,27 @@ public class UnidadAliada {
 	}
 	
 	
+	/**
+	 * Metodo que dependiendo de que soldado se trate el que ataque
+	 * variara en efectividad
+	 * 
+	 * 
+	 * @param P punto donde se clicka para obtener el objetivo
+	 */
 	
 	
+	//FIXME poner un random de atacar o fallar para  que sea mas emocionante
 	public void atacar(Point P){
 		
 		for(UnidadEnemiga ue:LogicaPartida.getListaEnemigos()){
 			if(P.getX()==ue.getCordX()&&P.getY()==ue.getCordY()){
 				
-				if(ue instanceof SoldadoRasoEnemigo){//Hay que crear las mismas clases de soldadorasoenemigo y asi en otra clase
+				if(ue instanceof SoldadoRasoEnemigo){
 					
 				
 				
 				if(this.getArma().equals("Fusil")){
-					ue.setSalud(ue.getSalud()-40);
+					ue.setSalud(ue.getSalud()-50);
 					
 					
 					
@@ -272,31 +367,31 @@ public class UnidadAliada {
 					
 				}
 				if(this.getArma().equals("Pistola")){
-					ue.setSalud(ue.getSalud()-40);
+					ue.setSalud(ue.getSalud()-30);
 					
 					
 					
 				}
 				if(this.getArma().equals("Bazooka")){
-					ue.setSalud(ue.getSalud()-40);
+					ue.setSalud(ue.getSalud()-60);
 					
 					
 					
 				}
 				if(this.getArma().equals("Misil")){
-					ue.setSalud(ue.getSalud()-40);
+					ue.setSalud(ue.getSalud()-60);
 					
 					
 					
 				}
 				if(this.getArma().equals("Ametralladora")){
-					ue.setSalud(ue.getSalud()-40);
+					ue.setSalud(ue.getSalud()-80);
 					
 					
 					
 				}
 				if(this.getArma().equals("CCC")){
-					ue.setSalud(ue.getSalud()-40);
+					ue.setSalud(ue.getSalud()-30);
 					
 					
 					
@@ -304,6 +399,202 @@ public class UnidadAliada {
 				
 				
 				}
+				if(ue instanceof FrancotiradorEnemigo){
+					
+					
+					
+					if(this.getArma().equals("Fusil")){
+						ue.setSalud(ue.getSalud()-70);
+						
+						
+						
+					}
+					if(this.getArma().equals("Rifle")){
+						ue.setSalud(ue.getSalud()-70);
+						
+						
+						
+					}
+					if(this.getArma().equals("Pistola")){
+						ue.setSalud(ue.getSalud()-40);
+						
+						
+						
+					}
+					if(this.getArma().equals("Bazooka")){
+						ue.setSalud(ue.getSalud()-60);
+						
+						
+						
+					}
+					if(this.getArma().equals("Misil")){
+						ue.setSalud(ue.getSalud()-760);
+						
+						
+						
+					}
+					if(this.getArma().equals("Ametralladora")){
+						ue.setSalud(ue.getSalud()-80);
+						
+						
+						
+					}
+					if(this.getArma().equals("CCC")){
+						ue.setSalud(ue.getSalud()-50);
+						
+						
+						
+					}
+					
+					
+					}
+				if(ue instanceof BazookaEnemigo){
+					
+					
+					
+					if(this.getArma().equals("Fusil")){
+						ue.setSalud(ue.getSalud()-50);
+						
+						
+						
+					}
+					if(this.getArma().equals("Rifle")){
+						ue.setSalud(ue.getSalud()-80);
+						
+						
+						
+					}
+					if(this.getArma().equals("Pistola")){
+						ue.setSalud(ue.getSalud()-30);
+						
+						
+						
+					}
+					if(this.getArma().equals("Bazooka")){
+						ue.setSalud(ue.getSalud()-50);
+						
+						
+						
+					}
+					if(this.getArma().equals("Misil")){
+						ue.setSalud(ue.getSalud()-60);
+						
+						
+						
+					}
+					if(this.getArma().equals("Ametralladora")){
+						ue.setSalud(ue.getSalud()-80);
+						
+						
+						
+					}
+					if(this.getArma().equals("CCC")){
+						ue.setSalud(ue.getSalud()-40);
+						
+						
+						
+					}
+					
+					
+					}
+				if(ue instanceof SemiorugaEnemigo){
+					
+					
+					
+					if(this.getArma().equals("Fusil")){
+						ue.setSalud(ue.getSalud()-20);
+						
+						
+						
+					}
+					if(this.getArma().equals("Rifle")){
+						ue.setSalud(ue.getSalud()-10);
+						
+						
+						
+					}
+					if(this.getArma().equals("Pistola")){
+						ue.setSalud(ue.getSalud()-5);
+						
+						
+						
+					}
+					if(this.getArma().equals("Bazooka")){
+						ue.setSalud(ue.getSalud()-90);
+						
+						
+						
+					}
+					if(this.getArma().equals("Misil")){
+						ue.setSalud(ue.getSalud()-100);
+						
+						
+						
+					}
+					if(this.getArma().equals("Ametralladora")){
+						ue.setSalud(ue.getSalud()-50);
+						
+						
+						
+					}
+					if(this.getArma().equals("CCC")){
+						ue.setSalud(ue.getSalud());
+						
+						
+						
+					}
+					
+					
+					}
+				if(ue instanceof TanqueEnemigo){
+					
+					
+					
+					if(this.getArma().equals("Fusil")){
+						ue.setSalud(ue.getSalud()-5);
+						
+						
+						
+					}
+					if(this.getArma().equals("Rifle")){
+						ue.setSalud(ue.getSalud()-5);
+						
+						
+						
+					}
+					if(this.getArma().equals("Pistola")){
+						ue.setSalud(ue.getSalud());
+						
+						
+						
+					}
+					if(this.getArma().equals("Bazooka")){
+						ue.setSalud(ue.getSalud()-70);
+						
+						
+						
+					}
+					if(this.getArma().equals("Misil")){
+						ue.setSalud(ue.getSalud()-80);
+						
+						
+						
+					}
+					if(this.getArma().equals("Ametralladora")){
+						ue.setSalud(ue.getSalud()-10);
+						
+						
+						
+					}
+					if(this.getArma().equals("CCC")){
+						ue.setSalud(ue.getSalud());
+						
+						
+						
+					}
+					
+					
+					}
 				
 				
 				
@@ -322,7 +613,13 @@ public class UnidadAliada {
 	}
 	
 	
-	
+	/*TILES way
+	 * FIXME
+	 * npcWayDeterminer.wayIsClear = function(x,y) {
+				var td = tabageos.BlitMath.getTileDataAt(x,y, map, 32, 32);
+				return (td != null && td.value[0] == 1 && td.value[1] == 1);
+			};
+	 */
 	
 	
 	

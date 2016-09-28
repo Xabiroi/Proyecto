@@ -11,8 +11,9 @@ public class Tanque extends UnidadAliada implements Vehiculo{
 		arma="Misil";
 		this.armas= new String[] {"Misil", "Ametralladora"};
 		Salud = 170;
-		this.cordX = cordX;
-		this.cordY = cordY;
+		this.x = cordX;
+		this.y = cordY;
+		this.coste =90;
 		
 	}
 
