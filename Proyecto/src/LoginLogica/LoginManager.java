@@ -2,8 +2,6 @@ package LoginLogica;
 
 import java.util.ArrayList;
 
-import javax.naming.AuthenticationNotSupportedException;
-
 import LoginData.Usuario;
 
 public class LoginManager implements ILogin {

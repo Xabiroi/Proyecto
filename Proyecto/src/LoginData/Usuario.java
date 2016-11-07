@@ -5,7 +5,7 @@ public class Usuario {
 	private String usuario;
 	private String contraseña;
 	private String nick;
-	
+	//FIXME añadir arraylist de partidas locales y online para la base de datos(?)
 	public Usuario() {}
 	
 	

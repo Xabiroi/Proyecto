@@ -45,7 +45,7 @@ public class VentanaContraseña extends JDialog {
 	 * @param lm 
 	 */
 	public VentanaContraseña(LoginManager lm) {
-		this.lm = lm;
+		this.setLm(lm);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
@@ -87,6 +87,14 @@ public class VentanaContraseña extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+
+	public LoginManager getLm() {
+		return lm;
+	}
+
+	public void setLm(LoginManager lm) {
+		this.lm = lm;
 	}
 
 }
