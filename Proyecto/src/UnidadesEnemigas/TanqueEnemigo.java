@@ -1,9 +1,11 @@
 package UnidadesEnemigas;
 
 
+import Interfaces.Unidad;
 import Interfaces.Vehiculo;
 
-public class TanqueEnemigo extends UnidadEnemiga implements Vehiculo{
+
+public class TanqueEnemigo extends UnidadEnemiga implements Vehiculo,Unidad{
 	public TanqueEnemigo(int cordX, int cordY) {
 		super();
 		//Un set image aqui(?)

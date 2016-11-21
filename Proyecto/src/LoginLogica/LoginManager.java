@@ -18,7 +18,7 @@ public class LoginManager implements ILogin {
 		boolean resultado = false;
 		// recorrer el array buscando el nombre de usuario y la contraseña
 		for(Usuario u : aUsuarios){
-			if(u.getUsuario().equals(usuario) &&
+			if(u.getNombre().equals(usuario) &&
 					u.getContraseña().equals(contraseña)){
 				resultado = true;
 				break;
@@ -33,7 +33,7 @@ public class LoginManager implements ILogin {
 		boolean registrado = false;
 		// TODO Auto-generated method stub
 		for(Usuario u1 : aUsuarios){
-			if(u1.getUsuario().equals(u.getUsuario())){
+			if(u1.getNombre().equals(u.getNombre())){
 				return registrado;
 			}
 		}
@@ -51,7 +51,7 @@ public class LoginManager implements ILogin {
 		String contraseña = null;
 		// TODO Auto-generated method stub
 		for(Usuario u1 : aUsuarios){
-			if(u1.getUsuario().equals(usuario)){
+			if(u1.getNombre().equals(usuario)){
 				contraseña = u1.getContraseña();
 				break;
 			}
@@ -73,14 +73,14 @@ public class LoginManager implements ILogin {
 		
 		//  Prueba login
 		System.out.println("Pruebas login\n============");
-		System.out.println(lm.login(u1.getUsuario(), u1.getContraseña()));
-		System.out.println(lm.login(u1.getUsuario(), "fallo"));
+		System.out.println(lm.login(u1.getNombre(), u1.getContraseña()));
+		System.out.println(lm.login(u1.getNombre(), "fallo"));
 		System.out.println(lm.login("c","c"));
 		
 		// Prueba recuperarContraseña
 		
 		System.out.println("Pruebas contraseña\n============");
-		System.out.println(lm.recuperarContraseña(u1.getUsuario()));
+		System.out.println(lm.recuperarContraseña(u1.getNombre()));
 		System.out.println(lm.recuperarContraseña("c"));
 		
 		

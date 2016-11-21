@@ -4,9 +4,11 @@ package UnidadesEnemigas;
 
 import java.awt.Image;
 import Interfaces.Persona;
+import Interfaces.Unidad;
 
 
-public class SoldadoRasoEnemigo extends UnidadEnemiga implements Persona{
+
+public class SoldadoRasoEnemigo extends UnidadEnemiga implements Persona,Unidad{
 
 	/**
 	 * Atributos de los soldados normales:

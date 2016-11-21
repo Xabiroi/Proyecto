@@ -4,11 +4,12 @@ import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import Interfaces.Unidad;
 import LogicaBatallas.LogicaPartida;
 import UnidadesAmigas.SoldadoRaso;
 import UnidadesAmigas.UnidadAliada;
 
-public class UnidadEnemiga {
+public class UnidadEnemiga implements Unidad{
 	protected String Nombre;
 	protected String[] armas= new String[5]; 
 	protected String arma;

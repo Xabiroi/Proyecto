@@ -2,8 +2,9 @@ package UnidadesAmigas;
 
 
 import Interfaces.Persona;
+import Interfaces.Unidad;
 
-public class Bazooka extends UnidadAliada implements Persona{
+public class Bazooka extends UnidadAliada implements Persona,Unidad{
 	
 	public Bazooka(int cordX, int cordY) {
 		super();

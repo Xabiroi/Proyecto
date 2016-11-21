@@ -5,6 +5,7 @@ import java.awt.Point;
 
 import java.util.ArrayList;
 
+import Interfaces.Unidad;
 import LogicaBatallas.LogicaPartida;
 import UnidadesEnemigas.BazookaEnemigo;
 import UnidadesEnemigas.FrancotiradorEnemigo;
@@ -13,7 +14,7 @@ import UnidadesEnemigas.SoldadoRasoEnemigo;
 import UnidadesEnemigas.TanqueEnemigo;
 import UnidadesEnemigas.UnidadEnemiga;
 
-public class UnidadAliada {
+public class UnidadAliada implements Unidad{
 	protected String Nombre;
 	protected String[] armas= new String[5]; 
 	protected String arma;

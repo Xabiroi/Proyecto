@@ -4,8 +4,8 @@ import LoginData.Usuario;
 
 public class Partida {
 	protected String Partida;
-	protected Usuario usuario;
-	protected Usuario usuario2;
+	protected String usuario;
+	protected String usuario2;
 	protected long fechaPartida;
 	protected LogicaPartida lp;
 	protected int dineroAliado=200;
@@ -14,7 +14,7 @@ public class Partida {
 	protected int puntuacionEnemigo=0;
 	
 	//constructor partida multijugador, dos usuarios
-	public Partida(Usuario usuario, Usuario usuario2,long fechaPartida, String NombrePartida) {
+	public Partida(String usuario, String usuario2,long fechaPartida, String NombrePartida) {
 		super();
 		this.Partida=NombrePartida;
 		this.usuario = usuario;
@@ -23,14 +23,14 @@ public class Partida {
 		this.lp = new LogicaPartida();
 	}
 	//constructor partida local, con el mismo usuario
-	public Partida(Usuario usuario, long fechaPartida,String NombrePartida) {
+	public Partida(String usuario, long fechaPartida,String NombrePartida) {
 		this.usuario = usuario;
 		this.Partida=NombrePartida;
 		this.fechaPartida = fechaPartida;
 		this.lp=new LogicaPartida();
 	}
-	//constructor partida multijugador, dos usuarios
-	public Partida(Usuario usuario, Usuario usuario2,long fechaPartida, String NombrePartida,LogicaPartida lp) {
+	//CArgar partida multijugador, dos usuarios
+	public Partida(String usuario, String usuario2,long fechaPartida, String NombrePartida,LogicaPartida lp) {
 		
 		this.Partida=NombrePartida;
 		this.usuario = usuario;
@@ -38,18 +38,21 @@ public class Partida {
 		this.fechaPartida = fechaPartida;
 		this.lp = lp;
 	}
-	//constructor partida local, con el mismo usuario
-	public Partida(Usuario usuario, long fechaPartida,String NombrePartida,LogicaPartida lp) {
+	//Cargar partida local, con el mismo usuario
+	public Partida(String usuario, long fechaPartida,String NombrePartida,LogicaPartida lp) {
 		this.usuario = usuario;
 		this.Partida=NombrePartida;
 		this.fechaPartida = fechaPartida;
 		this.lp=lp;
 	}
 	
-	public Usuario getUsuario() {
+	public Partida() {
+		
+	}
+	public String getUsuario() {
 		return usuario;
 	}
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
 	public long getFechaPartida() {
@@ -64,10 +67,10 @@ public class Partida {
 	public void setPartida(String partida) {
 		Partida = partida;
 	}
-	public Usuario getUsuario2() {
+	public String getUsuario2() {
 		return usuario2;
 	}
-	public void setUsuario2(Usuario usuario2) {
+	public void setUsuario2(String usuario2) {
 		this.usuario2 = usuario2;
 	}
 	public LogicaPartida getLp() {

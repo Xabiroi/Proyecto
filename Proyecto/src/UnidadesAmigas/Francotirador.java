@@ -2,8 +2,9 @@ package UnidadesAmigas;
 
 
 import Interfaces.Persona;
+import Interfaces.Unidad;
 
-public class Francotirador extends UnidadAliada implements Persona{
+public class Francotirador extends UnidadAliada implements Persona,Unidad{
 
 	public Francotirador(int cordX, int cordY) {
 		super();

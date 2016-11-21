@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import Interfaces.Persona;
+import Interfaces.Unidad;
 import LogicaBatallas.Partida;
 import LoginData.Usuario;
 import UnidadesAmigas.UnidadAliada;
@@ -202,14 +203,14 @@ private static Exception lastError = null;  // Información de último error SQL o
 		try {
 
 			sentSQL = "insert into partida values(" +
-					"'" + secu(p.getNick()) + "', " +
-					"'" + secu(p.getNick()) + "', " +
-					"'" + secu(p.getNick()) + "', " +
-					"'" + secu(p.getNick()) + "', " +
-					"'" + secu(p.getNick()) + "', " +
-					"'" + secu(p.getNick()) + "', " +
-					"'" + secu(p.getContraseña()) + "', " +
-					"'" + secu(p.getUsuario()) +"')";
+					"'" + secu(p.getUsuario()) + "', " +
+					"'" + secu(p.getUsuario2()) + "', " +
+					"'" + secu(p.getPartida()) + "', " +
+					"'" + secu(""+p.getDineroAliado()) + "', " +
+					"'" + secu(""+p.getDineroEnemigo()) + "', " +
+					"'" + secu(""+p.getPuntuacionAliado()) + "', " +
+					"'" + secu(""+p.getPuntuacionEnemigo()) + "', " +
+					"'" + secu(""+p.getFechaPartida()) +"')";
 
 			int val = st.executeUpdate( sentSQL );
 			log( Level.INFO, "BD añadida " + val + " fila\t" + sentSQL, null );
@@ -225,14 +226,19 @@ private static Exception lastError = null;  // Información de último error SQL o
 			return false;
 		}
 	}
-	public static boolean UnidadesInsert( Statement st, Persona s ) {
+	
+
+	public static boolean UnidadesInsert( Statement st, Unidad s, Partida p) {
 		String sentSQL = "";
 		try {
 
 			sentSQL = "insert into usuario values(" +
-					"'" + secu(u.getNick()) + "', " +
-					"'" + secu(u.getContraseña()) + "', " +
-					"'" + secu(u.getUsuario()) +"')";
+					"'" + secu(p.getPartida()) + "', " +
+					"'" + secu(s.getNombre()) + "', " +
+					"'" + secu(s.getArma()) + "', " +
+					"'" + secu(""+s.getSalud()) + "', " +
+					"'" + secu(""+s.getCordX()) + "', " +
+					"'" + secu(""+s.getCordY()) +"')";
 
 			int val = st.executeUpdate( sentSQL );
 			log( Level.INFO, "BD añadida " + val + " fila\t" + sentSQL, null );
@@ -267,18 +273,8 @@ private static Exception lastError = null;  // Información de último error SQL o
 			while (rs.next()) {
 				Usuario u = new Usuario();
 				u.setNick( rs.getString( "nick" ) );
-				u.setPassword( rs.getString( "password" ) );
+				u.setContraseña( rs.getString( "password" ) );
 				u.setNombre( rs.getString( "nombre" ) );
-				u.setApellidos( rs.getString( "apellidos" ) );
-				u.setTelefono( rs.getInt( "telefono" ) );
-				u.setFechaUltimoLogin( rs.getLong( "fechaultimologin" ) );
-				u.setTipo( TipoUsuario.valueOf( rs.getString( "tipo" ) ) );
-				ArrayList<String> listaEmails = new ArrayList<String>();
-				StringTokenizer stt = new StringTokenizer( rs.getString("emails"), "," );
-				while (stt.hasMoreTokens()) {
-					listaEmails.add( stt.nextToken() );
-				}
-				u.setListaEmails( listaEmails );
 				ret.add( u );
 			}
 			rs.close();
@@ -296,7 +292,90 @@ private static Exception lastError = null;  // Información de último error SQL o
 			return null;
 		}
 	}
+	
 
+	public static ArrayList<Partida> PartidaSelect( Statement st, String codigoSelect ) {
+		String sentSQL = "";
+		ArrayList<Partida> ret = new ArrayList<>();
+		try {
+			sentSQL = "select * from partida";
+			if (codigoSelect!=null && !codigoSelect.equals(""))
+				sentSQL = sentSQL + " where " + codigoSelect;
+			// System.out.println( sentSQL );  // Para ver lo que se hace en consola
+			ResultSet rs = st.executeQuery( sentSQL );
+			while (rs.next()) {
+				Partida p = new Partida();
+				p.setDineroAliado(Integer.parseInt(rs.getString("dineroAliado")));
+				p.setDineroEnemigo(Integer.parseInt(rs.getString("dineroEnemigo")));
+				p.setFechaPartida(Integer.parseInt(rs.getString("fechapartida")));
+				p.setPartida(rs.getString("Partida"));
+				p.setPuntuacionAliado(Integer.parseInt(rs.getString("puntuacionAliado")));
+				p.setPuntuacionEnemigo(Integer.parseInt(rs.getString("puntuacionEnemigo")));
+				p.setUsuario(rs.getString("usuario1"));
+				p.setUsuario2(rs.getString("usuario2"));
+				/*
+						statement.executeUpdate("create table partidaMultijugador " 
+					+"(usuario1 string not null references usuario(nick) on delete cascade,"
+					+ "usuario2 string not null references usuario(nick) on delete cascade,"
+					+ "Partida string"
+					+ "dineroAliado integer,"
+					+ "dineroEnemigo integer,"
+					+ "puntuacionAliado integer,"
+					+ "puntuacionEnemigo integer, "
+					+ "fechapartida bigint)");
+				*/
+				ret.add( p );
+			}
+			rs.close();
+			log( Level.INFO, "BD\t" + sentSQL, null );
+			return ret;
+		} catch (IllegalArgumentException e) {  // Error en tipo usuario (enumerado)
+			log( Level.SEVERE, "Error en BD en tipo de usuario\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return null;
+		}
+	}
+	/////////////////////////////////////////
+	/////          FIXME               //////
+	/////////////////////////////////////////
+	public static ArrayList<Unidad> SoldadoSelect( Statement st, String codigoSelect ) {
+		String sentSQL = "";
+		ArrayList<Unidad> ret = new ArrayList<>();
+		try {
+			sentSQL = "select * from unidad";
+			if (codigoSelect!=null && !codigoSelect.equals(""))
+				sentSQL = sentSQL + " where " + codigoSelect;
+			// System.out.println( sentSQL );  // Para ver lo que se hace en consola
+			ResultSet rs = st.executeQuery( sentSQL );
+			while (rs.next()) {
+				Unidad u = new Unidad();
+				u.setNick( rs.getString( "nick" ) );
+				u.setContraseña( rs.getString( "password" ) );
+				u.setNombre( rs.getString( "nombre" ) );
+				ret.add( u );
+			}
+			rs.close();
+			log( Level.INFO, "BD\t" + sentSQL, null );
+			return ret;
+		} catch (IllegalArgumentException e) {  // Error en tipo usuario (enumerado)
+			log( Level.SEVERE, "Error en BD en tipo de usuario\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	/** Modifica un usuario en la tabla abierta de BD, usando la sentencia UPDATE de SQL
 	 * @param st	Sentencia ya abierta de Base de Datos (con la estructura de tabla correspondiente al usuario)
 	 * @param u	Usuario a modificar en la base de datos. Se toma su nick como clave
@@ -336,7 +415,76 @@ private static Exception lastError = null;  // Información de último error SQL o
 			return false;
 		}
 	}
-
+	public static boolean PartidaUpdate( Statement st, Usuario u ) {
+		String sentSQL = "";
+		try {
+			String listaEms = "";
+			String sep = "";
+			for (String email : u.getListaEmails()) {
+				listaEms = listaEms + sep + email;
+				sep = ",";
+			}
+			sentSQL = "update usuario set" +
+					// " nick='" + u.getNick() + "', " +  // No hay que actualizar el nick, solo el resto de campos
+					" password='" + u.getPassword() + "', " +
+					" nombre='" + u.getNombre() + "', " +
+					" apellidos='" + u.getApellidos() + "', " +
+					" telefono=" + u.getTelefono() + ", " +
+					" fechaultimologin=" + u.getFechaUltimoLogin() + ", " +
+					" tipo='" + u.getTipo() + "', " +
+					" emails='" + listaEms + "'" +
+					" where nick='" + u.getNick() + "'";
+			// System.out.println( sentSQL );  // para ver lo que se hace en consola
+			int val = st.executeUpdate( sentSQL );
+			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
+			if (val!=1) {  // Se tiene que modificar 1 - error si no
+				log( Level.SEVERE, "Error en update de BD\t" + sentSQL, null );
+				return false;  
+			}
+			return true;
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public static boolean SoldadoUpdate( Statement st, Usuario u ) {
+		String sentSQL = "";
+		try {
+			String listaEms = "";
+			String sep = "";
+			for (String email : u.getListaEmails()) {
+				listaEms = listaEms + sep + email;
+				sep = ",";
+			}
+			sentSQL = "update usuario set" +
+					// " nick='" + u.getNick() + "', " +  // No hay que actualizar el nick, solo el resto de campos
+					" password='" + u.getPassword() + "', " +
+					" nombre='" + u.getNombre() + "', " +
+					" apellidos='" + u.getApellidos() + "', " +
+					" telefono=" + u.getTelefono() + ", " +
+					" fechaultimologin=" + u.getFechaUltimoLogin() + ", " +
+					" tipo='" + u.getTipo() + "', " +
+					" emails='" + listaEms + "'" +
+					" where nick='" + u.getNick() + "'";
+			// System.out.println( sentSQL );  // para ver lo que se hace en consola
+			int val = st.executeUpdate( sentSQL );
+			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
+			if (val!=1) {  // Se tiene que modificar 1 - error si no
+				log( Level.SEVERE, "Error en update de BD\t" + sentSQL, null );
+				return false;  
+			}
+			return true;
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+/*
 	/////////////////////////////////////////////////////////////////////
 	//                      Operaciones de partida                     //
 	/////////////////////////////////////////////////////////////////////
@@ -346,24 +494,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 	 * @param p	Partida a añadir en la base de datos
 	 * @return	true si la inserción es correcta, false en caso contrario
 	 */
-	public static boolean partidaInsert( Statement st, Partida p ) {
-		String sentSQL = "";
-		try {
-			sentSQL = "insert into partida values(" +
-					"'" + p.getUsuario().getNick() + "', " +
-					"" + p.getFechaPartida() + ", " +
-					"" + p.getPuntuacion() + ")";
-			int val = st.executeUpdate( sentSQL );
-			log( Level.INFO, "BD añadida " + val + " fila\t" + sentSQL, null );
-			if (val!=1) return false;  // Se tiene que añadir 1 - error si no
-			return true;
-		} catch (SQLException e) {
-			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
-			lastError = e;
-			e.printStackTrace();
-			return false;
-		}
-	}
+
 	
 	/** Realiza una consulta a la tabla abierta de partidas de la BD, usando la sentencia SELECT de SQL
 	 * @param st	Sentencia ya abierta de Base de Datos (con la estructura de tabla correspondiente a la partida)
@@ -431,7 +562,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 			return null;
 		}
 	}
-
+*/
 	
 	
 	/////////////////////////////////////////////////////////////////////

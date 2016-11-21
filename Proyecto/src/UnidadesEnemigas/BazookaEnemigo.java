@@ -2,8 +2,9 @@ package UnidadesEnemigas;
 
 
 import Interfaces.Persona;
+import Interfaces.Unidad;
 
-public class BazookaEnemigo extends UnidadEnemiga implements Persona{
+public class BazookaEnemigo extends UnidadEnemiga implements Persona,Unidad{
 	
 	public BazookaEnemigo(int cordX, int cordY) {
 		super();
