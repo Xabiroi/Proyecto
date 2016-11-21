@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import UnidadesAmigas.UnidadAliada;
 import UnidadesEnemigas.UnidadEnemiga;
 
-public class LogicaPartida {
+public class LogicaPartida{
 	public static ArrayList<UnidadEnemiga> ListaEnemigos=new ArrayList<UnidadEnemiga>();
 	public static ArrayList<UnidadAliada> ListaAliados=new ArrayList<UnidadAliada>();
-	public static int dineroAliado=200;
-	public static int dineroEnemigo=200;
+	
+	
 	
 	
 	
@@ -18,10 +18,13 @@ public class LogicaPartida {
 	 * Se actualizan cada vez que una unidad es creada o muerta, al final de cada ataque o turno del jugador
 	 * Los objetivos de cada persona seran alcanzables solo si se encuentran a unas coordenadas de distancia que variara depende del arma usada
 	 */
-	
+	//FIXME METER TODO ESTO EN PARTIDA PARA LOS ACCESOS DE METODOS
 	public static void actualizar(){
 		//añadir los nuevos soldados creados en el turno/quitar los muertos
-		
+		/*
+		Partida.this.dineroAliado=+50;
+		Partida.dineroEnemigo=+50;
+		*/
 	}
 	
 	
@@ -29,8 +32,8 @@ public class LogicaPartida {
 	//FIXME Funcion que se pondra en la ventana, adelanto
 	public static void Turno(){
 		actualizar();
-		dineroAliado=+50;
-		dineroEnemigo=+50;
+		
+		
 		
 	//Turno aliado
 		boolean terminadoUnidadAliada=false;
@@ -150,13 +153,7 @@ public class LogicaPartida {
 	public static void setListaAliados(ArrayList<UnidadAliada> listaAliados) {
 		ListaAliados = listaAliados;
 	}
-	public static int getDineroAliado() {
-		return dineroAliado;
-	}
 
-	public static int getDineroEnemigo() {
-		return dineroEnemigo;
-	}
 
 	
 	

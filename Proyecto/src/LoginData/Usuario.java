@@ -2,7 +2,7 @@ package LoginData;
 
 public class Usuario {
 	
-	private String usuario;
+	private String nombre;
 	private String contraseña;
 	private String nick;
 	//FIXME añadir arraylist de partidas locales y online para la base de datos(?)
@@ -12,7 +12,7 @@ public class Usuario {
 	
 	public Usuario(String usuario, String contraseña) {
 		super();
-		this.usuario = usuario;
+		this.nombre = usuario;
 		this.contraseña = contraseña;
 	}
 
@@ -20,7 +20,7 @@ public class Usuario {
 
 	public Usuario(String usuario, String contraseña, String nick) {
 		super();
-		this.usuario = usuario;
+		this.nombre = usuario;
 		this.contraseña = contraseña;
 		this.nick = nick;
 	}
@@ -30,14 +30,14 @@ public class Usuario {
 	/**
 	 * @return the usuario
 	 */
-	public String getUsuario() {
-		return usuario;
+	public String getNombre() {
+		return nombre;
 	}
 	/**
 	 * @param usuario the usuario to set
 	 */
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	/**
 	 * @return the contraseña
