@@ -6,7 +6,7 @@ import Interfaces.Vehiculo;
 
 public class Tanque extends UnidadAliada implements Vehiculo,Unidad{
 	public Tanque(int cordX, int cordY) {
-		super();
+		
 		//Un set image aqui(?)
 		Nombre="Tanque";
 		arma="Misil";

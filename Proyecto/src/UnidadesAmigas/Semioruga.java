@@ -6,7 +6,7 @@ import Interfaces.Vehiculo;
 
 public class Semioruga extends UnidadAliada implements Vehiculo,Unidad{
 	public Semioruga(int cordX, int cordY) {
-		super();
+		
 		//Un set image aqui(?)
 		Nombre="Semioruga";
 		arma="Ametralladora";

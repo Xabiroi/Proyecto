@@ -5,6 +5,7 @@ import java.awt.Point;
 
 import java.util.ArrayList;
 
+import BD.UnidadBD;
 import Interfaces.Unidad;
 import LogicaBatallas.LogicaPartida;
 import UnidadesEnemigas.BazookaEnemigo;
@@ -14,18 +15,10 @@ import UnidadesEnemigas.SoldadoRasoEnemigo;
 import UnidadesEnemigas.TanqueEnemigo;
 import UnidadesEnemigas.UnidadEnemiga;
 
-public class UnidadAliada implements Unidad{
-	protected String Nombre;
-	protected String[] armas= new String[5]; 
-	protected String arma;
+public class UnidadAliada extends UnidadBD implements Unidad{
 	protected ArrayList<UnidadEnemiga> enemigos=new ArrayList<UnidadEnemiga>();
-	protected int Salud;
-	protected Image image;
-	protected int x;
-	protected int y;
-	protected int coste;
-	protected int dx;
-	protected int dy;
+
+	
 
 	
 	

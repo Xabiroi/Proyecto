@@ -202,7 +202,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 		String sentSQL = "";
 		try {
 
-			sentSQL = "insert into partida values(" +
+			sentSQL = "insert into partidaMultijugador values(" +
 					"'" + secu(p.getUsuario()) + "', " +
 					"'" + secu(p.getUsuario2()) + "', " +
 					"'" + secu(p.getPartida()) + "', " +
@@ -228,11 +228,11 @@ private static Exception lastError = null;  // Información de último error SQL o
 	}
 	
 
-	public static boolean UnidadesInsert( Statement st, Unidad s, Partida p) {
+	public static boolean UnidadesInsert( Statement st, UnidadBD s, Partida p) {
 		String sentSQL = "";
 		try {
 
-			sentSQL = "insert into usuario values(" +
+			sentSQL = "insert into soldados values(" +
 					"'" + secu(p.getPartida()) + "', " +
 					"'" + secu(s.getNombre()) + "', " +
 					"'" + secu(s.getArma()) + "', " +
@@ -298,7 +298,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 		String sentSQL = "";
 		ArrayList<Partida> ret = new ArrayList<>();
 		try {
-			sentSQL = "select * from partida";
+			sentSQL = "select * from partidaMultijugador";
 			if (codigoSelect!=null && !codigoSelect.equals(""))
 				sentSQL = sentSQL + " where " + codigoSelect;
 			// System.out.println( sentSQL );  // Para ver lo que se hace en consola
@@ -313,17 +313,6 @@ private static Exception lastError = null;  // Información de último error SQL o
 				p.setPuntuacionEnemigo(Integer.parseInt(rs.getString("puntuacionEnemigo")));
 				p.setUsuario(rs.getString("usuario1"));
 				p.setUsuario2(rs.getString("usuario2"));
-				/*
-						statement.executeUpdate("create table partidaMultijugador " 
-					+"(usuario1 string not null references usuario(nick) on delete cascade,"
-					+ "usuario2 string not null references usuario(nick) on delete cascade,"
-					+ "Partida string"
-					+ "dineroAliado integer,"
-					+ "dineroEnemigo integer,"
-					+ "puntuacionAliado integer,"
-					+ "puntuacionEnemigo integer, "
-					+ "fechapartida bigint)");
-				*/
 				ret.add( p );
 			}
 			rs.close();
@@ -344,27 +333,30 @@ private static Exception lastError = null;  // Información de último error SQL o
 	/////////////////////////////////////////
 	/////          FIXME               //////
 	/////////////////////////////////////////
-	public static ArrayList<Unidad> SoldadoSelect( Statement st, String codigoSelect ) {
+	public static ArrayList<UnidadBD> UnidadBDSelect( Statement st, String codigoSelect ) {
 		String sentSQL = "";
-		ArrayList<Unidad> ret = new ArrayList<>();
+		ArrayList<UnidadBD> ret = new ArrayList<>();
 		try {
-			sentSQL = "select * from unidad";
+			sentSQL = "select * from soldados";
 			if (codigoSelect!=null && !codigoSelect.equals(""))
 				sentSQL = sentSQL + " where " + codigoSelect;
 			// System.out.println( sentSQL );  // Para ver lo que se hace en consola
 			ResultSet rs = st.executeQuery( sentSQL );
 			while (rs.next()) {
-				Unidad u = new Unidad();
-				u.setNick( rs.getString( "nick" ) );
-				u.setContraseña( rs.getString( "password" ) );
-				u.setNombre( rs.getString( "nombre" ) );
+				UnidadBD u = new UnidadBD();
+				
+				u.setArma(rs.getString("Partida"));
+				u.setCordX(Integer.parseInt(rs.getString("cordX")));
+				u.setCordY(Integer.parseInt(rs.getString("cordY")));
+				u.setNombre("nombre");
+				u.setSalud(Integer.parseInt(rs.getString("salud")));
 				ret.add( u );
 			}
 			rs.close();
 			log( Level.INFO, "BD\t" + sentSQL, null );
 			return ret;
 		} catch (IllegalArgumentException e) {  // Error en tipo usuario (enumerado)
-			log( Level.SEVERE, "Error en BD en tipo de usuario\t" + sentSQL, e );
+			log( Level.SEVERE, "Error en BD en tipo de unidades\t" + sentSQL, e );
 			lastError = e;
 			e.printStackTrace();
 			return null;
@@ -384,91 +376,11 @@ private static Exception lastError = null;  // Información de último error SQL o
 	public static boolean usuarioUpdate( Statement st, Usuario u ) {
 		String sentSQL = "";
 		try {
-			String listaEms = "";
-			String sep = "";
-			for (String email : u.getListaEmails()) {
-				listaEms = listaEms + sep + email;
-				sep = ",";
-			}
+			
 			sentSQL = "update usuario set" +
-					// " nick='" + u.getNick() + "', " +  // No hay que actualizar el nick, solo el resto de campos
-					" password='" + u.getPassword() + "', " +
+					" password='" + u.getContraseña() + "', " +
 					" nombre='" + u.getNombre() + "', " +
-					" apellidos='" + u.getApellidos() + "', " +
-					" telefono=" + u.getTelefono() + ", " +
-					" fechaultimologin=" + u.getFechaUltimoLogin() + ", " +
-					" tipo='" + u.getTipo() + "', " +
-					" emails='" + listaEms + "'" +
 					" where nick='" + u.getNick() + "'";
-			// System.out.println( sentSQL );  // para ver lo que se hace en consola
-			int val = st.executeUpdate( sentSQL );
-			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
-			if (val!=1) {  // Se tiene que modificar 1 - error si no
-				log( Level.SEVERE, "Error en update de BD\t" + sentSQL, null );
-				return false;  
-			}
-			return true;
-		} catch (SQLException e) {
-			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
-			lastError = e;
-			e.printStackTrace();
-			return false;
-		}
-	}
-	public static boolean PartidaUpdate( Statement st, Usuario u ) {
-		String sentSQL = "";
-		try {
-			String listaEms = "";
-			String sep = "";
-			for (String email : u.getListaEmails()) {
-				listaEms = listaEms + sep + email;
-				sep = ",";
-			}
-			sentSQL = "update usuario set" +
-					// " nick='" + u.getNick() + "', " +  // No hay que actualizar el nick, solo el resto de campos
-					" password='" + u.getPassword() + "', " +
-					" nombre='" + u.getNombre() + "', " +
-					" apellidos='" + u.getApellidos() + "', " +
-					" telefono=" + u.getTelefono() + ", " +
-					" fechaultimologin=" + u.getFechaUltimoLogin() + ", " +
-					" tipo='" + u.getTipo() + "', " +
-					" emails='" + listaEms + "'" +
-					" where nick='" + u.getNick() + "'";
-			// System.out.println( sentSQL );  // para ver lo que se hace en consola
-			int val = st.executeUpdate( sentSQL );
-			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
-			if (val!=1) {  // Se tiene que modificar 1 - error si no
-				log( Level.SEVERE, "Error en update de BD\t" + sentSQL, null );
-				return false;  
-			}
-			return true;
-		} catch (SQLException e) {
-			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
-			lastError = e;
-			e.printStackTrace();
-			return false;
-		}
-	}
-	public static boolean SoldadoUpdate( Statement st, Usuario u ) {
-		String sentSQL = "";
-		try {
-			String listaEms = "";
-			String sep = "";
-			for (String email : u.getListaEmails()) {
-				listaEms = listaEms + sep + email;
-				sep = ",";
-			}
-			sentSQL = "update usuario set" +
-					// " nick='" + u.getNick() + "', " +  // No hay que actualizar el nick, solo el resto de campos
-					" password='" + u.getPassword() + "', " +
-					" nombre='" + u.getNombre() + "', " +
-					" apellidos='" + u.getApellidos() + "', " +
-					" telefono=" + u.getTelefono() + ", " +
-					" fechaultimologin=" + u.getFechaUltimoLogin() + ", " +
-					" tipo='" + u.getTipo() + "', " +
-					" emails='" + listaEms + "'" +
-					" where nick='" + u.getNick() + "'";
-			// System.out.println( sentSQL );  // para ver lo que se hace en consola
 			int val = st.executeUpdate( sentSQL );
 			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
 			if (val!=1) {  // Se tiene que modificar 1 - error si no
@@ -484,85 +396,78 @@ private static Exception lastError = null;  // Información de último error SQL o
 		}
 	}
 	
-/*
-	/////////////////////////////////////////////////////////////////////
-	//                      Operaciones de partida                     //
-	/////////////////////////////////////////////////////////////////////
-	
-	/** Añade un usuario a la tabla abierta de BD, usando la sentencia INSERT de SQL
-	 * @param st	Sentencia ya abierta de Base de Datos (con la estructura de tabla correspondiente a la partida)
-	 * @param p	Partida a añadir en la base de datos
-	 * @return	true si la inserción es correcta, false en caso contrario
-	 */
 
 	
-	/** Realiza una consulta a la tabla abierta de partidas de la BD, usando la sentencia SELECT de SQL
-	 * @param st	Sentencia ya abierta de Base de Datos (con la estructura de tabla correspondiente a la partida)
-	 * @param u	Usuario del cual se quieren cargar las partidas (si es null no se considera)
-	 * @param codigoSelect	Sentencia correcta de WHERE (sin incluirlo) para filtrar la búsqueda (vacía si no se usa)
-	 * @param lUsuarios	Lista de usuarios reconocidos. Necesaria si se quieren consultar partidas de cualquier usuario (no necesario si el usuario u no es null).
-	 *   Si el usuario leído no está en esta lista, esa partida no se devuelve y se saca un mensaje a la salida de error estándar.
-	 * @return	lista de partidas cargadas desde la base de datos, null si hay cualquier error SQL
-	 */
-	public static ArrayList<Partida> partidaSelect( Statement st, Usuario u, String codigoSelect, List<Usuario> lUsuarios ) {
+	public static boolean PartidaUpdate( Statement st, Partida p ) {
 		String sentSQL = "";
-		ArrayList<Partida> ret = new ArrayList<>();
 		try {
-			sentSQL = "select * from partida";
-			if (u!=null) {
-				String whereUsuario = "usuario_nick='" + u.getNick() + "'";
-				if (codigoSelect!=null && !codigoSelect.equals(""))
-					sentSQL = sentSQL + " where " + whereUsuario + " AND " + codigoSelect;
-				else
-					sentSQL = sentSQL + " where " + whereUsuario;
-			} else {
-				if (codigoSelect!=null && !codigoSelect.equals(""))
-					sentSQL = sentSQL + " where " + codigoSelect;
+			
+			sentSQL = "update partidaMultijugador set" +
+					// " nick='" + u.getNick() + "', " +  // No hay que actualizar el nick, solo el resto de campos
+
+					" dineroAliado=" + p.getDineroAliado() + ", " +
+					" dineroEnemigo=" + p.getDineroEnemigo() + ", " +
+					" puntuacionAliado='" + p.getPuntuacionAliado() + "', " +
+					" puntuacionEnemigo='" + p.getPuntuacionEnemigo() + "', " +
+					" fechapartida='" + p.getFechaPartida() + "," +
+					" where Partida='" + p.getPartida() + "'";
+			// System.out.println( sentSQL );  // para ver lo que se hace en consola
+			int val = st.executeUpdate( sentSQL );
+			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
+			if (val!=1) {  // Se tiene que modificar 1 - error si no
+				log( Level.SEVERE, "Error en update de BD\t" + sentSQL, null );
+				return false;  
 			}
-			// System.out.println( sentSQL );  // Para ver lo que se hace en consola
-			ResultSet rs = st.executeQuery( sentSQL );
-			while (rs.next()) {
-				Partida p = new Partida();
-				boolean encontrado = true;
-				String nick = rs.getString( "usuario_nick" );
-				if (u!=null)
-					p.setUsuario( u );
-				else {
-					encontrado = false;
-					if (lUsuarios!=null) {
-						for (Usuario uBusq : lUsuarios) {
-							if (uBusq.getNick().equals( nick )) {
-								p.setUsuario( uBusq );
-								encontrado = true;
-								break;
-							}
-						}
-					}
-				}
-				if (encontrado) {
-					p.setFechaPartida( rs.getLong( "fechapartida" ) );
-					p.setPuntuacion( rs.getInt( "puntuacion" ) );
-					ret.add( p );
-				} else {  // No se encuentra en la lista, no se puede crear el objeto partida
-					System.err.println( "Usuario leído de base de datos " + nick + " no está presente en la lista de usuarios suministrada." );
-				}
-			}
-			rs.close();
-			log( Level.INFO, "BD\t" + sentSQL, null );
-			return ret;
-		} catch (IllegalArgumentException e) {  // Error en tipo usuario (enumerado)
-			log( Level.SEVERE, "Error en BD en tipo de usuario\t" + sentSQL, e );
-			lastError = e;
-			e.printStackTrace();
-			return null;
+			return true;
 		} catch (SQLException e) {
 			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
 			lastError = e;
 			e.printStackTrace();
-			return null;
+			return false;
 		}
 	}
-*/
+	
+	/*
+	 * 
+	 * 		statement.executeUpdate("create table soldados "
+					+ "(Partida string not null references partidaMultijugador(Partida) on delete cascade,"
+					+ " nombre string,"
+					+ " arma string,"
+					+ " salud string,"
+					+ " coordX integer,"
+					+ " coordY integer)");
+				
+				
+	 */
+	public static boolean UnidadBDUpdate( Statement st, UnidadBD u ) {
+		String sentSQL = "";
+		try {
+			
+			sentSQL = "update soldados set" +
+					" arma='" + u.getArma() + "', " +
+					" salud=" + u.getSalud() + ", " +
+					" coordX=" + u.getCordX() + ", " +
+					" coordY='" + u.getCordY() + "," +
+					" where Partida='" + u.getPartida() + "'";
+			// System.out.println( sentSQL );  // para ver lo que se hace en consola
+			int val = st.executeUpdate( sentSQL );
+			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
+			if (val!=1) {  // Se tiene que modificar 1 - error si no
+				log( Level.SEVERE, "Error en update de BD\t" + sentSQL, null );
+				return false;  
+			}
+			return true;
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+
+
+
 	
 	
 	/////////////////////////////////////////////////////////////////////

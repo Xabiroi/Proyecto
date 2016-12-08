@@ -26,7 +26,6 @@ public class SoldadoRaso extends UnidadAliada implements Persona,Unidad{
 
 	
 	public SoldadoRaso(int cordX, int cordY) {
-		super();
 		//FIXME Un set image aqui(?)
 		Nombre="Soldado";
 		arma="Fusil";

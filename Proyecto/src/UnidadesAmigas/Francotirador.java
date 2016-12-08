@@ -7,7 +7,7 @@ import Interfaces.Unidad;
 public class Francotirador extends UnidadAliada implements Persona,Unidad{
 
 	public Francotirador(int cordX, int cordY) {
-		super();
+		
 		//Un set image aqui(?)
 		Nombre="Francotirador";
 		arma="Rifle";

@@ -4,20 +4,17 @@ import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import BD.UnidadBD;
 import Interfaces.Unidad;
 import LogicaBatallas.LogicaPartida;
 import UnidadesAmigas.SoldadoRaso;
 import UnidadesAmigas.UnidadAliada;
 
-public class UnidadEnemiga implements Unidad{
-	protected String Nombre;
-	protected String[] armas= new String[5]; 
-	protected String arma;
+public class UnidadEnemiga extends UnidadBD implements Unidad{
 	protected ArrayList<UnidadAliada> enemigos=new ArrayList<UnidadAliada>();
-	protected int Salud;
-	protected Image image;
-	protected int cordX;
-	protected int cordY;
+
+
+	
 	
 	
 	
@@ -25,32 +22,6 @@ public class UnidadEnemiga implements Unidad{
 ///////////////////////////////////////////////
 	
 	
-	
-	
-	public String getArma() {
-		return arma;
-	}
-
-	public String getNombre() {
-		return Nombre;
-	}
-
-	public void setNombre(String nombre) {
-		Nombre = nombre;
-	}
-
-	public void setArma(String arma) {
-		this.arma = arma;
-	}
-
-	public String[] getArmas() {
-		return armas;
-	}
-
-
-	public void setArmas(String[] armas) {
-		this.armas = armas;
-	}
 
 
 	public ArrayList<UnidadAliada> getEnemigos() {
@@ -63,53 +34,8 @@ public class UnidadEnemiga implements Unidad{
 	}
 
 
-	public int getSalud() {
-		return Salud;
-	}
-
-
-	public void setSalud(int salud) {
-		Salud = salud;
-	}
-
-
-	public Image getImage() {
-		return image;
-	}
-
-
-	public void setImage(Image image) {
-		this.image = image;
-	}
-	
-	public int getCordX() {
-		return cordX;
-	}
-
-
-	public void setCordX(int cordX) {
-		this.cordX = cordX;
-	}
-
-
-	public int getCordY() {
-		return cordY;
-	}
-
-
-	public void setCordY(int cordY) {
-		this.cordY = cordY;
-	}
-
-
 	
 	///////////////////////////////////////////
-	
-	public void Nombre(){
-		
-		
-		
-	}
 	
 	
 

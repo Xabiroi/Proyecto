@@ -27,14 +27,14 @@ public class SoldadoRasoEnemigo extends UnidadEnemiga implements Persona,Unidad{
 
 	
 	public SoldadoRasoEnemigo(int cordX, int cordY) {
-		super();
+		
 		//FIXME Un set image aqui(?)
 		Nombre="Soldado";
 		arma="Fusil";
 		this.armas= new String[] {"Fusil", "Pistola", "CCC" };//CCC=combate cuerpo a cuerpo
 		Salud = 100;
-		this.cordX = cordX;
-		this.cordY = cordY;
+		this.x = cordX;
+		this.y = cordY;
 		
 	}
 
