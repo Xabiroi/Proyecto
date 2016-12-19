@@ -2,6 +2,8 @@ package Ventanas;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -15,7 +17,7 @@ public class Menu1Jugador extends JDialog{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3L;
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -136,6 +138,17 @@ public class Menu1Jugador extends JDialog{
 			
 			JButton btnJugar = new JButton("JUGAR!");
 			btnJugar.setBounds(413, 681, 89, 23);
+			btnJugar.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					Partida p=new Partida();
+					setVisible(false);
+					p.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					p.setVisible(true);
+					setVisible(false);
+					getDefaultCloseOperation();
+				}
+			});
 			 getContentPane().add(btnJugar);
 			
 			JButton btnVolver = new JButton("Volver");

@@ -14,6 +14,10 @@ import javax.swing.JButton;
 
 public class MenuMultijugador extends JDialog{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4L;
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;

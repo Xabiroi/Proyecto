@@ -1,8 +1,8 @@
 package Ventanas;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
-import java.awt.GridLayout;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -15,13 +15,17 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import Edificios.prueba;
+
 import LoginGui.VentanaContraseña;
 import LoginGui.VentanaRegistro;
 import LoginLogica.LoginManager;
 import java.awt.Font;
 
-public class Juego {
+public class Juego{
+
+	/**
+	 * 
+	 */
 
 	private JFrame frame;
 	private JTextField txtUsuario;
