@@ -1,16 +1,24 @@
 package Ventanas;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+
 
 public class Menu1Jugador extends JDialog{
 
@@ -53,7 +61,39 @@ public class Menu1Jugador extends JDialog{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		///////////////
+		/* FIXME
+		PARTE DE BASES DE DATOS 
+		//Para hacer las listas de las partidas utilizar el comando de select 
+		 * 
+		 * 
+		String [] namelist = new String[gameinfo.length];
+		for (int i=0; i<gameinfo.length; i++)
+			namelist[i] = gameinfo[i][0];
+		list = new JList(namelist);
+		list.setFont(new Font("Helvetica",Font.BOLD,15));
+		JScrollPane list_pane = new JScrollPane(list);
+		list_pane.setPreferredSize(new Dimension(270,300));
 		
+		
+		
+		//Para que cada vez que se elija una partida se haga la de list listener
+		 *Hay que cambiar todo esto obviamente FIXME
+		 * 	list.addListSelectionListener(new ListSelectionListener() {
+			 public void valueChanged(ListSelectionEvent e) {
+			 	int idx = list.getSelectedIndex();
+				if (idx < 0) return;
+				desc_area.setText(
+						formatText(readTextFile(gameinfo[idx][2]),35)
+						+"\n\nPress Esc or Shift-Esc to quit."
+				);
+				grab.setIcon(new ImageIcon(Launcher.class.getClassLoader().
+					getResource(gameinfo[idx][3])));
+			 }
+		} );
+		
+		
+		*/
 			
 			setBounds(100, 100, 1193, 802);
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
