@@ -27,7 +27,7 @@ public class LoginManager implements ILogin {
 		return resultado;
 		
 	}
-
+	//FIXME añadir a la base de datos
 	@Override
 	public boolean registro(Usuario u) {
 		boolean registrado = false;

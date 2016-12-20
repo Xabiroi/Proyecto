@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -15,7 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-
+import BD.BD;
+import LoginData.Usuario;
 import LoginGui.VentanaContraseña;
 import LoginGui.VentanaRegistro;
 import LoginLogica.LoginManager;
@@ -139,8 +143,23 @@ public class Juego{
 	btnAceptar.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			if(lm.login(txtUsuario.getText(),
-					new String(pswField.getPassword()))){
+			
+			
+			//FIXME base de datos da error en crear la base de datos con nombre "Local" (hay que elegir otro nombre) 
+			Connection c=BD.initBD( "Local" );
+			Statement st=BD.usarBD(c);
+			BD.usarCrearTablasBD(c);
+			ArrayList<Usuario> u=BD.usuarioSelect( st, "NOMBRE="+txtUsuario.getText()+" AND CONTRASEÑA="+ new String(pswField.getPassword()) );
+			Usuario u1=u.get(0);			
+			lm.registro(u1);
+			
+			
+			
+			
+			//Cambiar que se obtena de la base de datos FIXME
+			
+			if(lm.login(u1.getNombre(),u1.getContraseña())){
+				
 				//TODO abrir las otras ventanas principales
 				MenuPrincipal mp=new MenuPrincipal();
 				frame.setVisible(false);
