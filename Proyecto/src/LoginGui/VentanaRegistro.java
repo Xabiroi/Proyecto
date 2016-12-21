@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import BD.BD;
 import LoginData.Usuario;
 import LoginLogica.LoginManager;
 
@@ -18,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Statement;
 
 public class VentanaRegistro extends JDialog {
 
@@ -111,6 +113,8 @@ public class VentanaRegistro extends JDialog {
 							u = new Usuario(txtUsuario.getText(),
 									new String(pswField.getPassword()),
 									txtNombreReal.getText());
+							Statement st=BD.usarBD(BD.initBD("Local"));//FIXME
+									BD.usuarioInsert(st,u);
 							
 						}
 						

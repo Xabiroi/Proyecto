@@ -5,7 +5,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import BD.BD;
+import LoginLogica.LoginManager;
+
 import java.awt.Font;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -63,8 +70,19 @@ public class MenuMultijugador extends JDialog{
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel.setBounds(498, 62, 241, 60);
 		 getContentPane().add(lblNewLabel);
+		 
+		 
+		 ArrayList<LogicaBatallas.Partida> a=BD.PartidaSelect( BD.usarBD(BD.initBD("Local")),"usuario1="+Juego.getLM().getUsuario()+" OR usuario2="+Juego.getLM().getUsuario());//FIXME cambiar la conexion
+		//AÑADIR LA UNION DE BASE DE DATOS FIXME
 		
-		JComboBox comboBox = new JComboBox();
+
+		
+		JComboBox<LogicaBatallas.Partida> comboBox =new JComboBox();
+		
+		for(LogicaBatallas.Partida p:a){comboBox.addItem(p);}
+		
+		
+		
 		comboBox.setBounds(114, 209, 200, 35);
 		 getContentPane().add(comboBox);
 		

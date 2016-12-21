@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -34,7 +36,11 @@ public class Juego{
 	private JFrame frame;
 	private JTextField txtUsuario;
 	private JPasswordField pswField;
-	private LoginManager lm = new LoginManager();
+	public static LoginManager lm = new LoginManager();
+	
+	public static LoginManager getLM(){return lm;}
+	
+	
 	/*
     private MenuPrincipal mp=new MenuPrincipal();
     private MenuMultijugador mm=new MenuMultijugador();
@@ -145,8 +151,14 @@ public class Juego{
 		public void mouseClicked(MouseEvent arg0) {
 			
 			
+
+
+			
+			
+			
+			
 			//FIXME base de datos da error en crear la base de datos con nombre "Local" (hay que elegir otro nombre) 
-			Connection c=BD.initBD( "Local" );
+			Connection c=BD.initBD( "//localhost/BD.bd" );
 			Statement st=BD.usarBD(c);
 			BD.usarCrearTablasBD(c);
 			ArrayList<Usuario> u=BD.usuarioSelect( st, "NOMBRE="+txtUsuario.getText()+" AND CONTRASEÑA="+ new String(pswField.getPassword()) );

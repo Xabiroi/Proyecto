@@ -105,7 +105,7 @@ public class Menu1Jugador extends JDialog{
 			 getContentPane().add(lblNewLabel);
 			
 			//AÑADIR LA UNION DE BASE DE DATOS FIXME
-			String partidas[]=new String[30];
+			
 			//partidas=;
 			
 			JComboBox comboBox = new JComboBox();

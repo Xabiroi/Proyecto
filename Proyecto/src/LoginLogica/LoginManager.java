@@ -10,6 +10,9 @@ public class LoginManager implements ILogin {
 	
 	public LoginManager(){	}
 	
+	
+	public Usuario getUsuario(){return aUsuarios.get(0);}
+	
 	/**
 	 * Método que hace el login y lo comprueba con el array
 	 */
