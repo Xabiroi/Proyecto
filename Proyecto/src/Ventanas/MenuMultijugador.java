@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import BD.BD;
+import LogicaBatallas.Partida;
 import LoginLogica.LoginManager;
 
 import java.awt.Font;
@@ -18,6 +19,8 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MenuMultijugador extends JDialog{
 
@@ -26,13 +29,13 @@ public class MenuMultijugador extends JDialog{
 	 */
 	private static final long serialVersionUID = 4L;
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
+	private JTextField textDinero1;
+	private JTextField textpuntos1;
+	private JTextField textdinero2;
+	private JTextField textpuntos2;
+	private JTextField textUsuario2;
+	private JTextField textUsuario1;
+	private JTextField textFecha;
 
 	/**
 	 * Launch the application.
@@ -77,9 +80,24 @@ public class MenuMultijugador extends JDialog{
 		
 
 		
-		JComboBox<LogicaBatallas.Partida> comboBox =new JComboBox();
-		
+		JComboBox<LogicaBatallas.Partida> comboBox =new JComboBox<LogicaBatallas.Partida>();
 		for(LogicaBatallas.Partida p:a){comboBox.addItem(p);}
+		
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(comboBox.getSelectedItem()!=null){
+					textDinero1.setText(""+a.get(comboBox.getSelectedIndex()).getDineroAliado());
+					textpuntos1.setText(""+a.get(comboBox.getSelectedIndex()).getPuntuacionAliado());
+					textdinero2.setText(""+a.get(comboBox.getSelectedIndex()).getDineroEnemigo());
+					textpuntos2.setText(""+a.get(comboBox.getSelectedIndex()).getPuntuacionEnemigo());
+					textUsuario2.setText(""+a.get(comboBox.getSelectedIndex()).getUsuario2());
+					textUsuario1.setText(""+a.get(comboBox.getSelectedIndex()).getUsuario());
+					textFecha.setText(""+a.get(comboBox.getSelectedIndex()).getFechaPartida());
+				}
+			}
+		});
+		
+		
 		
 		
 		
@@ -119,47 +137,60 @@ public class MenuMultijugador extends JDialog{
 		lblPuntos_1.setBounds(640, 442, 33, 14);
 		 getContentPane().add(lblPuntos_1);
 		
-		textField = new JTextField();
-		textField.setBounds(696, 291, 86, 20);
-		 getContentPane().add(textField);
-		textField.setColumns(10);
+		textDinero1 = new JTextField();
+		textDinero1.setBounds(696, 291, 86, 20);
+		 getContentPane().add(textDinero1);
+		textDinero1.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(696, 316, 86, 20);
-		 getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		textpuntos1 = new JTextField();
+		textpuntos1.setBounds(696, 316, 86, 20);
+		 getContentPane().add(textpuntos1);
+		textpuntos1.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(696, 414, 86, 20);
-		 getContentPane().add(textField_2);
-		textField_2.setColumns(10);
+		textdinero2 = new JTextField();
+		textdinero2.setBounds(696, 414, 86, 20);
+		 getContentPane().add(textdinero2);
+		textdinero2.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(696, 439, 86, 20);
-		 getContentPane().add(textField_3);
-		textField_3.setColumns(10);
+		textpuntos2 = new JTextField();
+		textpuntos2.setBounds(696, 439, 86, 20);
+		 getContentPane().add(textpuntos2);
+		textpuntos2.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(653, 367, 86, 20);
-		 getContentPane().add(textField_4);
-		textField_4.setColumns(10);
+		textUsuario2 = new JTextField();
+		textUsuario2.setBounds(653, 367, 86, 20);
+		 getContentPane().add(textUsuario2);
+		textUsuario2.setColumns(10);
 		
-		textField_5 = new JTextField();
-		textField_5.setBounds(653, 254, 86, 20);
-		 getContentPane().add(textField_5);
-		textField_5.setColumns(10);
+		textUsuario1 = new JTextField();
+		textUsuario1.setBounds(653, 254, 86, 20);
+		 getContentPane().add(textUsuario1);
+		textUsuario1.setColumns(10);
 		
-		textField_6 = new JTextField();
-		textField_6.setBounds(651, 216, 86, 20);
-		 getContentPane().add(textField_6);
-		textField_6.setColumns(10);
+		textFecha = new JTextField();
+		textFecha.setBounds(651, 216, 86, 20);
+		 getContentPane().add(textFecha);
+		textFecha.setColumns(10);
 		
 		JButton btnJugar = new JButton("JUGAR!");
-		btnJugar.setBounds(413, 681, 89, 23);
+		btnJugar.setBounds(358, 681, 127, 23);
 		 getContentPane().add(btnJugar);
 		
 		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(597, 681, 89, 23);
+		btnVolver.setBounds(681, 681, 89, 23);
 		 getContentPane().add(btnVolver);
+		 
+		 JButton btnCrearPartida = new JButton("Crear partida");
+		 btnCrearPartida.addActionListener(new ActionListener() {
+		 	public void actionPerformed(ActionEvent arg0) {
+		 		CrearPartida cp=new CrearPartida();
+		 		
+		 		
+		 		
+		 		
+		 	}
+		 });
+		 btnCrearPartida.setBounds(523, 681, 118, 23);
+		 getContentPane().add(btnCrearPartida);
 	}
 }

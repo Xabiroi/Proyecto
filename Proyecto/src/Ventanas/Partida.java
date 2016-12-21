@@ -4,8 +4,6 @@ import java.awt.EventQueue;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JSplitPane;
-import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.event.ActionListener;
@@ -51,6 +49,16 @@ public class Partida extends JDialog{
 	 * Create the application.
 	 */
 	public Partida() {
+		this.initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 600, 600);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -191,15 +199,5 @@ public class Partida extends JDialog{
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(154, 114, 913, 492);
 		getContentPane().add(panel_3);
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }

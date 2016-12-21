@@ -37,8 +37,6 @@ public class MenuPrincipal extends JDialog{
 				try {
 					MenuPrincipal window = new MenuPrincipal();
 					window.frame.setVisible(true);
-					//window.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					//window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
