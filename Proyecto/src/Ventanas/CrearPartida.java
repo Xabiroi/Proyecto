@@ -8,8 +8,13 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import BD.BD;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.Statement;
 
 public class CrearPartida extends JDialog{
 
@@ -64,6 +69,11 @@ public class CrearPartida extends JDialog{
 				p.setVisible(true);
 				p.setSize(1200, 1000);
 				//FIXME las operaciones de crear una nueva partida (crear un constructor de ventana con parametros como oro y demas o sino como loginmanager meter un objeto como atributo a PARTIDA)
+				Statement st=BD.usarBD(BD.initBD("Local"));
+				BD.PartidaInsert(st, p.getP());
+				
+				
+				
 			}
 		});
 		btnCrear.setBounds(81, 115, 114, 23);

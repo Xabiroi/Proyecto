@@ -28,6 +28,8 @@ public class Partida extends JDialog{
 	private JTextField textFieldPS;
 	private JTextField textFieldArma;
 	private JTextField textFieldAcciones;
+	private LogicaBatallas.LogicaPartida lp;
+	private LogicaBatallas.Partida p;
 
 	/**
 	 * Launch the application.
@@ -104,19 +106,19 @@ public class Partida extends JDialog{
 		panel_1.add(lblNewLabel);
 		
 		JLabel lblJugador = new JLabel("Jugador 1:");
-		lblJugador.setBounds(507, 11, 66, 14);
+		lblJugador.setBounds(495, 11, 66, 14);
 		panel_1.add(lblJugador);
 		
 		JLabel lblJugador_1 = new JLabel("Jugador 2:");
-		lblJugador_1.setBounds(507, 42, 66, 14);
+		lblJugador_1.setBounds(495, 42, 66, 14);
 		panel_1.add(lblJugador_1);
 		
 		JLabel lblPuntos = new JLabel("Puntos:");
-		lblPuntos.setBounds(706, 11, 46, 14);
+		lblPuntos.setBounds(688, 11, 46, 14);
 		panel_1.add(lblPuntos);
 		
 		JLabel lblPuntos_1 = new JLabel("Puntos:");
-		lblPuntos_1.setBounds(706, 42, 46, 14);
+		lblPuntos_1.setBounds(688, 42, 46, 14);
 		panel_1.add(lblPuntos_1);
 		
 		textFieldPartida = new JTextField();
@@ -199,5 +201,21 @@ public class Partida extends JDialog{
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(154, 114, 913, 492);
 		getContentPane().add(panel_3);
+	}
+
+	public LogicaBatallas.LogicaPartida getLp() {
+		return lp;
+	}
+
+	public void setLp(LogicaBatallas.LogicaPartida lp) {
+		this.lp = lp;
+	}
+
+	public LogicaBatallas.Partida getP() {
+		return p;
+	}
+
+	public void setP(LogicaBatallas.Partida p) {
+		this.p = p;
 	}
 }
