@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -185,7 +186,13 @@ public class Menu1Jugador extends JDialog{
 			btnJugar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					Partida p=new Partida();
+					Partida p=null;
+					try {
+						p = new Partida();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					setVisible(false);
 					p.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					p.setVisible(true);

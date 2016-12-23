@@ -13,6 +13,7 @@ import BD.BD;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Statement;
 
@@ -62,7 +63,13 @@ public class CrearPartida extends JDialog{
 		btnCrear.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Partida p=new Partida();
+				Partida p=null;
+				try {
+					p = new Partida();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				frame.setVisible(false);
 				frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 				p.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
