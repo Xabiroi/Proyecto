@@ -31,8 +31,16 @@ private static Exception lastError = null;  // Información de último error SQL o
 	 */
 	public static Connection initBD( String nombreBD ) {
 		try {
-		    Class.forName("org.sqlite.JDBC");
-		    Connection con = DriverManager.getConnection("jdbc:sqlite:" + nombreBD );
+		    try {
+				Class.forName("com.mysql.jdbc.Driver").newInstance();
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    Connection con = DriverManager.getConnection("jdbc:mysql://192.100.0.000:3306/" + nombreBD,"root","root");
 			log( Level.INFO, "Conectada base de datos " + nombreBD, null );
 		    return con;
 		} catch (ClassNotFoundException | SQLException e) {

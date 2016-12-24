@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry excluding="Informacion/src-base/|Informacion/src-base/" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/Users/Xabier/Desktop/Xabier Uni/Programacion/drivers/j2sdk1.4.2_03/jre/lib/ext/sqlite.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Xabier/Desktop/Xabier Uni/Programacion/Proyecto program/mysql-connector-java-5.1.40/mysql-connector-java-5.1.40-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
