@@ -78,26 +78,29 @@ private static Exception lastError = null;  // Información de último error SQL o
 			statement.setQueryTimeout(30);  // poner timeout 30 msg
 			try {
 				statement.executeUpdate("create table usuario " +
-					"(nombre string, contraseña string, nick string)");
+					"(nombre char(30) not null primary key, "
+					+ "contraseña char(30) not null,"
+					+ " nick char(30) not null)");
 			} catch (SQLException e) {} // Tabla ya existe. Nada que hacer
 		
 			try {
 				statement.executeUpdate("create table partidaMultijugador " 
-					+"(usuario1 string not null references usuario(nick) on delete cascade,"
-					+ "usuario2 string not null references usuario(nick) on delete cascade,"
-					+ "Partida string"
+					+"(usuario1 char(30) not null references usuario(nick) on delete cascade,"
+					+ "usuario2 char(30) not null references usuario(nick) on delete cascade,"
+					+ "Partida char(30),"
 					+ "dineroAliado integer,"
 					+ "dineroEnemigo integer,"
 					+ "puntuacionAliado integer,"
 					+ "puntuacionEnemigo integer, "
-					+ "fechapartida bigint)");
+					+ "fechapartida bigint,"
+					+ "primary key(usuario1,usuario2))");
 			} catch (SQLException e) {} // Tabla ya existe. Nada que hacer
 			try {
 				statement.executeUpdate("create table soldados "
-					+ "(Partida string not null references partidaMultijugador(Partida) on delete cascade,"
-					+ " nombre string,"
-					+ " arma string,"
-					+ " salud string,"
+					+ "(Partida char(30) not null references partidaMultijugador(Partida) on delete cascade,"
+					+ " nombre char(30),"
+					+ " arma char(30),"
+					+ " salud char(30),"
 					+ " coordX integer,"
 					+ " coordY integer)");
 				
@@ -281,7 +284,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 			while (rs.next()) {
 				Usuario u = new Usuario();
 				u.setNick( rs.getString( "nick" ) );
-				u.setContraseña( rs.getString( "password" ) );
+				u.setContraseña( rs.getString( "contraseña" ) );
 				u.setNombre( rs.getString( "nombre" ) );
 				ret.add( u );
 			}

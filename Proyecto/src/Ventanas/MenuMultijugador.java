@@ -75,7 +75,7 @@ public class MenuMultijugador extends JDialog{
 		 getContentPane().add(lblNewLabel);
 		 
 		 
-		 ArrayList<LogicaBatallas.Partida> a=BD.PartidaSelect( BD.usarBD(BD.initBD("Local")),"usuario1="+Juego.getLM().getUsuario()+" OR usuario2="+Juego.getLM().getUsuario());//FIXME cambiar la conexion
+		 ArrayList<LogicaBatallas.Partida> a=BD.PartidaSelect( BD.usarBD(BD.initBD("Local")),"usuario1="+"'"+Juego.getLM().getUsuario().getNick()+"'"+" OR usuario2="+"'"+Juego.getLM().getUsuario().getNick()+"'");//FIXME cambiar la conexion
 		//AÑADIR LA UNION DE BASE DE DATOS FIXME
 		
 

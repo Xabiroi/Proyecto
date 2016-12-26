@@ -158,10 +158,10 @@ public class Juego{
 			
 			
 			//FIXME base de datos da error en crear la base de datos con nombre "Local" (hay que elegir otro nombre) 
-			Connection c=BD.initBD( "//localhost/BD.bd" );
+			Connection c=BD.initBD( "Local" );
 			Statement st=BD.usarBD(c);
 			BD.usarCrearTablasBD(c);
-			ArrayList<Usuario> u=BD.usuarioSelect( st, "NOMBRE="+txtUsuario.getText()+" AND CONTRASEÑA="+ new String(pswField.getPassword()) );
+			ArrayList<Usuario> u=BD.usuarioSelect( st, "NOMBRE="+"'"+txtUsuario.getText()+"'"+" AND CONTRASEÑA="+"'"+ new String(pswField.getPassword())+"'" );
 			Usuario u1=u.get(0);			
 			lm.registro(u1);
 			
