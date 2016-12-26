@@ -75,7 +75,13 @@ public class CrearPartida extends JDialog{
 				p.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				p.setVisible(true);
 				p.setSize(1200, 1000);
+				//FIXME es temporal pero ni creando las tablas con el codigo de usarCrearTablas la partida multijugador se ejecuta
+				//////TEMPORAL
+				BD.usarCrearTablasBD(BD.initBD("Local"));
+				//////
 				//FIXME las operaciones de crear una nueva partida (crear un constructor de ventana con parametros como oro y demas o sino como loginmanager meter un objeto como atributo a PARTIDA)
+				LogicaBatallas.Partida pa=new LogicaBatallas.Partida(textField.getText(),textField_1.getText(),System.currentTimeMillis(),textField.getText()+"vs"+textField_1.getText());
+				p.setP(pa);
 				Statement st=BD.usarBD(BD.initBD("Local"));
 				BD.PartidaInsert(st, p.getP());
 				

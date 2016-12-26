@@ -65,7 +65,7 @@ public class Juego{
 					window.frame.setVisible(true);
 					
 					*/
-					
+					BD.usarCrearTablasBD(BD.initBD("Local"));
 					Juego window1 = new Juego();
 					window1.frame.setVisible(true);
 

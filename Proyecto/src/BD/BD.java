@@ -40,7 +40,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		    Connection con = DriverManager.getConnection("jdbc:mysql://192.100.0.000:3306/" + nombreBD,"root","root");
+		    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+nombreBD+"?autoReconnect=true&useSSL=false","root","root");
 			log( Level.INFO, "Conectada base de datos " + nombreBD, null );
 		    return con;
 		} catch (ClassNotFoundException | SQLException e) {
