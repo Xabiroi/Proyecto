@@ -10,12 +10,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import BD.UnidadBD;
 
 public class Partida extends JDialog{
 
@@ -36,6 +42,7 @@ public class Partida extends JDialog{
 	private JTextField textFieldAcciones;
 	private LogicaBatallas.LogicaPartida lp;
 	private LogicaBatallas.Partida p;
+	private UnidadBD[][] tablero;//TODO array que tenga los componentes, y su equivalente en gridlayout apra que sea utilizable
 
 	/**
 	 * Launch the application.
@@ -131,27 +138,35 @@ public class Partida extends JDialog{
 		
 		textFieldPartida = new JTextField();
 		textFieldPartida.setBounds(228, 8, 86, 20);
+		textFieldPartida.setText(p.getPartida());
+		textFieldPartida.setEditable(false);
 		panel_1.add(textFieldPartida);
 		textFieldPartida.setColumns(10);
 		
 		textFieldJugador1 = new JTextField();
-		textFieldJugador1.setText("");
+		textFieldJugador1.setText(p.getUsuario());
+		textFieldJugador1.setEditable(false);
 		textFieldJugador1.setBounds(560, 8, 86, 20);
 		panel_1.add(textFieldJugador1);
 		textFieldJugador1.setColumns(10);
 		
 		textFieldJugador2 = new JTextField();
 		textFieldJugador2.setBounds(560, 39, 86, 20);
+		textFieldJugador2.setText(p.getUsuario2());
+		textFieldJugador2.setEditable(false);
 		panel_1.add(textFieldJugador2);
 		textFieldJugador2.setColumns(10);
 		
 		textFieldPuntosJ1 = new JTextField();
 		textFieldPuntosJ1.setBounds(744, 8, 86, 20);
+		textFieldPuntosJ1.setText(""+p.getPuntuacionAliado());
+		textFieldPuntosJ1.setEditable(false);
 		panel_1.add(textFieldPuntosJ1);
 		textFieldPuntosJ1.setColumns(10);
 		
 		textFieldPuntosJ2 = new JTextField();
-		textFieldPuntosJ2.setText("");
+		textFieldPuntosJ2.setText(""+p.getPuntuacionEnemigo());
+		textFieldPuntosJ2.setEditable(false);
 		textFieldPuntosJ2.setBounds(744, 39, 86, 20);
 		panel_1.add(textFieldPuntosJ2);
 		textFieldPuntosJ2.setColumns(10);
@@ -167,6 +182,35 @@ public class Partida extends JDialog{
 		
 		textFieldPropietario = new JTextField();
 		textFieldPropietario.setBounds(72, 8, 86, 20);
+		textFieldPropietario.setEditable(false);
+		UnidadBD unidadactual=new UnidadBD();
+		textFieldPropietario.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//TODO meter el array o el gridlayout y comprobar si hay alguna unidad
+				 Pattern pat = Pattern.compile(".Enemigo$");
+			     Matcher mat = pat.matcher(unidadactual.getClass().getName());
+			     
+				int x=0,y=0;
+				try {
+					 
+						x = e.getX();
+						y = e.getY();
+						
+					//TODO meter la parte de gridbuttonpanel en transparente para saber las colisiones y las coordenadas
+					//unidadactual=...
+						if (mat.matches()) {
+							textFieldPropietario.setText("Usuario 2");
+					     } else {
+					    	 textFieldPropietario.setText("Usuario 1");
+					     }
+						
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+	
 		panel_2.add(textFieldPropietario);
 		textFieldPropietario.setColumns(10);
 		
@@ -176,6 +220,8 @@ public class Partida extends JDialog{
 		
 		textFieldUnidad = new JTextField();
 		textFieldUnidad.setBounds(241, 8, 86, 20);
+		textFieldUnidad.setText(unidadactual.getNombre());
+		textFieldUnidad.setEditable(false);
 		panel_2.add(textFieldUnidad);
 		textFieldUnidad.setColumns(10);
 		
@@ -185,6 +231,8 @@ public class Partida extends JDialog{
 		
 		textFieldPS = new JTextField();
 		textFieldPS.setBounds(393, 8, 86, 20);
+		textFieldPS.setText(""+unidadactual.getSalud());
+		textFieldPS.setEditable(false);
 		panel_2.add(textFieldPS);
 		textFieldPS.setColumns(10);
 		
@@ -194,17 +242,11 @@ public class Partida extends JDialog{
 		
 		textFieldArma = new JTextField();
 		textFieldArma.setBounds(545, 8, 86, 20);
+		textFieldArma.setEditable(false);
+		textFieldArma.setText(unidadactual.getArma());
 		panel_2.add(textFieldArma);
 		textFieldArma.setColumns(10);
 		
-		JLabel lblAcciones = new JLabel("Acciones:");
-		lblAcciones.setBounds(651, 11, 46, 14);
-		panel_2.add(lblAcciones);
-		
-		textFieldAcciones = new JTextField();
-		textFieldAcciones.setBounds(707, 8, 86, 20);
-		panel_2.add(textFieldAcciones);
-		textFieldAcciones.setColumns(10);
 
 		String arg = "Resources.Mapa.png";
 		    
