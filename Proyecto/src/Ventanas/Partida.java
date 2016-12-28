@@ -44,9 +44,8 @@ public class Partida extends JDialog{
 	private LogicaBatallas.Partida p;
 	private UnidadBD[][] tablero;//TODO array que tenga los componentes, y su equivalente en gridlayout apra que sea utilizable
 
-	/**
-	 * Launch the application.
-	 */
+
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -59,12 +58,14 @@ public class Partida extends JDialog{
 			}
 		});
 	}
-
+	 */
 	/**
 	 * Create the application.
 	 * @throws IOException 
 	 */
-	public Partida() throws IOException {
+	public Partida(LogicaBatallas.Partida p,LogicaBatallas.LogicaPartida lp) throws IOException {
+		this.p=p;
+		this.lp=lp;
 		this.initialize();
 	}
 
@@ -74,8 +75,8 @@ public class Partida extends JDialog{
 	 */
 	private void initialize() throws IOException {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 600, 600);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 600, 600);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();

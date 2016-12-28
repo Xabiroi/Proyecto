@@ -102,7 +102,7 @@ panel.add(label);
 		 getContentPane().add(btnUn_jugador);
 		
 		
-		JButton btnMultijuador = new JButton("Multijuador");
+		JButton btnMultijuador = new JButton("Multijugador");
 		btnMultijuador.setBounds(256, 246, 173, 23);
 		btnMultijuador.addMouseListener(new MouseAdapter() {
 				@Override

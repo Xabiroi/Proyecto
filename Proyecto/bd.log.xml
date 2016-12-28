@@ -7276,3 +7276,956 @@ The last packet sent successfully to the server was 0 milliseconds ago. The driv
   <thread>12</thread>
   <message>BD	select * from partidaMultijugador where usuario1='a' OR usuario2='a'</message>
 </record>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2016-12-28T13:59:00</date>
+  <millis>1482929940371</millis>
+  <sequence>0</sequence>
+  <logger>BD.BD</logger>
+  <level>SEVERE</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Error en conexión de base de datos Local</message>
+  <exception>
+    <message>com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Could not create connection to database server. Attempted reconnect 3 times. Giving up.</message>
+    <frame>
+      <class>sun.reflect.NativeConstructorAccessorImpl</class>
+      <method>newInstance0</method>
+    </frame>
+    <frame>
+      <class>sun.reflect.NativeConstructorAccessorImpl</class>
+      <method>newInstance</method>
+    </frame>
+    <frame>
+      <class>sun.reflect.DelegatingConstructorAccessorImpl</class>
+      <method>newInstance</method>
+    </frame>
+    <frame>
+      <class>java.lang.reflect.Constructor</class>
+      <method>newInstance</method>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.Util</class>
+      <method>handleNewInstance</method>
+      <line>425</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.Util</class>
+      <method>getInstance</method>
+      <line>408</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.SQLError</class>
+      <method>createSQLException</method>
+      <line>918</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.SQLError</class>
+      <method>createSQLException</method>
+      <line>897</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.SQLError</class>
+      <method>createSQLException</method>
+      <line>886</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.SQLError</class>
+      <method>createSQLException</method>
+      <line>860</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.ConnectionImpl</class>
+      <method>connectWithRetries</method>
+      <line>2163</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.ConnectionImpl</class>
+      <method>createNewIO</method>
+      <line>2088</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.ConnectionImpl</class>
+      <method>&lt;init&gt;</method>
+      <line>806</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.JDBC4Connection</class>
+      <method>&lt;init&gt;</method>
+      <line>47</line>
+    </frame>
+    <frame>
+      <class>sun.reflect.NativeConstructorAccessorImpl</class>
+      <method>newInstance0</method>
+    </frame>
+    <frame>
+      <class>sun.reflect.NativeConstructorAccessorImpl</class>
+      <method>newInstance</method>
+    </frame>
+    <frame>
+      <class>sun.reflect.DelegatingConstructorAccessorImpl</class>
+      <method>newInstance</method>
+    </frame>
+    <frame>
+      <class>java.lang.reflect.Constructor</class>
+      <method>newInstance</method>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.Util</class>
+      <method>handleNewInstance</method>
+      <line>425</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.ConnectionImpl</class>
+      <method>getInstance</method>
+      <line>410</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.NonRegisteringDriver</class>
+      <method>connect</method>
+      <line>328</line>
+    </frame>
+    <frame>
+      <class>java.sql.DriverManager</class>
+      <method>getConnection</method>
+    </frame>
+    <frame>
+      <class>java.sql.DriverManager</class>
+      <method>getConnection</method>
+    </frame>
+    <frame>
+      <class>BD.BD</class>
+      <method>initBD</method>
+      <line>43</line>
+    </frame>
+    <frame>
+      <class>Ventanas.Juego$1</class>
+      <method>run</method>
+      <line>68</line>
+    </frame>
+    <frame>
+      <class>java.awt.event.InvocationEvent</class>
+      <method>dispatch</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventQueue</class>
+      <method>dispatchEventImpl</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventQueue</class>
+      <method>access$500</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventQueue$3</class>
+      <method>run</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventQueue$3</class>
+      <method>run</method>
+    </frame>
+    <frame>
+      <class>java.security.AccessController</class>
+      <method>doPrivileged</method>
+    </frame>
+    <frame>
+      <class>java.security.ProtectionDomain$JavaSecurityAccessImpl</class>
+      <method>doIntersectionPrivilege</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventQueue</class>
+      <method>dispatchEvent</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventDispatchThread</class>
+      <method>pumpOneEventForFilters</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventDispatchThread</class>
+      <method>pumpEventsForFilter</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventDispatchThread</class>
+      <method>pumpEventsForHierarchy</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventDispatchThread</class>
+      <method>pumpEvents</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventDispatchThread</class>
+      <method>pumpEvents</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventDispatchThread</class>
+      <method>run</method>
+    </frame>
+  </exception>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2016-12-28T14:00:10</date>
+  <millis>1482930010171</millis>
+  <sequence>0</sequence>
+  <logger>BD.BD</logger>
+  <level>SEVERE</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Error en conexión de base de datos Local</message>
+  <exception>
+    <message>com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Could not create connection to database server. Attempted reconnect 3 times. Giving up.</message>
+    <frame>
+      <class>sun.reflect.NativeConstructorAccessorImpl</class>
+      <method>newInstance0</method>
+    </frame>
+    <frame>
+      <class>sun.reflect.NativeConstructorAccessorImpl</class>
+      <method>newInstance</method>
+    </frame>
+    <frame>
+      <class>sun.reflect.DelegatingConstructorAccessorImpl</class>
+      <method>newInstance</method>
+    </frame>
+    <frame>
+      <class>java.lang.reflect.Constructor</class>
+      <method>newInstance</method>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.Util</class>
+      <method>handleNewInstance</method>
+      <line>425</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.Util</class>
+      <method>getInstance</method>
+      <line>408</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.SQLError</class>
+      <method>createSQLException</method>
+      <line>918</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.SQLError</class>
+      <method>createSQLException</method>
+      <line>897</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.SQLError</class>
+      <method>createSQLException</method>
+      <line>886</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.SQLError</class>
+      <method>createSQLException</method>
+      <line>860</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.ConnectionImpl</class>
+      <method>connectWithRetries</method>
+      <line>2163</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.ConnectionImpl</class>
+      <method>createNewIO</method>
+      <line>2088</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.ConnectionImpl</class>
+      <method>&lt;init&gt;</method>
+      <line>806</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.JDBC4Connection</class>
+      <method>&lt;init&gt;</method>
+      <line>47</line>
+    </frame>
+    <frame>
+      <class>sun.reflect.NativeConstructorAccessorImpl</class>
+      <method>newInstance0</method>
+    </frame>
+    <frame>
+      <class>sun.reflect.NativeConstructorAccessorImpl</class>
+      <method>newInstance</method>
+    </frame>
+    <frame>
+      <class>sun.reflect.DelegatingConstructorAccessorImpl</class>
+      <method>newInstance</method>
+    </frame>
+    <frame>
+      <class>java.lang.reflect.Constructor</class>
+      <method>newInstance</method>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.Util</class>
+      <method>handleNewInstance</method>
+      <line>425</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.ConnectionImpl</class>
+      <method>getInstance</method>
+      <line>410</line>
+    </frame>
+    <frame>
+      <class>com.mysql.jdbc.NonRegisteringDriver</class>
+      <method>connect</method>
+      <line>328</line>
+    </frame>
+    <frame>
+      <class>java.sql.DriverManager</class>
+      <method>getConnection</method>
+    </frame>
+    <frame>
+      <class>java.sql.DriverManager</class>
+      <method>getConnection</method>
+    </frame>
+    <frame>
+      <class>BD.BD</class>
+      <method>initBD</method>
+      <line>43</line>
+    </frame>
+    <frame>
+      <class>Ventanas.Juego$1</class>
+      <method>run</method>
+      <line>68</line>
+    </frame>
+    <frame>
+      <class>java.awt.event.InvocationEvent</class>
+      <method>dispatch</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventQueue</class>
+      <method>dispatchEventImpl</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventQueue</class>
+      <method>access$500</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventQueue$3</class>
+      <method>run</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventQueue$3</class>
+      <method>run</method>
+    </frame>
+    <frame>
+      <class>java.security.AccessController</class>
+      <method>doPrivileged</method>
+    </frame>
+    <frame>
+      <class>java.security.ProtectionDomain$JavaSecurityAccessImpl</class>
+      <method>doIntersectionPrivilege</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventQueue</class>
+      <method>dispatchEvent</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventDispatchThread</class>
+      <method>pumpOneEventForFilters</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventDispatchThread</class>
+      <method>pumpEventsForFilter</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventDispatchThread</class>
+      <method>pumpEventsForHierarchy</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventDispatchThread</class>
+      <method>pumpEvents</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventDispatchThread</class>
+      <method>pumpEvents</method>
+    </frame>
+    <frame>
+      <class>java.awt.EventDispatchThread</class>
+      <method>run</method>
+    </frame>
+  </exception>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2016-12-28T14:01:01</date>
+  <millis>1482930061585</millis>
+  <sequence>0</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:01:01</date>
+  <millis>1482930061621</millis>
+  <sequence>1</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Creada base de datos</message>
+</record>
+<record>
+  <date>2016-12-28T14:01:05</date>
+  <millis>1482930065847</millis>
+  <sequence>2</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:01:05</date>
+  <millis>1482930065862</millis>
+  <sequence>3</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Creada base de datos</message>
+</record>
+<record>
+  <date>2016-12-28T14:01:05</date>
+  <millis>1482930065903</millis>
+  <sequence>4</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from usuario where NOMBRE='a' AND CONTRASEÑA='a'</message>
+</record>
+<record>
+  <date>2016-12-28T14:01:12</date>
+  <millis>1482930072323</millis>
+  <sequence>5</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:01:12</date>
+  <millis>1482930072349</millis>
+  <sequence>6</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where usuario1='a' OR usuario2='a'</message>
+</record>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2016-12-28T14:02:54</date>
+  <millis>1482930174673</millis>
+  <sequence>0</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:02:54</date>
+  <millis>1482930174701</millis>
+  <sequence>1</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Creada base de datos</message>
+</record>
+<record>
+  <date>2016-12-28T14:02:58</date>
+  <millis>1482930178475</millis>
+  <sequence>2</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:02:58</date>
+  <millis>1482930178484</millis>
+  <sequence>3</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Creada base de datos</message>
+</record>
+<record>
+  <date>2016-12-28T14:02:58</date>
+  <millis>1482930178488</millis>
+  <sequence>4</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from usuario where NOMBRE='a' AND CONTRASEÑA='a'</message>
+</record>
+<record>
+  <date>2016-12-28T14:03:01</date>
+  <millis>1482930181957</millis>
+  <sequence>5</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:03:01</date>
+  <millis>1482930181963</millis>
+  <sequence>6</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where usuario1='a' OR usuario2='a'</message>
+</record>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2016-12-28T14:17:04</date>
+  <millis>1482931024130</millis>
+  <sequence>0</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2016-12-28T14:20:18</date>
+  <millis>1482931218840</millis>
+  <sequence>0</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:20:18</date>
+  <millis>1482931218869</millis>
+  <sequence>1</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Creada base de datos</message>
+</record>
+<record>
+  <date>2016-12-28T14:20:21</date>
+  <millis>1482931221992</millis>
+  <sequence>2</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:20:22</date>
+  <millis>1482931222006</millis>
+  <sequence>3</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Creada base de datos</message>
+</record>
+<record>
+  <date>2016-12-28T14:20:22</date>
+  <millis>1482931222010</millis>
+  <sequence>4</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from usuario where NOMBRE='a' AND CONTRASEÑA='a'</message>
+</record>
+<record>
+  <date>2016-12-28T14:20:24</date>
+  <millis>1482931224426</millis>
+  <sequence>5</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:20:24</date>
+  <millis>1482931224433</millis>
+  <sequence>6</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where usuario1='a' OR usuario2='a'</message>
+</record>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2016-12-28T14:21:00</date>
+  <millis>1482931260383</millis>
+  <sequence>0</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:21:00</date>
+  <millis>1482931260413</millis>
+  <sequence>1</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Creada base de datos</message>
+</record>
+<record>
+  <date>2016-12-28T14:21:03</date>
+  <millis>1482931263743</millis>
+  <sequence>2</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:21:03</date>
+  <millis>1482931263755</millis>
+  <sequence>3</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Creada base de datos</message>
+</record>
+<record>
+  <date>2016-12-28T14:21:03</date>
+  <millis>1482931263761</millis>
+  <sequence>4</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from usuario where NOMBRE='a' AND CONTRASEÑA='a'</message>
+</record>
+<record>
+  <date>2016-12-28T14:21:05</date>
+  <millis>1482931265315</millis>
+  <sequence>5</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:21:05</date>
+  <millis>1482931265322</millis>
+  <sequence>6</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where usuario1='a' OR usuario2='a'</message>
+</record>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2016-12-28T14:25:19</date>
+  <millis>1482931519942</millis>
+  <sequence>0</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:25:20</date>
+  <millis>1482931520012</millis>
+  <sequence>1</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Creada base de datos</message>
+</record>
+<record>
+  <date>2016-12-28T14:25:22</date>
+  <millis>1482931522671</millis>
+  <sequence>2</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:25:22</date>
+  <millis>1482931522678</millis>
+  <sequence>3</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Creada base de datos</message>
+</record>
+<record>
+  <date>2016-12-28T14:25:22</date>
+  <millis>1482931522683</millis>
+  <sequence>4</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from usuario where NOMBRE='a' AND CONTRASEÑA='a'</message>
+</record>
+<record>
+  <date>2016-12-28T14:25:24</date>
+  <millis>1482931524410</millis>
+  <sequence>5</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:25:24</date>
+  <millis>1482931524413</millis>
+  <sequence>6</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where usuario1='a' OR usuario2='a'</message>
+</record>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2016-12-28T14:31:38</date>
+  <millis>1482931898468</millis>
+  <sequence>0</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:31:38</date>
+  <millis>1482931898493</millis>
+  <sequence>1</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Creada base de datos</message>
+</record>
+<record>
+  <date>2016-12-28T14:31:41</date>
+  <millis>1482931901208</millis>
+  <sequence>2</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:31:41</date>
+  <millis>1482931901219</millis>
+  <sequence>3</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Creada base de datos</message>
+</record>
+<record>
+  <date>2016-12-28T14:31:41</date>
+  <millis>1482931901224</millis>
+  <sequence>4</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from usuario where NOMBRE='a' AND CONTRASEÑA='a'</message>
+</record>
+<record>
+  <date>2016-12-28T14:31:42</date>
+  <millis>1482931902970</millis>
+  <sequence>5</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:31:42</date>
+  <millis>1482931902975</millis>
+  <sequence>6</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where usuario1='a' OR usuario2='a'</message>
+</record>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2016-12-28T14:34:33</date>
+  <millis>1482932073637</millis>
+  <sequence>0</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:34:33</date>
+  <millis>1482932073662</millis>
+  <sequence>1</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Creada base de datos</message>
+</record>
+<record>
+  <date>2016-12-28T14:34:36</date>
+  <millis>1482932076342</millis>
+  <sequence>2</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:34:36</date>
+  <millis>1482932076351</millis>
+  <sequence>3</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Creada base de datos</message>
+</record>
+<record>
+  <date>2016-12-28T14:34:36</date>
+  <millis>1482932076356</millis>
+  <sequence>4</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from usuario where NOMBRE='a' AND CONTRASEÑA='a'</message>
+</record>
+<record>
+  <date>2016-12-28T14:34:37</date>
+  <millis>1482932077866</millis>
+  <sequence>5</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2016-12-28T14:34:37</date>
+  <millis>1482932077872</millis>
+  <sequence>6</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where usuario1='a' OR usuario2='a'</message>
+</record>

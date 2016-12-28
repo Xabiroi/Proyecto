@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import BD.BD;
+import LogicaBatallas.LogicaPartida;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -47,31 +48,26 @@ public class CrearPartida extends JDialog{
 	 * Create the application.
 	 */
 	public CrearPartida() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 363, 192);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		setBounds(100, 100, 363, 192);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		getContentPane().setLayout(null);
 		
 		JButton btnCrear = new JButton("Crear partida");
 		btnCrear.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Partida p=null;
+				Ventanas.Partida p=null;
+				LogicaBatallas.LogicaPartida lb=new LogicaBatallas.LogicaPartida();
+				LogicaBatallas.Partida p1=new LogicaBatallas.Partida();
 				try {
-					p = new Partida();
+					p = new Ventanas.Partida(p1, lb);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				frame.setVisible(false);
-				frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+				setVisible(false);
+				setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 				p.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				p.setVisible(true);
 				p.setSize(1200, 1000);
@@ -90,36 +86,45 @@ public class CrearPartida extends JDialog{
 			}
 		});
 		btnCrear.setBounds(81, 115, 114, 23);
-		frame.getContentPane().add(btnCrear);
+		getContentPane().add(btnCrear);
 		
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-			frame.setVisible(false);
+			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			setVisible(false);
 			
 			}
 		});
 		btnVolver.setBounds(228, 115, 89, 23);
-		frame.getContentPane().add(btnVolver);
+		getContentPane().add(btnVolver);
 		
 		JLabel lblUsuario = new JLabel("Usuario 1:");
 		lblUsuario.setBounds(81, 42, 77, 14);
-		frame.getContentPane().add(lblUsuario);
+		getContentPane().add(lblUsuario);
 		
 		JLabel lblUsuario_1 = new JLabel("Usuario 2:");
 		lblUsuario_1.setBounds(81, 67, 77, 14);
-		frame.getContentPane().add(lblUsuario_1);
+		getContentPane().add(lblUsuario_1);
 		
 		textField = new JTextField();
 		textField.setBounds(168, 39, 86, 20);
-		frame.getContentPane().add(textField);
+		getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(168, 64, 86, 20);
-		frame.getContentPane().add(textField_1);
+		getContentPane().add(textField_1);
 		textField_1.setColumns(10);
+	
+	}
+		
+	
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	void initialize() {
 	}
 }
