@@ -17,7 +17,12 @@ import UnidadesEnemigas.UnidadEnemiga;
 
 public class UnidadAliada extends UnidadBD implements Unidad{
 	protected ArrayList<UnidadEnemiga> enemigos=new ArrayList<UnidadEnemiga>();
-
+	
+	
+	public UnidadAliada(){
+		this.equipo=1;
+		
+	}
 	
 
 	

@@ -101,6 +101,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 					+ " nombre char(30),"
 					+ " arma char(30),"
 					+ " salud char(30),"
+					+ " equipo integer,"
 					+ " coordX integer,"
 					+ " coordY integer)");
 				
@@ -248,6 +249,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 					"'" + secu(s.getNombre()) + "', " +
 					"'" + secu(s.getArma()) + "', " +
 					"'" + secu(""+s.getSalud()) + "', " +
+					"'" + secu(""+s.getEquipo()) + "', " +
 					"'" + secu(""+s.getCordX()) + "', " +
 					"'" + secu(""+s.getCordY()) +"')";
 
@@ -359,6 +361,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 				u.setArma(rs.getString("Partida"));
 				u.setCordX(Integer.parseInt(rs.getString("cordX")));
 				u.setCordY(Integer.parseInt(rs.getString("cordY")));
+				u.setEquipo(Integer.parseInt(rs.getString("equipo")));
 				u.setNombre("nombre");
 				u.setSalud(Integer.parseInt(rs.getString("salud")));
 				ret.add( u );
@@ -457,6 +460,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 			sentSQL = "update soldados set" +
 					" arma='" + u.getArma() + "', " +
 					" salud=" + u.getSalud() + ", " +
+					" equipo=" + u.getEquipo() + ", " +
 					" coordX=" + u.getCordX() + ", " +
 					" coordY='" + u.getCordY() + "," +
 					" where Partida='" + u.getPartida() + "'";
