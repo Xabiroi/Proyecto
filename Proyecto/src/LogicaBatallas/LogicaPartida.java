@@ -144,13 +144,13 @@ public class LogicaPartida{
 	public static ArrayList<UnidadEnemiga> getListaEnemigos() {
 		return ListaEnemigos;
 	}
-	public static void setListaEnemigos(ArrayList<UnidadEnemiga> listaEnemigos) {
+	public void setListaEnemigos(ArrayList<UnidadEnemiga> listaEnemigos) {
 		ListaEnemigos = listaEnemigos;
 	}
 	public static ArrayList<UnidadAliada> getListaAliados() {
 		return ListaAliados;
 	}
-	public static void setListaAliados(ArrayList<UnidadAliada> listaAliados) {
+	public void setListaAliados(ArrayList<UnidadAliada> listaAliados) {
 		ListaAliados = listaAliados;
 	}
 

@@ -4,17 +4,24 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
 import BD.BD;
-import LogicaBatallas.Partida;
-import LoginLogica.LoginManager;
+import BD.UnidadBD;
+import UnidadesAmigas.Bazooka;
+import UnidadesAmigas.Francotirador;
+import UnidadesAmigas.Semioruga;
+import UnidadesAmigas.SoldadoRaso;
+import UnidadesAmigas.Tanque;
+import UnidadesAmigas.UnidadAliada;
+import UnidadesEnemigas.BazookaEnemigo;
+import UnidadesEnemigas.FrancotiradorEnemigo;
+import UnidadesEnemigas.SemiorugaEnemigo;
+import UnidadesEnemigas.SoldadoRasoEnemigo;
+import UnidadesEnemigas.TanqueEnemigo;
+import UnidadesEnemigas.UnidadEnemiga;
 
 import java.awt.Font;
-import java.sql.Statement;
 import java.util.ArrayList;
 
-import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
@@ -79,7 +86,7 @@ public class MenuMultijugador extends JDialog{
 		 
 		 
 		 ArrayList<LogicaBatallas.Partida> a=BD.PartidaSelect( BD.usarBD(BD.initBD("Local")),"usuario1="+"'"+Juego.getLM().getUsuario().getNick()+"'"+" OR usuario2="+"'"+Juego.getLM().getUsuario().getNick()+"'");//FIXME cambiar la conexion
-		//AÑADIR LA UNION DE BASE DE DATOS FIXME
+		//FIXME Cambiar la conexion de local a base de datos remoto
 		
 
 		
@@ -113,31 +120,31 @@ public class MenuMultijugador extends JDialog{
 		 getContentPane().add(lblPartidas);
 		
 		JLabel lblFecha = new JLabel("Fecha:");
-		lblFecha.setBounds(615, 219, 33, 14);
+		lblFecha.setBounds(599, 219, 49, 14);
 		 getContentPane().add(lblFecha);
 		
 		JLabel lblUsuario = new JLabel("Usuario 1:");
-		lblUsuario.setBounds(599, 257, 49, 14);
+		lblUsuario.setBounds(577, 257, 71, 14);
 		 getContentPane().add(lblUsuario);
 		
 		JLabel lblUsuario_1 = new JLabel("Usuario 2:");
-		lblUsuario_1.setBounds(599, 370, 49, 14);
+		lblUsuario_1.setBounds(577, 370, 71, 14);
 		 getContentPane().add(lblUsuario_1);
 		
 		JLabel lblDinero = new JLabel("Dinero");
-		lblDinero.setBounds(640, 294, 46, 14);
+		lblDinero.setBounds(627, 294, 59, 14);
 		 getContentPane().add(lblDinero);
 		
 		JLabel lblPuntos = new JLabel("Puntos");
-		lblPuntos.setBounds(640, 319, 33, 14);
+		lblPuntos.setBounds(627, 319, 46, 14);
 		 getContentPane().add(lblPuntos);
 		
 		JLabel lblDinero_1 = new JLabel("Dinero");
-		lblDinero_1.setBounds(640, 417, 33, 14);
+		lblDinero_1.setBounds(627, 417, 46, 14);
 		 getContentPane().add(lblDinero_1);
 		
 		JLabel lblPuntos_1 = new JLabel("Puntos");
-		lblPuntos_1.setBounds(640, 442, 33, 14);
+		lblPuntos_1.setBounds(627, 442, 46, 14);
 		 getContentPane().add(lblPuntos_1);
 		
 		textDinero1 = new JTextField();
@@ -187,11 +194,117 @@ public class MenuMultijugador extends JDialog{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				Ventanas.Partida p=null;
-				//TODO añadir las recuperaciones de la base de datos para la partida (soldados y asi)
 				LogicaBatallas.LogicaPartida lb=new LogicaBatallas.LogicaPartida();
+				
 				LogicaBatallas.Partida p1=new LogicaBatallas.Partida();
-			//	lb.setListaAliados(listaAliados);//FIXME hay que cambiar la parte de BD de soldados para poder distinguir de que equipo son
-			//	lb.setListaEnemigos(listaEnemigos);
+				
+				ArrayList<UnidadBD> Unidades=BD.UnidadBDSelect(BD.usarBD(BD.initBD("Local")), "USUARIO="+Juego.getLM().getUsuario()+" AND PARTIDA="+comboBox.getSelectedItem().toString());
+				
+				ArrayList<UnidadBD> UnidadesAliadas1=new ArrayList<UnidadBD>();
+				for(UnidadBD u:Unidades)if(u.getEquipo()==1){UnidadesAliadas1.add(u);}
+				ArrayList<UnidadBD> UnidadesEnemigas1=new ArrayList<UnidadBD>();
+				for(UnidadBD u:Unidades)if(u.getEquipo()==2){UnidadesEnemigas1.add(u);}
+				
+				
+				
+				ArrayList<UnidadAliada> UnidadesAliadas=new ArrayList<UnidadAliada>();
+			
+				ArrayList<UnidadEnemiga> UnidadesEnemigas=new ArrayList<UnidadEnemiga>();
+
+				
+				//TODO Comprobar que funciona bien (JTESTUNIT)
+				
+				for(UnidadBD u:UnidadesAliadas1){
+					String nombre=null;
+					nombre=u.getNombre();
+					switch(nombre){
+					case "Soldado":SoldadoRaso s=new SoldadoRaso(u.getCordX(),u.getCordY());
+					s.setArma(u.getArma());
+					s.setArmas(u.getArmas());
+					s.setSalud(u.getSalud());
+					UnidadesAliadas.add(s);
+					break;
+					case "Bazooka":Bazooka b=new Bazooka(u.getCordX(),u.getCordY());
+					b.setArma(u.getArma());
+					b.setArmas(u.getArmas());
+					b.setSalud(u.getSalud());
+					UnidadesAliadas.add(b);
+					break;
+					case "Francotirador":Francotirador f=new Francotirador(u.getCordX(),u.getCordY());
+					f.setArma(u.getArma());
+					f.setArmas(u.getArmas());
+					f.setSalud(u.getSalud());
+					UnidadesAliadas.add(f);
+					break;
+					case "Tanque":Tanque t=new Tanque(u.getCordX(),u.getCordY());
+					t.setArma(u.getArma());
+					t.setArmas(u.getArmas());
+					t.setSalud(u.getSalud());
+					UnidadesAliadas.add(t);
+					break;
+					case "Semioruga":Semioruga se=new Semioruga(u.getCordX(),u.getCordY());
+					se.setArma(u.getArma());
+					se.setArmas(u.getArmas());
+					se.setSalud(u.getSalud());
+					UnidadesAliadas.add(se);
+					break;
+					default:break;
+
+					}
+					
+					
+					
+					
+				}
+				
+				for(UnidadBD u:UnidadesEnemigas1){
+					String nombre=null;
+					nombre=u.getNombre();
+					switch(nombre){
+					case "Soldado":SoldadoRasoEnemigo s=new SoldadoRasoEnemigo(u.getCordX(),u.getCordY());
+					s.setArma(u.getArma());
+					s.setArmas(u.getArmas());
+					s.setSalud(u.getSalud());
+					UnidadesEnemigas.add(s);
+					break;
+					case "Bazooka":BazookaEnemigo b=new BazookaEnemigo(u.getCordX(),u.getCordY());
+					b.setArma(u.getArma());
+					b.setArmas(u.getArmas());
+					b.setSalud(u.getSalud());
+					UnidadesEnemigas.add(b);
+					break;
+					case "Francotirador":FrancotiradorEnemigo f=new FrancotiradorEnemigo(u.getCordX(),u.getCordY());
+					f.setArma(u.getArma());
+					f.setArmas(u.getArmas());
+					f.setSalud(u.getSalud());
+					UnidadesEnemigas.add(f);
+					break;
+					case "Tanque":TanqueEnemigo t=new TanqueEnemigo(u.getCordX(),u.getCordY());
+					t.setArma(u.getArma());
+					t.setArmas(u.getArmas());
+					t.setSalud(u.getSalud());
+					UnidadesEnemigas.add(t);
+					break;
+					case "Semioruga":SemiorugaEnemigo se=new SemiorugaEnemigo(u.getCordX(),u.getCordY());
+					se.setArma(u.getArma());
+					se.setArmas(u.getArmas());
+					se.setSalud(u.getSalud());
+					UnidadesEnemigas.add(se);
+					break;
+					default:break;
+
+					}
+					
+					
+					
+					
+				}
+				
+				
+				
+				//TODO resolver lo de static
+				lb.setListaEnemigos(UnidadesEnemigas);
+				lb.setListaAliados(UnidadesAliadas);
 				p1=BD.PartidaSelect(BD.usarBD(BD.initBD("Local")), "USUARIO="+Juego.getLM().getUsuario()).get(0);
 				
 				
@@ -201,7 +314,6 @@ public class MenuMultijugador extends JDialog{
 				try {
 					p = new Ventanas.Partida(p1,lb);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				frame.setVisible(false);

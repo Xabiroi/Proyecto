@@ -25,6 +25,7 @@ public class Partida {
 	//constructor partida local, con el mismo usuario
 	public Partida(String usuario, long fechaPartida,String NombrePartida) {
 		this.usuario = usuario;
+		this.usuario2=null;
 		this.Partida=NombrePartida;
 		this.fechaPartida = fechaPartida;
 		this.lp=new LogicaPartida();
@@ -41,6 +42,7 @@ public class Partida {
 	//Cargar partida local, con el mismo usuario
 	public Partida(String usuario, long fechaPartida,String NombrePartida,LogicaPartida lp) {
 		this.usuario = usuario;
+		this.usuario2=null;
 		this.Partida=NombrePartida;
 		this.fechaPartida = fechaPartida;
 		this.lp=lp;

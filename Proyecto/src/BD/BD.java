@@ -29,15 +29,16 @@ private static Exception lastError = null;  // Información de último error SQL o
 	 * @param nombreBD	Nombre de fichero de la base de datos
 	 * @return	Conexión con la base de datos indicada. Si hay algún error, se devuelve null
 	 */
+//FIXME Poner otro metodo para las conexiones en la abse de datos remota
 	public static Connection initBD( String nombreBD ) {
 		try {
 		    try {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+nombreBD+"?autoReconnect=true&useSSL=false","root","root");
@@ -82,7 +83,17 @@ private static Exception lastError = null;  // Información de último error SQL o
 					+ "contraseña char(30) not null,"
 					+ " nick char(30) not null)");
 			} catch (SQLException e) {} // Tabla ya existe. Nada que hacer
-		
+			try {
+				statement.executeUpdate("create table partidaLocal " 
+					+"(usuario1 char(30) not null references usuario(nick) on delete cascade,"
+					+ "Partida char(30),"
+					+ "dineroAliado integer,"
+					+ "dineroEnemigo integer,"
+					+ "puntuacionAliado integer,"
+					+ "puntuacionEnemigo integer, "
+					+ "fechapartida bigint,"
+					+ "primary key(usuario1))");
+			} catch (SQLException e) {} // Tabla ya existe. Nada que hacer
 			try {
 				statement.executeUpdate("create table partidaMultijugador " 
 					+"(usuario1 char(30) not null references usuario(nick) on delete cascade,"
@@ -120,7 +131,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 			return null;
 		}
 	}
-	//FIXME
+
 	
 	
 	
@@ -177,7 +188,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 	
 	
 	
-	//FIXME
+
 	/////////////////////////////////////////////////////////////////////
 	//                      Operaciones de usuario                     //
 	/////////////////////////////////////////////////////////////////////
@@ -238,6 +249,33 @@ private static Exception lastError = null;  // Información de último error SQL o
 			return false;
 		}
 	}
+	public static boolean Partida1JInsert( Statement st, Partida p ) {
+		String sentSQL = "";
+		try {
+
+			sentSQL = "insert into partidaLocal values(" +
+					"'" + secu(p.getUsuario()) + "', " +
+					"'" + secu(p.getPartida()) + "', " +
+					"'" + secu(""+p.getDineroAliado()) + "', " +
+					"'" + secu(""+p.getDineroEnemigo()) + "', " +
+					"'" + secu(""+p.getPuntuacionAliado()) + "', " +
+					"'" + secu(""+p.getPuntuacionEnemigo()) + "', " +
+					"'" + secu(""+p.getFechaPartida()) +"')";
+
+			int val = st.executeUpdate( sentSQL );
+			log( Level.INFO, "BD añadida " + val + " fila\t" + sentSQL, null );
+			if (val!=1) {  // Se tiene que añadir 1 - error si no
+				log( Level.SEVERE, "Error en insert de BD\t" + sentSQL, null );
+				return false;  
+			}
+			return true;
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
 
 	public static boolean UnidadesInsert( Statement st, UnidadBD s, Partida p) {
@@ -267,7 +305,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 			return false;
 		}
 	}
-	//FIXME
+
 
 	/** Realiza una consulta a la tabla abierta de usuarios de la BD, usando la sentencia SELECT de SQL
 	 * @param st	Sentencia ya abierta de Base de Datos (con la estructura de tabla correspondiente al usuario)
@@ -343,9 +381,41 @@ private static Exception lastError = null;  // Información de último error SQL o
 			return null;
 		}
 	}
-	/////////////////////////////////////////
-	/////          FIXME               //////
-	/////////////////////////////////////////
+	public static ArrayList<Partida> PartidaSelect1J( Statement st, String codigoSelect ) {
+		String sentSQL = "";
+		ArrayList<Partida> ret = new ArrayList<>();
+		try {
+			sentSQL = "select * from partidaLocal";
+			if (codigoSelect!=null && !codigoSelect.equals(""))
+				sentSQL = sentSQL + " where " + codigoSelect;
+			ResultSet rs = st.executeQuery( sentSQL );
+			while (rs.next()) {
+				Partida p = new Partida();
+				p.setDineroAliado(Integer.parseInt(rs.getString("dineroAliado")));
+				p.setDineroEnemigo(Integer.parseInt(rs.getString("dineroEnemigo")));
+				p.setFechaPartida(Integer.parseInt(rs.getString("fechapartida")));
+				p.setPartida(rs.getString("Partida"));
+				p.setPuntuacionAliado(Integer.parseInt(rs.getString("puntuacionAliado")));
+				p.setPuntuacionEnemigo(Integer.parseInt(rs.getString("puntuacionEnemigo")));
+				p.setUsuario(rs.getString("usuario1"));
+				ret.add( p );
+			}
+			rs.close();
+			log( Level.INFO, "BD\t" + sentSQL, null );
+			return ret;
+		} catch (IllegalArgumentException e) {  // Error en tipo usuario (enumerado)
+			log( Level.SEVERE, "Error en BD en tipo de usuario\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return null;
+		}
+	}
+//FIXME hacer el separador de arrays dependiendo del numero de equipo
 	public static ArrayList<UnidadBD> UnidadBDSelect( Statement st, String codigoSelect ) {
 		String sentSQL = "";
 		ArrayList<UnidadBD> ret = new ArrayList<>();
@@ -410,7 +480,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 		}
 	}
 	
-
+//Sirve para el local y multijugador ya que solo actualiza el dinero y la puntuacion
 	
 	public static boolean PartidaUpdate( Statement st, Partida p ) {
 		String sentSQL = "";

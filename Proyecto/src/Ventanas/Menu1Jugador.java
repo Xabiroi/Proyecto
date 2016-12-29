@@ -1,23 +1,21 @@
 package Ventanas;
 
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import BD.BD;
 
 
 
@@ -28,13 +26,13 @@ public class Menu1Jugador extends JDialog{
 	 */
 	private static final long serialVersionUID = 3L;
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
+	private JTextField textDinero1;
+	private JTextField textpuntos1;
+	private JTextField textdinero2;
+	private JTextField textpuntos2;
+	private JTextField textUsuario2;
+	private JTextField textUsuario1;
+	private JTextField textFecha;
 	/**
 	 * Launch the application.
 	 */
@@ -62,39 +60,7 @@ public class Menu1Jugador extends JDialog{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		///////////////
-		/* FIXME
-		PARTE DE BASES DE DATOS 
-		//Para hacer las listas de las partidas utilizar el comando de select 
-		 * 
-		 * 
-		String [] namelist = new String[gameinfo.length];
-		for (int i=0; i<gameinfo.length; i++)
-			namelist[i] = gameinfo[i][0];
-		list = new JList(namelist);
-		list.setFont(new Font("Helvetica",Font.BOLD,15));
-		JScrollPane list_pane = new JScrollPane(list);
-		list_pane.setPreferredSize(new Dimension(270,300));
-		
-		
-		
-		//Para que cada vez que se elija una partida se haga la de list listener
-		 *Hay que cambiar todo esto obviamente FIXME
-		 * 	list.addListSelectionListener(new ListSelectionListener() {
-			 public void valueChanged(ListSelectionEvent e) {
-			 	int idx = list.getSelectedIndex();
-				if (idx < 0) return;
-				desc_area.setText(
-						formatText(readTextFile(gameinfo[idx][2]),35)
-						+"\n\nPress Esc or Shift-Esc to quit."
-				);
-				grab.setIcon(new ImageIcon(Launcher.class.getClassLoader().
-					getResource(gameinfo[idx][3])));
-			 }
-		} );
-		
-		
-		*/
+
 			
 			setBounds(100, 100, 1193, 802);
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -105,106 +71,161 @@ public class Menu1Jugador extends JDialog{
 			lblNewLabel.setBounds(498, 62, 241, 60);
 			 getContentPane().add(lblNewLabel);
 			
-			//AÑADIR LA UNION DE BASE DE DATOS FIXME
-			
-			//partidas=;
-			
-			JComboBox comboBox = new JComboBox();
+			 ArrayList<LogicaBatallas.Partida> a=BD.PartidaSelect1J( BD.usarBD(BD.initBD("Local")),"usuario1="+"'"+Juego.getLM().getUsuario().getNick()+"'");
+				JComboBox<LogicaBatallas.Partida> comboBox =new JComboBox<LogicaBatallas.Partida>();
+				for(LogicaBatallas.Partida p:a){comboBox.addItem(p);}
+				
+				comboBox.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if(comboBox.getSelectedItem()!=null){
+							textDinero1.setText(""+a.get(comboBox.getSelectedIndex()).getDineroAliado());
+							textpuntos1.setText(""+a.get(comboBox.getSelectedIndex()).getPuntuacionAliado());
+							textdinero2.setText(""+a.get(comboBox.getSelectedIndex()).getDineroEnemigo());
+							textpuntos2.setText(""+a.get(comboBox.getSelectedIndex()).getPuntuacionEnemigo());
+							textUsuario2.setText("J2 Local");
+							textUsuario1.setText(a.get(comboBox.getSelectedIndex()).getUsuario());
+							textFecha.setText(""+a.get(comboBox.getSelectedIndex()).getFechaPartida());
+						}
+					}
+				});
+				
 			comboBox.setBounds(114, 209, 200, 35);
-			 getContentPane().add(comboBox);
-			
+			getContentPane().add(comboBox);
+				 
 			JLabel lblPartidas = new JLabel("Partidas");
 			lblPartidas.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			lblPartidas.setBounds(114, 184, 93, 14);
 			 getContentPane().add(lblPartidas);
 			
 			JLabel lblFecha = new JLabel("Fecha:");
-			lblFecha.setBounds(615, 219, 33, 14);
+			lblFecha.setBounds(599, 219, 49, 14);
 			 getContentPane().add(lblFecha);
 			
-			JLabel lblUsuario = new JLabel("Jugador 1:");
-			lblUsuario.setBounds(580, 257, 68, 14);
+			JLabel lblUsuario = new JLabel("Usuario 1:");
+			lblUsuario.setBounds(577, 257, 71, 14);
 			 getContentPane().add(lblUsuario);
 			
-			JLabel lblUsuario_1 = new JLabel("Jugador 2:");
-			lblUsuario_1.setBounds(580, 370, 68, 14);
+			JLabel lblUsuario_1 = new JLabel("Usuario 2:");
+			lblUsuario_1.setBounds(577, 370, 71, 14);
 			 getContentPane().add(lblUsuario_1);
 			
 			JLabel lblDinero = new JLabel("Dinero");
-			lblDinero.setBounds(640, 294, 46, 14);
+			lblDinero.setBounds(627, 294, 59, 14);
 			 getContentPane().add(lblDinero);
 			
 			JLabel lblPuntos = new JLabel("Puntos");
-			lblPuntos.setBounds(640, 319, 33, 14);
+			lblPuntos.setBounds(627, 319, 46, 14);
 			 getContentPane().add(lblPuntos);
 			
 			JLabel lblDinero_1 = new JLabel("Dinero");
-			lblDinero_1.setBounds(640, 417, 33, 14);
+			lblDinero_1.setBounds(627, 417, 46, 14);
 			 getContentPane().add(lblDinero_1);
 			
 			JLabel lblPuntos_1 = new JLabel("Puntos");
-			lblPuntos_1.setBounds(640, 442, 33, 14);
+			lblPuntos_1.setBounds(627, 442, 46, 14);
 			 getContentPane().add(lblPuntos_1);
 			
-			textField = new JTextField();
-			textField.setBounds(696, 291, 86, 20);
-			 getContentPane().add(textField);
-			textField.setColumns(10);
+			textDinero1 = new JTextField();
+			textDinero1.setBounds(696, 291, 86, 20);
+			textDinero1.setEditable(false);
+			 getContentPane().add(textDinero1);
+			textDinero1.setColumns(10);
 			
-			textField_1 = new JTextField();
-			textField_1.setBounds(696, 316, 86, 20);
-			 getContentPane().add(textField_1);
-			textField_1.setColumns(10);
+			textpuntos1 = new JTextField();
+			textpuntos1.setBounds(696, 316, 86, 20);
+			textpuntos1.setEditable(false);
+			 getContentPane().add(textpuntos1);
+			textpuntos1.setColumns(10);
 			
-			textField_2 = new JTextField();
-			textField_2.setBounds(696, 414, 86, 20);
-			 getContentPane().add(textField_2);
-			textField_2.setColumns(10);
+			textdinero2 = new JTextField();
+			textdinero2.setBounds(696, 414, 86, 20);
+			textdinero2.setEditable(false);
+			 getContentPane().add(textdinero2);
+			textdinero2.setColumns(10);
 			
-			textField_3 = new JTextField();
-			textField_3.setBounds(696, 439, 86, 20);
-			 getContentPane().add(textField_3);
-			textField_3.setColumns(10);
+			textpuntos2 = new JTextField();
+			textpuntos2.setBounds(696, 439, 86, 20);
+			textpuntos2.setEditable(false);
+			 getContentPane().add(textpuntos2);
+			textpuntos2.setColumns(10);
 			
-			textField_4 = new JTextField();
-			textField_4.setBounds(653, 367, 86, 20);
-			 getContentPane().add(textField_4);
-			textField_4.setColumns(10);
+			textUsuario2 = new JTextField();
+			textUsuario2.setBounds(653, 367, 86, 20);
+			textUsuario2.setEditable(false);
+			 getContentPane().add(textUsuario2);
+			textUsuario2.setColumns(10);
 			
-			textField_5 = new JTextField();
-			textField_5.setBounds(653, 254, 86, 20);
-			 getContentPane().add(textField_5);
-			textField_5.setColumns(10);
+			textUsuario1 = new JTextField();
+			textUsuario1.setBounds(653, 254, 86, 20);
+			textUsuario1.setEditable(false);
+			 getContentPane().add(textUsuario1);
+			textUsuario1.setColumns(10);
 			
-			textField_6 = new JTextField();
-			textField_6.setBounds(651, 216, 86, 20);
-			 getContentPane().add(textField_6);
-			textField_6.setColumns(10);
+			textFecha = new JTextField();
+			textFecha.setBounds(651, 216, 86, 20);
+			textFecha.setEditable(false);
+			 getContentPane().add(textFecha);
+			textFecha.setColumns(10);
 			
 			JButton btnJugar = new JButton("JUGAR!");
-			btnJugar.setBounds(413, 681, 89, 23);
 			btnJugar.addMouseListener(new MouseAdapter() {
 				@Override
-				public void mouseClicked(MouseEvent e) {
-					Partida p=null;
+				public void mouseClicked(MouseEvent arg0) {
+					Ventanas.Partida p=null;
+					//TODO añadir las recuperaciones de la base de datos para la partida (soldados y asi)
+					LogicaBatallas.LogicaPartida lb=new LogicaBatallas.LogicaPartida();
+					LogicaBatallas.Partida p1=new LogicaBatallas.Partida();
+				//	lb.setListaAliados(listaAliados);//FIXME hay que cambiar la parte de BD de soldados para poder distinguir de que equipo son
+				//	lb.setListaEnemigos(listaEnemigos);
+					p1=BD.PartidaSelect(BD.usarBD(BD.initBD("Local")), "USUARIO="+Juego.getLM().getUsuario()).get(0);
+					
+					
+					
+					
+					
 					try {
-						p = new Partida();
-					} catch (IOException e1) {
+						p = new Ventanas.Partida(p1,lb);
+					} catch (IOException e) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e.printStackTrace();
 					}
-					setVisible(false);
+					frame.setVisible(false);
 					p.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					p.setVisible(true);
-					setVisible(false);
-					getDefaultCloseOperation();
+					
 				}
 			});
+			btnJugar.setBounds(358, 681, 127, 23);
 			 getContentPane().add(btnJugar);
 			
 			JButton btnVolver = new JButton("Volver");
-			btnVolver.setBounds(597, 681, 89, 23);
+			btnVolver.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					frame.setVisible(false);
+					MenuPrincipal mp=new MenuPrincipal();
+					mp.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					mp.setVisible(true);
+					
+				}
+			});
+			btnVolver.setBounds(681, 681, 89, 23);
 			 getContentPane().add(btnVolver);
+			 
+			 JButton btnCrearPartida = new JButton("Crear partida");
+			 btnCrearPartida.addActionListener(new ActionListener() {
+			 	public void actionPerformed(ActionEvent arg0) {
+			 		CrearPartida cp=new CrearPartida();
+			 		cp.initialize();
+			 		cp.setBounds(100, 100, 363, 192);
+					cp.getContentPane().setLayout(null);
+			 		setVisible(false);
+			 		cp.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					cp.setVisible(true);
+			 		
+			 	}
+			 });
+			 btnCrearPartida.setBounds(523, 681, 118, 23);
+			 getContentPane().add(btnCrearPartida);
 		}
-
-}
+	}
