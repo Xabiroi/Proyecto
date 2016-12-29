@@ -14,6 +14,7 @@ public class UnidadBD {
 	//protected int dx;
 	//protected int dy;
 	protected String Partida;
+	protected int equipo;
 	
 	
 	////FIXME 
@@ -105,6 +106,14 @@ public class UnidadBD {
 	
 	
 	
+	public int getEquipo() {
+		return equipo;
+	}
+
+	public void setEquipo(int equipo) {
+		this.equipo = equipo;
+	}
+
 	public String getArma() {
 		return arma;
 	}

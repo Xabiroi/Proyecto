@@ -14,6 +14,10 @@ public class UnidadEnemiga extends UnidadBD implements Unidad{
 	protected ArrayList<UnidadAliada> enemigos=new ArrayList<UnidadAliada>();
 
 
+	public UnidadEnemiga(){
+		this.equipo=2;
+		
+	}
 	
 	
 	
