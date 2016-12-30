@@ -78,7 +78,7 @@ public class GridButtonPanel {
             int col = i % N;
             JButton gb = createGridButton(row, col);
             gb.setOpaque(false);
-            gb.setText(""); //Cambiando esto se consigue en invisible (para el mapa)
+            gb.setText(""); //Cambiando esto se consigue en invisible (para el mapa y eso)
             gb.setBorder(null);
             gb.setBorderPainted(false);
             gb.setContentAreaFilled(false);
