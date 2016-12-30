@@ -14,6 +14,7 @@ public class TanqueEnemigo extends UnidadEnemiga implements Vehiculo,Unidad{
 		Salud = 170;
 		this.x = cordX;
 		this.y= cordY;
+		this.Distancia = 7;
 		
 	}
 

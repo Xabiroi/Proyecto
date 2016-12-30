@@ -11,6 +11,7 @@ public class UnidadBD {
 	protected int x;
 	protected int y;
 	protected int coste;
+	protected int Distancia;
 	//protected int dx;
 	//protected int dy;
 	protected String Partida;
@@ -184,6 +185,15 @@ public class UnidadBD {
 
 	public void setPartida(String partida) {
 		Partida = partida;
+	}
+	
+	public int getDistancia() {
+		return Distancia;
+	}
+
+
+	public void setDistancia(int distancia) {
+		distancia = Distancia;
 	}
 
 

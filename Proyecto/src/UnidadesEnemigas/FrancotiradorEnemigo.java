@@ -16,6 +16,7 @@ public class FrancotiradorEnemigo extends UnidadEnemiga implements Persona,Unida
 		Salud = 70;
 		this.x = cordX;
 		this.y = cordY;
+		this.Distancia = 5;
 		
 	}
 

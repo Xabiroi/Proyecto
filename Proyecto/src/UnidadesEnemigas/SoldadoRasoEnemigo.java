@@ -35,6 +35,7 @@ public class SoldadoRasoEnemigo extends UnidadEnemiga implements Persona,Unidad{
 		Salud = 100;
 		this.x = cordX;
 		this.y = cordY;
+		this.Distancia = 5;
 		
 	}
 

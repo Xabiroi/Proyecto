@@ -16,6 +16,7 @@ public class Bazooka extends UnidadAliada implements Persona,Unidad{
 		this.x = cordX;
 		this.y = cordY;
 		this.coste =50;
+		this.Distancia = 5;
 		
 	}
 

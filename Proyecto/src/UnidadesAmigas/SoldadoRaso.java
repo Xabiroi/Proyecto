@@ -34,6 +34,7 @@ public class SoldadoRaso extends UnidadAliada implements Persona,Unidad{
 		this.x = cordX;
 		this.y = cordY;
 		this.coste =35;
+		this.Distancia = 5;
 		
 	}
 

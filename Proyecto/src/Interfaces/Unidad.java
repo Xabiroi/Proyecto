@@ -10,5 +10,6 @@ public interface Unidad {
 	public Image getImage() ;
 	public int getCordX() ;
 	public int getCordY() ;
+	public int getDistancia();
 
 }

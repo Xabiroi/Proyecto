@@ -15,6 +15,7 @@ public class BazookaEnemigo extends UnidadEnemiga implements Persona,Unidad{
 		Salud = 60;
 		this.x = cordX;
 		this.y = cordY;
+		this.Distancia = 5;
 		
 	}
 

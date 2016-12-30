@@ -15,6 +15,7 @@ public class SemiorugaEnemigo extends UnidadEnemiga implements Vehiculo,Unidad{
 		Salud = 120;
 		this.x = cordX;
 		this.y = cordY;
+		this.Distancia = 7;
 		
 	}
 

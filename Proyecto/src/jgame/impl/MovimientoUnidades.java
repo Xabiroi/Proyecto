@@ -4,6 +4,7 @@ import java.util.function.Function;
 
 public class MovimientoUnidades {
 	
+	@SuppressWarnings("rawtypes")
 	Function Transport(int unit, int voyageur) {
 		this.unit = unit;
 		this.voyageur = voyageur;
@@ -20,12 +21,12 @@ public class MovimientoUnidades {
 					
 				}
 				else{
-					// vehicule plein
+					
 				}
 			}
 			Transport.prototype.deposerVoyageur = function(coord) {
 				if(this.unit.isTransporting){
-					// en désordre
+					
 					units[this.voyageurSave.id] = this.voyageurSave;
 					this.voyageur = this.voyageurSave;
 
@@ -44,7 +45,7 @@ public class MovimientoUnidades {
 					this.unit.updateTransport(false);
 				}
 				else{
-					// vehicule vide
+				
 				}
 			}
 			Transport.prototype.calculDepot = function(newX, newY, k, lim) {

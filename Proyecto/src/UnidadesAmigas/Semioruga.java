@@ -15,6 +15,7 @@ public class Semioruga extends UnidadAliada implements Vehiculo,Unidad{
 		this.x = cordX;
 		this.y = cordY;
 		this.coste =70;
+		this.Distancia = 7;
 		
 	}
 

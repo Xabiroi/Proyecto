@@ -15,6 +15,7 @@ public class Tanque extends UnidadAliada implements Vehiculo,Unidad{
 		this.x = cordX;
 		this.y = cordY;
 		this.coste =90;
+		this.Distancia = 7;
 		
 	}
 

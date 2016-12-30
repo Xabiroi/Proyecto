@@ -189,7 +189,16 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 	public void setCordY(int cordY) {
 		this.y = cordY;
 	}
+	
+	
+	public int getDistancia() {
+		return Distancia;
+	}
 
+
+	public void setDistancia(int distancia) {
+		Distancia = distancia;
+	}
 
 	
 	///////////////////////////////////////////
