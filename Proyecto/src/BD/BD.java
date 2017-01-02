@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 import Interfaces.Persona;
 import Interfaces.Unidad;
-import LogicaBatallas.Partida;
+import LogicaBatallas.ElementosPartida;
 import LoginData.Usuario;
 import UnidadesAmigas.UnidadAliada;
 
@@ -221,7 +221,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 			return false;
 		}
 	}
-	public static boolean PartidaInsert( Statement st, Partida p ) {
+	public static boolean PartidaInsert( Statement st, ElementosPartida p ) {
 		String sentSQL = "";
 		try {
 
@@ -249,7 +249,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 			return false;
 		}
 	}
-	public static boolean Partida1JInsert( Statement st, Partida p ) {
+	public static boolean Partida1JInsert( Statement st, ElementosPartida p ) {
 		String sentSQL = "";
 		try {
 
@@ -278,7 +278,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 	}
 	
 
-	public static boolean UnidadesInsert( Statement st, UnidadBD s, Partida p) {
+	public static boolean UnidadesInsert( Statement st, UnidadBD s, ElementosPartida p) {
 		String sentSQL = "";
 		try {
 
@@ -345,9 +345,9 @@ private static Exception lastError = null;  // Información de último error SQL o
 	}
 	
 
-	public static ArrayList<Partida> PartidaSelect( Statement st, String codigoSelect ) {
+	public static ArrayList<ElementosPartida> PartidaSelect( Statement st, String codigoSelect ) {
 		String sentSQL = "";
-		ArrayList<Partida> ret = new ArrayList<>();
+		ArrayList<ElementosPartida> ret = new ArrayList<>();
 		try {
 			sentSQL = "select * from partidaMultijugador";
 			if (codigoSelect!=null && !codigoSelect.equals(""))
@@ -355,7 +355,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 			// System.out.println( sentSQL );  // Para ver lo que se hace en consola
 			ResultSet rs = st.executeQuery( sentSQL );
 			while (rs.next()) {
-				Partida p = new Partida();
+				ElementosPartida p = new ElementosPartida();
 				p.setDineroAliado(Integer.parseInt(rs.getString("dineroAliado")));
 				p.setDineroEnemigo(Integer.parseInt(rs.getString("dineroEnemigo")));
 				p.setFechaPartida(Integer.parseInt(rs.getString("fechapartida")));
@@ -381,16 +381,16 @@ private static Exception lastError = null;  // Información de último error SQL o
 			return null;
 		}
 	}
-	public static ArrayList<Partida> PartidaSelect1J( Statement st, String codigoSelect ) {
+	public static ArrayList<ElementosPartida> PartidaSelect1J( Statement st, String codigoSelect ) {
 		String sentSQL = "";
-		ArrayList<Partida> ret = new ArrayList<>();
+		ArrayList<ElementosPartida> ret = new ArrayList<>();
 		try {
 			sentSQL = "select * from partidaLocal";
 			if (codigoSelect!=null && !codigoSelect.equals(""))
 				sentSQL = sentSQL + " where " + codigoSelect;
 			ResultSet rs = st.executeQuery( sentSQL );
 			while (rs.next()) {
-				Partida p = new Partida();
+				ElementosPartida p = new ElementosPartida();
 				p.setDineroAliado(Integer.parseInt(rs.getString("dineroAliado")));
 				p.setDineroEnemigo(Integer.parseInt(rs.getString("dineroEnemigo")));
 				p.setFechaPartida(Integer.parseInt(rs.getString("fechapartida")));
@@ -482,7 +482,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 	
 //Sirve para el local y multijugador ya que solo actualiza el dinero y la puntuacion
 	
-	public static boolean PartidaUpdate( Statement st, Partida p ) {
+	public static boolean PartidaUpdate( Statement st, ElementosPartida p ) {
 		String sentSQL = "";
 		try {
 			

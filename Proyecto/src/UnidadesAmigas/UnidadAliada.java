@@ -14,6 +14,7 @@ import UnidadesEnemigas.SemiorugaEnemigo;
 import UnidadesEnemigas.SoldadoRasoEnemigo;
 import UnidadesEnemigas.TanqueEnemigo;
 import UnidadesEnemigas.UnidadEnemiga;
+import Ventanas.Partida;
 
 public class UnidadAliada extends UnidadBD implements Unidad{
 	protected ArrayList<UnidadEnemiga> enemigos=new ArrayList<UnidadEnemiga>();
@@ -247,8 +248,8 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 				//Si la distancia a la que esta el otro soldado es menor que la del alcance, se añade a la lista de enemigos
 				int x=ue.getCordX();
 				int y=ue.getCordY();
-				if(x1-x<100){
-					if(y1-y<100){this.enemigos.add(ue);
+				if(x1-x<5){
+					if(y1-y<5){this.enemigos.add(ue);
 					
 					}	
 				}
@@ -259,8 +260,8 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 				
 				int x=ue.getCordX();
 				int y=ue.getCordY();
-				if(x1-x<100){
-					if(y1-y<100){this.enemigos.add(ue);
+				if(x1-x<3){
+					if(y1-y<3){this.enemigos.add(ue);
 					
 					}	
 				}
@@ -272,8 +273,8 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 				
 				int x=ue.getCordX();
 				int y=ue.getCordY();
-				if(x1-x<100){
-					if(y1-y<100){this.enemigos.add(ue);
+				if(x1-x<7){
+					if(y1-y<7){this.enemigos.add(ue);
 					
 					}	
 				}
@@ -284,8 +285,8 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 				
 				int x=ue.getCordX();
 				int y=ue.getCordY();
-				if(x1-x<100){
-					if(y1-y<100){this.enemigos.add(ue);
+				if(x1-x<5){
+					if(y1-y<5){this.enemigos.add(ue);
 					
 					}	
 				}
@@ -296,8 +297,8 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 				
 				int x=ue.getCordX();
 				int y=ue.getCordY();
-				if(x1-x<100){
-					if(y1-y<100){this.enemigos.add(ue);
+				if(x1-x<7){
+					if(y1-y<7){this.enemigos.add(ue);
 					
 					}	
 				}
@@ -308,8 +309,8 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 				
 				int x=ue.getCordX();
 				int y=ue.getCordY();
-				if(x1-x<100){
-					if(y1-y<100){this.enemigos.add(ue);
+				if(x1-x<5){
+					if(y1-y<5){this.enemigos.add(ue);
 					
 					}	
 				}
@@ -321,8 +322,8 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 				
 				int x=ue.getCordX();
 				int y=ue.getCordY();
-				if(x1-x<100){
-					if(y1-y<100){this.enemigos.add(ue);
+				if(x1-x<2){
+					if(y1-y<2){this.enemigos.add(ue);
 					
 					}	
 				}
@@ -353,10 +354,10 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 	
 	
 	//FIXME poner un random de atacar o fallar para  que sea mas emocionante
-	public void atacar(Point P){
+	public void atacar(int x,int y){
 		
 		for(UnidadEnemiga ue:LogicaPartida.getListaEnemigos()){
-			if(P.getX()==ue.getCordX()&&P.getY()==ue.getCordY()){
+			if(x==ue.getCordX()&&y==ue.getCordY()){
 				
 				if(ue instanceof SoldadoRasoEnemigo){
 					
@@ -620,20 +621,12 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 		
 	}
 	
-	
-	/*TILES way
-	 * FIXME
-	 * npcWayDeterminer.wayIsClear = function(x,y) {
-				var td = tabageos.BlitMath.getTileDataAt(x,y, map, 32, 32);
-				return (td != null && td.value[0] == 1 && td.value[1] == 1);
-			};
-	 */
-	
+
 	
 	
 	
 
-	public boolean Mover(Point P) {
+	public void Mover(int x,int y) {
 		/**Mover básico que se cambiara por un algoritmo de pathfinding mas complicado en caso de tener tiempo, sino--->
 		 * Comprobar que 
 		 * 
@@ -644,82 +637,25 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 		 * 
 		 * 
 		 */
-		//Se obtienen coordenadas de la actual posicion
-		int x=this.getCordX();
-		int y=this.getCordY();
-		
-		//Se clicka en la posicion donde se quiere mover
-		
-		
-		/*
-	    public void mousePressed(MouseEvent e)
-	      {
-	        this.Puntoclickado = e.getPoint();
-	      }
-	      
-		*/
-		
-		//Se restan para saber si el moviemiento esta permitidio o no
+		UnidadBD[][] aux=Ventanas.Partida.getTablero();
+		if(aux[x][y]==null){
+		try {
+			aux[x][y]=(UnidadBD) this.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		aux[this.getCordX()][this.getCordY()]=null;
 		
 		
+		}else{}
+			//TODO que salte una ventana de que no puede, o una alerta de sonido
 		
-			//Este punto p sera creado al clickar en un sitio en el mapa
-		
-		
-		/**
-		 * 
-		 * 
-		 * PROVISIONAL
-		 */
-		
-	
-			int x1=(int) P.getX();
-			int y1=(int) P.getY();
-			if(x1-x<100){
-				if(y1-y<100){
-					for(UnidadEnemiga ue:LogicaPartida.getListaEnemigos()){
-						if(this.getCordX()==ue.getCordX() && this.getCordY()==ue.getCordY()){
-							
-							/**
-							 * Panel auxiliar de mensajes ingame (estaria bien)
-							 * Aqui iria el mensaje de que no se puede mover a tal sitio
-							 * 
-							 * Devolveria falso si las coordenadas coincidieran
-							 */
-							return false;
-						}
-						
-					}
-					for(UnidadAliada ua:LogicaPartida.getListaAliados()){
-						if(this.getCordX()==ua.getCordX() && this.getCordY()==ua.getCordY()){
-							
-							/**
-							 * 
-							 * Aqui iria el mensaje de que no se puede mover a tal sitio
-							 * 
-							 * Devolveria falso si las coordenadas coincidieran
-							 */
-							return false;
-						}
-						
-					}
-					
-					//las coordenadas se devuelven al comprobar que no hay ningun objeto en ese lugar
-					this.setCordX(x1);this.setCordY(y1);//Movimiento de la unidad con su respectivo cambio de coordenadas
-					return true;
-				}	
-			}
-			return false;
-		
-		
-		
-		
-		
-		
-		
-		
-		
+			
+
 	}
+	
+	
 /**
  * Parte de ventanas:
  * -Mostrar la lista de armas

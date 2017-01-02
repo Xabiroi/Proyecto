@@ -71,9 +71,9 @@ public class Menu1Jugador extends JDialog{
 			lblNewLabel.setBounds(498, 62, 241, 60);
 			 getContentPane().add(lblNewLabel);
 			
-			 ArrayList<LogicaBatallas.Partida> a=BD.PartidaSelect1J( BD.usarBD(BD.initBD("Local")),"usuario1="+"'"+Juego.getLM().getUsuario().getNick()+"'");
-				JComboBox<LogicaBatallas.Partida> comboBox =new JComboBox<LogicaBatallas.Partida>();
-				for(LogicaBatallas.Partida p:a){comboBox.addItem(p);}
+			 ArrayList<LogicaBatallas.ElementosPartida> a=BD.PartidaSelect1J( BD.usarBD(BD.initBD("Local")),"usuario1="+"'"+Juego.getLM().getUsuario().getNick()+"'");
+				JComboBox<LogicaBatallas.ElementosPartida> comboBox =new JComboBox<LogicaBatallas.ElementosPartida>();
+				for(LogicaBatallas.ElementosPartida p:a){comboBox.addItem(p);}
 				
 				comboBox.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -174,7 +174,7 @@ public class Menu1Jugador extends JDialog{
 					Ventanas.Partida p=null;
 					//TODO añadir las recuperaciones de la base de datos para la partida (soldados y asi)
 					LogicaBatallas.LogicaPartida lb=new LogicaBatallas.LogicaPartida();
-					LogicaBatallas.Partida p1=new LogicaBatallas.Partida();
+					LogicaBatallas.ElementosPartida p1=new LogicaBatallas.ElementosPartida();
 				//	lb.setListaAliados(listaAliados);//FIXME hay que cambiar la parte de BD de soldados para poder distinguir de que equipo son
 				//	lb.setListaEnemigos(listaEnemigos);
 					p1=BD.PartidaSelect(BD.usarBD(BD.initBD("Local")), "USUARIO="+Juego.getLM().getUsuario()).get(0);

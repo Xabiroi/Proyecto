@@ -85,13 +85,13 @@ public class MenuMultijugador extends JDialog{
 		 getContentPane().add(lblNewLabel);
 		 
 		 
-		 ArrayList<LogicaBatallas.Partida> a=BD.PartidaSelect( BD.usarBD(BD.initBD("Local")),"usuario1="+"'"+Juego.getLM().getUsuario().getNick()+"'"+" OR usuario2="+"'"+Juego.getLM().getUsuario().getNick()+"'");//FIXME cambiar la conexion
+		 ArrayList<LogicaBatallas.ElementosPartida> a=BD.PartidaSelect( BD.usarBD(BD.initBD("Local")),"usuario1="+"'"+Juego.getLM().getUsuario().getNick()+"'"+" OR usuario2="+"'"+Juego.getLM().getUsuario().getNick()+"'");//FIXME cambiar la conexion
 		//FIXME Cambiar la conexion de local a base de datos remoto
 		
 
 		
-		JComboBox<LogicaBatallas.Partida> comboBox =new JComboBox<LogicaBatallas.Partida>();
-		for(LogicaBatallas.Partida p:a){comboBox.addItem(p);}
+		JComboBox<LogicaBatallas.ElementosPartida> comboBox =new JComboBox<LogicaBatallas.ElementosPartida>();
+		for(LogicaBatallas.ElementosPartida p:a){comboBox.addItem(p);}
 		
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -196,7 +196,7 @@ public class MenuMultijugador extends JDialog{
 				Ventanas.Partida p=null;
 				LogicaBatallas.LogicaPartida lb=new LogicaBatallas.LogicaPartida();
 				
-				LogicaBatallas.Partida p1=new LogicaBatallas.Partida();
+				LogicaBatallas.ElementosPartida p1=new LogicaBatallas.ElementosPartida();
 				
 				ArrayList<UnidadBD> Unidades=BD.UnidadBDSelect(BD.usarBD(BD.initBD("Local")), "USUARIO="+Juego.getLM().getUsuario()+" AND PARTIDA="+comboBox.getSelectedItem().toString());
 				

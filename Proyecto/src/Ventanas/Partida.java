@@ -1,8 +1,5 @@
 package Ventanas;
 
-import java.awt.EventQueue;
-import java.awt.Graphics;
-
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.imageio.ImageIO;
@@ -29,7 +26,6 @@ public class Partida extends JDialog{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JFrame frame;
 	private JTextField textFieldPartida;
 	private JTextField textFieldJugador1;
 	private JTextField textFieldJugador2;
@@ -39,11 +35,18 @@ public class Partida extends JDialog{
 	private JTextField textFieldUnidad;
 	private JTextField textFieldPS;
 	private JTextField textFieldArma;
-	private JTextField textFieldAcciones;
 	private LogicaBatallas.LogicaPartida lp;
-	private LogicaBatallas.Partida p;
-	private UnidadBD[][] tablero;//TODO array que tenga los componentes, y su equivalente en gridlayout apra que sea utilizable
+	private LogicaBatallas.ElementosPartida p;
+	public static UnidadBD[][] tablero=null;//TODO array que tenga los componentes, y su equivalente en gridlayout apra que sea utilizable
 
+
+	public static UnidadBD[][] getTablero() {
+		return tablero;
+	}
+
+	public static void setTablero(UnidadBD[][] tablero) {
+		Partida.tablero = tablero;
+	}
 
 	/*
 	public static void main(String[] args) {
@@ -63,7 +66,7 @@ public class Partida extends JDialog{
 	 * Create the application.
 	 * @throws IOException 
 	 */
-	public Partida(LogicaBatallas.Partida p,LogicaBatallas.LogicaPartida lp) throws IOException {
+	public Partida(LogicaBatallas.ElementosPartida p,LogicaBatallas.LogicaPartida lp) throws IOException {
 		this.p=p;
 		this.lp=lp;
 		this.initialize();
@@ -74,7 +77,7 @@ public class Partida extends JDialog{
 	 * @throws IOException 
 	 */
 	private void initialize() throws IOException {
-		frame = new JFrame();
+		new JFrame();
 		setBounds(100, 100, 600, 600);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
@@ -192,11 +195,10 @@ public class Partida extends JDialog{
 				 Pattern pat = Pattern.compile(".Enemigo$");
 			     Matcher mat = pat.matcher(unidadactual.getClass().getName());
 			     
-				int x=0,y=0;
 				try {
 					 
-						x = e.getX();
-						y = e.getY();
+						e.getX();
+						e.getY();
 						
 					//TODO meter la parte de gridbuttonpanel en transparente para saber las colisiones y las coordenadas
 					//unidadactual=...
@@ -319,11 +321,11 @@ public class Partida extends JDialog{
 		this.lp = lp;
 	}
 
-	public LogicaBatallas.Partida getP() {
+	public LogicaBatallas.ElementosPartida getP() {
 		return p;
 	}
 
-	public void setP(LogicaBatallas.Partida p) {
+	public void setP(LogicaBatallas.ElementosPartida p) {
 		this.p = p;
 	}
 }

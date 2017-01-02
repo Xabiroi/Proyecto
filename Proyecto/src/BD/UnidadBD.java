@@ -2,7 +2,7 @@ package BD;
 
 import java.awt.Image;
 
-public class UnidadBD {
+public class UnidadBD implements Cloneable{
 	protected String Nombre;
 	protected String[] armas= new String[5]; 
 	protected String arma;
