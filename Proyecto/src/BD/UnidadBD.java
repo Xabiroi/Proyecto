@@ -1,6 +1,11 @@
 package BD;
 
 import java.awt.Image;
+import java.awt.Point;
+import java.util.ArrayList;
+import BD.UnidadBD;
+
+import javax.swing.JOptionPane;
 
 public class UnidadBD implements Cloneable{
 	protected String Nombre;
@@ -16,6 +21,150 @@ public class UnidadBD implements Cloneable{
 	//protected int dy;
 	protected String Partida;
 	protected int equipo;
+	
+	
+	
+	
+	
+	
+
+	public int getX() {
+		return x;
+	}
+
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+
+	public int getY() {
+		return y;
+	}
+
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+
+	public int getCoste() {
+		return coste;
+	}
+
+
+	public void setCoste(int coste) {
+		this.coste = coste;
+	}
+
+
+	public void Mover(int x,int y) {
+		/**Mover básico que se cambiara por un algoritmo de pathfinding mas complicado en caso de tener tiempo, sino--->
+		 * Comprobar que 
+		 * 
+		 * Obtener coordenadas de donde esta y a donde se clicka con el mouse
+		 * El movimiento estara limitado dependiendo de la unidad, permitiendo solo mover una cantidad de x y de y
+		 * Habria que ajustar el hitbox dependiendo de las dimensiones de las imagenes de los soldados y reajustar los calculos de movimiento en base a las coordenadas
+		 * 
+		 * 
+		 * 
+		 */
+		UnidadBD[][] aux=Ventanas.Partida.getTablero();
+		if(aux[x][y]==null){
+		try {
+			aux[x][y]=(UnidadBD) this.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		aux[this.getCordX()][this.getCordY()]=null;
+		
+		
+		}else{int input = JOptionPane.showOptionDialog(null, "Elija otra posicion valida", "Aviso", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+
+		if(input == JOptionPane.OK_OPTION)
+		{}
+			
+		  
+		}
+			//TODO que salte una ventana de que no puede, o una alerta de sonido
+		
+			
+
+	}
+	/**
+	 * 
+	 * @param Movimientos Cuantos movimientos de casilla tiene disponible la unidad
+	 * @param x Coordenada x objetivo a la que se quiere mover
+	 * @param y Coordenada y objetivo a la que se quiere mover
+	 */
+	
+public void AlgoritmoPathfinding(int Movimientos,int x,int y){
+	UnidadBD[][] aAux=null;
+	Point p=new Point();
+	if(Movimientos==0){
+		//
+		if(this.getCordX()==x && this.getCordY()==y){this.Mover(x, y);}
+	}
+	else if(Math.abs(x-this.getCordX())>Movimientos){}
+	else{
+		aAux=Ventanas.Partida.getTablero();
+
+		//devolver punto
+		p=comprobar(aAux,this.getCordX(),this.getCordY(),x,y);
+		//comprobar
+		if(p.getX()==x &&p.getY()==y){this.Mover(x, y);}
+		//sino colocar colision y avanzar//Al inicio colision tipo 2 para saber que es el inicio
+		//si null pone colision en el primer punto de empiece
+				
+				
+		//sustituir con el set el tablero del juego al final
+		
+	}
+	Ventanas.Partida.setTablero(aAux);
+	
+}
+
+		public Point comprobar(UnidadBD[][] a,int x,int y,int xobj,int yobj){
+			
+			ArrayList<Point> array=new ArrayList<Point>();
+			if(a[x+1][y]==null){array.add(new Point(x+1,y));}
+			if(a[x-1][y]==null){array.add(new Point(x-1,y));}
+			if(a[x][y+1]==null){array.add(new Point(x,y+1));}
+			if(a[x][y-1]==null){array.add(new Point(x,y-1));}
+			
+			for(Point p:array){if(p.getX()==xobj && p.getY()==yobj){return new Point((int)p.getX(),(int)p.getY());}}
+			for(Point p:array){if(p.getX()-xobj<p.getX()-x || p.getY()-yobj<p.getY()-y){return new Point((int)p.getX(),(int)p.getY());}
+				
+			}
+			
+			
+			return null;
+		}
+//FIXME cambiar todavia el metodo (No tocar)
+public void limpiarColisiones(UnidadBD[][] a){
+	for(int i=0;i<a.length;i++){
+		for(int j=0;j<a[0].length;j++){
+			if(a[i][j] instanceof UnidadBD){}
+		}
+	}
+	
+	
+}
+	
+/**
+ * Parte de ventanas:
+ * -Mostrar la lista de armas
+ * -Elegir una
+ * -Pasar por parametro el string
+ * -Cambiar arma
+ * 
+ */
+	public void CambiarArma(String arma) {
+		this.setArma(arma);
+	
+		
+	}
 	
 	
 	////FIXME 

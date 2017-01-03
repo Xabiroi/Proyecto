@@ -37,7 +37,7 @@ public class Partida extends JDialog{
 	private JTextField textFieldArma;
 	private LogicaBatallas.LogicaPartida lp;
 	private LogicaBatallas.ElementosPartida p;
-	public static UnidadBD[][] tablero=null;//TODO array que tenga los componentes, y su equivalente en gridlayout apra que sea utilizable
+	public static UnidadBD[][] tablero=null;//TODO array que tenga los componentes, y su equivalente en gridlayout para que sea utilizable
 
 
 	public static UnidadBD[][] getTablero() {

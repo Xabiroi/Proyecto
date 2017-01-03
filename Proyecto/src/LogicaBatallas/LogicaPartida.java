@@ -2,6 +2,8 @@ package LogicaBatallas;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import UnidadesAmigas.UnidadAliada;
 import UnidadesEnemigas.UnidadEnemiga;
 
@@ -122,6 +124,17 @@ public class LogicaPartida{
 				
 				break;
 			case  "Finalizar":
+				//Se crea el dialogo de si se quiere finalizar turno, y depende de la respuesta si o no
+				//PRUEBA FIXME
+				int input = JOptionPane.showOptionDialog(null, "Finalizar turno?", "Aviso", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+
+				if(input == JOptionPane.OK_OPTION)
+				{
+					
+				    break;
+				}
+				
+				
 				break;
 			
 			

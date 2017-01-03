@@ -1,7 +1,5 @@
 package LogicaBatallas;
 
-import LoginData.Usuario;
-
 public class ElementosPartida {
 	protected String Partida;
 	protected String usuario;
@@ -12,6 +10,7 @@ public class ElementosPartida {
 	protected int dineroEnemigo=200;
 	protected int puntuacionAliado=0;
 	protected int puntuacionEnemigo=0;
+	protected int Turno=0;
 	
 	//constructor partida multijugador, dos usuarios
 	public ElementosPartida(String usuario, String usuario2,long fechaPartida, String NombrePartida) {
@@ -21,6 +20,7 @@ public class ElementosPartida {
 		this.usuario2=usuario2;
 		this.fechaPartida = fechaPartida;
 		this.lp = new LogicaPartida();
+		this.Turno=0;
 	}
 	//constructor partida local, con el mismo usuario
 	public ElementosPartida(String usuario, long fechaPartida,String NombrePartida) {
@@ -29,25 +29,35 @@ public class ElementosPartida {
 		this.Partida=NombrePartida;
 		this.fechaPartida = fechaPartida;
 		this.lp=new LogicaPartida();
+		this.Turno=0;
 	}
 	//CArgar partida multijugador, dos usuarios
-	public ElementosPartida(String usuario, String usuario2,long fechaPartida, String NombrePartida,LogicaPartida lp) {
+	public ElementosPartida(String usuario, String usuario2,long fechaPartida, String NombrePartida,LogicaPartida lp,int Turno) {
 		
 		this.Partida=NombrePartida;
 		this.usuario = usuario;
 		this.usuario2=usuario2;
 		this.fechaPartida = fechaPartida;
 		this.lp = lp;
+		this.Turno=Turno;
 	}
 	//Cargar partida local, con el mismo usuario
-	public ElementosPartida(String usuario, long fechaPartida,String NombrePartida,LogicaPartida lp) {
+	public ElementosPartida(String usuario, long fechaPartida,String NombrePartida,LogicaPartida lp,int Turno) {
 		this.usuario = usuario;
 		this.usuario2=null;
 		this.Partida=NombrePartida;
 		this.fechaPartida = fechaPartida;
 		this.lp=lp;
+		this.Turno=Turno;
 	}
 	
+	
+	public int getTurno() {
+		return Turno;
+	}
+	public void setTurno(int turno) {
+		Turno = turno;
+	}
 	public ElementosPartida() {
 		
 	}

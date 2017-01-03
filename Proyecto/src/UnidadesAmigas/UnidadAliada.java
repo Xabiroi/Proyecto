@@ -624,49 +624,5 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 
 	
 	
-	
 
-	public void Mover(int x,int y) {
-		/**Mover básico que se cambiara por un algoritmo de pathfinding mas complicado en caso de tener tiempo, sino--->
-		 * Comprobar que 
-		 * 
-		 * Obtener coordenadas de donde esta y a donde se clicka con el mouse
-		 * El movimiento estara limitado dependiendo de la unidad, permitiendo solo mover una cantidad de x y de y
-		 * Habria que ajustar el hitbox dependiendo de las dimensiones de las imagenes de los soldados y reajustar los calculos de movimiento en base a las coordenadas
-		 * 
-		 * 
-		 * 
-		 */
-		UnidadBD[][] aux=Ventanas.Partida.getTablero();
-		if(aux[x][y]==null){
-		try {
-			aux[x][y]=(UnidadBD) this.clone();
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		aux[this.getCordX()][this.getCordY()]=null;
-		
-		
-		}else{}
-			//TODO que salte una ventana de que no puede, o una alerta de sonido
-		
-			
-
-	}
-	
-	
-/**
- * Parte de ventanas:
- * -Mostrar la lista de armas
- * -Elegir una
- * -Pasar por parametro el string
- * -Cambiar arma
- * 
- */
-	public void CambiarArma(String arma) {
-		this.setArma(arma);
-	
-		
-	}
 }
