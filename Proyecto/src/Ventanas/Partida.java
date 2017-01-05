@@ -12,8 +12,16 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -253,6 +261,28 @@ public class Partida extends JDialog{
 
 		String arg = "Resources.Mapa.png";
 		    
+		
+		//PRUEBA
+
+        setBounds(154, 114, 1200, 800);
+        setResizable(true);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        getContentPane().add(createGridPanel());
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		/*ORIGINAL
+
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(154, 114, 1200, 800);
 	    ImageIcon icon = new ImageIcon(arg); 
@@ -265,11 +295,85 @@ public class Partida extends JDialog{
 		JLabel picLabel = new JLabel(new ImageIcon(myPicture));
 		panel_3.add(picLabel);
 		
-		
-		
+	*/
 		
 	}
+	
+	
+	
+	
+	
+	
+	/////////////TODO LO DE GRIDPANEL
+	
+    private static final int N = 50;
+    private final List<JButton> list = new ArrayList<JButton>();
 
+    private JButton getGridButton(int r, int c) {
+        int index = r * N + c;
+        return list.get(index);
+    }
+	
+	 private JPanel createGridPanel() {
+	    	final Image image=requestImage();
+	    	 JPanel p = new JPanel(new GridLayout(49, 32)){
+	    		/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				@Override
+	    	    protected void paintComponent(Graphics g) {
+	    	        super.paintComponent(g);
+	    	        g.drawImage(image, 0, 0, null);
+	    	    }
+	    	};
+	    	p.setBounds(154, 114, 1200, 800);
+	        for (int i = 0; i < 47 * 47; i++) {
+	            int row = i / 50;
+	            int col = i % 50;
+	            JButton gb = createGridButton(row, col);
+	            gb.setOpaque(false);
+	            gb.setText("P"); //Cambiando esto se consigue en invisible (para el mapa y eso)
+	            gb.setBorder(null);
+	            gb.setBorderPainted(false);
+	            gb.setContentAreaFilled(false);
+	            list.add(gb);
+	            Dimension d=new Dimension(100,100);
+	            p.setPreferredSize(d);
+	            p.add(gb);
+	        }
+	        return p;
+	    }
+	
+	  private BufferedImage requestImage() {
+	        BufferedImage image = null;
+
+	        try {
+	        	image = ImageIO.read(Partida.class.getResourceAsStream("/resources/MapaPartida.png"));
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+
+	        return image;
+	    }
+	
+	   private JButton createGridButton(final int row, final int col) {
+	        final JButton b = new JButton("r" + row + ",c" + col);
+	        b.addActionListener(new ActionListener() {
+
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                JButton gb =Partida.this.getGridButton(row, col);
+	                System.out.println("r" + row + ",c" + col
+	                    + " " + (b == gb)
+	                    + " " + (b.equals(gb)));
+	            }
+	        });
+	        return b;
+	    }
+
+	
 	//Array mapa un ejemplo para las colisiones TODO (el mapa seria un 50x50 o alo asi, lueo se ajusta al tamaño)
 	int[][][] myMap ={   
 	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
