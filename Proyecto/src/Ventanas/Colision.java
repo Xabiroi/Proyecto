@@ -12,5 +12,9 @@ public class Colision extends BD.UnidadBD{
 		Tipo = tipo;
 	}
 
-public Colision(){}
+	public Colision(){
+	}
+	public Colision(int tipo){
+	this.Tipo=tipo;
+	}
 }

@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
 import BD.UnidadBD;
+import Ventanas.Colision;
 
 import javax.swing.JOptionPane;
 
@@ -98,31 +99,38 @@ public class UnidadBD implements Cloneable{
 	 * @param x Coordenada x objetivo a la que se quiere mover
 	 * @param y Coordenada y objetivo a la que se quiere mover
 	 */
-	
-public void AlgoritmoPathfinding(int Movimientos,int x,int y){
-	UnidadBD[][] aAux=null;
+
+public UnidadBD[][] AlgoritmoPathfinding(int Movimientos,int x,int y){
+	UnidadBD[][] aAux=Ventanas.Partida.getTablero();
 	Point p=new Point();
 	if(Movimientos==0){
 		//
 		if(this.getCordX()==x && this.getCordY()==y){this.Mover(x, y);}
 	}
-	else if(Math.abs(x-this.getCordX())>Movimientos){}
+	else if(Math.abs(x-this.getCordX())>Movimientos){//TODO no se puede mover(una ventana o algo)		
+	}
+	
 	else{
-		aAux=Ventanas.Partida.getTablero();
+
 
 		//devolver punto
 		p=comprobar(aAux,this.getCordX(),this.getCordY(),x,y);
 		//comprobar
 		if(p.getX()==x &&p.getY()==y){this.Mover(x, y);}
-		//sino colocar colision y avanzar//Al inicio colision tipo 2 para saber que es el inicio
+		//sino colocar colision y avanzar//Al inicio colision tipo 1 para saber que es el inicio
+		else if((p.getX()!=x ||p.getY()!=y)){
+			aAux[this.getCordX()][this.getCordY()]=new Colision(1);
+			AlgoritmoPathfinding(Movimientos-1,x,y);
+
+		}
 		//si null pone colision en el primer punto de empiece
 				
 				
 		//sustituir con el set el tablero del juego al final
 		
 	}
-	Ventanas.Partida.setTablero(aAux);
-	
+	return aAux;//FIXME en la parte donde se implemente Ventanas.Partida.setTablero(aAux);
+
 }
 
 		public Point comprobar(UnidadBD[][] a,int x,int y,int xobj,int yobj){
@@ -145,7 +153,10 @@ public void AlgoritmoPathfinding(int Movimientos,int x,int y){
 public void limpiarColisiones(UnidadBD[][] a){
 	for(int i=0;i<a.length;i++){
 		for(int j=0;j<a[0].length;j++){
-			if(a[i][j] instanceof UnidadBD){}
+			if(a[i][j] instanceof Colision && ((Colision) a[i][j]).getTipo()==1){
+				a[i][j]=null;
+				
+			}
 		}
 	}
 	

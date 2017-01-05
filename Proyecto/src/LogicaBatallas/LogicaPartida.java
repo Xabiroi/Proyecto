@@ -31,7 +31,7 @@ public class LogicaPartida{
 	
 	
 	
-	//FIXME Funcion que se pondra en la ventana, adelanto
+	//FIXME Funcion que se pondra en la ventana, adelanto (pasar parametro un boton clickado? y luego el getText)
 	public static void Turno(){
 		actualizar();
 		
