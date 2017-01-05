@@ -1,6 +1,8 @@
 package UnidadesEnemigas;
 
 
+import javax.swing.ImageIcon;
+
 import Interfaces.Persona;
 import Interfaces.Unidad;
 
@@ -20,4 +22,13 @@ public class FrancotiradorEnemigo extends UnidadEnemiga implements Persona,Unida
 		
 	}
 
+	@SuppressWarnings("unused")
+	private void initCraft() {
+        
+        ImageIcon ii = new ImageIcon("craft.png");
+        image = ii.getImage();
+        //x = 40;
+        //y = 60;        
+    }
+	
 }

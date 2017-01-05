@@ -3,6 +3,9 @@ package UnidadesEnemigas;
 
 
 import java.awt.Image;
+
+import javax.swing.ImageIcon;
+
 import Interfaces.Persona;
 import Interfaces.Unidad;
 
@@ -39,6 +42,13 @@ public class SoldadoRasoEnemigo extends UnidadEnemiga implements Persona,Unidad{
 		
 	}
 
-
+	@SuppressWarnings("unused")
+	private void initCraft() {
+        
+        ImageIcon ii = new ImageIcon("craft.png");
+        image = ii.getImage();
+        //x = 40;
+        //y = 60;        
+    }
 	
 }

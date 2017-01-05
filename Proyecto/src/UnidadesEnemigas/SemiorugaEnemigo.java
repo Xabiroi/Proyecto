@@ -1,6 +1,8 @@
 package UnidadesEnemigas;
 
 
+import javax.swing.ImageIcon;
+
 import Interfaces.Unidad;
 import Interfaces.Vehiculo;
 
@@ -24,5 +26,14 @@ public class SemiorugaEnemigo extends UnidadEnemiga implements Vehiculo,Unidad{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	@SuppressWarnings("unused")
+	private void initCraft() {
+        
+        ImageIcon ii = new ImageIcon("craft.png");
+        image = ii.getImage();
+        //x = 40;
+        //y = 60;        
+    }
 
 }

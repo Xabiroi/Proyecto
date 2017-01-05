@@ -1,6 +1,8 @@
 package UnidadesAmigas;
 
 
+import javax.swing.ImageIcon;
+
 import Interfaces.Persona;
 import Interfaces.Unidad;
 
@@ -19,5 +21,14 @@ public class Bazooka extends UnidadAliada implements Persona,Unidad{
 		this.Distancia = 5;
 		
 	}
+	
+	@SuppressWarnings("unused")
+	private void initCraft() {
+        
+        ImageIcon ii = new ImageIcon("craft.png");
+        image = ii.getImage();
+        //x = 40;
+        //y = 60;        
+    }
 
 }
