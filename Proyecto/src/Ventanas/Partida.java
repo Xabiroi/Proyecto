@@ -39,6 +39,8 @@ public class Partida extends JDialog{
 	private JTextField textFieldJugador2;
 	private JTextField textFieldPuntosJ1;
 	private JTextField textFieldPuntosJ2;
+	private JTextField textFieldDineroJ1;
+	private JTextField textFieldDineroJ2;
 	private JTextField textFieldPropietario;
 	private JTextField textFieldUnidad;
 	private JTextField textFieldPS;
@@ -86,7 +88,7 @@ public class Partida extends JDialog{
 	 */
 	private void initialize() throws IOException {
 		new JFrame();
-		setBounds(100, 100, 600, 600);
+		setBounds(100, 100, 675, 473);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
@@ -129,27 +131,49 @@ public class Partida extends JDialog{
 		panel_1.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Partida:");
-		lblNewLabel.setBounds(183, 11, 60, 14);
+		lblNewLabel.setBounds(52, 11, 60, 14);
 		panel_1.add(lblNewLabel);
 		
 		JLabel lblJugador = new JLabel("Jugador 1:");
-		lblJugador.setBounds(495, 11, 66, 14);
+		lblJugador.setBounds(250, 11, 66, 14);
 		panel_1.add(lblJugador);
 		
 		JLabel lblJugador_1 = new JLabel("Jugador 2:");
-		lblJugador_1.setBounds(495, 42, 66, 14);
+		lblJugador_1.setBounds(250, 42, 66, 14);
 		panel_1.add(lblJugador_1);
 		
 		JLabel lblPuntos = new JLabel("Puntos:");
-		lblPuntos.setBounds(688, 11, 46, 14);
+		lblPuntos.setBounds(445, 11, 45, 14);
 		panel_1.add(lblPuntos);
 		
 		JLabel lblPuntos_1 = new JLabel("Puntos:");
-		lblPuntos_1.setBounds(688, 42, 46, 14);
+		lblPuntos_1.setBounds(445, 42, 45, 14);
 		panel_1.add(lblPuntos_1);
 		
+		JLabel lblDineroJ1 = new JLabel("Dinero:");
+		lblDineroJ1.setBounds(651, 11, 60, 14);
+		panel_1.add(lblDineroJ1);
+		
+		JLabel lblDineroJ2 = new JLabel("Dinero:");
+		lblDineroJ2.setBounds(651, 42, 40, 14);
+		panel_1.add(lblDineroJ2);
+		
+		textFieldDineroJ1 = new JTextField();
+		textFieldDineroJ1.setBounds(701, 8, 86, 20);
+		textFieldDineroJ1.setText(""+p.getDineroAliado());
+		textFieldDineroJ1.setEditable(false);
+		panel_1.add(textFieldDineroJ1);
+		textFieldDineroJ1.setColumns(10);
+		
+		textFieldDineroJ2 = new JTextField();
+		textFieldDineroJ2.setText(""+p.getDineroEnemigo());
+		textFieldDineroJ2.setEditable(false);
+		textFieldDineroJ2.setBounds(701, 39, 86, 20);
+		panel_1.add(textFieldDineroJ2);
+		textFieldDineroJ2.setColumns(10);
+		
 		textFieldPartida = new JTextField();
-		textFieldPartida.setBounds(228, 8, 86, 20);
+		textFieldPartida.setBounds(100, 8, 86, 20);
 		textFieldPartida.setText(p.getPartida());
 		textFieldPartida.setEditable(false);
 		panel_1.add(textFieldPartida);
@@ -158,19 +182,19 @@ public class Partida extends JDialog{
 		textFieldJugador1 = new JTextField();
 		textFieldJugador1.setText(p.getUsuario());
 		textFieldJugador1.setEditable(false);
-		textFieldJugador1.setBounds(560, 8, 86, 20);
+		textFieldJugador1.setBounds(312, 8, 86, 20);
 		panel_1.add(textFieldJugador1);
 		textFieldJugador1.setColumns(10);
 		
 		textFieldJugador2 = new JTextField();
-		textFieldJugador2.setBounds(560, 39, 86, 20);
+		textFieldJugador2.setBounds(312, 36, 86, 20);
 		textFieldJugador2.setText(p.getUsuario2());
 		textFieldJugador2.setEditable(false);
 		panel_1.add(textFieldJugador2);
 		textFieldJugador2.setColumns(10);
 		
 		textFieldPuntosJ1 = new JTextField();
-		textFieldPuntosJ1.setBounds(744, 8, 86, 20);
+		textFieldPuntosJ1.setBounds(500, 8, 86, 20);
 		textFieldPuntosJ1.setText(""+p.getPuntuacionAliado());
 		textFieldPuntosJ1.setEditable(false);
 		panel_1.add(textFieldPuntosJ1);
@@ -179,7 +203,7 @@ public class Partida extends JDialog{
 		textFieldPuntosJ2 = new JTextField();
 		textFieldPuntosJ2.setText(""+p.getPuntuacionEnemigo());
 		textFieldPuntosJ2.setEditable(false);
-		textFieldPuntosJ2.setBounds(744, 39, 86, 20);
+		textFieldPuntosJ2.setBounds(500, 39, 86, 20);
 		panel_1.add(textFieldPuntosJ2);
 		textFieldPuntosJ2.setColumns(10);
 		
@@ -306,7 +330,7 @@ public class Partida extends JDialog{
 	
 	/////////////TODO LO DE GRIDPANEL
 	
-    private static final int N = 50;
+    private static final int N = 32;
     private final List<JButton> list = new ArrayList<JButton>();
 
     private JButton getGridButton(int r, int c) {
@@ -316,7 +340,7 @@ public class Partida extends JDialog{
 	
 	 private JPanel createGridPanel() {
 	    	final Image image=requestImage();
-	    	 JPanel p = new JPanel(new GridLayout(49, 32)){
+	    	 JPanel p = new JPanel(new GridLayout(32, 32)){
 	    		/**
 				 * 
 				 */
@@ -328,10 +352,10 @@ public class Partida extends JDialog{
 	    	        g.drawImage(image, 0, 0, null);
 	    	    }
 	    	};
-	    	p.setBounds(154, 114, 1200, 800);
-	        for (int i = 0; i < 47 * 47; i++) {
-	            int row = i / 50;
-	            int col = i % 50;
+	    	p.setBounds(154, 114, 800, 800);
+	        for (int i = 0; i < 32 * 32; i++) {
+	            int row = i / 32;
+	            int col = i % 32;
 	            JButton gb = createGridButton(row, col);
 	            gb.setOpaque(false);
 	            gb.setText("P"); //Cambiando esto se consigue en invisible (para el mapa y eso)
