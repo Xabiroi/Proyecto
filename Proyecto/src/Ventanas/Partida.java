@@ -398,34 +398,44 @@ public class Partida extends JDialog{
 	    }
 
 	
-	//Array mapa un ejemplo para las colisiones TODO (el mapa seria un 50x50 o alo asi, lueo se ajusta al tamaño)
-	int[][][] myMap ={   
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} },
-	{ {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14}, {1,14} }
-	  };
-	
+	//Array 32x32
+	   //FIXME hay que poner todas las colisiones a mano en vez de los nulls mirando el mapa que tal va
+	   
+	UnidadBD[][] myMap =
+			{  
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null }
+			  };
 	
 	
 	
