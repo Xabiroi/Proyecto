@@ -72,6 +72,9 @@ public class UnidadBD implements Cloneable{
 		 * 
 		 * 
 		 */
+		
+		
+		
 		UnidadBD[][] aux=Ventanas.Partida.getTablero();
 		if(aux[x][y]==null){
 		try {
@@ -84,9 +87,9 @@ public class UnidadBD implements Cloneable{
 		
 		Ventanas.Partida.setTablero(aux);
 		}else{int input = JOptionPane.showOptionDialog(null, "Elija otra posicion valida", "Aviso", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
-
+		
 		if(input == JOptionPane.OK_OPTION)
-		{}
+		{JOptionPane.getRootFrame().repaint();;}
 			
 		  
 		}

@@ -19,6 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.DisplayMode;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -27,6 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import BD.UnidadBD;
+import UnidadesAmigas.SoldadoRaso;
 
 public class Partida extends JDialog{
 
@@ -47,7 +49,48 @@ public class Partida extends JDialog{
 	private JTextField textFieldArma;
 	private LogicaBatallas.LogicaPartida lp;
 	private LogicaBatallas.ElementosPartida p;
-	public static UnidadBD[][] tablero=null;//TODO array que tenga los componentes, y su equivalente en gridlayout para que sea utilizable
+	public static UnidadBD[][] tablero= //32x32, hay que meter manualmente las colisiones
+		{  
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null }
+		  };
+	
+	
+	
+;//TODO array que tenga los componentes, y su equivalente en gridlayout para que sea utilizable
+	private int x,y; //Coordenadas del ultimo soldado clickado, con el que se haran las acciones
+	private int xobj,yobj;
+	private UnidadBD UnidadActual=new SoldadoRaso(0,0);//FIXME de prueba
 
 
 	public static UnidadBD[][] getTablero() {
@@ -88,7 +131,7 @@ public class Partida extends JDialog{
 	 */
 	private void initialize() throws IOException {
 		new JFrame();
-		setBounds(100, 100, 675, 473);
+		setBounds(100, 100, 330, 141);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
@@ -97,19 +140,53 @@ public class Partida extends JDialog{
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JButton btnMover = new JButton("Mover");
+		final JButton btnMover = new JButton("Mover");
+		btnMover.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) { 
+				btnMover.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0)  {
+				        UnidadActual.Mover(xobj, yobj);
+				        System.out.println("se ha movido la unidad a las coordenadas X="+xobj+" y="+yobj);
+				    }
+				});
+			
+			
+				
+				
+				
+				 
+			}
+		});
 		btnMover.setBounds(30, 25, 101, 46);
 		panel.add(btnMover);
 		
 		JButton btnAtacar = new JButton("Atacar");
+		btnAtacar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)  {
+				//UnidadActual.Mover(xobj,yobj);
+		        UnidadActual.AlgoritmoPathfinding(UnidadActual.getDistancia(),x,y,xobj ,yobj ,tablero );
+		        System.out.println("se ha movido la unidad a las coordenadas X="+xobj+" y="+yobj);
+		    }
+		});
 		btnAtacar.setBounds(30, 82, 101, 46);
 		panel.add(btnAtacar);
 		
 		JButton btnTerminar = new JButton("Finalizar Unidad");
+		btnTerminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		btnTerminar.setBounds(30, 196, 115, 56);
 		panel.add(btnTerminar);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		btnGuardar.setBounds(30, 298, 101, 23);
 		panel.add(btnGuardar);
 		
@@ -122,6 +199,11 @@ public class Partida extends JDialog{
 		panel.add(btnCambiarArma);
 		
 		JButton btnFinalizarTurno = new JButton("Finalizar Turno");
+		btnFinalizarTurno.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		btnFinalizarTurno.setBounds(28, 335, 103, 56);
 		panel.add(btnFinalizarTurno);
 		
@@ -357,6 +439,13 @@ public class Partida extends JDialog{
 	            int row = i / 32;
 	            int col = i % 32;
 	            JButton gb = createGridButton(row, col);
+	            gb.addMouseListener(new MouseAdapter() {
+	    			@Override
+	    			public void mouseClicked(MouseEvent e) {
+	    				if(tablero[row][col]==null || tablero[row][col] instanceof Colision){System.out.println("Es null");xobj=row;yobj=col;}//FIXME cambiar esto
+	    				else{UnidadActual=tablero[row][col];x=row;y=col;}
+	    			}
+	    		});
 	            gb.setOpaque(false);
 	            gb.setText("P"); //Cambiando esto se consigue en invisible (para el mapa y eso)
 	            gb.setBorder(null);
@@ -384,8 +473,7 @@ public class Partida extends JDialog{
 	
 	   private JButton createGridButton(final int row, final int col) {
 	        final JButton b = new JButton("r" + row + ",c" + col);
-	        b.addActionListener(new ActionListener() {
-
+	        b.addActionListener(new ActionListener() {   	
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
 	                JButton gb =Partida.this.getGridButton(row, col);
@@ -398,45 +486,8 @@ public class Partida extends JDialog{
 	    }
 
 	
-	//Array 32x32
-	   //FIXME hay que poner todas las colisiones a mano en vez de los nulls mirando el mapa que tal va
-	   
-	UnidadBD[][] myMap =
-			{  
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-			{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null }
-			  };
-	
+
+
 	
 	
 	
@@ -465,5 +516,45 @@ public class Partida extends JDialog{
 
 	public void setP(LogicaBatallas.ElementosPartida p) {
 		this.p = p;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public UnidadBD getUnidadActual() {
+		return UnidadActual;
+	}
+
+	public void setUnidadActual(UnidadBD unidadActual) {
+		UnidadActual = unidadActual;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getXobj() {
+		return xobj;
+	}
+
+	public void setXobj(int xobj) {
+		this.xobj = xobj;
+	}
+
+	public int getYobj() {
+		return yobj;
+	}
+
+	public void setYobj(int yobj) {
+		this.yobj = yobj;
 	}
 }
