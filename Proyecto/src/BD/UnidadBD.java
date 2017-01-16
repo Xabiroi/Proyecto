@@ -4,7 +4,6 @@ import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
 import BD.UnidadBD;
-import UnidadesAmigas.SoldadoRaso;
 import Ventanas.Colision;
 
 import javax.swing.JOptionPane;
@@ -23,12 +22,23 @@ public class UnidadBD implements Cloneable{
 	//protected int dy;
 	protected String Partida;
 	protected int equipo;
+	protected int finalizado;
 	
 	
 	
 	
 	
 	
+
+	public int getFinalizado() {
+		return finalizado;
+	}
+
+
+	public void setFinalizado(int finalizado) {
+		this.finalizado = finalizado;
+	}
+
 
 	public int getX() {
 		return x;

@@ -51,6 +51,9 @@ public class Partida extends JDialog{
 	private JTextField textFieldArma;
 	private LogicaBatallas.LogicaPartida lp;
 	private LogicaBatallas.ElementosPartida p;
+
+	
+	
 	public static UnidadBD[][] tablero= //32x32, hay que meter manualmente las colisiones
 			//Ejemplo con dos soldados para probar el metodo atacar
 		{  
@@ -92,8 +95,16 @@ public class Partida extends JDialog{
 	
 ;//TODO array que tenga los componentes, y su equivalente en gridlayout para que sea utilizable
 	private int xobj,yobj;
-	private UnidadBD UnidadActual;//FIXME de prueba
+	private UnidadBD UnidadActual=new UnidadBD();//FIXME de prueba
+	private int Finalizado=UnidadActual.getFinalizado();
 
+	public int getFinalizado() {
+		return Finalizado;
+	}
+
+	public void setFinalizado(int finalizado) {
+		Finalizado = finalizado;
+	}
 
 	public static UnidadBD[][] getTablero() {
 		return tablero;
@@ -145,28 +156,22 @@ public class Partida extends JDialog{
 		
 		//FIXME se necesita cambiar los listeners con cada uno su codigo (los x,y,xobj,yobje para ajustarlos bien)
 		/*
-		 * Parte de eso
-		
-		*/
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		 *
+		*Como quitar las acciones del panel cuando el elemento seleccionado sea una unidad finalizada
+		*/ 
+	
+	
 		final JButton btnMover = new JButton("Mover");
 		btnMover.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) { 
 				btnMover.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0)  {
+					
 						if(tablero[xobj][yobj]==null){System.out.println("Es null");UnidadActual.Mover(xobj, yobj);}//Habria que meter el algoritmo de pathfinding (todavia con el simple)}//FIXME cambiar esto
 			        System.out.println("se ha movido la unidad a las coordenadas X="+xobj+" y="+yobj);
-				    }
+				   
+				}
 				});
 			
 			
@@ -182,6 +187,12 @@ public class Partida extends JDialog{
 		JButton btnAtacar = new JButton("Atacar");
 		btnAtacar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)  {
+				if(UnidadActual.getFinalizado()==1){btnAtacar.setEnabled(false);}
+				else{btnAtacar.setEnabled(true);}
+		    }
+		});
+		btnAtacar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)  {
 				if(tablero[xobj][yobj]==null){}
 				else{UnidadActual.atacar(xobj,yobj);
 		        System.out.println("se ha atacado a la unidad de las coordenadas X="+xobj+" y="+yobj);}
@@ -191,9 +202,16 @@ public class Partida extends JDialog{
 		panel.add(btnAtacar);
 		
 		JButton btnTerminar = new JButton("Finalizar Unidad");
+		btnTerminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)  {
+				if(UnidadActual.getFinalizado()==1){btnTerminar.setEnabled(false);}
+				else{btnTerminar.setEnabled(true);}
+		    }
+		});
 		btnTerminar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				UnidadActual.setFinalizado(1);
 			}
 		});
 		btnTerminar.setBounds(30, 196, 115, 56);
@@ -209,6 +227,12 @@ public class Partida extends JDialog{
 		panel.add(btnGuardar);
 		
 		JButton btnCambiarArma = new JButton("Cambiar arma");
+		btnCambiarArma.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)  {
+				if(UnidadActual.getFinalizado()==1){btnCambiarArma.setEnabled(false);}
+				else{btnCambiarArma.setEnabled(true);}
+		    }
+		});
 		btnCambiarArma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -319,21 +343,17 @@ public class Partida extends JDialog{
 		textFieldPropietario = new JTextField();
 		textFieldPropietario.setBounds(72, 8, 86, 20);
 		textFieldPropietario.setEditable(false);
-		UnidadBD unidadactual=new UnidadBD();
 		textFieldPropietario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//TODO meter el array o el gridlayout y comprobar si hay alguna unidad
+
 				 Pattern pat = Pattern.compile(".Enemigo$");
-			     Matcher mat = pat.matcher(unidadactual.getClass().getName());
+			     Matcher mat = pat.matcher(UnidadActual.getNombre());
 			     
 				try {
 					 
-						e.getX();
-						e.getY();
 						
-					//TODO meter la parte de gridbuttonpanel en transparente para saber las colisiones y las coordenadas
-					//unidadactual=...
+					//TODO no estoy seguro de si esto funciona
 						if (mat.matches()) {
 							textFieldPropietario.setText("Usuario 2");
 					     } else {
@@ -355,7 +375,7 @@ public class Partida extends JDialog{
 		
 		textFieldUnidad = new JTextField();
 		textFieldUnidad.setBounds(241, 8, 86, 20);
-		textFieldUnidad.setText(unidadactual.getNombre());
+		textFieldUnidad.setText(UnidadActual.getNombre());
 		textFieldUnidad.setEditable(false);
 		panel_2.add(textFieldUnidad);
 		textFieldUnidad.setColumns(10);
@@ -366,7 +386,7 @@ public class Partida extends JDialog{
 		
 		textFieldPS = new JTextField();
 		textFieldPS.setBounds(393, 8, 86, 20);
-		textFieldPS.setText(""+unidadactual.getSalud());
+		textFieldPS.setText(""+UnidadActual.getSalud());
 		textFieldPS.setEditable(false);
 		panel_2.add(textFieldPS);
 		textFieldPS.setColumns(10);
@@ -378,15 +398,10 @@ public class Partida extends JDialog{
 		textFieldArma = new JTextField();
 		textFieldArma.setBounds(545, 8, 86, 20);
 		textFieldArma.setEditable(false);
-		textFieldArma.setText(unidadactual.getArma());
+		textFieldArma.setText(UnidadActual.getArma());
 		panel_2.add(textFieldArma);
-		textFieldArma.setColumns(10);
-		
+		textFieldArma.setColumns(10);	    
 
-		String arg = "Resources.Mapa.png";
-		    
-		
-		//PRUEBA
 
         setBounds(154, 114, 1200, 800);
         setResizable(true);
@@ -395,38 +410,10 @@ public class Partida extends JDialog{
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
-
 	
-		
-		
-		
-		
-		
-		
-		
-		
-		/*ORIGINAL
-
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(154, 114, 1200, 800);
-	    ImageIcon icon = new ImageIcon(arg); 
-	    JLabel label = new JLabel(); 
-	    label.setIcon(icon); 
-	    panel_3.add(label);
-		getContentPane().add(panel_3);
-		
-		BufferedImage myPicture = ImageIO.read(new File("C:\\Users\\Xabier\\git\\Proyectoprog3\\Proyecto\\src\\Resources\\Mapa.png"));
-		JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-		panel_3.add(picLabel);
-		
-	*/
-		
 	}
 	
-	
-	
-	
-	
+
 	
 	/////////////TODO LO DE GRIDPANEL
 	
@@ -460,7 +447,7 @@ public class Partida extends JDialog{
 	            gb.addMouseListener(new MouseAdapter() {
 	    			@Override
 	    			public void mouseClicked(MouseEvent e) {
-	    				xobj=col;yobj=row;
+	    				UnidadActual=tablero[col][row];xobj=col;yobj=row;
 	    				
 	    			}
 	    		});
