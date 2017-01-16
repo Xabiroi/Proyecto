@@ -197,6 +197,11 @@ public void limpiarColisiones(UnidadBD[][] a){
 	
 		
 	}
+	public void atacar(int x,int y) {
+
+	
+		
+	}
 	
 	
 	////FIXME 

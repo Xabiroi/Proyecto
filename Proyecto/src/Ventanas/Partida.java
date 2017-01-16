@@ -23,12 +23,14 @@ import java.awt.DisplayMode;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import BD.UnidadBD;
 import UnidadesAmigas.SoldadoRaso;
+import UnidadesEnemigas.SoldadoRasoEnemigo;
 
 public class Partida extends JDialog{
 
@@ -50,8 +52,9 @@ public class Partida extends JDialog{
 	private LogicaBatallas.LogicaPartida lp;
 	private LogicaBatallas.ElementosPartida p;
 	public static UnidadBD[][] tablero= //32x32, hay que meter manualmente las colisiones
+			//Ejemplo con dos soldados para probar el metodo atacar
 		{  
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+		{ new SoldadoRaso(0,0), new SoldadoRasoEnemigo(0,1), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
 		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
 		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
 		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
@@ -88,9 +91,8 @@ public class Partida extends JDialog{
 	
 	
 ;//TODO array que tenga los componentes, y su equivalente en gridlayout para que sea utilizable
-	private int x,y; //Coordenadas del ultimo soldado clickado, con el que se haran las acciones
 	private int xobj,yobj;
-	private UnidadBD UnidadActual=new SoldadoRaso(0,0);//FIXME de prueba
+	private UnidadBD UnidadActual;//FIXME de prueba
 
 
 	public static UnidadBD[][] getTablero() {
@@ -140,14 +142,30 @@ public class Partida extends JDialog{
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
+		
+		//FIXME se necesita cambiar los listeners con cada uno su codigo (los x,y,xobj,yobje para ajustarlos bien)
+		/*
+		 * Parte de eso
+		
+		*/
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		final JButton btnMover = new JButton("Mover");
 		btnMover.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) { 
 				btnMover.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0)  {
-				        UnidadActual.Mover(xobj, yobj);
-				        System.out.println("se ha movido la unidad a las coordenadas X="+xobj+" y="+yobj);
+						if(tablero[xobj][yobj]==null){System.out.println("Es null");UnidadActual.Mover(xobj, yobj);}//Habria que meter el algoritmo de pathfinding (todavia con el simple)}//FIXME cambiar esto
+			        System.out.println("se ha movido la unidad a las coordenadas X="+xobj+" y="+yobj);
 				    }
 				});
 			
@@ -164,9 +182,9 @@ public class Partida extends JDialog{
 		JButton btnAtacar = new JButton("Atacar");
 		btnAtacar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)  {
-				//UnidadActual.Mover(xobj,yobj);
-		        UnidadActual.AlgoritmoPathfinding(UnidadActual.getDistancia(),x,y,xobj ,yobj ,tablero );
-		        System.out.println("se ha movido la unidad a las coordenadas X="+xobj+" y="+yobj);
+				if(tablero[xobj][yobj]==null){}
+				else{UnidadActual.atacar(xobj,yobj);
+		        System.out.println("se ha atacado a la unidad de las coordenadas X="+xobj+" y="+yobj);}
 		    }
 		});
 		btnAtacar.setBounds(30, 82, 101, 46);
@@ -442,8 +460,8 @@ public class Partida extends JDialog{
 	            gb.addMouseListener(new MouseAdapter() {
 	    			@Override
 	    			public void mouseClicked(MouseEvent e) {
-	    				if(tablero[row][col]==null || tablero[row][col] instanceof Colision){System.out.println("Es null");xobj=row;yobj=col;}//FIXME cambiar esto
-	    				else{UnidadActual=tablero[row][col];x=row;y=col;}
+	    				xobj=col;yobj=row;
+	    				
 	    			}
 	    		});
 	            gb.setOpaque(false);
@@ -485,21 +503,7 @@ public class Partida extends JDialog{
 	        return b;
 	    }
 
-	
 
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	public LogicaBatallas.LogicaPartida getLp() {
@@ -518,13 +522,6 @@ public class Partida extends JDialog{
 		this.p = p;
 	}
 
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
 
 	public UnidadBD getUnidadActual() {
 		return UnidadActual;
@@ -534,13 +531,6 @@ public class Partida extends JDialog{
 		UnidadActual = unidadActual;
 	}
 
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
 
 	public int getXobj() {
 		return xobj;

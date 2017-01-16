@@ -356,7 +356,7 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 	//FIXME poner un random de atacar o fallar para  que sea mas emocionante
 	public void atacar(int x,int y){
 		
-		for(UnidadEnemiga ue:LogicaPartida.getListaEnemigos()){
+		for(UnidadEnemiga ue:enemigos){
 			if(x==ue.getCordX()&&y==ue.getCordY()){
 				
 				if(ue instanceof SoldadoRasoEnemigo){
