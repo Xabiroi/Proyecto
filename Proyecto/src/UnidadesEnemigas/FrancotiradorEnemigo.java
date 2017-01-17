@@ -27,8 +27,8 @@ public class FrancotiradorEnemigo extends UnidadEnemiga implements Persona,Unida
         
         ImageIcon ii = new ImageIcon("craft.png");
         image = ii.getImage();
-        //x = 40;
-        //y = 60;        
+        x = 55;
+        y = 55;        
     }
 	
 }
