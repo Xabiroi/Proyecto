@@ -28,7 +28,7 @@ public class Francotirador extends UnidadAliada implements Persona,Unidad{
         ImageIcon ii = new ImageIcon("craft.png");
         image = ii.getImage();
         x = 26;
-        y = 26;             
+        y = 26;        asas     
     }
 
 }
