@@ -16,28 +16,11 @@ public class UnidadBD implements Cloneable{
 	protected Image image;
 	protected int x;
 	protected int y;
-	protected int coste;
-	protected int Distancia;
-	//protected int dx;
-	//protected int dy;
-	protected String Partida;
-	protected int equipo;
-	protected int finalizado;
-	
-	
-	
-	
-	
-	
+	protected int coste; //Coste de crear el soldado
+	protected int Distancia; //Puntos de movimiento
+	protected String Partida; //Nombre
+	protected int equipo; //1 o 0
 
-	public int getFinalizado() {
-		return finalizado;
-	}
-
-
-	public void setFinalizado(int finalizado) {
-		this.finalizado = finalizado;
-	}
 
 
 	public int getX() {
@@ -83,16 +66,11 @@ public class UnidadBD implements Cloneable{
 		 * 
 		 */
 		
-		
+		UnidadBD u=this;
 		
 		UnidadBD[][] aux=Ventanas.Partida.getTablero();
 		if(aux[x][y]==null){
-		try {
-			aux[x][y]=(UnidadBD) this.clone();
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		aux[x][y]=u;
 		aux[this.getCordX()][this.getCordY()]=null;
 		
 		Ventanas.Partida.setTablero(aux);

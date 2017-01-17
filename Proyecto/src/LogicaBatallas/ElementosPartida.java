@@ -13,21 +13,21 @@ public class ElementosPartida {
 	protected int Turno=0;
 	
 	//constructor partida multijugador, dos usuarios
-	public ElementosPartida(String usuario, String usuario2,long fechaPartida, String NombrePartida) {
+	public ElementosPartida(String usuario, String usuario2, String NombrePartida) {
 		super();
 		this.Partida=NombrePartida;
 		this.usuario = usuario;
 		this.usuario2=usuario2;
-		this.fechaPartida = fechaPartida;
+		this.fechaPartida = System.currentTimeMillis();
 		this.lp = new LogicaPartida();
 		this.Turno=0;
 	}
 	//constructor partida local, con el mismo usuario
-	public ElementosPartida(String usuario, long fechaPartida,String NombrePartida) {
+	public ElementosPartida(String usuario,String NombrePartida) {
 		this.usuario = usuario;
 		this.usuario2=null;
 		this.Partida=NombrePartida;
-		this.fechaPartida = fechaPartida;
+		this.fechaPartida = System.currentTimeMillis();
 		this.lp=new LogicaPartida();
 		this.Turno=0;
 	}

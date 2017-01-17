@@ -76,7 +76,7 @@ public class CrearPartida extends JDialog{
 				BD.usarCrearTablasBD(BD.initBD("Local"));
 				//////
 				//FIXME las operaciones de crear una nueva partida (crear un constructor de ventana con parametros como oro y demas o sino como loginmanager meter un objeto como atributo a PARTIDA)
-				LogicaBatallas.ElementosPartida pa=new LogicaBatallas.ElementosPartida(textField.getText(),textField_1.getText(),System.currentTimeMillis(),textField.getText()+"vs"+textField_1.getText());
+				LogicaBatallas.ElementosPartida pa=new LogicaBatallas.ElementosPartida(textField.getText(),textField_1.getText(),textField.getText()+"vs"+textField_1.getText());
 				p.setP(pa);
 				Statement st=BD.usarBD(BD.initBD("Local"));
 				BD.PartidaInsert(st, p.getP());
