@@ -3,27 +3,21 @@ package Ventanas;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.DisplayMode;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -52,66 +46,90 @@ public class Partida extends JDialog{
 	private LogicaBatallas.LogicaPartida lp;
 	private LogicaBatallas.ElementosPartida p;
 
+
+
+	public static UnidadBD[][] tablero=//32x32, hay que meter manualmente las colisiones
 	
-	
-	public static UnidadBD[][] tablero= //32x32, hay que meter manualmente las colisiones
-			//Ejemplo con dos soldados para probar el metodo atacar
+	{  
+	{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0) },
+	{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, null, null, null, null, new Colision(0) },
+	{ null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, null, null, null, new Colision(0), null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0) },
+	{ null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, new Colision(0), null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null },
+	{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null },
+	{ new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, new Colision(0), null, null, null, new Colision(0), null, null, null, new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null },
+	{ new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null },
+	{ new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, null, null },
+	{ null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null },
+	{ null, null, null, null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null },
+	{ null, null, null, null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, null, null, new Colision(0), null, null },
+	{ null, null, new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, null, new Colision(0), null, null },
+	{ null, null, new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, new Colision(0), null, null, new Colision(0), null, null },
+	{ null, new Colision(0), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, new Colision(0), new Colision(0), null, null, null, null, new Colision(0), null, null, null, null, null },
+	{ new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null },
+	{ new Colision(0), new Colision(0), null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0), null, null },
+	{ null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, new Colision(0), null, null },
+	{ null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), null, null, new Colision(0), new Colision(0), null, null, null, null },
+	{ null, null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, new Colision(0), null, null, null, new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
+	{ null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, new Colision(0), null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0) },
+	{ null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, null },
+	{ null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, null },
+	{ new Colision(0), null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, new Colision(0), null, null },
+	{ new Colision(0), null, null, new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, new Colision(0), null, null },
+	{ null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0) },
+	{ null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, new Colision(0), null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0) },
+	{ null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, new Colision(0), null, null, null, new Colision(0), null, new Colision(0), new Colision(0), null, null, null, new Colision(0), null, null, new Colision(0), null, null, new Colision(0), new Colision(0), new Colision(0) },
+	{ null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, new Colision(0), new Colision(0), new Colision(0), null, new Colision(0), null, new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
+	{ null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, new Colision(0), null, null, null, new Colision(0), null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
+	{ new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
+	{ new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
+	{ new Colision(0), null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) }
+	  };
+
+			/*Como queda con las colisiones a modo de array
 		{  
-		{ new SoldadoRaso(0,0), new SoldadoRasoEnemigo(0,1), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-		{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null }
+		{ *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, a },
+		{ *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, a, a, *, *, a, *, *, *, *, *, *, *, *, a },
+		{ *, *, *, *, *, *, *, *, *, *, *, a, *, *, *, *, *, *, *, *, a, *, a, a, *, *, *, *, *, *, *, a },
+		{ *, *, *, *, *, *, *, *, *, *, *, a, *, *, *, *, *, a, *, *, a, a, a, *, *, *, *, *, *, *, *, * },
+		{ *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, a, a, a, a, a, *, *, *, *, *, * },
+		{ a, a, a, *, *, *, *, *, *, a, *, *, *, a, *, *, *, a, a, *, a, a, a, a, a, a, *, *, *, *, *, * },
+		{ a, a, a, a, *, *, *, *, *, *, *, *, *, *, *, *, *, a, a, *, a, a, a, a, a, a, *, *, *, *, *, * },
+		{ a, a, a, a, a, a, a, a, a, *, *, *, *, a, *, *, *, a, a, a, a, a, a, *, *, a, *, *, *, *, *, * },
+		{ *, *, *, *, a, a, a, a, a, a, *, *, *, *, *, *, *, a, a, a, a, a, a, *, *, *, *, *, *, *, *, * },
+		{ *, *, *, *, a, a, *, *, *, a, a, a, *, *, *, a, a, a, a, a, a, a, *, *, *, *, *, *, *, *, *, * },
+		{ *, *, *, *, a, a, *, *, *, a, a, a, *, *, *, a, a, a, a, a, *, *, a, *, *, *, *, *, *, a, *, * },
+		{ *, *, a, *, *, *, *, a, a, *, a, a, *, *, *, *, *, *, *, *, *, *, a, *, *, *, *, *, *, a, *, * },
+		{ *, *, a, *, *, *, *, a, a, *, a, a, *, *, *, *, *, *, *, *, a, a, *, *, *, *, a, *, *, a, *, * },
+		{ *, a, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, a, *, *, a, a, *, *, *, *, a, *, *, *, *, * },
+		{ a, a, *, *, *, *, *, *, *, *, *, *, *, a, a, a, a, *, *, *, a, a, *, *, *, *, *, *, *, *, *, * },
+		{ a, a, *, *, *, *, *, a, a, a, *, *, a, *, *, *, *, *, *, *, a, a, *, *, *, *, *, *, *, a, *, * },
+		{ *, *, *, *, *, *, *, a, a, a, *, *, a, *, *, *, *, a, a, a, a, *, *, *, *, *, *, *, *, a, *, * },
+		{ *, *, *, *, *, *, *, *, *, *, *, *, *, a, *, *, *, a, a, a, a, *, a, a, *, *, a, a, *, *, *, * },
+		{ *, *, *, *, a, a, a, *, *, *, *, *, *, a, *, *, *, a, *, *, *, *, a, a, *, *, *, a, a, a, a, a },
+		{ *, *, *, *, a, a, a, a, *, a, *, *, *, *, *, *, *, *, *, *, *, *, a, *, *, *, *, *, *, a, a, a },
+		{ *, *, *, *, *, a, a, a, a, a, *, *, *, *, *, *, *, *, a, a, *, *, *, *, *, *, *, *, *, *, *, * },
+		{ *, *, *, *, *, *, a, a, a, a, a, *, *, *, *, a, a, a, a, a, *, *, *, *, *, *, *, *, *, *, *, * },
+		{ a, *, *, *, *, *, *, a, a, a, a, *, *, *, *, a, a, a, a, *, *, *, a, a, a, a, a, a, *, a, *, * },
+		{ a, *, *, a, *, *, *, *, a, a, *, *, *, *, *, *, *, a, a, *, *, *, *, *, a, a, a, a, *, a, *, * },
+		{ *, *, *, a, a, a, *, *, *, *, *, *, *, *, *, *, *, a, a, a, *, *, *, *, a, a, *, *, *, a, a, a },
+		{ *, a, a, a, a, a, *, *, *, *, *, *, *, *, *, *, a, *, a, a, *, *, *, *, *, *, *, *, *, a, a, a },
+		{ *, a, a, a, a, *, *, a, *, *, *, *, a, *, *, *, a, *, a, a, *, *, *, a, *, *, a, *, *, a, a, a },
+		{ *, *, *, *, *, *, *, a, *, *, *, *, *, *, *, *, *, *, *, a, *, *, a, a, a, *, a, *, a, a, a, a },
+		{ *, *, *, *, *, a, a, *, *, *, *, *, *, a, a, *, *, *, *, a, *, *, *, a, *, *, a, a, a, a, a, a },
+	//	{ a, *, *, *, *, a, a, *, a, a, *, *, *, a, a, *, *, *, *, *, *, *, *, *, *, *, a, a, a, a, a, a },
+		{ a, *, *, *, *, *, *, *, a, a, *, *, *, a, a, a, a, a, *, *, *, *, *, *, *, a, a, a, a, a, a, a },
+		{ a, *, *, *, *, *, *, *, *, *, *, *, *, a, a, a, a, a, a, *, *, *, *, *, *, a, a, a, a, a, a, a }
 		  };
+	*/
 	
 	
-	
-;//TODO array que tenga los componentes, y su equivalente en gridlayout para que sea utilizable
+//TODO array que tenga los componentes, y su equivalente en gridlayout para que sea utilizable
 	private int xobj,yobj;
 	private UnidadBD UnidadActual=new UnidadBD();//FIXME de prueba
-	private int Finalizado=UnidadActual.getFinalizado();
+	private UnidadBD UnidadObjetivo=new UnidadBD();
 
-	public int getFinalizado() {
-		return Finalizado;
-	}
-
-	public void setFinalizado(int finalizado) {
-		Finalizado = finalizado;
-	}
-
-	public static UnidadBD[][] getTablero() {
-		return tablero;
-	}
-
-	public static void setTablero(UnidadBD[][] tablero) {
-		Partida.tablero = tablero;
+	public static void setTablero(UnidadBD[][] tablero1) {
+		tablero = tablero1;
 	}
 
 	/*
@@ -132,6 +150,7 @@ public class Partida extends JDialog{
 	 * Create the application.
 	 * @throws IOException 
 	 */
+	//FIXME Falta por determinar bien el constructor
 	public Partida(LogicaBatallas.ElementosPartida p,LogicaBatallas.LogicaPartida lp) throws IOException {
 		this.p=p;
 		this.lp=lp;
@@ -170,7 +189,7 @@ public class Partida extends JDialog{
 					
 						if(tablero[xobj][yobj]==null){System.out.println("Es null");UnidadActual.Mover(xobj, yobj);}//Habria que meter el algoritmo de pathfinding (todavia con el simple)}//FIXME cambiar esto
 			        System.out.println("se ha movido la unidad a las coordenadas X="+xobj+" y="+yobj);
-				   
+			        System.out.println("Count of listeners: " + ((JButton) arg0.getSource()).getActionListeners().length);//Cuantos actionlistener hay activos
 				}
 				});
 			
@@ -187,8 +206,7 @@ public class Partida extends JDialog{
 		JButton btnAtacar = new JButton("Atacar");
 		btnAtacar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)  {
-				if(UnidadActual.getFinalizado()==1){btnAtacar.setEnabled(false);}
-				else{btnAtacar.setEnabled(true);}
+
 		    }
 		});
 		btnAtacar.addActionListener(new ActionListener() {
@@ -200,22 +218,6 @@ public class Partida extends JDialog{
 		});
 		btnAtacar.setBounds(30, 82, 101, 46);
 		panel.add(btnAtacar);
-		
-		JButton btnTerminar = new JButton("Finalizar Unidad");
-		btnTerminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)  {
-				if(UnidadActual.getFinalizado()==1){btnTerminar.setEnabled(false);}
-				else{btnTerminar.setEnabled(true);}
-		    }
-		});
-		btnTerminar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				UnidadActual.setFinalizado(1);
-			}
-		});
-		btnTerminar.setBounds(30, 196, 115, 56);
-		panel.add(btnTerminar);
 		
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addMouseListener(new MouseAdapter() {
@@ -229,9 +231,7 @@ public class Partida extends JDialog{
 		JButton btnCambiarArma = new JButton("Cambiar arma");
 		btnCambiarArma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)  {
-				if(UnidadActual.getFinalizado()==1){btnCambiarArma.setEnabled(false);}
-				else{btnCambiarArma.setEnabled(true);}
-		    }
+			}
 		});
 		btnCambiarArma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -447,12 +447,26 @@ public class Partida extends JDialog{
 	            gb.addMouseListener(new MouseAdapter() {
 	    			@Override
 	    			public void mouseClicked(MouseEvent e) {
-	    				UnidadActual=tablero[col][row];xobj=col;yobj=row;
+	    			   if(e.getButton() == MouseEvent.BUTTON1)
+	        	    {
+	    				   if(tablero[col][row] instanceof UnidadBD){
+	    				   UnidadActual=tablero[col][row];xobj=col;yobj=row;}
+	    				   else{xobj=col;yobj=row;}
+	        	      System.out.println("Click izquierdo col="+col+" row="+row);
+	        	      }
 	    				
+	        	        
+	        	    else if(e.getButton() == MouseEvent.BUTTON3)
+	        	    {
+	        	    	if(tablero[col][row]!=null || tablero[col][row] instanceof UnidadBD){
+	        	    	UnidadObjetivo=tablero[col][row];xobj=col;yobj=row;}
+	        	    	else{}
+	        	    	System.out.println("Click derecho col="+col+" row="+row);
+	        	    }	    				
 	    			}
 	    		});
 	            gb.setOpaque(false);
-	            gb.setText("P"); //Cambiando esto se consigue en invisible (para el mapa y eso)
+	            gb.setText("P"); //FIXME Cambiando esto se consigue en invisible (para el mapa y eso)
 	            gb.setBorder(null);
 	            gb.setBorderPainted(false);
 	            gb.setContentAreaFilled(false);
@@ -533,5 +547,18 @@ public class Partida extends JDialog{
 
 	public void setYobj(int yobj) {
 		this.yobj = yobj;
+	}
+
+	public UnidadBD getUnidadObjetivo() {
+		return UnidadObjetivo;
+	}
+
+	public void setUnidadObjetivo(UnidadBD unidadObjetivo) {
+		UnidadObjetivo = unidadObjetivo;
+	}
+
+	public static UnidadBD[][] getTablero() {
+		// TODO Auto-generated method stub
+		return tablero;
 	}
 }

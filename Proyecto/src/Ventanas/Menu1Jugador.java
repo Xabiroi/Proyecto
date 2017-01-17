@@ -202,7 +202,7 @@ public class Menu1Jugador extends JDialog{
 			btnVolver.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
-					frame.setVisible(false);
+					setVisible(false);
 					MenuPrincipal mp=new MenuPrincipal();
 					mp.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					mp.setVisible(true);

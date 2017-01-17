@@ -1,23 +1,17 @@
 package BD;
 
-import java.awt.Image;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import Interfaces.Persona;
-import Interfaces.Unidad;
 import LogicaBatallas.ElementosPartida;
 import LoginData.Usuario;
-import UnidadesAmigas.UnidadAliada;
 
 
 
@@ -87,6 +81,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 				statement.executeUpdate("create table partidaLocal " 
 					+"(usuario1 char(30) not null references usuario(nick) on delete cascade,"
 					+ "Partida char(30),"
+					+ "Turno integer,"
 					+ "dineroAliado integer,"
 					+ "dineroEnemigo integer,"
 					+ "puntuacionAliado integer,"
@@ -99,6 +94,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 					+"(usuario1 char(30) not null references usuario(nick) on delete cascade,"
 					+ "usuario2 char(30) not null references usuario(nick) on delete cascade,"
 					+ "Partida char(30),"
+					+ "Turno integer,"
 					+ "dineroAliado integer,"
 					+ "dineroEnemigo integer,"
 					+ "puntuacionAliado integer,"
@@ -112,6 +108,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 					+ " nombre char(30),"
 					+ " arma char(30),"
 					+ " salud char(30),"
+					+ " distancia integer,"
 					+ " equipo integer,"
 					+ " coordX integer,"
 					+ " coordY integer)");
@@ -229,6 +226,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 					"'" + secu(p.getUsuario()) + "', " +
 					"'" + secu(p.getUsuario2()) + "', " +
 					"'" + secu(p.getPartida()) + "', " +
+					"'" + secu(""+p.getTurno()) + "', " +
 					"'" + secu(""+p.getDineroAliado()) + "', " +
 					"'" + secu(""+p.getDineroEnemigo()) + "', " +
 					"'" + secu(""+p.getPuntuacionAliado()) + "', " +
@@ -256,6 +254,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 			sentSQL = "insert into partidaLocal values(" +
 					"'" + secu(p.getUsuario()) + "', " +
 					"'" + secu(p.getPartida()) + "', " +
+					"'" + secu(""+p.getTurno()) + "', " +
 					"'" + secu(""+p.getDineroAliado()) + "', " +
 					"'" + secu(""+p.getDineroEnemigo()) + "', " +
 					"'" + secu(""+p.getPuntuacionAliado()) + "', " +
@@ -287,6 +286,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 					"'" + secu(s.getNombre()) + "', " +
 					"'" + secu(s.getArma()) + "', " +
 					"'" + secu(""+s.getSalud()) + "', " +
+					"'" + secu(""+s.getDistancia()) + "', " +
 					"'" + secu(""+s.getEquipo()) + "', " +
 					"'" + secu(""+s.getCordX()) + "', " +
 					"'" + secu(""+s.getCordY()) +"')";
@@ -360,6 +360,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 				p.setDineroEnemigo(Integer.parseInt(rs.getString("dineroEnemigo")));
 				p.setFechaPartida(Integer.parseInt(rs.getString("fechapartida")));
 				p.setPartida(rs.getString("Partida"));
+				p.setTurno(Integer.parseInt(rs.getString("Turno")));
 				p.setPuntuacionAliado(Integer.parseInt(rs.getString("puntuacionAliado")));
 				p.setPuntuacionEnemigo(Integer.parseInt(rs.getString("puntuacionEnemigo")));
 				p.setUsuario(rs.getString("usuario1"));
@@ -395,6 +396,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 				p.setDineroEnemigo(Integer.parseInt(rs.getString("dineroEnemigo")));
 				p.setFechaPartida(Integer.parseInt(rs.getString("fechapartida")));
 				p.setPartida(rs.getString("Partida"));
+				p.setTurno(Integer.parseInt(rs.getString("Turno")));
 				p.setPuntuacionAliado(Integer.parseInt(rs.getString("puntuacionAliado")));
 				p.setPuntuacionEnemigo(Integer.parseInt(rs.getString("puntuacionEnemigo")));
 				p.setUsuario(rs.getString("usuario1"));
@@ -434,6 +436,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 				u.setEquipo(Integer.parseInt(rs.getString("equipo")));
 				u.setNombre("nombre");
 				u.setSalud(Integer.parseInt(rs.getString("salud")));
+				u.setDistancia(Integer.parseInt(rs.getString("distancia")));
 				ret.add( u );
 			}
 			rs.close();
@@ -487,8 +490,8 @@ private static Exception lastError = null;  // Información de último error SQL o
 		try {
 			
 			sentSQL = "update partidaMultijugador set" +
-					// " nick='" + u.getNick() + "', " +  // No hay que actualizar el nick, solo el resto de campos
 
+					" Turno=" + p.getTurno() + ", " +
 					" dineroAliado=" + p.getDineroAliado() + ", " +
 					" dineroEnemigo=" + p.getDineroEnemigo() + ", " +
 					" puntuacionAliado='" + p.getPuntuacionAliado() + "', " +
@@ -511,18 +514,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 		}
 	}
 	
-	/*
-	 * 
-	 * 		statement.executeUpdate("create table soldados "
-					+ "(Partida string not null references partidaMultijugador(Partida) on delete cascade,"
-					+ " nombre string,"
-					+ " arma string,"
-					+ " salud string,"
-					+ " coordX integer,"
-					+ " coordY integer)");
-				
-				
-	 */
+
 	public static boolean UnidadBDUpdate( Statement st, UnidadBD u ) {
 		String sentSQL = "";
 		try {
@@ -530,6 +522,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 			sentSQL = "update soldados set" +
 					" arma='" + u.getArma() + "', " +
 					" salud=" + u.getSalud() + ", " +
+					" distancia=" + u.getDistancia() + ", " +
 					" equipo=" + u.getEquipo() + ", " +
 					" coordX=" + u.getCordX() + ", " +
 					" coordY='" + u.getCordY() + "," +
