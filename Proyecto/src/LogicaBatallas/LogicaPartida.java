@@ -14,7 +14,7 @@ public class LogicaPartida{
 	
 	
 	
-	
+	//cada turno quitar la unidad actual
 	/*
 	 * Listas de enemigos que comprueben coordenadas
 	 * Se actualizan cada vez que una unidad es creada o muerta, al final de cada ataque o turno del jugador
@@ -31,7 +31,7 @@ public class LogicaPartida{
 	
 	
 	
-	//FIXME Funcion que se pondra en la ventana, adelanto (pasar parametro un boton clickado? y luego el getText)
+	//FIXME Funcion que se pondra en la ventana
 	public static void Turno(){
 		actualizar();
 

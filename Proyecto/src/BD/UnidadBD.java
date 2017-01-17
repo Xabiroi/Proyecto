@@ -70,9 +70,10 @@ public class UnidadBD implements Cloneable{
 		
 		UnidadBD[][] aux=Ventanas.Partida.getTablero();
 		if(aux[x][y]==null){
+		aux[u.getCordX()][u.getCordY()]=null; 
+		u.setCordX(x);
+		u.setCordY(y);
 		aux[x][y]=u;
-		aux[this.getCordX()][this.getCordY()]=null;
-		
 		Ventanas.Partida.setTablero(aux);
 		}else{int input = JOptionPane.showOptionDialog(null, "Elija otra posicion valida", "Aviso", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 		
@@ -191,92 +192,6 @@ public void limpiarColisiones(UnidadBD[][] a){
 		
 	}
 	
-	
-	////FIXME 
-	/* Ejemplo
-	 * private void initSoldado() {
-        
-        ImageIcon ii = new ImageIcon("SoldadoRaso.png");
-        image = ii.getImage();
-        x = 40;
-        y = 60;        
-    }
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 *  public void move() {
-        x += dx;
-        y += dy;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public void keyPressed(KeyEvent e) {
-
-        int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_LEFT) {
-            dx = -1;
-        }
-
-        if (key == KeyEvent.VK_RIGHT) {
-            dx = 1;
-        }
-
-        if (key == KeyEvent.VK_UP) {
-            dy = -1;
-        }
-
-        if (key == KeyEvent.VK_DOWN) {
-            dy = 1;
-        }
-    }
-
-    public void keyReleased(KeyEvent e) {
-        
-        int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_LEFT) {
-            dx = 0;
-        }
-
-        if (key == KeyEvent.VK_RIGHT) {
-            dx = 0;
-        }
-
-        if (key == KeyEvent.VK_UP) {
-            dy = 0;
-        }
-
-        if (key == KeyEvent.VK_DOWN) {
-            dy = 0;
-        }
-    }
-}
-	 * 
-	 */
-	
-	
-	
-	
-	
-	
-	
-	
-	//Getters y setters
-///////////////////////////////////////////////
 	
 	
 	

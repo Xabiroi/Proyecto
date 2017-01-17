@@ -12,19 +12,21 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import BD.BD;
 import BD.UnidadBD;
 import UnidadesAmigas.SoldadoRaso;
-import UnidadesEnemigas.SoldadoRasoEnemigo;
+import UnidadesAmigas.UnidadAliada;
+import UnidadesEnemigas.TanqueEnemigo;
+import UnidadesEnemigas.UnidadEnemiga;
 
 public class Partida extends JDialog{
 
@@ -44,14 +46,14 @@ public class Partida extends JDialog{
 	private JTextField textFieldPS;
 	private JTextField textFieldArma;
 	private LogicaBatallas.LogicaPartida lp;
-	private LogicaBatallas.ElementosPartida p;
+	private static LogicaBatallas.ElementosPartida p;
 
 
 
 	public static UnidadBD[][] tablero=//32x32, hay que meter manualmente las colisiones
 	
 	{  
-	{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0) },
+	{ new SoldadoRaso(0,0), new TanqueEnemigo(0,1), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0) },
 	{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, null, null, null, null, new Colision(0) },
 	{ null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, null, null, null, new Colision(0), null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0) },
 	{ null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, new Colision(0), null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null },
@@ -85,7 +87,7 @@ public class Partida extends JDialog{
 	{ new Colision(0), null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) }
 	  };
 
-			/*Como queda con las colisiones a modo de array
+		/*Como queda con las colisiones a modo de array
 		{  
 		{ *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, a },
 		{ *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, a, a, *, *, a, *, *, *, *, *, *, *, *, a },
@@ -125,8 +127,9 @@ public class Partida extends JDialog{
 	
 //TODO array que tenga los componentes, y su equivalente en gridlayout para que sea utilizable
 	private int xobj,yobj;
-	private UnidadBD UnidadActual=new UnidadBD();//FIXME de prueba
-	private UnidadBD UnidadObjetivo=new UnidadBD();
+	static UnidadBD UnidadActual=new UnidadBD();//FIXME de prueba 
+	static UnidadBD UnidadObjetivo=new UnidadBD();//FIXME cambiar la visibilidad del package acaso(?)
+
 
 	public static void setTablero(UnidadBD[][] tablero1) {
 		tablero = tablero1;
@@ -185,11 +188,10 @@ public class Partida extends JDialog{
 			@Override
 			public void mouseClicked(MouseEvent arg0) { 
 				btnMover.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0)  {
-					
+					public void actionPerformed(ActionEvent arg0)  {	
 						if(tablero[xobj][yobj]==null){System.out.println("Es null");UnidadActual.Mover(xobj, yobj);}//Habria que meter el algoritmo de pathfinding (todavia con el simple)}//FIXME cambiar esto
 			        System.out.println("se ha movido la unidad a las coordenadas X="+xobj+" y="+yobj);
-			        System.out.println("Count of listeners: " + ((JButton) arg0.getSource()).getActionListeners().length);//Cuantos actionlistener hay activos
+			        System.out.println("Count of listeners: " + ((JButton) arg0.getSource()).getActionListeners().length);//Cuantos actionlistener hay activos					
 				}
 				});
 			
@@ -211,9 +213,20 @@ public class Partida extends JDialog{
 		});
 		btnAtacar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)  {
+			if(p.getTurno()==0){
 				if(tablero[xobj][yobj]==null){}
-				else{UnidadActual.atacar(xobj,yobj);
+				else{
+					UnidadActual.atacar(xobj,yobj);
 		        System.out.println("se ha atacado a la unidad de las coordenadas X="+xobj+" y="+yobj);}
+			}
+			else if(p.getTurno()==1){
+				if(tablero[xobj][yobj]==null){}
+				else{
+					UnidadActual.atacar(xobj,yobj);
+		        System.out.println("se ha atacado a la unidad de las coordenadas X="+xobj+" y="+yobj);}
+			}
+			
+				
 		    }
 		});
 		btnAtacar.setBounds(30, 82, 101, 46);
@@ -222,7 +235,13 @@ public class Partida extends JDialog{
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {			
+				BD.PartidaInsert(BD.usarBD(BD.initBD("Local")),p);
+				setVisible(false);
+				MenuPrincipal mp=new MenuPrincipal();
+				mp.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				mp.setVisible(true);
+				
 			}
 		});
 		btnGuardar.setBounds(30, 298, 101, 23);
@@ -231,6 +250,19 @@ public class Partida extends JDialog{
 		JButton btnCambiarArma = new JButton("Cambiar arma");
 		btnCambiarArma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)  {
+				try{
+				 JFrame frame = new JFrame("Cambiar Arma");
+				 String[] armas =UnidadActual.getArmas();
+				    String arma = (String) JOptionPane.showInputDialog(frame, 
+				        "Elija el arma",
+				        "Armas",
+				        JOptionPane.QUESTION_MESSAGE, 
+				        null, 
+				        armas, 
+				        armas[0]);
+				    tablero[UnidadActual.getCordX()][UnidadActual.getY()].setArma(arma);
+				    	}
+				catch(NullPointerException e){System.out.println("NO SE HA ELEGIDO NINGUNA PERSONA");}//FIXME cambiar por una alerta(?)
 			}
 		});
 		btnCambiarArma.addActionListener(new ActionListener() {
@@ -244,6 +276,9 @@ public class Partida extends JDialog{
 		btnFinalizarTurno.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(Partida.p.getTurno()==0){textFieldPropietario.setText(p.getUsuario2());
+			Partida.p.setTurno(1);}
+				else{Partida.p.setTurno(0);textFieldPropietario.setText(p.getUsuario());}
 			}
 		});
 		btnFinalizarTurno.setBounds(28, 335, 103, 56);
@@ -347,22 +382,8 @@ public class Partida extends JDialog{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				 Pattern pat = Pattern.compile(".Enemigo$");
-			     Matcher mat = pat.matcher(UnidadActual.getNombre());
-			     
-				try {
-					 
-						
-					//TODO no estoy seguro de si esto funciona
-						if (mat.matches()) {
-							textFieldPropietario.setText("Usuario 2");
-					     } else {
-					    	 textFieldPropietario.setText("Usuario 1");
-					     }
-						
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
+				if(p.getTurno()==0){textFieldPropietario.setText(p.getUsuario());}
+				else{textFieldPropietario.setText(p.getUsuario2());}
 			}
 		});
 	
@@ -413,7 +434,22 @@ public class Partida extends JDialog{
 	
 	}
 	
-
+	private void actualiza(){
+		textFieldJugador2.setText(p.getUsuario2());
+		textFieldPuntosJ1.setText(""+p.getPuntuacionAliado());
+		textFieldPuntosJ2.setText(""+p.getPuntuacionEnemigo());
+		textFieldJugador1.setText(p.getUsuario2());
+		textFieldArma.setText(UnidadActual.getArma());
+		textFieldPS.setText(""+UnidadActual.getSalud());
+		textFieldUnidad.setText(UnidadActual.getNombre());
+		if(p.getTurno()==0)
+		textFieldPropietario.setText(p.getUsuario());
+		else if(p.getTurno()==1)
+		textFieldPropietario.setText(p.getUsuario2());
+		textFieldDineroJ2.setText(""+p.getDineroEnemigo());
+		textFieldDineroJ1.setText(""+p.getDineroAliado());
+		textFieldPartida.setText(p.getPartida());
+	}
 	
 	/////////////TODO LO DE GRIDPANEL
 	
@@ -447,22 +483,53 @@ public class Partida extends JDialog{
 	            gb.addMouseListener(new MouseAdapter() {
 	    			@Override
 	    			public void mouseClicked(MouseEvent e) {
+	    				actualiza();
+	    				if(tablero[row][col] instanceof UnidadAliada)gb.setText("X");//FIXME QUITAR ESTO; SOLO ES PARA PRUEBAS
+	    				else if(tablero[row][col] instanceof UnidadEnemiga)gb.setText("Y");
+	    				else if(tablero[row][col] instanceof Colision)gb.setText("C");
+	    				else if(tablero[row][col]==null)gb.setText("P");
+	    				
+	    				
 	    			   if(e.getButton() == MouseEvent.BUTTON1)
 	        	    {
-	    				   if(tablero[col][row] instanceof UnidadBD){
-	    				   UnidadActual=tablero[col][row];xobj=col;yobj=row;}
-	    				   else{xobj=col;yobj=row;}
+	    				   if(Partida.p.getTurno()==0){
+	    				   if(tablero[row][col] instanceof UnidadAliada){
+	    				   UnidadActual=tablero[row][col];xobj=row;yobj=col;}
+	    				   else if(tablero[row][col] instanceof Colision){}
+	    				   else if(tablero[row][col] instanceof UnidadEnemiga){}
+	    				   else{xobj=row;yobj=col;}
 	        	      System.out.println("Click izquierdo col="+col+" row="+row);
-	        	      }
-	    				
+	        	      actualiza();
+	    				   }else if(Partida.p.getTurno()==1){
+	    					   if(tablero[row][col] instanceof UnidadEnemiga){
+		    				   UnidadActual=tablero[row][col];xobj=row;yobj=col;}
+	    					   else if(tablero[row][col] instanceof Colision){}
+	    					   else if(tablero[row][col] instanceof UnidadAliada){}
+		    				   else{xobj=row;yobj=col;}
+		        	      System.out.println("Click izquierdo col="+col+" row="+row);
+		        	      actualiza();
+		        	      }
+	        	    }  
+	    				   
 	        	        
 	        	    else if(e.getButton() == MouseEvent.BUTTON3)
 	        	    {
-	        	    	if(tablero[col][row]!=null || tablero[col][row] instanceof UnidadBD){
-	        	    	UnidadObjetivo=tablero[col][row];xobj=col;yobj=row;}
-	        	    	else{}
-	        	    	System.out.println("Click derecho col="+col+" row="+row);
-	        	    }	    				
+	        	 	   if(Partida.p.getTurno()==0){
+	    				   if(tablero[row][col] instanceof UnidadAliada){
+	    				   UnidadObjetivo=tablero[row][col];xobj=row;yobj=col;}
+	    				   else if(tablero[row][col] instanceof Colision){}
+	    				   else{xobj=row;yobj=col;}
+	        	      System.out.println("Click derecho col="+col+" row="+row);
+	        	      actualiza();
+	    				   }else if(Partida.p.getTurno()==1){
+	    					   if(tablero[row][col] instanceof UnidadEnemiga){
+		    				   UnidadObjetivo=tablero[row][col];xobj=row;yobj=col;}
+	    					   else if(tablero[row][col] instanceof Colision){}
+		    				   else{xobj=row;yobj=col;}
+		        	      System.out.println("Click derecho col="+col+" row="+row);
+		        	      actualiza();
+		        	      }
+	        	    }	   				
 	    			}
 	    		});
 	            gb.setOpaque(false);
@@ -549,7 +616,7 @@ public class Partida extends JDialog{
 		this.yobj = yobj;
 	}
 
-	public UnidadBD getUnidadObjetivo() {
+	public static UnidadBD getUnidadObjetivo() {
 		return UnidadObjetivo;
 	}
 
@@ -561,4 +628,6 @@ public class Partida extends JDialog{
 		// TODO Auto-generated method stub
 		return tablero;
 	}
+
+
 }

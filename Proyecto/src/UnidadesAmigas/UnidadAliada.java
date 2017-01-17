@@ -1,27 +1,23 @@
 package UnidadesAmigas;
 
 import java.awt.Image;
-import java.awt.Point;
-
 import java.util.ArrayList;
 
 import BD.UnidadBD;
 import Interfaces.Unidad;
-import LogicaBatallas.LogicaPartida;
 import UnidadesEnemigas.BazookaEnemigo;
 import UnidadesEnemigas.FrancotiradorEnemigo;
 import UnidadesEnemigas.SemiorugaEnemigo;
 import UnidadesEnemigas.SoldadoRasoEnemigo;
 import UnidadesEnemigas.TanqueEnemigo;
 import UnidadesEnemigas.UnidadEnemiga;
-import Ventanas.Partida;
 
 public class UnidadAliada extends UnidadBD implements Unidad{
 	protected ArrayList<UnidadEnemiga> enemigos=new ArrayList<UnidadEnemiga>();
 	
 	
 	public UnidadAliada(){
-		this.equipo=1;
+		this.equipo=0 ;
 		
 	}
 	
@@ -201,206 +197,79 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 		Distancia = distancia;
 	}
 
-	
-	///////////////////////////////////////////
-	
-	
-	
-	
 
-	public void Objetivos() {//ArrayList<UnidadEnemiga>(?)
-		
-
-		
-		
-		for(UnidadEnemiga ue:LogicaPartida.getListaEnemigos()){
-			/**
-			 * Cada vez que vaya a atacar, se enumeran los enemigos al alcance, y a continuacion se muestran en una lista con sus puntos de salud
-			 * A continuacion se procedera a restar puntos dependiendo del arma con la que se le haya atacado
-			 * (Debilidades y multiplicadores de daño hay que aplicarlos mas tarde)
-			 */
-			
-			
-		///////////////////////////////////////////////////////////////
-		//REAJUSTAR LAS COORDENADAS UNA VEZ HECHO EL MAPA DONDE SE JUEGA
-		///////////////////////////////////////////////////////////////
-			/**
-			 * Lista de armas del campo de batalla con sus respectivos rangos
-			 * Fusil:
-			 * Pistola
-			 * Rifle de francotirador
-			 * Bazooka
-			 * Misil tanque
-			 * Ametralladora ligera
-			 * CCC (melee)
-			 * 
-			 * 
-			 */
-			
-			int x1=this.getCordX();
-			int y1=this.getCordY();
-			//Coordenadas del soldado aliado
-			
-			if(this.getArma().equals("Fusil")){
-			
-			
-				
-				//Si la distancia a la que esta el otro soldado es menor que la del alcance, se añade a la lista de enemigos
-				int x=ue.getCordX();
-				int y=ue.getCordY();
-				if(x1-x<5){
-					if(y1-y<5){this.enemigos.add(ue);
-					
-					}	
-				}
-			
-			}
-			
-			else if(this.getArma().equals("Pistola")){
-				
-				int x=ue.getCordX();
-				int y=ue.getCordY();
-				if(x1-x<3){
-					if(y1-y<3){this.enemigos.add(ue);
-					
-					}	
-				}
-			
-			
-			}
-			
-			else if(this.getArma().equals("Rifle")){
-				
-				int x=ue.getCordX();
-				int y=ue.getCordY();
-				if(x1-x<7){
-					if(y1-y<7){this.enemigos.add(ue);
-					
-					}	
-				}
-			
-			}
-			
-			else if(this.getArma().equals("Bazooka")){
-				
-				int x=ue.getCordX();
-				int y=ue.getCordY();
-				if(x1-x<5){
-					if(y1-y<5){this.enemigos.add(ue);
-					
-					}	
-				}
-			
-			}
-			
-			else if(this.getArma().equals("Misil")){
-				
-				int x=ue.getCordX();
-				int y=ue.getCordY();
-				if(x1-x<7){
-					if(y1-y<7){this.enemigos.add(ue);
-					
-					}	
-				}
-			
-			}
-			
-			else if(this.getArma().equals("Ametralladora")){
-				
-				int x=ue.getCordX();
-				int y=ue.getCordY();
-				if(x1-x<5){
-					if(y1-y<5){this.enemigos.add(ue);
-					
-					}	
-				}
-			
-			
-			}
-			
-			else if(this.getArma().equals("CCC")){
-				
-				int x=ue.getCordX();
-				int y=ue.getCordY();
-				if(x1-x<2){
-					if(y1-y<2){this.enemigos.add(ue);
-					
-					}	
-				}
-			
-			}
-			
-			
-		
-			
-			
-		}
-		
-
-		
-		
-		
-		
-	}
-	
-	
 	/**
 	 * Metodo que dependiendo de que soldado se trate el que ataque
 	 * variara en efectividad
 	 * 
 	 * 
-	 * @param P punto donde se clicka para obtener el objetivo
+	 * 
 	 */
 	
 	
 	//FIXME poner un random de atacar o fallar para  que sea mas emocionante
+	@Override
 	public void atacar(int x,int y){
 		
-		for(UnidadEnemiga ue:enemigos){
-			if(x==ue.getCordX()&&y==ue.getCordY()){
+		if(Ventanas.Partida.getTablero()[x][y] instanceof UnidadEnemiga){
+			
 				
-				if(ue instanceof SoldadoRasoEnemigo){
+				if(Ventanas.Partida.getUnidadObjetivo() instanceof SoldadoRasoEnemigo){
 					
 				
 				
 				if(this.getArma().equals("Fusil")){
-					ue.setSalud(ue.getSalud()-50);
+					if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
+						if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
+					Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-50);
 					
 					
 					
 				}
-				if(this.getArma().equals("Rifle")){
-					ue.setSalud(ue.getSalud()-70);
+				else if(this.getArma().equals("Rifle")){
+					if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
+						if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
+					Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-70);
 					
 					
 					
 				}
-				if(this.getArma().equals("Pistola")){
-					ue.setSalud(ue.getSalud()-30);
+				else if(this.getArma().equals("Pistola")){
+					if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<3)
+						if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<3)
+					Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-30);
 					
 					
 					
 				}
-				if(this.getArma().equals("Bazooka")){
-					ue.setSalud(ue.getSalud()-60);
+				else if(this.getArma().equals("Bazooka")){
+					if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
+						if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
+					Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-60);
 					
 					
 					
 				}
-				if(this.getArma().equals("Misil")){
-					ue.setSalud(ue.getSalud()-60);
+				else if(this.getArma().equals("Misil")){
+					if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
+						if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
+					Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-60);
 					
 					
 					
 				}
-				if(this.getArma().equals("Ametralladora")){
-					ue.setSalud(ue.getSalud()-80);
+				else if(this.getArma().equals("Ametralladora")){
+					if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
+						if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
+					Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-80);
 					
 					
 					
 				}
-				if(this.getArma().equals("CCC")){
-					ue.setSalud(ue.getSalud()-30);
+				else if(this.getArma().equals("CCC")){
+					if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<2)
+						if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<2)
+					Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-30);
 					
 					
 					
@@ -408,97 +277,62 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 				
 				
 				}
-				if(ue instanceof FrancotiradorEnemigo){
+				if(Ventanas.Partida.getUnidadObjetivo() instanceof FrancotiradorEnemigo){
 					
 					
 					
 					if(this.getArma().equals("Fusil")){
-						ue.setSalud(ue.getSalud()-70);
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-70);
 						
 						
 						
 					}
-					if(this.getArma().equals("Rifle")){
-						ue.setSalud(ue.getSalud()-70);
+					else if(this.getArma().equals("Rifle")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-70);
 						
 						
 						
 					}
-					if(this.getArma().equals("Pistola")){
-						ue.setSalud(ue.getSalud()-40);
+					else if(this.getArma().equals("Pistola")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<3)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<3)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-40);
 						
 						
 						
 					}
-					if(this.getArma().equals("Bazooka")){
-						ue.setSalud(ue.getSalud()-60);
+					else if(this.getArma().equals("Bazooka")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-60);
 						
 						
 						
 					}
-					if(this.getArma().equals("Misil")){
-						ue.setSalud(ue.getSalud()-760);
+					else if(this.getArma().equals("Misil")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-760);
 						
 						
 						
 					}
-					if(this.getArma().equals("Ametralladora")){
-						ue.setSalud(ue.getSalud()-80);
+					else if(this.getArma().equals("Ametralladora")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
+						if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-80);
 						
 						
 						
 					}
-					if(this.getArma().equals("CCC")){
-						ue.setSalud(ue.getSalud()-50);
-						
-						
-						
-					}
-					
-					
-					}
-				if(ue instanceof BazookaEnemigo){
-					
-					
-					
-					if(this.getArma().equals("Fusil")){
-						ue.setSalud(ue.getSalud()-50);
-						
-						
-						
-					}
-					if(this.getArma().equals("Rifle")){
-						ue.setSalud(ue.getSalud()-80);
-						
-						
-						
-					}
-					if(this.getArma().equals("Pistola")){
-						ue.setSalud(ue.getSalud()-30);
-						
-						
-						
-					}
-					if(this.getArma().equals("Bazooka")){
-						ue.setSalud(ue.getSalud()-50);
-						
-						
-						
-					}
-					if(this.getArma().equals("Misil")){
-						ue.setSalud(ue.getSalud()-60);
-						
-						
-						
-					}
-					if(this.getArma().equals("Ametralladora")){
-						ue.setSalud(ue.getSalud()-80);
-						
-						
-						
-					}
-					if(this.getArma().equals("CCC")){
-						ue.setSalud(ue.getSalud()-40);
+					else if(this.getArma().equals("CCC")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<2)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<2)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-50);
 						
 						
 						
@@ -506,48 +340,62 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 					
 					
 					}
-				if(ue instanceof SemiorugaEnemigo){
+				if(Ventanas.Partida.getUnidadObjetivo() instanceof BazookaEnemigo){
 					
 					
 					
 					if(this.getArma().equals("Fusil")){
-						ue.setSalud(ue.getSalud()-20);
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-50);
 						
 						
 						
 					}
-					if(this.getArma().equals("Rifle")){
-						ue.setSalud(ue.getSalud()-10);
+					else if(this.getArma().equals("Rifle")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-80);
 						
 						
 						
 					}
-					if(this.getArma().equals("Pistola")){
-						ue.setSalud(ue.getSalud()-5);
+					else if(this.getArma().equals("Pistola")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<3)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<3)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-30);
 						
 						
 						
 					}
-					if(this.getArma().equals("Bazooka")){
-						ue.setSalud(ue.getSalud()-90);
+					else if(this.getArma().equals("Bazooka")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-50);
 						
 						
 						
 					}
-					if(this.getArma().equals("Misil")){
-						ue.setSalud(ue.getSalud()-100);
+					else if(this.getArma().equals("Misil")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-60);
 						
 						
 						
 					}
-					if(this.getArma().equals("Ametralladora")){
-						ue.setSalud(ue.getSalud()-50);
+					else if(this.getArma().equals("Ametralladora")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-80);
 						
 						
 						
 					}
-					if(this.getArma().equals("CCC")){
-						ue.setSalud(ue.getSalud());
+					else if(this.getArma().equals("CCC")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<2)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<2)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-40);
 						
 						
 						
@@ -555,69 +403,118 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 					
 					
 					}
-				if(ue instanceof TanqueEnemigo){
+				if(Ventanas.Partida.getUnidadObjetivo() instanceof SemiorugaEnemigo){
 					
 					
 					
 					if(this.getArma().equals("Fusil")){
-						ue.setSalud(ue.getSalud()-5);
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-20);
 						
 						
 						
 					}
-					if(this.getArma().equals("Rifle")){
-						ue.setSalud(ue.getSalud()-5);
+					else if(this.getArma().equals("Rifle")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-10);
 						
 						
 						
 					}
-					if(this.getArma().equals("Pistola")){
-						ue.setSalud(ue.getSalud());
+					else if(this.getArma().equals("Pistola")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<3)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<3)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-5);
 						
 						
 						
 					}
-					if(this.getArma().equals("Bazooka")){
-						ue.setSalud(ue.getSalud()-70);
+					else if(this.getArma().equals("Bazooka")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-90);
 						
 						
 						
 					}
-					if(this.getArma().equals("Misil")){
-						ue.setSalud(ue.getSalud()-80);
+					else if(this.getArma().equals("Misil")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-100);
 						
 						
 						
 					}
-					if(this.getArma().equals("Ametralladora")){
-						ue.setSalud(ue.getSalud()-10);
+					else if(this.getArma().equals("Ametralladora")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-50);
 						
 						
 						
 					}
-					if(this.getArma().equals("CCC")){
-						ue.setSalud(ue.getSalud());
+					else if(this.getArma().equals("CCC")){					
+					}
+					
+					
+					}
+				if(Ventanas.Partida.getUnidadObjetivo() instanceof TanqueEnemigo){
+					
+					
+					
+					if(this.getArma().equals("Fusil")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-5);
 						
 						
 						
+					}
+					else if(this.getArma().equals("Rifle")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-5);
+						
+						
+						
+					}
+					else if(this.getArma().equals("Pistola")){			
+					}
+					else if(this.getArma().equals("Bazooka")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-70);
+						
+						
+						
+					}
+					else if(this.getArma().equals("Misil")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-80);
+						
+						
+						
+					}
+					else if(this.getArma().equals("Ametralladora")){
+						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
+							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
+						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-10);
+						
+						
+						
+					}
+					else if(this.getArma().equals("CCC")){		
 					}
 					
 					
 					}
 				
-				
-				
-				
-				
-				//////////////////
-			}
-			
+
 		}
-	////////////////	
-		
-		
-		
-		
+	
 		
 	}
 	
