@@ -215,13 +215,17 @@ public class Partida extends JDialog{
 			public void actionPerformed(ActionEvent arg0)  {
 			if(p.getTurno()==0){
 				if(tablero[xobj][yobj]==null){}
-				else{
+				else if(tablero[xobj][yobj] instanceof Colision){}
+				else if(tablero[xobj][yobj] instanceof UnidadEnemiga){
+					UnidadObjetivo=tablero[xobj][yobj];
 					UnidadActual.atacar(xobj,yobj);
 		        System.out.println("se ha atacado a la unidad de las coordenadas X="+xobj+" y="+yobj);}
 			}
 			else if(p.getTurno()==1){
 				if(tablero[xobj][yobj]==null){}
-				else{
+				else if(tablero[xobj][yobj] instanceof Colision){}
+				else if(tablero[xobj][yobj] instanceof UnidadAliada){
+					UnidadObjetivo=tablero[xobj][yobj];
 					UnidadActual.atacar(xobj,yobj);
 		        System.out.println("se ha atacado a la unidad de las coordenadas X="+xobj+" y="+yobj);}
 			}
