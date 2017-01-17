@@ -32,8 +32,8 @@ public class SemiorugaEnemigo extends UnidadEnemiga implements Vehiculo,Unidad{
         
         ImageIcon ii = new ImageIcon("craft.png");
         image = ii.getImage();
-        x = 55;
-        y = 55;        
+        x = 26;
+        y = 26;              
     }
 
 }
