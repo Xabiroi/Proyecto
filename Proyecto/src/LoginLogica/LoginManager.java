@@ -6,12 +6,12 @@ import LoginData.Usuario;
 
 public class LoginManager implements ILogin {
 
-	private ArrayList<Usuario> aUsuarios = new ArrayList<Usuario>();
+	private static ArrayList<Usuario> aUsuarios = new ArrayList<Usuario>();
 	
 	public LoginManager(){	}
 	
 	
-	public Usuario getUsuario(){return aUsuarios.get(0);}
+	public static Usuario getUsuario(){return aUsuarios.get(0);}
 	
 	/**
 	 * Método que hace el login y lo comprueba con el array

@@ -1,5 +1,7 @@
 package LogicaBatallas;
 
+import java.util.Calendar;
+
 public class ElementosPartida {
 	protected String Partida;
 	protected String usuario;
@@ -18,7 +20,13 @@ public class ElementosPartida {
 		this.Partida=NombrePartida;
 		this.usuario = usuario;
 		this.usuario2=usuario2;
-		this.fechaPartida = System.currentTimeMillis();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(System.currentTimeMillis());
+
+		int mYear = calendar.get(Calendar.YEAR);
+		int mMonth = calendar.get(Calendar.MONTH);
+		int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+		this.fechaPartida = mYear+mMonth*10000+mDay*1000000;
 		this.lp = new LogicaPartida();
 		this.Turno=0;
 	}
@@ -27,7 +35,13 @@ public class ElementosPartida {
 		this.usuario = usuario;
 		this.usuario2=null;
 		this.Partida=NombrePartida;
-		this.fechaPartida = System.currentTimeMillis();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(System.currentTimeMillis());
+
+		int mYear = calendar.get(Calendar.YEAR);
+		int mMonth = calendar.get(Calendar.MONTH);
+		int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+		this.fechaPartida = mYear+mMonth*10000+mDay*1000000;
 		this.lp=new LogicaPartida();
 		this.Turno=0;
 	}

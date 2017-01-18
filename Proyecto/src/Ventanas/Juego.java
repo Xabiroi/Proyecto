@@ -37,14 +37,7 @@ public class Juego{
 	public static LoginManager lm = new LoginManager();
 	
 	public static LoginManager getLM(){return lm;}
-	
-	
-	/*
-    private MenuPrincipal mp=new MenuPrincipal();
-    private MenuMultijugador mm=new MenuMultijugador();
-    private Menu1Jugador m1j=new Menu1Jugador();
-    private MenuOpciones mo=new MenuOpciones();
-    */
+
 	/**
 	 * Launch the application.
 	 */
@@ -52,17 +45,7 @@ public class Juego{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
-					/*
-					 * 
-					 * 
-					 * 
-					 * FIXME
-					 Ventana V2
-					VentanaLogin window = new VentanaLogin();
-					window.frame.setVisible(true);
-					
-					*/
+
 					BD.usarCrearTablasBD(BD.initBD("Local"));
 					Juego window1 = new Juego();
 					window1.frame.setVisible(true);
@@ -186,8 +169,8 @@ public class Juego{
 	pnlBotones.setLayout(null);
 	pnlBotones.add(btnAceptar);
 	
-	JButton btnCancelar = new JButton("Cancelar");
-	btnCancelar.setBounds(482, 5, 100, 23);
+	JButton btnCancelar = new JButton("Salir");
+	btnCancelar.setBounds(482, 5, 100, 23);//FIXME system.exit(0);
 	pnlBotones.add(btnCancelar);
 	
 	JButton btnRegistrar = new JButton("Registrar");

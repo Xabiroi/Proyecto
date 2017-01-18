@@ -155,7 +155,7 @@ public class Partida extends JDialog{
 	 */
 	//FIXME Falta por determinar bien el constructor
 	public Partida(LogicaBatallas.ElementosPartida p,LogicaBatallas.LogicaPartida lp) throws IOException {
-		this.p=p;
+		Partida.p=p;
 		this.lp=lp;
 		this.initialize();
 	}
@@ -239,7 +239,8 @@ public class Partida extends JDialog{
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {			
+			public void mouseClicked(MouseEvent e) {	
+				
 				BD.PartidaInsert(BD.usarBD(BD.initBD("Local")),p);
 				setVisible(false);
 				MenuPrincipal mp=new MenuPrincipal();
@@ -591,7 +592,7 @@ public class Partida extends JDialog{
 	}
 
 	public void setP(LogicaBatallas.ElementosPartida p) {
-		this.p = p;
+		Partida.p = p;
 	}
 
 

@@ -3,19 +3,17 @@ package Ventanas;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import BD.BD;
-import LogicaBatallas.LogicaPartida;
+import LoginLogica.LoginManager;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.Statement;
 
 public class CrearPartida extends JDialog{
@@ -71,11 +69,9 @@ public class CrearPartida extends JDialog{
 				p.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				p.setVisible(true);
 				p.setSize(1200, 1000);
-				//FIXME es temporal pero ni creando las tablas con el codigo de usarCrearTablas la partida multijugador se ejecuta
+				//FIXME mirar si hay una aprtida con esos jugadores y si la hay, enviar una alerta (joption pane)
 				//////TEMPORAL
 				BD.usarCrearTablasBD(BD.initBD("Local"));
-				//////
-				//FIXME las operaciones de crear una nueva partida (crear un constructor de ventana con parametros como oro y demas o sino como loginmanager meter un objeto como atributo a PARTIDA)
 				LogicaBatallas.ElementosPartida pa=new LogicaBatallas.ElementosPartida(textField.getText(),textField_1.getText(),textField.getText()+"vs"+textField_1.getText());
 				p.setP(pa);
 				Statement st=BD.usarBD(BD.initBD("Local"));
@@ -112,6 +108,8 @@ public class CrearPartida extends JDialog{
 		textField.setBounds(168, 39, 86, 20);
 		getContentPane().add(textField);
 		textField.setColumns(10);
+		textField.setText(LoginManager.getUsuario().getNick());
+		textField.setEditable(false);
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(168, 64, 86, 20);
