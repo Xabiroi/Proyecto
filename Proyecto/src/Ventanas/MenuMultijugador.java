@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import BD.BD;
 import BD.UnidadBD;
+import LogicaBatallas.ElementosPartida;
 import UnidadesAmigas.Bazooka;
 import UnidadesAmigas.Francotirador;
 import UnidadesAmigas.Semioruga;
@@ -198,7 +199,7 @@ public class MenuMultijugador extends JDialog{
 				
 				LogicaBatallas.ElementosPartida p1=new LogicaBatallas.ElementosPartida();
 				
-				ArrayList<UnidadBD> Unidades=BD.UnidadBDSelect(BD.usarBD(BD.initBD("Local")), "USUARIO="+Juego.getLM().getUsuario().getNombre()+" AND PARTIDA="+comboBox.getSelectedItem().toString());//SOLUCIONAR EL TOSTRING
+				ArrayList<UnidadBD> Unidades=BD.UnidadBDSelect(BD.usarBD(BD.initBD("Local")), "Partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'");//SOLUCIONAR EL TOSTRING "USUARIO="+Juego.getLM().getUsuario().getNombre()+" AND 
 				
 				ArrayList<UnidadBD> UnidadesAliadas1=new ArrayList<UnidadBD>();
 				for(UnidadBD u:Unidades)if(u.getEquipo()==1){UnidadesAliadas1.add(u);}
@@ -305,7 +306,7 @@ public class MenuMultijugador extends JDialog{
 				//TODO resolver lo de static
 				lb.setListaEnemigos(UnidadesEnemigas);
 				lb.setListaAliados(UnidadesAliadas);
-				p1=BD.PartidaSelect(BD.usarBD(BD.initBD("Local")), "USUARIO="+Juego.getLM().getUsuario()).get(0);
+				p1=BD.PartidaSelect(BD.usarBD(BD.initBD("Local")), "usuario1='"+Juego.getLM().getUsuario().getNombre()+"'").get(0);
 				
 				
 				
@@ -316,7 +317,7 @@ public class MenuMultijugador extends JDialog{
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				frame.setVisible(false);
+				setVisible(false);
 				p.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				p.setVisible(true);
 				

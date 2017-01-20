@@ -429,8 +429,8 @@ private static Exception lastError = null;  // Información de último error SQL o
 			ResultSet rs = st.executeQuery( sentSQL );
 			while (rs.next()) {
 				UnidadBD u = new UnidadBD();
-				
-				u.setArma(rs.getString("Partida"));
+				u.setPartida(rs.getString("Partida"));
+				u.setArma(rs.getString("arma"));
 				u.setCordX(Integer.parseInt(rs.getString("cordX")));
 				u.setCordY(Integer.parseInt(rs.getString("cordY")));
 				u.setEquipo(Integer.parseInt(rs.getString("equipo")));

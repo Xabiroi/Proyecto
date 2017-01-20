@@ -160,6 +160,7 @@ public class Partida extends JDialog{
 		this.initialize();
 	}
 
+	
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws IOException 
@@ -281,11 +282,52 @@ public class Partida extends JDialog{
 		btnFinalizarTurno.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 				if(Partida.p.getTurno()==0){textFieldPropietario.setText(p.getUsuario2());
-			Partida.p.setTurno(1);}
-				else{Partida.p.setTurno(0);textFieldPropietario.setText(p.getUsuario());}
+			Partida.p.setTurno(1);JOptionPane.showMessageDialog(null, "Turno del jugador "+p.getUsuario2());
+				//FIXME sera para comprobar los turnos de los diferentes jugadores
+				//no se deshabilitara el boton de finalizar turno para ver si se puede hacer deshabilitar y habilitar los botones al pasar de turno
+					if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario2())){
+						btnAtacar.setEnabled(true);
+						btnGuardar.setEnabled(true);
+						btnMover.setEnabled(true);
+						btnCambiarArma.setEnabled(true);
+//FIXME enablear/disablear el boton de finalizar turno tambien, pero hasta que se haga pruebas no
+					}
+				if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario())){
+						btnAtacar.setEnabled(false);
+						btnGuardar.setEnabled(false);
+						btnMover.setEnabled(false);
+						btnCambiarArma.setEnabled(false);
+
+					}
+				
+					
+				}
+				else{Partida.p.setTurno(0);textFieldPropietario.setText(p.getUsuario());JOptionPane.showMessageDialog(null, "Turno del jugador "+p.getUsuario());
+				if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario2())){
+					btnAtacar.setEnabled(false);
+					btnGuardar.setEnabled(false);
+					btnMover.setEnabled(false);
+					btnCambiarArma.setEnabled(false);
+
+				
+				}
+				if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario())){
+					btnAtacar.setEnabled(true);
+					btnGuardar.setEnabled(true);
+					btnMover.setEnabled(true);
+					btnCambiarArma.setEnabled(true);
+
+				}
+
+				}UnidadActual=new UnidadBD();UnidadObjetivo=new UnidadBD(); //Para no poder mover los soldados seleccionados anteriormente
 			}
 		});
+
+		
+		
+		
 		btnFinalizarTurno.setBounds(28, 335, 103, 56);
 		panel.add(btnFinalizarTurno);
 		
