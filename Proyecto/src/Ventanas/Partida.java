@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 
 import BD.BD;
 import BD.UnidadBD;
+import LogicaBatallas.ElementosPartida;
 import UnidadesAmigas.SoldadoRaso;
 import UnidadesAmigas.UnidadAliada;
 import UnidadesEnemigas.TanqueEnemigo;
@@ -48,8 +49,12 @@ public class Partida extends JDialog{
 	private LogicaBatallas.LogicaPartida lp;
 	private static LogicaBatallas.ElementosPartida p;
 
-
-
+	public static ElementosPartida getPartida() {
+		return p;
+	}
+	public static void setPartida(ElementosPartida p1) {
+		p=p1;;
+	}
 	public static UnidadBD[][] tablero=//32x32, hay que meter manualmente las colisiones
 	
 	{  
@@ -242,7 +247,7 @@ public class Partida extends JDialog{
 			@Override
 			public void mouseClicked(MouseEvent e) {	
 				
-				BD.PartidaInsert(BD.usarBD(BD.initBD("Local")),p);
+				BD.PartidaUpdate(BD.usarBD(BD.initBD("Local")),p);
 				setVisible(false);
 				MenuPrincipal mp=new MenuPrincipal();
 				mp.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

@@ -51,8 +51,29 @@ public class UnidadBD implements Cloneable{
 	public void setCoste(int coste) {
 		this.coste = coste;
 	}
+	
+	
 
-
+	public void comprobarMuerto(){
+		if(Ventanas.Partida.getUnidadObjetivo().getSalud()<=0){
+		UnidadBD[][] a=Ventanas.Partida.tablero;
+		a[Ventanas.Partida.getUnidadObjetivo().getCordX()][Ventanas.Partida.getUnidadObjetivo().getCordY()]=null;
+		Ventanas.Partida.setTablero(a);
+		if(Ventanas.Partida.getPartida().getTurno()==0)
+		Ventanas.Partida.getPartida().setPuntuacionAliado(Ventanas.Partida.getPartida().getPuntuacionAliado()+5);
+		else if(Ventanas.Partida.getPartida().getTurno()==1)
+		Ventanas.Partida.getPartida().setPuntuacionAliado(Ventanas.Partida.getPartida().getPuntuacionEnemigo()+5);
+		}
+	}
+	public void ataca(int x,int y){
+		if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<x)
+			if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<x)
+		Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-y);
+		comprobarMuerto();
+		
+	}
+	
+	
 	public void Mover(int x,int y) {
 		
 		/**Mover básico que se cambiara por un algoritmo de pathfinding mas complicado en caso de tener tiempo, sino--->

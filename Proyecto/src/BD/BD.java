@@ -91,8 +91,8 @@ private static Exception lastError = null;  // Información de último error SQL o
 			} catch (SQLException e) {} // Tabla ya existe. Nada que hacer
 			try {
 				statement.executeUpdate("create table partidaMultijugador " 
-					+"(usuario1 char(30) not null references usuario(nick) on delete cascade,"
-					+ "usuario2 char(30) not null references usuario(nick) on delete cascade,"
+					+"(usuario1 char(30) not null references usuario(nombre) on delete cascade,"
+					+ "usuario2 char(30) not null references usuario(nombre) on delete cascade,"
 					+ "Partida char(30),"
 					+ "Turno integer,"
 					+ "dineroAliado integer,"
@@ -466,7 +466,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 			
 			sentSQL = "update usuario set" +
 					" password='" + u.getContraseña() + "', " +
-					" nombre='" + u.getNombre() + "', " +
+					" nombre='" + u.getNombre() + "' " +
 					" where nick='" + u.getNick() + "'";
 			int val = st.executeUpdate( sentSQL );
 			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
@@ -488,6 +488,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 	public static boolean PartidaUpdate( Statement st, ElementosPartida p ) {
 		String sentSQL = "";
 		try {
+			//FIXME
 			
 			sentSQL = "update partidaMultijugador set" +
 
@@ -496,8 +497,8 @@ private static Exception lastError = null;  // Información de último error SQL o
 					" dineroEnemigo=" + p.getDineroEnemigo() + ", " +
 					" puntuacionAliado='" + p.getPuntuacionAliado() + "', " +
 					" puntuacionEnemigo='" + p.getPuntuacionEnemigo() + "', " +
-					" fechapartida='" + p.getFechaPartida() + "," +
-					" where Partida='" + p.getPartida() + "'";
+					" fechapartida='" + p.getFechaPartida() + "'" +
+					" where Partida='" + p.getPartida() + "';";
 			// System.out.println( sentSQL );  // para ver lo que se hace en consola
 			int val = st.executeUpdate( sentSQL );
 			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
@@ -525,7 +526,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 					" distancia=" + u.getDistancia() + ", " +
 					" equipo=" + u.getEquipo() + ", " +
 					" coordX=" + u.getCordX() + ", " +
-					" coordY='" + u.getCordY() + "," +
+					" coordY='" + u.getCordY() + "'" +
 					" where Partida='" + u.getPartida() + "'";
 			// System.out.println( sentSQL );  // para ver lo que se hace en consola
 			int val = st.executeUpdate( sentSQL );

@@ -1,6 +1,5 @@
 package UnidadesAmigas;
 
-import java.awt.Image;
 import java.util.ArrayList;
 
 import BD.UnidadBD;
@@ -9,6 +8,7 @@ import UnidadesEnemigas.BazookaEnemigo;
 import UnidadesEnemigas.FrancotiradorEnemigo;
 import UnidadesEnemigas.SemiorugaEnemigo;
 import UnidadesEnemigas.SoldadoRasoEnemigo;
+import UnidadesEnemigas.SpawnEnemigo;
 import UnidadesEnemigas.TanqueEnemigo;
 import UnidadesEnemigas.UnidadEnemiga;
 
@@ -109,34 +109,6 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 	
 	//Getters y setters
 ///////////////////////////////////////////////
-	
-	
-	
-	
-	public String getArma() {
-		return arma;
-	}
-
-	public String getNombre() {
-		return Nombre;
-	}
-
-	public void setNombre(String nombre) {
-		Nombre = nombre;
-	}
-
-	public void setArma(String arma) {
-		this.arma = arma;
-	}
-
-	public String[] getArmas() {
-		return armas;
-	}
-
-
-	public void setArmas(String[] armas) {
-		this.armas = armas;
-	}
 
 
 	public ArrayList<UnidadEnemiga> getEnemigos() {
@@ -149,53 +121,6 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 	}
 
 
-	public int getSalud() {
-		return Salud;
-	}
-
-
-	public void setSalud(int salud) {
-		Salud = salud;
-	}
-
-
-	public Image getImage() {
-		return image;
-	}
-
-
-	public void setImage(Image image) {
-		this.image = image;
-	}
-	
-	public int getCordX() {
-		return x;
-	}
-
-
-	public void setCordX(int cordX) {
-		this.x = cordX;
-	}
-
-
-	public int getCordY() {
-		return y;
-	}
-
-
-	public void setCordY(int cordY) {
-		this.y = cordY;
-	}
-	
-	
-	public int getDistancia() {
-		return Distancia;
-	}
-
-
-	public void setDistancia(int distancia) {
-		Distancia = distancia;
-	}
 
 
 	/**
@@ -205,6 +130,8 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 	 * 
 	 * 
 	 */
+
+
 	
 	
 	//FIXME poner un random de atacar o fallar para  que sea mas emocionante
@@ -218,297 +145,166 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 					
 				
 				
+					
+					if(this.getArma().equals("Fusil")){
+						ataca(5,50);				
+					}
+					else if(this.getArma().equals("Rifle")){
+						ataca(7,70);	
+					}
+					else if(this.getArma().equals("Pistola")){
+						ataca(3,30);
+					}
+					else if(this.getArma().equals("Bazooka")){
+						ataca(5,60);			
+					}
+					else if(this.getArma().equals("Misil")){
+						ataca(7,60);				
+					}
+					else if(this.getArma().equals("Ametralladora")){
+						ataca(5,80);	
+					}
+					else if(this.getArma().equals("CCC")){
+						ataca(2,30);	
+					}
+					
+				
+				
+				}
+				else if(Ventanas.Partida.getUnidadObjetivo() instanceof FrancotiradorEnemigo){
+					
+					
+					
+					
+					if(this.getArma().equals("Fusil")){
+						ataca(5,70);
+					}
+					else if(this.getArma().equals("Rifle")){
+						ataca(7,70);
+					}
+					else if(this.getArma().equals("Pistola")){
+						ataca(3,40);
+					}
+					else if(this.getArma().equals("Bazooka")){
+						ataca(5,60);
+					}
+					else if(this.getArma().equals("Misil")){
+						ataca(7,70);
+					}
+					else if(this.getArma().equals("Ametralladora")){
+						ataca(5,80);
+
+					}
+					else if(this.getArma().equals("CCC")){
+						ataca(2,50);
+						
+					}
+					
+					
+					}
+				else if(Ventanas.Partida.getUnidadObjetivo() instanceof BazookaEnemigo){
+					
+					
+					
+					if(this.getArma().equals("Fusil")){
+						ataca(5,50);
+					}
+					else if(this.getArma().equals("Rifle")){
+						ataca(7,80);
+					}
+					else if(this.getArma().equals("Pistola")){
+						ataca(3,30);
+					}
+					else if(this.getArma().equals("Bazooka")){
+						ataca(5,50);
+					}
+					else if(this.getArma().equals("Misil")){
+						ataca(7,60);				
+					}
+					else if(this.getArma().equals("Ametralladora")){
+						ataca(5,80);				
+					}
+					else if(this.getArma().equals("CCC")){
+						ataca(2,40);
+					}
+					
+					
+					
+					}
+				else if(Ventanas.Partida.getUnidadObjetivo() instanceof SemiorugaEnemigo){
+					
+					
+					
 				if(this.getArma().equals("Fusil")){
-					if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
-						if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
-					Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-50);
-					
-					
-					
+					ataca(5,20);
 				}
 				else if(this.getArma().equals("Rifle")){
-					if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
-						if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
-					Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-70);
-					
-					
-					
+					ataca(7,10);
 				}
 				else if(this.getArma().equals("Pistola")){
-					if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<3)
-						if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<3)
-					Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-30);
-					
-					
-					
+					ataca(3,5);				
 				}
 				else if(this.getArma().equals("Bazooka")){
-					if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
-						if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
-					Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-60);
-					
-					
-					
+					ataca(5,90);				
 				}
 				else if(this.getArma().equals("Misil")){
-					if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
-						if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
-					Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-60);
-					
-					
-					
+					ataca(7,100);
 				}
 				else if(this.getArma().equals("Ametralladora")){
-					if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
-						if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
-					Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-80);
-					
-					
-					
+					ataca(5,50);
 				}
-				else if(this.getArma().equals("CCC")){
-					if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<2)
-						if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<2)
-					Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-30);
-					
-					
-					
+				else if(this.getArma().equals("CCC")){					
 				}
 				
-				
-				}
-				if(Ventanas.Partida.getUnidadObjetivo() instanceof FrancotiradorEnemigo){
-					
-					
-					
-					if(this.getArma().equals("Fusil")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-70);
-						
-						
-						
-					}
-					else if(this.getArma().equals("Rifle")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-70);
-						
-						
-						
-					}
-					else if(this.getArma().equals("Pistola")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<3)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<3)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-40);
-						
-						
-						
-					}
-					else if(this.getArma().equals("Bazooka")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-60);
-						
-						
-						
-					}
-					else if(this.getArma().equals("Misil")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-760);
-						
-						
-						
-					}
-					else if(this.getArma().equals("Ametralladora")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
-						if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-80);
-						
-						
-						
-					}
-					else if(this.getArma().equals("CCC")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<2)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<2)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-50);
-						
-						
-						
-					}
-					
 					
 					}
-				if(Ventanas.Partida.getUnidadObjetivo() instanceof BazookaEnemigo){
-					
+				else if(Ventanas.Partida.getUnidadObjetivo() instanceof TanqueEnemigo){
 					
 					
 					if(this.getArma().equals("Fusil")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-50);
-						
-						
-						
+						ataca(5,5);	
 					}
 					else if(this.getArma().equals("Rifle")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-80);
-						
-						
-						
-					}
-					else if(this.getArma().equals("Pistola")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<3)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<3)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-30);
-						
-						
-						
-					}
-					else if(this.getArma().equals("Bazooka")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-50);
-						
-						
-						
-					}
-					else if(this.getArma().equals("Misil")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-60);
-						
-						
-						
-					}
-					else if(this.getArma().equals("Ametralladora")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-80);
-						
-						
-						
-					}
-					else if(this.getArma().equals("CCC")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<2)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<2)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-40);
-						
-						
-						
-					}
-					
-					
-					}
-				if(Ventanas.Partida.getUnidadObjetivo() instanceof SemiorugaEnemigo){
-					
-					
-					
-					if(this.getArma().equals("Fusil")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-20);
-						
-						
-						
-					}
-					else if(this.getArma().equals("Rifle")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-10);
-						
-						
-						
-					}
-					else if(this.getArma().equals("Pistola")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<3)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<3)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-5);
-						
-						
-						
-					}
-					else if(this.getArma().equals("Bazooka")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-90);
-						
-						
-						
-					}
-					else if(this.getArma().equals("Misil")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-100);
-						
-						
-						
-					}
-					else if(this.getArma().equals("Ametralladora")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-50);
-						
-						
-						
-					}
-					else if(this.getArma().equals("CCC")){					
-					}
-					
-					
-					}
-				if(Ventanas.Partida.getUnidadObjetivo() instanceof TanqueEnemigo){
-					
-					
-					
-					if(this.getArma().equals("Fusil")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-5);
-						
-						
-						
-					}
-					else if(this.getArma().equals("Rifle")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-5);
-						
-						
-						
+						ataca(7,5);
 					}
 					else if(this.getArma().equals("Pistola")){			
 					}
 					else if(this.getArma().equals("Bazooka")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-70);
-						
-						
-						
+						ataca(5,70);
 					}
 					else if(this.getArma().equals("Misil")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<7)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<7)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-80);
-						
-						
-						
+						ataca(7,80);
 					}
 					else if(this.getArma().equals("Ametralladora")){
-						if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<5)
-							if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<5)
-						Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-10);
-						
-						
-						
+						ataca(5,10);
 					}
 					else if(this.getArma().equals("CCC")){		
 					}
 					
+					}
+				else if(Ventanas.Partida.getUnidadObjetivo() instanceof SpawnEnemigo){
+					
+					
+					if(this.getArma().equals("Fusil")){
+						ataca(5,10);	
+					}
+					else if(this.getArma().equals("Rifle")){
+						ataca(7,10);
+					}
+					else if(this.getArma().equals("Pistola")){
+						ataca(3,5);
+					}
+					else if(this.getArma().equals("Bazooka")){
+						ataca(5,15);
+					}
+					else if(this.getArma().equals("Misil")){
+						ataca(7,15);
+					}
+					else if(this.getArma().equals("Ametralladora")){
+						ataca(5,10);
+					}
+					else if(this.getArma().equals("CCC")){		
+					}
 					
 					}
 				

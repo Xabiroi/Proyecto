@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 import BD.UnidadBD;
 import LogicaBatallas.ElementosPartida;
 
-public class SpawnEnemigo {
+public class SpawnEnemigo extends UnidadBD{
 	/*
 r0,c30 true true
 r1,c30 true true
