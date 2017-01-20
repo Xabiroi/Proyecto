@@ -25,7 +25,9 @@ import BD.BD;
 import BD.UnidadBD;
 import LogicaBatallas.ElementosPartida;
 import UnidadesAmigas.SoldadoRaso;
+import UnidadesAmigas.Spawn;
 import UnidadesAmigas.UnidadAliada;
+import UnidadesEnemigas.SpawnEnemigo;
 import UnidadesEnemigas.TanqueEnemigo;
 import UnidadesEnemigas.UnidadEnemiga;
 
@@ -58,7 +60,7 @@ public class Partida extends JDialog{
 	public static UnidadBD[][] tablero=//32x32, hay que meter manualmente las colisiones
 	
 	{  
-	{ new SoldadoRaso(0,0), new TanqueEnemigo(0,1), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0) },
+	{ new SoldadoRaso(0,0), new TanqueEnemigo(0,1), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Spawn() },
 	{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, null, null, null, null, new Colision(0) },
 	{ null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, null, null, null, new Colision(0), null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0) },
 	{ null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, new Colision(0), null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null },
@@ -89,12 +91,12 @@ public class Partida extends JDialog{
 	{ null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, new Colision(0), null, null, null, new Colision(0), null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
 	{ new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
 	{ new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
-	{ new Colision(0), null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) }
+	{ new Spawn(), null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) }
 	  };
 
 		/*Como queda con las colisiones a modo de array
 		{  
-		{ *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, a },
+		{ *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, s },
 		{ *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, a, a, *, *, a, *, *, *, *, *, *, *, *, a },
 		{ *, *, *, *, *, *, *, *, *, *, *, a, *, *, *, *, *, *, *, *, a, *, a, a, *, *, *, *, *, *, *, a },
 		{ *, *, *, *, *, *, *, *, *, *, *, a, *, *, *, *, *, a, *, *, a, a, a, *, *, *, *, *, *, *, *, * },
@@ -125,7 +127,7 @@ public class Partida extends JDialog{
 		{ *, *, *, *, *, a, a, *, *, *, *, *, *, a, a, *, *, *, *, a, *, *, *, a, *, *, a, a, a, a, a, a },
 	//	{ a, *, *, *, *, a, a, *, a, a, *, *, *, a, a, *, *, *, *, *, *, *, *, *, *, *, a, a, a, a, a, a },
 		{ a, *, *, *, *, *, *, *, a, a, *, *, *, a, a, a, a, a, *, *, *, *, *, *, *, a, a, a, a, a, a, a },
-		{ a, *, *, *, *, *, *, *, *, *, *, *, *, a, a, a, a, a, a, *, *, *, *, *, *, a, a, a, a, a, a, a }
+		{ s, *, *, *, *, *, *, *, *, *, *, *, *, a, a, a, a, a, a, *, *, *, *, *, *, a, a, a, a, a, a, a }
 		  };
 	*/
 	
@@ -549,6 +551,23 @@ public class Partida extends JDialog{
 	    				   UnidadActual=tablero[row][col];xobj=row;yobj=col;}
 	    				   else if(tablero[row][col] instanceof Colision){}
 	    				   else if(tablero[row][col] instanceof UnidadEnemiga){}
+	    				   else if(tablero[row][col] instanceof Spawn){
+	    					   final String[] soldados = { "Soldado raso", "Francotirador", "Bazooka", "Semioruga","Tanque" };
+	    					     JFrame frame = new JFrame("Crear Soldados");
+	    					     String SoldadoCreado = (String) JOptionPane.showInputDialog(frame, 
+	    					         "¿Que soldado desea crear?",
+	    					         "Cuartel general",
+	    					         JOptionPane.QUESTION_MESSAGE, 
+	    					         null, 
+	    					         soldados, 
+	    					         soldados[0]);
+	    					     
+	    					     if(SoldadoCreado.equals("Soldado raso")){tablero=((Spawn) tablero[0][31]).CrearSoldadoRaso(Partida.p);}
+	    					     else if(SoldadoCreado.equals("Francotirador")){tablero=((Spawn) tablero[0][31]).CrearFrancotirador(Partida.p);}
+	    					     else if(SoldadoCreado.equals("Bazooka")){tablero=((Spawn) tablero[0][31]).CrearBazooka(Partida.p);}
+	    					     else if(SoldadoCreado.equals("Semioruga")){tablero=((Spawn) tablero[0][31]).CrearSemioruga(Partida.p);}
+	    					     else if(SoldadoCreado.equals("Tanque")){tablero=((Spawn) tablero[0][31]).CrearTanque(Partida.p);}
+	    				   }			   
 	    				   else{xobj=row;yobj=col;}
 	        	      System.out.println("Click izquierdo col="+col+" row="+row);
 	        	      actualiza();
@@ -557,6 +576,23 @@ public class Partida extends JDialog{
 		    				   UnidadActual=tablero[row][col];xobj=row;yobj=col;}
 	    					   else if(tablero[row][col] instanceof Colision){}
 	    					   else if(tablero[row][col] instanceof UnidadAliada){}
+		    				   else if(tablero[row][col] instanceof SpawnEnemigo){
+		    					   final String[] soldados = { "Soldado raso", "Francotirador", "Bazooka", "Semioruga","Tanque" };
+		    					     JFrame frame = new JFrame("Crear Soldados");
+		    					     String SoldadoCreado = (String) JOptionPane.showInputDialog(frame, 
+		    					         "¿Que soldado desea crear?",
+		    					         "Cuartel general",
+		    					         JOptionPane.QUESTION_MESSAGE, 
+		    					         null, 
+		    					         soldados, 
+		    					         soldados[0]);
+		    					     
+		    					     if(SoldadoCreado.equals("Soldado raso")){tablero=((SpawnEnemigo) tablero[31][0]).CrearSoldadoRasoEnemigo(Partida.p);}
+		    					     else if(SoldadoCreado.equals("Francotirador")){tablero=((SpawnEnemigo) tablero[31][0]).CrearFrancotiradorEnemigo(Partida.p);}
+		    					     else if(SoldadoCreado.equals("Bazooka")){tablero=((SpawnEnemigo) tablero[31][0]).CrearBazookaEnemigo(Partida.p);}
+		    					     else if(SoldadoCreado.equals("Semioruga")){tablero=((SpawnEnemigo) tablero[31][0]).CrearSemiorugaEnemigo(Partida.p);}
+		    					     else if(SoldadoCreado.equals("Tanque")){tablero=((SpawnEnemigo) tablero[31][0]).CrearTanqueEnemigo(Partida.p);}
+		    				   }
 		    				   else{xobj=row;yobj=col;}
 		        	      System.out.println("Click izquierdo col="+col+" row="+row);
 		        	      actualiza();
@@ -677,7 +713,6 @@ public class Partida extends JDialog{
 	}
 
 	public static UnidadBD[][] getTablero() {
-		// TODO Auto-generated method stub
 		return tablero;
 	}
 
