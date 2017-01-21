@@ -517,6 +517,35 @@ private static Exception lastError = null;  // Información de último error SQL o
 			return false;
 		}
 	}
+	public static boolean PartidaUpdate1J( Statement st, ElementosPartida p ) {
+		String sentSQL = "";
+		try {
+			//FIXME
+			
+			sentSQL = "update partidalocal set" +
+
+					" Turno=" + p.getTurno() + ", " +
+					" dineroAliado=" + p.getDineroAliado() + ", " +
+					" dineroEnemigo=" + p.getDineroEnemigo() + ", " +
+					" puntuacionAliado='" + p.getPuntuacionAliado() + "', " +
+					" puntuacionEnemigo='" + p.getPuntuacionEnemigo() + "', " +
+					" fechapartida='" + p.getFechaPartida() + "'" +
+					" where Partida='" + p.getPartida() + "';";
+			// System.out.println( sentSQL );  // para ver lo que se hace en consola
+			int val = st.executeUpdate( sentSQL );
+			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
+			if (val!=1) {  // Se tiene que modificar 1 - error si no
+				log( Level.SEVERE, "Error en update de BD\t" + sentSQL, null );
+				return false;  
+			}
+			return true;
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
 
 	public static boolean UnidadBDUpdate( Statement st, UnidadBD u ) {

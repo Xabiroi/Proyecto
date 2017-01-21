@@ -81,7 +81,8 @@ public class UnidadBD implements Cloneable{
 		                null,
 		                options,
 		                options[0]);
-			    System.exit(0);//FIXME se cierra el programa, hay que hacer que se cree el menu principal y ya
+			    //FIXME se cierra el programa, hay que hacer que se cree el menu principal y borrar la partida
+			    //setVisible(false);
 			    MenuPrincipal mp=new MenuPrincipal();
 				
 				

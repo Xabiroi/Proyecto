@@ -74,6 +74,7 @@ public class Menu1Jugador extends JDialog{
 			 ArrayList<LogicaBatallas.ElementosPartida> a=BD.PartidaSelect1J( BD.usarBD(BD.initBD("Local")),"usuario1="+"'"+Juego.getLM().getUsuario().getNombre()+"'");
 				JComboBox<LogicaBatallas.ElementosPartida> comboBox =new JComboBox<LogicaBatallas.ElementosPartida>();
 				for(LogicaBatallas.ElementosPartida p:a){comboBox.addItem(p);}
+				comboBox.setRenderer(new Renderer());
 				
 				comboBox.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -177,7 +178,7 @@ public class Menu1Jugador extends JDialog{
 					LogicaBatallas.ElementosPartida p1=new LogicaBatallas.ElementosPartida();
 				//	lb.setListaAliados(listaAliados);//FIXME hay que cambiar la parte de BD de soldados para poder distinguir de que equipo son
 				//	lb.setListaEnemigos(listaEnemigos);
-					p1=BD.PartidaSelect(BD.usarBD(BD.initBD("Local")), "USUARIO="+Juego.getLM().getUsuario().getNombre()+"'").get(0);
+					p1=BD.PartidaSelect1J(BD.usarBD(BD.initBD("Local")), "usuario1='"+Juego.getLM().getUsuario().getNombre()+"'").get(0);
 					
 					
 					
@@ -191,7 +192,7 @@ public class Menu1Jugador extends JDialog{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					frame.setVisible(false);
+					setVisible(false);
 					p.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					p.setVisible(true);
 					
@@ -217,7 +218,7 @@ public class Menu1Jugador extends JDialog{
 			 JButton btnCrearPartida = new JButton("Crear partida");
 			 btnCrearPartida.addActionListener(new ActionListener() {
 			 	public void actionPerformed(ActionEvent arg0) {
-			 		CrearPartida cp=new CrearPartida();
+			 		CrearPartidaLocal cp=new CrearPartidaLocal();
 			 		cp.initialize();
 			 		cp.setBounds(100, 100, 363, 192);
 					cp.getContentPane().setLayout(null);

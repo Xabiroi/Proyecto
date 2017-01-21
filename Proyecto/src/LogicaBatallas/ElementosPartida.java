@@ -26,7 +26,7 @@ public class ElementosPartida {
 		int mYear = calendar.get(Calendar.YEAR);
 		int mMonth = calendar.get(Calendar.MONTH);
 		int mDay = calendar.get(Calendar.DAY_OF_MONTH);
-		this.fechaPartida = mYear+mMonth*10000+mDay*1000000;
+		this.fechaPartida = mYear+(mMonth+1)*10000+mDay*1000000;
 		this.lp = new LogicaPartida();
 		this.Turno=0;
 	}
@@ -41,7 +41,7 @@ public class ElementosPartida {
 		int mYear = calendar.get(Calendar.YEAR);
 		int mMonth = calendar.get(Calendar.MONTH);
 		int mDay = calendar.get(Calendar.DAY_OF_MONTH);
-		this.fechaPartida = mYear+mMonth*10000+mDay*1000000;
+		this.fechaPartida = mYear+(mMonth+1)*10000+mDay*1000000;
 		this.lp=new LogicaPartida();
 		this.Turno=0;
 	}

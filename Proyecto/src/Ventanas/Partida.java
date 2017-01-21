@@ -168,7 +168,7 @@ public class Partida extends JDialog{
 	 * Create the application.
 	 * @throws IOException 
 	 */
-	//FIXME Falta por determinar bien el constructor
+
 	public Partida(LogicaBatallas.ElementosPartida p,LogicaBatallas.LogicaPartida lp) throws IOException {
 		Partida.p=p;
 		this.lp=lp;
@@ -211,10 +211,6 @@ public class Partida extends JDialog{
 				}
 				});
 			
-			
-				
-				
-				
 				 
 			}
 		});
@@ -255,13 +251,20 @@ public class Partida extends JDialog{
 		btnGuardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {	
-				
-				BD.PartidaUpdate(BD.usarBD(BD.initBD("Local")),p);
+				//if()FIXME meter aqui si el seundo usuario es null que meta en BD partida local
+				if(p.getUsuario2()==null){
+				BD.PartidaUpdate1J(BD.usarBD(BD.initBD("Local")),p);
 				setVisible(false);
 				MenuPrincipal mp=new MenuPrincipal();
 				mp.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				mp.setVisible(true);
-				
+				}
+				else{
+				BD.PartidaUpdate(BD.usarBD(BD.initBD("Local")),p);//FIXME cambiar la conexion
+				setVisible(false);
+				MenuPrincipal mp=new MenuPrincipal();
+				mp.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				mp.setVisible(true);}
 			}
 		});
 		btnGuardar.setBounds(30, 298, 101, 23);
@@ -307,7 +310,7 @@ public class Partida extends JDialog{
 				
 				actualiza();
 				if(Partida.p.getTurno()==0){textFieldPropietario.setText(p.getUsuario2());
-			Partida.p.setTurno(1);JOptionPane.showMessageDialog(null, "Turno del jugador "+p.getUsuario2());
+			Partida.p.setTurno(1);JOptionPane.showMessageDialog(null, "Turno terminado");//FIXME meter en el crearpartidalocal que el usuario 2 tenga el nombre que insertes
 				//FIXME sera para comprobar los turnos de los diferentes jugadores
 				//no se deshabilitara el boton de finalizar turno para ver si se puede hacer deshabilitar y habilitar los botones al pasar de turno
 					if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario2())){
@@ -315,19 +318,27 @@ public class Partida extends JDialog{
 						btnGuardar.setEnabled(true);
 						btnMover.setEnabled(true);
 						btnCambiarArma.setEnabled(true);
+						
 //FIXME enablear/disablear el boton de finalizar turno tambien, pero hasta que se haga pruebas no
 					}
-				if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario())){
+				else if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario())){
 						btnAtacar.setEnabled(false);
 						btnGuardar.setEnabled(false);
 						btnMover.setEnabled(false);
 						btnCambiarArma.setEnabled(false);
 
 					}
+				else if(p.getUsuario2()==null){
+					btnAtacar.setEnabled(true);
+					btnGuardar.setEnabled(true);
+					btnMover.setEnabled(true);
+					btnCambiarArma.setEnabled(true);
+
+				}
 				
 					
 				}
-				else{Partida.p.setTurno(0);textFieldPropietario.setText(p.getUsuario());JOptionPane.showMessageDialog(null, "Turno del jugador "+p.getUsuario());
+				else{Partida.p.setTurno(0);textFieldPropietario.setText(p.getUsuario());JOptionPane.showMessageDialog(null, "Turno terminado");
 				if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario2())){
 					btnAtacar.setEnabled(false);
 					btnGuardar.setEnabled(false);
@@ -336,7 +347,14 @@ public class Partida extends JDialog{
 
 				
 				}
-				if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario())){
+				else if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario())){
+					btnAtacar.setEnabled(true);
+					btnGuardar.setEnabled(true);
+					btnMover.setEnabled(true);
+					btnCambiarArma.setEnabled(true);
+
+				}
+				else if(p.getUsuario2()==null){
 					btnAtacar.setEnabled(true);
 					btnGuardar.setEnabled(true);
 					btnMover.setEnabled(true);
@@ -530,18 +548,28 @@ public class Partida extends JDialog{
 		
 		
 		else if(p.getTurno()==1){
-			
-			if(UnidadActual.getAcciones()>0 && p.getUsuario2().equals(LoginManager.getUsuario().getNombre())){btnMover.setEnabled(true);
+			if(p.getUsuario2()!=null){
+			if(UnidadActual.getAcciones()>0 && p.getUsuario2().equals(LoginManager.getUsuario().getNombre())){
+			btnMover.setEnabled(true);
 			btnAtacar.setEnabled(true);
-			btnCambiarArma.setEnabled(true);
+			btnCambiarArma.setEnabled(true);}
 			
-			}else{btnMover.setEnabled(false);
+			else{btnMover.setEnabled(false);
 			btnAtacar.setEnabled(false);
 			btnCambiarArma.setEnabled(false);}
+			}
 			
+			else{if(UnidadActual.getAcciones()>0){
+				btnMover.setEnabled(true);
+				btnAtacar.setEnabled(true);
+				btnCambiarArma.setEnabled(true);}else{
+				btnMover.setEnabled(false);
+				btnAtacar.setEnabled(false);
+				btnCambiarArma.setEnabled(false);}
+			}
 	
 			
-		textFieldPropietario.setText(p.getUsuario2());}
+			textFieldPropietario.setText(p.getUsuario2());}
 		
 		
 		textFieldDineroJ2.setText(""+p.getDineroEnemigo());
@@ -623,6 +651,25 @@ public class Partida extends JDialog{
 		    				   UnidadActual=tablero[row][col];xobj=row;yobj=col;}
 	    					   else if(tablero[row][col] instanceof Colision){}
 	    					   else if(tablero[row][col] instanceof UnidadAliada){}
+		    				   else if(tablero[row][col] instanceof SpawnEnemigo && Partida.p.getUsuario2()==null){
+		    					   try{
+		    					   final String[] soldados = { "Soldado raso", "Francotirador", "Bazooka", "Semioruga","Tanque" };
+		    					     JFrame frame = new JFrame("Crear Soldados");
+		    					     String SoldadoCreado = (String) JOptionPane.showInputDialog(frame, 
+		    					         "¿Que soldado desea crear?",
+		    					         "Cuartel general",
+		    					         JOptionPane.QUESTION_MESSAGE, 
+		    					         null, 
+		    					         soldados, 
+		    					         soldados[0]);
+		    					     
+		    					     if(SoldadoCreado.equals("Soldado raso")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSoldadoRasoEnemigo(Partida.p);}
+		    					     else if(SoldadoCreado.equals("Francotirador")){tablero=((SpawnEnemigo) tablero[0][31]).CrearFrancotiradorEnemigo(Partida.p);}
+		    					     else if(SoldadoCreado.equals("Bazooka")){tablero=((SpawnEnemigo) tablero[0][31]).CrearBazookaEnemigo(Partida.p);}
+		    					     else if(SoldadoCreado.equals("Semioruga")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSemiorugaEnemigo(Partida.p);}
+		    					     else if(SoldadoCreado.equals("Tanque")){tablero=((SpawnEnemigo) tablero[0][31]).CrearTanqueEnemigo(Partida.p);}
+		    					}catch(NullPointerException e1){}
+		    				   }
 		    				   else if(tablero[row][col] instanceof SpawnEnemigo && Partida.p.getUsuario2().equals(LoginManager.getUsuario().getNombre())){
 		    					   try{
 		    					   final String[] soldados = { "Soldado raso", "Francotirador", "Bazooka", "Semioruga","Tanque" };
@@ -642,6 +689,7 @@ public class Partida extends JDialog{
 		    					     else if(SoldadoCreado.equals("Tanque")){tablero=((SpawnEnemigo) tablero[0][31]).CrearTanqueEnemigo(Partida.p);}
 		    					}catch(NullPointerException e1){}
 		    				   }
+
 		    				   else{xobj=row;yobj=col;}
 		        	      System.out.println("Click izquierdo col="+col+" row="+row);
 		        	      actualiza();
