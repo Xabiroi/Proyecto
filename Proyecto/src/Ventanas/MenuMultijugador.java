@@ -305,7 +305,7 @@ public class MenuMultijugador extends JDialog{
 				//TODO resolver lo de static
 				lb.setListaEnemigos(UnidadesEnemigas);
 				lb.setListaAliados(UnidadesAliadas);
-				p1=BD.PartidaSelect(BD.usarBD(BD.initBD("Local")), "usuario1='"+Juego.getLM().getUsuario().getNombre()+"'").get(0);
+				p1=BD.PartidaSelect(BD.usarBD(BD.initBD("Local")), "usuario1='"+Juego.getLM().getUsuario().getNombre()+"' or usuario2='"+Juego.getLM().getUsuario().getNombre()+"'").get(0);
 				
 				
 				

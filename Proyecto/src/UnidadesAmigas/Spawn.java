@@ -12,6 +12,7 @@ public Spawn(int x, int y){
 	this.x = x;
 	this.y = y;
 }
+
 public UnidadBD[][] CrearSoldadoRaso(ElementosPartida ep){
 	UnidadBD[][] a=Ventanas.Partida.getTablero();
 	if(a[31][1]==null && ep.getDineroAliado()>=35){a[31][1]=new SoldadoRaso(31,1);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-35);return a;}

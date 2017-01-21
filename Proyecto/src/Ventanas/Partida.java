@@ -143,7 +143,9 @@ public class Partida extends JDialog{
 	static UnidadBD UnidadActual=new UnidadBD();//FIXME de prueba 
 	static UnidadBD UnidadObjetivo=new UnidadBD();//FIXME cambiar la visibilidad del package acaso(?)
 
-
+	public static void setUnidadActual(ElementosPartida p1) {
+		p=p1;;
+	}
 	public static void setTablero(UnidadBD[][] tablero1) {
 		tablero = tablero1;
 	}
@@ -222,11 +224,7 @@ public class Partida extends JDialog{
 		btnAtacar = new JButton("Atacar");
 		btnAtacar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)  {
-
-		    }
-		});
-		btnAtacar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)  {
+			actualiza();
 			if(p.getTurno()==0){
 				if(tablero[xobj][yobj]==null){}
 				else if(tablero[xobj][yobj] instanceof Colision){}
@@ -234,6 +232,7 @@ public class Partida extends JDialog{
 					UnidadObjetivo=tablero[xobj][yobj];
 					UnidadActual.atacar(xobj,yobj);
 					UnidadActual.setAcciones(UnidadActual.getAcciones()-1);
+					actualiza();
 		        System.out.println("se ha atacado a la unidad de las coordenadas X="+xobj+" y="+yobj);}
 			}
 			else if(p.getTurno()==1){
@@ -300,6 +299,12 @@ public class Partida extends JDialog{
 			public void mouseClicked(MouseEvent e) {
 				p.setDineroAliado(p.getDineroAliado()+50);
 				p.setDineroEnemigo(p.getDineroEnemigo()+50);
+				for(int i=0;i<tablero.length;i++){
+					for(int j=0;j<tablero[0].length;j++){
+						if(tablero[i][j] instanceof UnidadAliada || tablero[i][j] instanceof UnidadEnemiga){tablero[i][j].setAcciones(2);}
+					}
+				}
+				
 				actualiza();
 				if(Partida.p.getTurno()==0){textFieldPropietario.setText(p.getUsuario2());
 			Partida.p.setTurno(1);JOptionPane.showMessageDialog(null, "Turno del jugador "+p.getUsuario2());
@@ -506,7 +511,7 @@ public class Partida extends JDialog{
 		textFieldJugador2.setText(p.getUsuario2());
 		textFieldPuntosJ1.setText(""+p.getPuntuacionAliado());
 		textFieldPuntosJ2.setText(""+p.getPuntuacionEnemigo());
-		textFieldJugador1.setText(p.getUsuario2());
+		textFieldJugador1.setText(p.getUsuario());
 		textFieldArma.setText(UnidadActual.getArma());
 		textFieldPS.setText(""+UnidadActual.getSalud());
 		textFieldUnidad.setText(UnidadActual.getNombre());
@@ -586,11 +591,11 @@ public class Partida extends JDialog{
 	    			   if(e.getButton() == MouseEvent.BUTTON1)
 	        	    {
 	    				   if(Partida.p.getTurno()==0){
-	    				   if(tablero[row][col] instanceof UnidadAliada && !(tablero[row][col] instanceof Spawn)){
-	    				   UnidadActual=tablero[row][col];xobj=row;yobj=col;}
+	    				   if(tablero[row][col] instanceof UnidadAliada && !(tablero[row][col] instanceof Spawn)){UnidadActual=tablero[row][col];xobj=row;yobj=col;}
 	    				   else if(tablero[row][col] instanceof Colision){}
 	    				   else if(tablero[row][col] instanceof UnidadEnemiga){}
-	    				   else if(tablero[row][col] instanceof Spawn){
+	    				   else if(tablero[row][col] instanceof Spawn && Partida.p.getUsuario().equals(LoginManager.getUsuario().getNombre())){
+	    					  try{
 	    					   final String[] soldados = { "Soldado raso", "Francotirador", "Bazooka", "Semioruga","Tanque" };
 	    					     JFrame frame = new JFrame("Crear Soldados");
 	    					     String SoldadoCreado = (String) JOptionPane.showInputDialog(frame, 
@@ -606,7 +611,10 @@ public class Partida extends JDialog{
 	    					     else if(SoldadoCreado.equals("Bazooka")){tablero=((Spawn) tablero[31][0]).CrearBazooka(Partida.p);}
 	    					     else if(SoldadoCreado.equals("Semioruga")){tablero=((Spawn) tablero[31][0]).CrearSemioruga(Partida.p);}
 	    					     else if(SoldadoCreado.equals("Tanque")){tablero=((Spawn) tablero[31][0]).CrearTanque(Partida.p);}
-	    				   }			   
+	    				   	}catch(NullPointerException e1){}
+	    					  }	   
+	    				   
+	    				   
 	    				   else{xobj=row;yobj=col;}
 	        	      System.out.println("Click izquierdo col="+col+" row="+row);
 	        	      actualiza();
@@ -615,7 +623,8 @@ public class Partida extends JDialog{
 		    				   UnidadActual=tablero[row][col];xobj=row;yobj=col;}
 	    					   else if(tablero[row][col] instanceof Colision){}
 	    					   else if(tablero[row][col] instanceof UnidadAliada){}
-		    				   else if(tablero[row][col] instanceof SpawnEnemigo){
+		    				   else if(tablero[row][col] instanceof SpawnEnemigo && Partida.p.getUsuario2().equals(LoginManager.getUsuario().getNombre())){
+		    					   try{
 		    					   final String[] soldados = { "Soldado raso", "Francotirador", "Bazooka", "Semioruga","Tanque" };
 		    					     JFrame frame = new JFrame("Crear Soldados");
 		    					     String SoldadoCreado = (String) JOptionPane.showInputDialog(frame, 
@@ -631,6 +640,7 @@ public class Partida extends JDialog{
 		    					     else if(SoldadoCreado.equals("Bazooka")){tablero=((SpawnEnemigo) tablero[0][31]).CrearBazookaEnemigo(Partida.p);}
 		    					     else if(SoldadoCreado.equals("Semioruga")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSemiorugaEnemigo(Partida.p);}
 		    					     else if(SoldadoCreado.equals("Tanque")){tablero=((SpawnEnemigo) tablero[0][31]).CrearTanqueEnemigo(Partida.p);}
+		    					}catch(NullPointerException e1){}
 		    				   }
 		    				   else{xobj=row;yobj=col;}
 		        	      System.out.println("Click izquierdo col="+col+" row="+row);
@@ -721,7 +731,7 @@ public class Partida extends JDialog{
 	}
 
 
-	public UnidadBD getUnidadActual() {
+	public static UnidadBD getUnidadActual() {
 		return UnidadActual;
 	}
 

@@ -108,7 +108,8 @@ public class UnidadBD implements Cloneable{
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 options,
-                options[0]);}
+                options[0]);
+	   Ventanas.Partida.getUnidadActual().setAcciones(Ventanas.Partida.getUnidadActual().getAcciones()+1);}
 		comprobarMuerto();
 		}else{ 
 		JFrame frame=new JFrame();
