@@ -2,8 +2,12 @@ package UnidadesAmigas;
 
 
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
-import javax.swing.ImageIcon;
+import java.awt.Toolkit;
+import java.net.URL;
+
 import Interfaces.Persona;
 import Interfaces.Unidad;
 
@@ -38,7 +42,8 @@ public class SoldadoRaso extends UnidadAliada implements Persona,Unidad{
 		this.Distancia = 5;
 		
 	}
-	
+
+/***
 	@SuppressWarnings("unused")
 	private void initCraft() {
         
@@ -47,6 +52,34 @@ public class SoldadoRaso extends UnidadAliada implements Persona,Unidad{
         x = 26;
         y = 26;               
     }
+    **/
+	
+	
+	private Image SoldadoRaso = null;
+	
+		public void pintarSoldadoRaso(Graphics g){
+			if (SoldadoRaso == null)
+				SoldadoRaso = getImage("SoldadoRaso.png");
+		
+			Graphics2D g2 = (Graphics2D) g;
+			g2.drawImage(SoldadoRaso, x, y, 26, 26, null); //x e y diran donde se coloca el soldado
+		}
+	
+		public Image getImage(String path){
+		
+			Image tempImage = null;
+			try{
+				URL imageURL = SoldadoRaso.class.getResource(path);
+				tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
+			}
+			//en caso de que la imagen no exista
+			catch (Exception e){
+				System.out.println("imagen no existente" + e.getMessage());
+			
+			}
+			return tempImage;
+	}
+
 
 
 	
