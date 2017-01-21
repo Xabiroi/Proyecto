@@ -199,8 +199,7 @@ public class MenuMultijugador extends JDialog{
 				
 				LogicaBatallas.ElementosPartida p1=new LogicaBatallas.ElementosPartida();
 				
-				ArrayList<UnidadBD> Unidades=BD.UnidadBDSelect(BD.usarBD(BD.initBD("Local")), "Partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'");//SOLUCIONAR EL TOSTRING "USUARIO="+Juego.getLM().getUsuario().getNombre()+" AND 
-				
+				ArrayList<UnidadBD> Unidades=BD.UnidadBDSelect(BD.usarBD(BD.initBD("Local")), "Partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'");
 				ArrayList<UnidadBD> UnidadesAliadas1=new ArrayList<UnidadBD>();
 				for(UnidadBD u:Unidades)if(u.getEquipo()==1){UnidadesAliadas1.add(u);}
 				ArrayList<UnidadBD> UnidadesEnemigas1=new ArrayList<UnidadBD>();
@@ -314,6 +313,8 @@ public class MenuMultijugador extends JDialog{
 				
 				try {
 					p = new Ventanas.Partida(p1,lb);
+					p.setSize(965, 940);
+					p.setResizable(false);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

@@ -108,7 +108,7 @@ public class CrearPartida extends JDialog{
 		textField.setBounds(168, 39, 86, 20);
 		getContentPane().add(textField);
 		textField.setColumns(10);
-		textField.setText(LoginManager.getUsuario().getNick());
+		textField.setText(LoginManager.getUsuario().getNombre());
 		textField.setEditable(false);
 		
 		textField_1 = new JTextField();

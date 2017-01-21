@@ -5,8 +5,12 @@ import javax.swing.JOptionPane;
 import BD.UnidadBD;
 import LogicaBatallas.ElementosPartida;
 
-public class Spawn extends UnidadBD{
-public Spawn(){
+public class Spawn extends UnidadAliada{
+public Spawn(int x, int y){
+	Nombre="Spawn";
+	Salud = 100;
+	this.x = x;
+	this.y = y;
 }
 public UnidadBD[][] CrearSoldadoRaso(ElementosPartida ep){
 	UnidadBD[][] a=Ventanas.Partida.getTablero();

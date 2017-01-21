@@ -106,6 +106,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 				statement.executeUpdate("create table soldados "
 					+ "(Partida char(30) not null references partidaMultijugador(Partida) on delete cascade,"
 					+ " nombre char(30),"
+					+ " acciones integer,"
 					+ " arma char(30),"
 					+ " salud char(30),"
 					+ " distancia integer,"
@@ -284,6 +285,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 			sentSQL = "insert into soldados values(" +
 					"'" + secu(p.getPartida()) + "', " +
 					"'" + secu(s.getNombre()) + "', " +
+					"'" + secu(""+s.getAcciones()) + "', " +
 					"'" + secu(s.getArma()) + "', " +
 					"'" + secu(""+s.getSalud()) + "', " +
 					"'" + secu(""+s.getDistancia()) + "', " +
@@ -431,6 +433,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 				UnidadBD u = new UnidadBD();
 				u.setPartida(rs.getString("Partida"));
 				u.setArma(rs.getString("arma"));
+				u.setAcciones(Integer.parseInt(rs.getString("acciones")));
 				u.setCordX(Integer.parseInt(rs.getString("cordX")));
 				u.setCordY(Integer.parseInt(rs.getString("cordY")));
 				u.setEquipo(Integer.parseInt(rs.getString("equipo")));
@@ -523,6 +526,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 			sentSQL = "update soldados set" +
 					" arma='" + u.getArma() + "', " +
 					" salud=" + u.getSalud() + ", " +
+					" acciones=" + u.getAcciones() + ", " +
 					" distancia=" + u.getDistancia() + ", " +
 					" equipo=" + u.getEquipo() + ", " +
 					" coordX=" + u.getCordX() + ", " +

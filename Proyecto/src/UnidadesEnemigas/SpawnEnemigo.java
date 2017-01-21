@@ -5,15 +5,13 @@ import javax.swing.JOptionPane;
 import BD.UnidadBD;
 import LogicaBatallas.ElementosPartida;
 
-public class SpawnEnemigo extends UnidadBD{
-	/*
-r0,c30 true true
-r1,c30 true true
-r2,c30 true true
-r3,c30 true true
-r3,c31 true true
-	 * 
-	 */
+public class SpawnEnemigo extends UnidadEnemiga{
+	public SpawnEnemigo(int x, int y){
+		Nombre="Spawn";
+		Salud = 100;
+		this.x = x;
+		this.y = y;
+	}
 
 public UnidadBD[][] CrearSoldadoRasoEnemigo(ElementosPartida ep){
 	UnidadBD[][] a=Ventanas.Partida.getTablero();

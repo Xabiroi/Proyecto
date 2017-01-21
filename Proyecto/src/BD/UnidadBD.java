@@ -4,8 +4,12 @@ import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
 import BD.UnidadBD;
+import UnidadesAmigas.Spawn;
+import UnidadesEnemigas.SpawnEnemigo;
 import Ventanas.Colision;
+import Ventanas.MenuPrincipal;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class UnidadBD implements Cloneable{
@@ -20,7 +24,18 @@ public class UnidadBD implements Cloneable{
 	protected int Distancia; //Puntos de movimiento
 	protected String Partida; //Nombre
 	protected int equipo; //1 o 0
+	protected int acciones=2;
 
+
+
+	public int getAcciones() {
+		return acciones;
+	}
+
+
+	public void setAcciones(int acciones) {
+		this.acciones = acciones;
+	}
 
 
 	public int getX() {
@@ -56,6 +71,22 @@ public class UnidadBD implements Cloneable{
 
 	public void comprobarMuerto(){
 		if(Ventanas.Partida.getUnidadObjetivo().getSalud()<=0){
+			if(Ventanas.Partida.getUnidadObjetivo().getSalud()<=0 && (Ventanas.Partida.getUnidadObjetivo() instanceof Spawn || Ventanas.Partida.getUnidadObjetivo() instanceof SpawnEnemigo)){
+				JFrame frame=new JFrame();
+				Object[] options = {"OK"};
+			    int n = JOptionPane.showOptionDialog(frame,
+		                "Has ganado!","Felicidades!",
+		                JOptionPane.PLAIN_MESSAGE,
+		                JOptionPane.QUESTION_MESSAGE,
+		                null,
+		                options,
+		                options[0]);
+			    System.exit(0);//FIXME se cierra el programa, hay que hacer que se cree el menu principal y ya
+			    MenuPrincipal mp=new MenuPrincipal();
+				
+				
+				
+			}
 		UnidadBD[][] a=Ventanas.Partida.tablero;
 		a[Ventanas.Partida.getUnidadObjetivo().getCordX()][Ventanas.Partida.getUnidadObjetivo().getCordY()]=null;
 		Ventanas.Partida.setTablero(a);
@@ -66,11 +97,29 @@ public class UnidadBD implements Cloneable{
 		}
 	}
 	public void ataca(int x,int y){
-		if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<x)
-			if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<x)
-		Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-y);
+		if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<x){
+			if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<x){
+		Ventanas.Partida.getUnidadObjetivo().setSalud(Ventanas.Partida.getUnidadObjetivo().getSalud()-y);}else{ 
+			JFrame frame=new JFrame();
+		Object[] options = {"OK"};
+	    int n = JOptionPane.showOptionDialog(frame,
+                "El objetivo esta fuera del alcance ","Cuidado",
+                JOptionPane.PLAIN_MESSAGE,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);}
 		comprobarMuerto();
-		
+		}else{ 
+		JFrame frame=new JFrame();
+		Object[] options = {"OK"};
+	    int n = JOptionPane.showOptionDialog(frame,
+                "El objetivo esta fuera del alcance","Cuidado",
+                JOptionPane.PLAIN_MESSAGE,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);}
 	}
 	
 	

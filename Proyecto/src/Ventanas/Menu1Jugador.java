@@ -71,7 +71,7 @@ public class Menu1Jugador extends JDialog{
 			lblNewLabel.setBounds(498, 62, 241, 60);
 			 getContentPane().add(lblNewLabel);
 			
-			 ArrayList<LogicaBatallas.ElementosPartida> a=BD.PartidaSelect1J( BD.usarBD(BD.initBD("Local")),"usuario1="+"'"+Juego.getLM().getUsuario().getNick()+"'");
+			 ArrayList<LogicaBatallas.ElementosPartida> a=BD.PartidaSelect1J( BD.usarBD(BD.initBD("Local")),"usuario1="+"'"+Juego.getLM().getUsuario().getNombre()+"'");
 				JComboBox<LogicaBatallas.ElementosPartida> comboBox =new JComboBox<LogicaBatallas.ElementosPartida>();
 				for(LogicaBatallas.ElementosPartida p:a){comboBox.addItem(p);}
 				
@@ -177,7 +177,7 @@ public class Menu1Jugador extends JDialog{
 					LogicaBatallas.ElementosPartida p1=new LogicaBatallas.ElementosPartida();
 				//	lb.setListaAliados(listaAliados);//FIXME hay que cambiar la parte de BD de soldados para poder distinguir de que equipo son
 				//	lb.setListaEnemigos(listaEnemigos);
-					p1=BD.PartidaSelect(BD.usarBD(BD.initBD("Local")), "USUARIO="+Juego.getLM().getUsuario()).get(0);
+					p1=BD.PartidaSelect(BD.usarBD(BD.initBD("Local")), "USUARIO="+Juego.getLM().getUsuario().getNombre()+"'").get(0);
 					
 					
 					
@@ -185,6 +185,8 @@ public class Menu1Jugador extends JDialog{
 					
 					try {
 						p = new Ventanas.Partida(p1,lb);
+						p.setSize(965, 940);
+						p.setResizable(false);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
