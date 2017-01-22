@@ -26,7 +26,7 @@ public class Bazooka extends UnidadAliada implements Persona,Unidad{
 		
 	}
 	
-	/***
+	/*
 	@SuppressWarnings("unused")
 	private void initCraft() {
         
@@ -35,7 +35,7 @@ public class Bazooka extends UnidadAliada implements Persona,Unidad{
         x = 26;
         y = 26;        
     }
-	**/
+	*/
 	
 	
 	private Image Bazooka = null;

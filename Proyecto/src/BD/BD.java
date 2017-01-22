@@ -79,7 +79,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 			} catch (SQLException e) {} // Tabla ya existe. Nada que hacer
 			try {
 				statement.executeUpdate("create table partidaLocal " 
-					+"(usuario1 char(30) not null references usuario(nick) on delete cascade,"
+					+"(usuario1 char(30) not null references usuario(nombre) on delete cascade,"
 					+ "Partida char(30),"
 					+ "Turno integer,"
 					+ "dineroAliado integer,"
@@ -118,6 +118,22 @@ private static Exception lastError = null;  // Información de último error SQL o
 				
 	
 			} catch (SQLException e) {} // Tabla ya existe. Nada que hacer
+			try {
+				statement.executeUpdate("create table soldadosLocal "
+					+ "(Partida char(30) not null references partidaLocal(Partida) on delete cascade,"
+					+ " nombre char(30),"
+					+ " acciones integer,"
+					+ " arma char(30),"
+					+ " salud char(30),"
+					+ " distancia integer,"
+					+ " equipo integer,"
+					+ " coordX integer,"
+					+ " coordY integer)");
+				
+				
+				
+	
+			} catch (SQLException e) {} // Tabla ya existe. Nada que hacer
 			
 			log( Level.INFO, "Creada base de datos", null );
 			return statement;
@@ -143,7 +159,10 @@ private static Exception lastError = null;  // Información de último error SQL o
 			Statement statement = con.createStatement();
 			statement.setQueryTimeout(30);  // poner timeout 30 msg
 			statement.executeUpdate("drop table if exists usuario");
-			statement.executeUpdate("drop table if exists partida");
+			statement.executeUpdate("drop table if exists partidaMultijugador");
+			statement.executeUpdate("drop table if exists partidaLocal");
+			statement.executeUpdate("drop table if exists soldados");
+			statement.executeUpdate("drop table if exists soldadosLocal");
 			log( Level.INFO, "Reiniciada base de datos", null );
 			return usarCrearTablasBD( con );
 		} catch (SQLException e) {
@@ -278,12 +297,41 @@ private static Exception lastError = null;  // Información de último error SQL o
 	}
 	
 
-	public static boolean UnidadesInsert( Statement st, UnidadBD s, ElementosPartida p) {
+	public static boolean UnidadesInsert( Statement st, UnidadBD s) {
 		String sentSQL = "";
 		try {
 
 			sentSQL = "insert into soldados values(" +
-					"'" + secu(p.getPartida()) + "', " +
+					"'" + secu(s.getPartida()) + "', " +
+					"'" + secu(s.getNombre()) + "', " +
+					"'" + secu(""+s.getAcciones()) + "', " +
+					"'" + secu(s.getArma()) + "', " +
+					"'" + secu(""+s.getSalud()) + "', " +
+					"'" + secu(""+s.getDistancia()) + "', " +
+					"'" + secu(""+s.getEquipo()) + "', " +
+					"'" + secu(""+s.getCordX()) + "', " +
+					"'" + secu(""+s.getCordY()) +"')";
+
+			int val = st.executeUpdate( sentSQL );
+			log( Level.INFO, "BD añadida " + val + " fila\t" + sentSQL, null );
+			if (val!=1) {  // Se tiene que añadir 1 - error si no
+				log( Level.SEVERE, "Error en insert de BD\t" + sentSQL, null );
+				return false;  
+			}
+			return true;
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public static boolean UnidadesInsertLocal( Statement st, UnidadBD s) {
+		String sentSQL = "";
+		try {
+
+			sentSQL = "insert into soldadosLocal values(" +
+					"'" + secu(s.getPartida()) + "', " +
 					"'" + secu(s.getNombre()) + "', " +
 					"'" + secu(""+s.getAcciones()) + "', " +
 					"'" + secu(s.getArma()) + "', " +
@@ -457,6 +505,43 @@ private static Exception lastError = null;  // Información de último error SQL o
 			return null;
 		}
 	}
+	public static ArrayList<UnidadBD> UnidadBDSelectlocal( Statement st, String codigoSelect ) {
+		String sentSQL = "";
+		ArrayList<UnidadBD> ret = new ArrayList<>();
+		try {
+			sentSQL = "select * from soldadoslocal";
+			if (codigoSelect!=null && !codigoSelect.equals(""))
+				sentSQL = sentSQL + " where " + codigoSelect;
+			// System.out.println( sentSQL );  // Para ver lo que se hace en consola
+			ResultSet rs = st.executeQuery( sentSQL );
+			while (rs.next()) {
+				UnidadBD u = new UnidadBD();
+				u.setPartida(rs.getString("Partida"));
+				u.setArma(rs.getString("arma"));
+				u.setAcciones(Integer.parseInt(rs.getString("acciones")));
+				u.setCordX(Integer.parseInt(rs.getString("cordX")));
+				u.setCordY(Integer.parseInt(rs.getString("cordY")));
+				u.setEquipo(Integer.parseInt(rs.getString("equipo")));
+				u.setNombre("nombre");
+				u.setSalud(Integer.parseInt(rs.getString("salud")));
+				u.setDistancia(Integer.parseInt(rs.getString("distancia")));
+				ret.add( u );
+			}
+			rs.close();
+			log( Level.INFO, "BD\t" + sentSQL, null );
+			return ret;
+		} catch (IllegalArgumentException e) {  // Error en tipo usuario (enumerado)
+			log( Level.SEVERE, "Error en BD en tipo de unidades\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 	/** Modifica un usuario en la tabla abierta de BD, usando la sentencia UPDATE de SQL
 	 * @param st	Sentencia ya abierta de Base de Datos (con la estructura de tabla correspondiente al usuario)
@@ -522,7 +607,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 		try {
 			//FIXME
 			
-			sentSQL = "update partidalocal set" +
+			sentSQL = "update partidaLocal set" +
 
 					" Turno=" + p.getTurno() + ", " +
 					" dineroAliado=" + p.getDineroAliado() + ", " +
@@ -576,8 +661,120 @@ private static Exception lastError = null;  // Información de último error SQL o
 			return false;
 		}
 	}
+	public static boolean UnidadBDUpdateLocal( Statement st, UnidadBD u ) {
+		String sentSQL = "";
+		try {
+			
+			sentSQL = "update soldadosLocal set" +
+					" arma='" + u.getArma() + "', " +
+					" salud=" + u.getSalud() + ", " +
+					" acciones=" + u.getAcciones() + ", " +
+					" distancia=" + u.getDistancia() + ", " +
+					" equipo=" + u.getEquipo() + ", " +
+					" coordX=" + u.getCordX() + ", " +
+					" coordY='" + u.getCordY() + "'" +
+					" where Partida='" + u.getPartida() + "'";
+			// System.out.println( sentSQL );  // para ver lo que se hace en consola
+			int val = st.executeUpdate( sentSQL );
+			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
+			if (val!=1) {  // Se tiene que modificar 1 - error si no
+				log( Level.SEVERE, "Error en update de BD\t" + sentSQL, null );
+				return false;  
+			}
+			return true;
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
 
+	public static boolean PartidaEliminar( Statement st, ElementosPartida u ) {
+		String sentSQL = "";
+		try {
+			
+			sentSQL = "delete from partidaMultijugador" +
+					" where Partida='" + u.getPartida() + "'";
+			// System.out.println( sentSQL );  // para ver lo que se hace en consola
+			int val = st.executeUpdate( sentSQL );
+			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
+			if (val!=1) {  // Se tiene que modificar 1 - error si no
+				log( Level.SEVERE, "Error en update de BD\t" + sentSQL, null );
+				return false;  
+			}
+			return true;
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public static boolean PartidaLocalEliminar( Statement st, ElementosPartida u ) {
+		String sentSQL = "";
+		try {
+			
+			sentSQL = "delete from partidaLocal" +
+					" where Partida='" + u.getPartida() + "'";
+			// System.out.println( sentSQL );  // para ver lo que se hace en consola
+			int val = st.executeUpdate( sentSQL );
+			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
+			if (val!=1) {  // Se tiene que modificar 1 - error si no
+				log( Level.SEVERE, "Error en update de BD\t" + sentSQL, null );
+				return false;  
+			}
+			return true;
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public static boolean SoldadosLocalEliminar( Statement st, ElementosPartida u ) {
+		String sentSQL = "";
+		try {
+			
+			sentSQL = "delete from soldadosLocal" +
+					" where Partida='" + u.getPartida() + "'";
+			// System.out.println( sentSQL );  // para ver lo que se hace en consola
+			int val = st.executeUpdate( sentSQL );
+			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
+			if (val!=1) {  // Se tiene que modificar 1 - error si no
+				log( Level.SEVERE, "Error en update de BD\t" + sentSQL, null );
+				return false;  
+			}
+			return true;
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public static boolean SoldadosEliminar( Statement st, ElementosPartida u ) {
+		String sentSQL = "";
+		try {
+			
+			sentSQL = "delete from soldados" +
+					" where Partida='" + u.getPartida() + "'";
+			// System.out.println( sentSQL );  // para ver lo que se hace en consola
+			int val = st.executeUpdate( sentSQL );
+			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
+			if (val!=1) {  // Se tiene que modificar 1 - error si no
+				log( Level.SEVERE, "Error en update de BD\t" + sentSQL, null );
+				return false;  
+			}
+			return true;
+		} catch (SQLException e) {
+			log( Level.SEVERE, "Error en BD\t" + sentSQL, e );
+			lastError = e;
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 
 	

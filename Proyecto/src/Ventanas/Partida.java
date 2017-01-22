@@ -25,11 +25,9 @@ import BD.BD;
 import BD.UnidadBD;
 import LogicaBatallas.ElementosPartida;
 import LoginLogica.LoginManager;
-import UnidadesAmigas.SoldadoRaso;
 import UnidadesAmigas.Spawn;
 import UnidadesAmigas.UnidadAliada;
 import UnidadesEnemigas.SpawnEnemigo;
-import UnidadesEnemigas.TanqueEnemigo;
 import UnidadesEnemigas.UnidadEnemiga;
 
 public class Partida extends JDialog{
@@ -54,19 +52,59 @@ public class Partida extends JDialog{
 	private JButton btnAtacar;
 	private JButton btnFinalizarTurno;
 	private JButton btnGuardar;
-	private LogicaBatallas.LogicaPartida lp;
+	private LogicaBatallas.ArraysPartida lp;
 	private static LogicaBatallas.ElementosPartida p;
+	public static UnidadBD[][] tablero=crearTablero();
 
 	public static ElementosPartida getPartida() {
 		return p;
 	}
+	public static UnidadBD[][] crearTablero() {
+		UnidadBD[][] tab={  
+				{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new SpawnEnemigo(0,31) },
+				{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, null, null, null, null, new Colision(0) },
+				{ null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, null, null, null, new Colision(0), null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0) },
+				{ null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, new Colision(0), null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null },
+				{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null },
+				{ new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, new Colision(0), null, null, null, new Colision(0), null, null, null, new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null },
+				{ new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null },
+				{ new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, null, null },
+				{ null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null },
+				{ null, null, null, null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null },
+				{ null, null, null, null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, null, null, new Colision(0), null, null },
+				{ null, null, new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, null, new Colision(0), null, null },
+				{ null, null, new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, new Colision(0), null, null, new Colision(0), null, null },
+				{ null, new Colision(0), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, new Colision(0), new Colision(0), null, null, null, null, new Colision(0), null, null, null, null, null },
+				{ new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null },
+				{ new Colision(0), new Colision(0), null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0), null, null },
+				{ null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, new Colision(0), null, null },
+				{ null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), null, null, new Colision(0), new Colision(0), null, null, null, null },
+				{ null, null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, new Colision(0), null, null, null, new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
+				{ null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, new Colision(0), null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0) },
+				{ null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, null },
+				{ null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, null },
+				{ new Colision(0), null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, new Colision(0), null, null },
+				{ new Colision(0), null, null, new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, new Colision(0), null, null },
+				{ null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0) },
+				{ null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, new Colision(0), null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0) },
+				{ null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, new Colision(0), null, null, null, new Colision(0), null, new Colision(0), new Colision(0), null, null, null, new Colision(0), null, null, new Colision(0), null, null, new Colision(0), new Colision(0), new Colision(0) },
+				{ null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, new Colision(0), new Colision(0), new Colision(0), null, new Colision(0), null, new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
+				{ null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, new Colision(0), null, null, null, new Colision(0), null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
+				{ new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
+				{ new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
+				{ new Spawn(31,0), null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) }
+				  };
+		return tab;
+	}
 	public static void setPartida(ElementosPartida p1) {
 		p=p1;;
 	}
-	public static UnidadBD[][] tablero=//32x32, hay que meter manualmente las colisiones
 	
+	
+	/*
+	public static UnidadBD[][] tablero=
 	{  
-	{ new SoldadoRaso(0,0), new TanqueEnemigo(0,1), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new SpawnEnemigo(0,31) },
+	{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new SpawnEnemigo(0,31) },
 	{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, null, null, null, null, new Colision(0) },
 	{ null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, null, null, null, new Colision(0), null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0) },
 	{ null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, new Colision(0), null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null },
@@ -99,7 +137,8 @@ public class Partida extends JDialog{
 	{ new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
 	{ new Spawn(31,0), null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) }
 	  };
-
+	}
+	*/
 		/*Como queda con las colisiones a modo de array
 		{  
 		{ *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, s },
@@ -169,7 +208,7 @@ public class Partida extends JDialog{
 	 * @throws IOException 
 	 */
 
-	public Partida(LogicaBatallas.ElementosPartida p,LogicaBatallas.LogicaPartida lp) throws IOException {
+	public Partida(LogicaBatallas.ElementosPartida p,LogicaBatallas.ArraysPartida lp) throws IOException {
 		Partida.p=p;
 		this.lp=lp;
 		this.initialize();
@@ -229,7 +268,31 @@ public class Partida extends JDialog{
 					UnidadActual.atacar(xobj,yobj);
 					UnidadActual.setAcciones(UnidadActual.getAcciones()-1);
 					actualiza();
-		        System.out.println("se ha atacado a la unidad de las coordenadas X="+xobj+" y="+yobj);}
+					if(Ventanas.Partida.getUnidadObjetivo().getSalud()<=0 && Ventanas.Partida.getUnidadObjetivo() instanceof SpawnEnemigo){
+						JFrame frame=new JFrame();
+						Object[] options = {"OK"};
+					    int n = JOptionPane.showOptionDialog(frame,
+				                "Has ganado!","Felicidades!",
+				                JOptionPane.PLAIN_MESSAGE,
+				                JOptionPane.QUESTION_MESSAGE,
+				                null,
+				                options,
+				                options[0]);
+					    
+					    setVisible(false); //FIXME poner aqui el codigo de BD remoto
+					    if(p.getUsuario2()!=null){
+					    BD.PartidaEliminar(BD.usarBD(BD.initBD("Local")), p);
+					    MenuPrincipal mp=new MenuPrincipal();
+					    mp.setVisible(true);
+					    }
+					    else{
+						    BD.PartidaLocalEliminar(BD.usarBD(BD.initBD("Local")), p);
+						    MenuPrincipal mp=new MenuPrincipal();
+						    mp.setVisible(true);
+						    }
+					}
+					actualiza();
+		        System.out.println("se ha atacado a la unidad de las coordenadas X="+xobj+" y="+yobj);} //FIXME quitar
 			}
 			else if(p.getTurno()==1){
 				if(tablero[xobj][yobj]==null){}
@@ -237,6 +300,23 @@ public class Partida extends JDialog{
 				else if(tablero[xobj][yobj] instanceof UnidadAliada){
 					UnidadObjetivo=tablero[xobj][yobj];
 					UnidadActual.atacar(xobj,yobj);
+					actualiza();
+					if(Ventanas.Partida.getUnidadObjetivo().getSalud()<=0 && Ventanas.Partida.getUnidadObjetivo() instanceof Spawn){
+						JFrame frame=new JFrame();
+						Object[] options = {"OK"};
+					    int n = JOptionPane.showOptionDialog(frame,
+				                "Has ganado!","Felicidades!",
+				                JOptionPane.PLAIN_MESSAGE,
+				                JOptionPane.QUESTION_MESSAGE,
+				                null,
+				                options,
+				                options[0]);
+					    setVisible(false);
+					    BD.PartidaEliminar(BD.usarBD(BD.initBD("Local")), p);
+					    MenuPrincipal mp=new MenuPrincipal();
+					    mp.setVisible(true);
+
+					}
 					UnidadActual.setAcciones(UnidadActual.getAcciones()-1);
 		        System.out.println("se ha atacado a la unidad de las coordenadas X="+xobj+" y="+yobj);}
 			}
@@ -250,21 +330,35 @@ public class Partida extends JDialog{
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {	
-				//if()FIXME meter aqui si el seundo usuario es null que meta en BD partida local
+			public void mouseClicked(MouseEvent e) {
 				if(p.getUsuario2()==null){
+					
+					
 				BD.PartidaUpdate1J(BD.usarBD(BD.initBD("Local")),p);
+				BD.SoldadosLocalEliminar(BD.usarBD(BD.initBD("Local")),p);
+				for(UnidadBD u:lp.getListaAliados()){
+					BD.UnidadesInsertLocal(BD.usarBD(BD.initBD("Local")),u);}
+				for(UnidadBD u:lp.getListaEnemigos()){
+					BD.UnidadesInsertLocal(BD.usarBD(BD.initBD("Local")),u);}
 				setVisible(false);
 				MenuPrincipal mp=new MenuPrincipal();
 				mp.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				mp.setVisible(true);
 				}
+				
 				else{
-				BD.PartidaUpdate(BD.usarBD(BD.initBD("Local")),p);//FIXME cambiar la conexion
+					
+				BD.PartidaUpdate(BD.usarBD(BD.initBD("Local")),p);
+				BD.SoldadosEliminar(BD.usarBD(BD.initBD("Local")),p);
+				for(UnidadBD u:lp.getListaAliados()){
+					BD.UnidadesInsert(BD.usarBD(BD.initBD("Local")),u);}
+				for(UnidadBD u:lp.getListaEnemigos()){
+					BD.UnidadesInsert(BD.usarBD(BD.initBD("Local")),u);}
 				setVisible(false);
 				MenuPrincipal mp=new MenuPrincipal();
 				mp.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				mp.setVisible(true);}
+				mp.setVisible(true);
+					}
 			}
 		});
 		btnGuardar.setBounds(30, 298, 101, 23);
@@ -762,11 +856,11 @@ public class Partida extends JDialog{
 
 	
 	
-	public LogicaBatallas.LogicaPartida getLp() {
+	public LogicaBatallas.ArraysPartida getLp() {
 		return lp;
 	}
 
-	public void setLp(LogicaBatallas.LogicaPartida lp) {
+	public void setLp(LogicaBatallas.ArraysPartida lp) {
 		this.lp = lp;
 	}
 

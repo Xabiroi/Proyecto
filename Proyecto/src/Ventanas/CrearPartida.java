@@ -56,7 +56,7 @@ public class CrearPartida extends JDialog{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				Ventanas.Partida p=null;
-				LogicaBatallas.LogicaPartida lb=new LogicaBatallas.LogicaPartida();
+				LogicaBatallas.ArraysPartida lb=new LogicaBatallas.ArraysPartida();
 				LogicaBatallas.ElementosPartida p1=new LogicaBatallas.ElementosPartida();
 				try {
 					p = new Ventanas.Partida(p1, lb);

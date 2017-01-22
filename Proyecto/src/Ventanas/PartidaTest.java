@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import LogicaBatallas.ElementosPartida;
-import LogicaBatallas.LogicaPartida;
+import LogicaBatallas.ArraysPartida;
 import UnidadesAmigas.SoldadoRaso;
 import UnidadesAmigas.Spawn;
 import UnidadesEnemigas.SoldadoRasoEnemigo;

@@ -195,7 +195,7 @@ public class MenuMultijugador extends JDialog{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				Ventanas.Partida p=null;
-				LogicaBatallas.LogicaPartida lb=new LogicaBatallas.LogicaPartida();
+				LogicaBatallas.ArraysPartida lb=new LogicaBatallas.ArraysPartida();
 				
 				LogicaBatallas.ElementosPartida p1=new LogicaBatallas.ElementosPartida();
 				
@@ -305,14 +305,18 @@ public class MenuMultijugador extends JDialog{
 				//TODO resolver lo de static
 				lb.setListaEnemigos(UnidadesEnemigas);
 				lb.setListaAliados(UnidadesAliadas);
-				p1=BD.PartidaSelect(BD.usarBD(BD.initBD("Local")), "usuario1='"+Juego.getLM().getUsuario().getNombre()+"' or usuario2='"+Juego.getLM().getUsuario().getNombre()+"'").get(0);
-				
+				p1=BD.PartidaSelect(BD.usarBD(BD.initBD("Local")), "partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'").get(0);//FIXMe erro aqui(?) comprobar si solucionado
+				UnidadBD[][] tablero1=Ventanas.Partida.getTablero();
+				for(UnidadAliada u:lb.getListaAliados()){tablero1[u.getCordX()][u.getCordY()]=u;}
+				for(UnidadEnemiga u:lb.getListaEnemigos()){tablero1[u.getCordX()][u.getCordY()]=u;}
 				
 				
 				
 				
 				try {
 					p = new Ventanas.Partida(p1,lb);
+					p.setTablero(Partida.crearTablero());
+					p.setTablero(tablero1);
 					p.setSize(965, 940);
 					p.setResizable(false);
 				} catch (IOException e) {
@@ -331,7 +335,7 @@ public class MenuMultijugador extends JDialog{
 		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				frame.setVisible(false);
+				setVisible(false);
 				MenuPrincipal mp=new MenuPrincipal();
 				mp.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				mp.setVisible(true);

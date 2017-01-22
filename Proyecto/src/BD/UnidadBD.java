@@ -71,23 +71,6 @@ public class UnidadBD implements Cloneable{
 
 	public void comprobarMuerto(){
 		if(Ventanas.Partida.getUnidadObjetivo().getSalud()<=0){
-			if(Ventanas.Partida.getUnidadObjetivo().getSalud()<=0 && (Ventanas.Partida.getUnidadObjetivo() instanceof Spawn || Ventanas.Partida.getUnidadObjetivo() instanceof SpawnEnemigo)){
-				JFrame frame=new JFrame();
-				Object[] options = {"OK"};
-			    int n = JOptionPane.showOptionDialog(frame,
-		                "Has ganado!","Felicidades!",
-		                JOptionPane.PLAIN_MESSAGE,
-		                JOptionPane.QUESTION_MESSAGE,
-		                null,
-		                options,
-		                options[0]);
-			    //FIXME se cierra el programa, hay que hacer que se cree el menu principal y borrar la partida
-			    //setVisible(false);
-			    MenuPrincipal mp=new MenuPrincipal();
-				
-				
-				
-			}
 		UnidadBD[][] a=Ventanas.Partida.tablero;
 		a[Ventanas.Partida.getUnidadObjetivo().getCordX()][Ventanas.Partida.getUnidadObjetivo().getCordY()]=null;
 		Ventanas.Partida.setTablero(a);

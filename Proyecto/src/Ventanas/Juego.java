@@ -20,7 +20,6 @@ import javax.swing.JTextField;
 
 import BD.BD;
 import LoginData.Usuario;
-import LoginGui.VentanaContraseña;
 import LoginGui.VentanaRegistro;
 import LoginLogica.LoginManager;
 import java.awt.Font;
@@ -171,6 +170,12 @@ public class Juego{
 	
 	JButton btnCancelar = new JButton("Salir");
 	btnCancelar.setBounds(482, 5, 100, 23);//FIXME system.exit(0);
+	btnCancelar.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			System.exit(0);
+		}
+	});
 	pnlBotones.add(btnCancelar);
 	
 	JButton btnRegistrar = new JButton("Registrar");
@@ -185,7 +190,7 @@ public class Juego{
 		}
 	});
 	pnlBotones.add(btnRegistrar);
-	
+	/*
 	JButton btnRecuperar = new JButton("Recuperar");
 	btnRecuperar.setBounds(702, 5, 100, 23);
 	btnRecuperar.addMouseListener(new MouseAdapter() {
@@ -196,6 +201,6 @@ public class Juego{
 			dialog.setVisible(true);
 		}
 	});
-	pnlBotones.add(btnRecuperar);
+	pnlBotones.add(btnRecuperar);*/
 }
 }

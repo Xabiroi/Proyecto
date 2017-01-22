@@ -114,7 +114,7 @@ panel.add(label);
 				}
 			});
 		 getContentPane().add(btnMultijuador);
-		
+	/*	
 		JButton btnOpciones = new JButton("Opciones");
 		btnOpciones.setBounds(256, 294, 173, 23);
 		btnOpciones.addMouseListener(new MouseAdapter() {
@@ -127,15 +127,14 @@ panel.add(label);
 				}
 			});
 		 getContentPane().add(btnOpciones);
-		
+		*/
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.setBounds(256, 353, 173, 23);
 		btnSalir.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					
-					setVisible(false);
-					getDefaultCloseOperation();
+					System.exit(0);
+
 				}
 			});
 		 getContentPane().add(btnSalir);

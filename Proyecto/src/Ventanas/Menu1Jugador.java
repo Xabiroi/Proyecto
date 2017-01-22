@@ -16,6 +16,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import BD.BD;
+import BD.UnidadBD;
+import LogicaBatallas.ElementosPartida;
+import UnidadesAmigas.Bazooka;
+import UnidadesAmigas.Francotirador;
+import UnidadesAmigas.Semioruga;
+import UnidadesAmigas.SoldadoRaso;
+import UnidadesAmigas.Tanque;
+import UnidadesAmigas.UnidadAliada;
+import UnidadesEnemigas.BazookaEnemigo;
+import UnidadesEnemigas.FrancotiradorEnemigo;
+import UnidadesEnemigas.SemiorugaEnemigo;
+import UnidadesEnemigas.SoldadoRasoEnemigo;
+import UnidadesEnemigas.TanqueEnemigo;
+import UnidadesEnemigas.UnidadEnemiga;
 
 
 
@@ -173,19 +187,136 @@ public class Menu1Jugador extends JDialog{
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
 					Ventanas.Partida p=null;
-					//TODO añadir las recuperaciones de la base de datos para la partida (soldados y asi)
-					LogicaBatallas.LogicaPartida lb=new LogicaBatallas.LogicaPartida();
+					LogicaBatallas.ArraysPartida lb=new LogicaBatallas.ArraysPartida();
+					
 					LogicaBatallas.ElementosPartida p1=new LogicaBatallas.ElementosPartida();
-				//	lb.setListaAliados(listaAliados);//FIXME hay que cambiar la parte de BD de soldados para poder distinguir de que equipo son
-				//	lb.setListaEnemigos(listaEnemigos);
-					p1=BD.PartidaSelect1J(BD.usarBD(BD.initBD("Local")), "usuario1='"+Juego.getLM().getUsuario().getNombre()+"'").get(0);
+					
+					ArrayList<UnidadBD> Unidades=BD.UnidadBDSelectlocal(BD.usarBD(BD.initBD("Local")), "Partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'");
+					ArrayList<UnidadBD> UnidadesAliadas1=new ArrayList<UnidadBD>();
+					for(UnidadBD u:Unidades)if(u.getEquipo()==1){UnidadesAliadas1.add(u);}
+					ArrayList<UnidadBD> UnidadesEnemigas1=new ArrayList<UnidadBD>();
+					for(UnidadBD u:Unidades)if(u.getEquipo()==2){UnidadesEnemigas1.add(u);}
 					
 					
 					
+					ArrayList<UnidadAliada> UnidadesAliadas=new ArrayList<UnidadAliada>();
+				
+					ArrayList<UnidadEnemiga> UnidadesEnemigas=new ArrayList<UnidadEnemiga>();
+
+					
+					//TODO Comprobar que funciona bien (JTESTUNIT)
+					
+					for(UnidadBD u:UnidadesAliadas1){
+						String nombre=null;
+						nombre=u.getNombre();
+						switch(nombre){
+						case "Soldado":SoldadoRaso s=new SoldadoRaso(u.getCordX(),u.getCordY());
+						s.setArma(u.getArma());
+						s.setArmas(u.getArmas());
+						s.setAcciones(u.getAcciones());
+						s.setSalud(u.getSalud());
+						UnidadesAliadas.add(s);
+						break;
+						case "Bazooka":Bazooka b=new Bazooka(u.getCordX(),u.getCordY());
+						b.setArma(u.getArma());
+						b.setArmas(u.getArmas());
+						b.setAcciones(u.getAcciones());
+						b.setSalud(u.getSalud());
+						UnidadesAliadas.add(b);
+						break;
+						case "Francotirador":Francotirador f=new Francotirador(u.getCordX(),u.getCordY());
+						f.setArma(u.getArma());
+						f.setArmas(u.getArmas());
+						f.setAcciones(u.getAcciones());
+						f.setSalud(u.getSalud());
+						UnidadesAliadas.add(f);
+						break;
+						case "Tanque":Tanque t=new Tanque(u.getCordX(),u.getCordY());
+						t.setArma(u.getArma());
+						t.setArmas(u.getArmas());
+						t.setAcciones(u.getAcciones());
+						t.setSalud(u.getSalud());
+						UnidadesAliadas.add(t);
+						break;
+						case "Semioruga":Semioruga se=new Semioruga(u.getCordX(),u.getCordY());
+						se.setArma(u.getArma());
+						se.setArmas(u.getArmas());
+						se.setAcciones(u.getAcciones());
+						se.setSalud(u.getSalud());
+						UnidadesAliadas.add(se);
+						break;
+						default:break;
+
+						}
+						
+						
+						
+						
+					}
+					
+					for(UnidadBD u:UnidadesEnemigas1){
+						String nombre=null;
+						nombre=u.getNombre();
+						switch(nombre){
+						case "Soldado":SoldadoRasoEnemigo s=new SoldadoRasoEnemigo(u.getCordX(),u.getCordY());
+						s.setArma(u.getArma());
+						s.setArmas(u.getArmas());
+						s.setAcciones(u.getAcciones());
+						s.setSalud(u.getSalud());
+						UnidadesEnemigas.add(s);
+						break;
+						case "Bazooka":BazookaEnemigo b=new BazookaEnemigo(u.getCordX(),u.getCordY());
+						b.setArma(u.getArma());
+						b.setArmas(u.getArmas());
+						b.setAcciones(u.getAcciones());
+						b.setSalud(u.getSalud());
+						UnidadesEnemigas.add(b);
+						break;
+						case "Francotirador":FrancotiradorEnemigo f=new FrancotiradorEnemigo(u.getCordX(),u.getCordY());
+						f.setArma(u.getArma());
+						f.setArmas(u.getArmas());
+						f.setSalud(u.getSalud());
+						f.setAcciones(u.getAcciones());
+						UnidadesEnemigas.add(f);
+						break;
+						case "Tanque":TanqueEnemigo t=new TanqueEnemigo(u.getCordX(),u.getCordY());
+						t.setArma(u.getArma());
+						t.setArmas(u.getArmas());
+						t.setAcciones(u.getAcciones());
+						t.setSalud(u.getSalud());
+						UnidadesEnemigas.add(t);
+						break;
+						case "Semioruga":SemiorugaEnemigo se=new SemiorugaEnemigo(u.getCordX(),u.getCordY());
+						se.setArma(u.getArma());
+						se.setArmas(u.getArmas());
+						se.setAcciones(u.getAcciones());
+						se.setSalud(u.getSalud());
+						UnidadesEnemigas.add(se);
+						break;
+						default:break;
+
+						}
+						
+						
+						
+						
+					}
+					
+					
+					
+					//TODO resolver lo de static
+					lb.setListaEnemigos(UnidadesEnemigas);
+					lb.setListaAliados(UnidadesAliadas);
+					p1=BD.PartidaSelect1J(BD.usarBD(BD.initBD("Local")), "partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'").get(0);//FIXME aqui daria el error de que partida coge
+					UnidadBD[][] tablero1=Ventanas.Partida.getTablero();
+					for(UnidadAliada u:lb.getListaAliados()){tablero1[u.getCordX()][u.getCordY()]=u;}
+					for(UnidadEnemiga u:lb.getListaEnemigos()){tablero1[u.getCordX()][u.getCordY()]=u;}
 					
 					
 					try {
 						p = new Ventanas.Partida(p1,lb);
+						p.setTablero(Partida.crearTablero());
+						p.setTablero(tablero1);
 						p.setSize(965, 940);
 						p.setResizable(false);
 					} catch (IOException e) {

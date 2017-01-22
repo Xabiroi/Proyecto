@@ -7,7 +7,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import LogicaBatallas.ElementosPartida;
-import LogicaBatallas.LogicaPartida;
+import LogicaBatallas.ArraysPartida;
 
 public class test {
 
@@ -45,7 +45,7 @@ public class test {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Partida j = null;
 		try {
-			j = new Partida(new ElementosPartida(), new LogicaPartida());
+			j = new Partida(new ElementosPartida(), new ArraysPartida());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

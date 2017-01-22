@@ -135,6 +135,12 @@ public class VentanaRegistro extends JDialog {
 			{
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
+				cancelButton.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						System.exit(0);
+					}
+				});
 				buttonPane.add(cancelButton);
 			}
 		}
