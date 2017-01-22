@@ -154,7 +154,7 @@ public class UnidadBD implements Cloneable{
 	 * 
 	 * 
 	 */
-//Si el algoritmo devuelve null abrir una ventana de error
+
 
 public UnidadBD[][] AlgoritmoPathfinding(int Movimientos,int x,int y,int xdest,int ydest, UnidadBD[][] Aux){
 	if(Aux[xdest][ydest] instanceof Colision){return null;}
@@ -164,22 +164,29 @@ public UnidadBD[][] AlgoritmoPathfinding(int Movimientos,int x,int y,int xdest,i
 
 	if(Movimientos==0){
 		//
-		if(xdest==x && ydest==y){aAux[xdest][ydest]=this;limpiarColisiones(aAux);return aAux;}
+		if(xdest==x && ydest==y){aAux[xdest][ydest]=this;aAux[this.getCordX()][this.getCordY()]=null;this.setCordX(xdest);this.setCordY(ydest);this.setAcciones(this.getAcciones()-1);limpiarColisiones(aAux);return aAux;}
+		else{limpiarColisiones(aAux);return aAux;}
 	}
-	else if(Math.abs(x-p.getX())+Math.abs(y-p.getY())>Movimientos){	
+	else if(Math.abs(x-p.getX())+Math.abs(y-p.getY())>Movimientos){JFrame frame=new JFrame();
+	Object[] options = {"OK"};
+    int n = JOptionPane.showOptionDialog(frame,
+            "¡No esta permitido moverse tanto!","Cuidado",
+            JOptionPane.PLAIN_MESSAGE,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            options,
+            options[0]);
 	}
 
 	
 	else{
 
-		if(p==null){return null;}
-
-		if((int)p.getX()==xdest && (int)p.getY()==ydest){aAux[xdest][ydest]=this;limpiarColisiones(aAux);return aAux;}
+		if((int)p.getX()==xdest && (int)p.getY()==ydest){aAux[xdest][ydest]=this;aAux[this.getCordX()][this.getCordY()]=null;this.setCordX(xdest);this.setCordY(ydest);this.setAcciones(this.getAcciones()-1);limpiarColisiones(aAux);return aAux;}
 		
 		else if(((int)p.getX()!=xdest || (int)p.getY()!=ydest)){
 
-			aAux[(int) p.getX()][(int) p.getY()]=aAux[x][y];
-			
+			//aAux[(int) p.getX()][(int) p.getY()]=aAux[x][y];
+			if(aAux[x][y]==null)
 			aAux[x][y]=new Colision(1);
 
 			AlgoritmoPathfinding(Movimientos-1,(int)p.getX(),(int)p.getY(),xdest,ydest,aAux);

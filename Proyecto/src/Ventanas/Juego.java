@@ -129,15 +129,9 @@ public class Juego{
 	btnAceptar.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			
-			
 
-
-			
-			
-			
-			
-			//FIXME base de datos da error en crear la base de datos con nombre "Local" (hay que elegir otro nombre) 
+		
+			//FIXME base de datos 
 			Connection c=BD.initBD( "Local" );
 			Statement st=BD.usarBD(c);
 			BD.usarCrearTablasBD(c);

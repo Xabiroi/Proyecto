@@ -157,6 +157,36 @@ public class Partida extends JDialog{
 		this.initialize();
 	}
 
+	
+	
+	   
+	 /*
+		public static RefrecarPantalla refrescarPantalla;
+		public static class RefrecarPantalla extends Thread{
+			private boolean X = true;
+			public void Stop(){
+				X = false;
+				interrupt();
+			}
+			public void run(){
+				int decimas = 0;
+				while (X){
+					decimas++;
+					if (decimas %10 == 0){ //un segundo
+						Partida.actualiza();
+					}
+				}
+				logger.log(Level.INFO, "Final de hilo de actualización de mapa");
+			}
+		}
+		
+	   */
+	
+	
+	
+	
+	
+	
 
 	private void initialize() throws IOException {
 		new JFrame();
@@ -180,19 +210,10 @@ public class Partida extends JDialog{
 					public void actionPerformed(ActionEvent arg0)  {	
 						if(tablero[xobj][yobj]==null){
 							try{
-						UnidadActual.AlgoritmoPathfinding(UnidadActual.getDistancia(), UnidadActual.getCordX(), UnidadActual.getCordY(), xobj, yobj, tablero);
-							}catch(NullPointerException e){
-							JFrame frame=new JFrame();
-							Object[] options = {"OK"};
-						    int n = JOptionPane.showOptionDialog(frame,
-					                "¡No esta permitido moverse tanto!","Cuidado",
-					                JOptionPane.PLAIN_MESSAGE,
-					                JOptionPane.QUESTION_MESSAGE,
-					                null,
-					                options,
-					                options[0]);}
-						UnidadActual.setAcciones(UnidadActual.getAcciones()-1);}			
-				}
+						tablero=UnidadActual.AlgoritmoPathfinding(UnidadActual.getDistancia(), UnidadActual.getCordX(), UnidadActual.getCordY(), xobj, yobj, tablero);
+							}catch(NullPointerException e){}
+					//	UnidadActual.setAcciones(UnidadActual.getAcciones()-1);}			
+					}}
 				});
 			
 				 
