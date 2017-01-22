@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import BD.BD;
 import BD.UnidadBD;
+import LogicaBatallas.ArraysPartida;
 import LogicaBatallas.ElementosPartida;
 import UnidadesAmigas.Bazooka;
 import UnidadesAmigas.Francotirador;
@@ -309,14 +310,14 @@ public class Menu1Jugador extends JDialog{
 					lb.setListaAliados(UnidadesAliadas);
 					p1=BD.PartidaSelect1J(BD.usarBD(BD.initBD("Local")), "partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'").get(0);//FIXME aqui daria el error de que partida coge
 					UnidadBD[][] tablero1=Ventanas.Partida.getTablero();
-					for(UnidadAliada u:lb.getListaAliados()){tablero1[u.getCordX()][u.getCordY()]=u;}
-					for(UnidadEnemiga u:lb.getListaEnemigos()){tablero1[u.getCordX()][u.getCordY()]=u;}
+					for(UnidadAliada u:ArraysPartida.getListaAliados()){tablero1[u.getCordX()][u.getCordY()]=u;}
+					for(UnidadEnemiga u:ArraysPartida.getListaEnemigos()){tablero1[u.getCordX()][u.getCordY()]=u;}
 					
 					
 					try {
 						p = new Ventanas.Partida(p1,lb);
-						p.setTablero(Partida.crearTablero());
-						p.setTablero(tablero1);
+						Partida.setTablero(Partida.crearTablero());
+						Partida.setTablero(tablero1);
 						p.setSize(965, 940);
 						p.setResizable(false);
 					} catch (IOException e) {

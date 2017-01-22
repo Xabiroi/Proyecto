@@ -10093,3 +10093,977 @@
   <thread>12</thread>
   <message>Error en update de BD	delete from soldados where Partida='avsb'</message>
 </record>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2017-01-22T14:13:24</date>
+  <millis>1485090804693</millis>
+  <sequence>0</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:13:24</date>
+  <millis>1485090804719</millis>
+  <sequence>1</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Creada base de datos</message>
+</record>
+<record>
+  <date>2017-01-22T14:13:27</date>
+  <millis>1485090807407</millis>
+  <sequence>2</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:13:27</date>
+  <millis>1485090807417</millis>
+  <sequence>3</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Creada base de datos</message>
+</record>
+<record>
+  <date>2017-01-22T14:13:27</date>
+  <millis>1485090807424</millis>
+  <sequence>4</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from usuario where NOMBRE='a' AND CONTRASEÑA='a'</message>
+</record>
+<record>
+  <date>2017-01-22T14:13:29</date>
+  <millis>1485090809260</millis>
+  <sequence>5</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:13:29</date>
+  <millis>1485090809263</millis>
+  <sequence>6</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where usuario1='a' OR usuario2='a'</message>
+</record>
+<record>
+  <date>2017-01-22T14:13:31</date>
+  <millis>1485090811940</millis>
+  <sequence>7</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:13:31</date>
+  <millis>1485090811943</millis>
+  <sequence>8</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from soldados where Partida='avsfff'</message>
+</record>
+<record>
+  <date>2017-01-22T14:13:31</date>
+  <millis>1485090811957</millis>
+  <sequence>9</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:13:31</date>
+  <millis>1485090811961</millis>
+  <sequence>10</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where partida='avsfff'</message>
+</record>
+<record>
+  <date>2017-01-22T14:13:58</date>
+  <millis>1485090838802</millis>
+  <sequence>11</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:13:58</date>
+  <millis>1485090838826</millis>
+  <sequence>12</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD modificada 1 fila	update partidaMultijugador set Turno=0,  dineroAliado=110,  dineroEnemigo=200,  puntuacionAliado='0',  puntuacionEnemigo='0',  fechapartida='22012017' where Partida='avsfff';</message>
+</record>
+<record>
+  <date>2017-01-22T14:13:58</date>
+  <millis>1485090838833</millis>
+  <sequence>13</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:13:58</date>
+  <millis>1485090838835</millis>
+  <sequence>14</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD modificada 0 fila	delete from soldados where Partida='avsfff'</message>
+</record>
+<record>
+  <date>2017-01-22T14:13:58</date>
+  <millis>1485090838835</millis>
+  <sequence>15</sequence>
+  <logger>BD.BD</logger>
+  <level>SEVERE</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Error en update de BD	delete from soldados where Partida='avsfff'</message>
+</record>
+<record>
+  <date>2017-01-22T14:14:01</date>
+  <millis>1485090841187</millis>
+  <sequence>16</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:14:01</date>
+  <millis>1485090841192</millis>
+  <sequence>17</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where usuario1='a' OR usuario2='a'</message>
+</record>
+<record>
+  <date>2017-01-22T14:14:03</date>
+  <millis>1485090843376</millis>
+  <sequence>18</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:14:03</date>
+  <millis>1485090843379</millis>
+  <sequence>19</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from soldados where Partida='avsb'</message>
+</record>
+<record>
+  <date>2017-01-22T14:14:03</date>
+  <millis>1485090843394</millis>
+  <sequence>20</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:14:03</date>
+  <millis>1485090843398</millis>
+  <sequence>21</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where partida='avsb'</message>
+</record>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2017-01-22T14:16:49</date>
+  <millis>1485091009253</millis>
+  <sequence>0</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:16:49</date>
+  <millis>1485091009281</millis>
+  <sequence>1</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Creada base de datos</message>
+</record>
+<record>
+  <date>2017-01-22T14:16:52</date>
+  <millis>1485091012031</millis>
+  <sequence>2</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:16:52</date>
+  <millis>1485091012039</millis>
+  <sequence>3</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Creada base de datos</message>
+</record>
+<record>
+  <date>2017-01-22T14:16:52</date>
+  <millis>1485091012043</millis>
+  <sequence>4</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from usuario where NOMBRE='a' AND CONTRASEÑA='a'</message>
+</record>
+<record>
+  <date>2017-01-22T14:16:53</date>
+  <millis>1485091013884</millis>
+  <sequence>5</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:16:53</date>
+  <millis>1485091013891</millis>
+  <sequence>6</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where usuario1='a' OR usuario2='a'</message>
+</record>
+<record>
+  <date>2017-01-22T14:16:56</date>
+  <millis>1485091016473</millis>
+  <sequence>7</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:16:56</date>
+  <millis>1485091016477</millis>
+  <sequence>8</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from soldados where Partida='avsb'</message>
+</record>
+<record>
+  <date>2017-01-22T14:16:56</date>
+  <millis>1485091016490</millis>
+  <sequence>9</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:16:56</date>
+  <millis>1485091016495</millis>
+  <sequence>10</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where partida='avsb'</message>
+</record>
+<record>
+  <date>2017-01-22T14:17:44</date>
+  <millis>1485091064960</millis>
+  <sequence>11</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:17:44</date>
+  <millis>1485091064989</millis>
+  <sequence>12</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD modificada 1 fila	update partidaMultijugador set Turno=0,  dineroAliado=85,  dineroEnemigo=300,  puntuacionAliado='0',  puntuacionEnemigo='0',  fechapartida='22012017' where Partida='avsb';</message>
+</record>
+<record>
+  <date>2017-01-22T14:17:45</date>
+  <millis>1485091065001</millis>
+  <sequence>13</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:17:45</date>
+  <millis>1485091065008</millis>
+  <sequence>14</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD modificada 0 fila	delete from soldados where Partida='avsb'</message>
+</record>
+<record>
+  <date>2017-01-22T14:17:45</date>
+  <millis>1485091065009</millis>
+  <sequence>15</sequence>
+  <logger>BD.BD</logger>
+  <level>SEVERE</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Error en update de BD	delete from soldados where Partida='avsb'</message>
+</record>
+<record>
+  <date>2017-01-22T14:17:49</date>
+  <millis>1485091069154</millis>
+  <sequence>16</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:17:49</date>
+  <millis>1485091069157</millis>
+  <sequence>17</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where usuario1='a' OR usuario2='a'</message>
+</record>
+<record>
+  <date>2017-01-22T14:17:51</date>
+  <millis>1485091071884</millis>
+  <sequence>18</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:17:51</date>
+  <millis>1485091071886</millis>
+  <sequence>19</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from soldados where Partida='avsfff'</message>
+</record>
+<record>
+  <date>2017-01-22T14:17:51</date>
+  <millis>1485091071893</millis>
+  <sequence>20</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:17:51</date>
+  <millis>1485091071895</millis>
+  <sequence>21</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where partida='avsfff'</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:08</date>
+  <millis>1485091088278</millis>
+  <sequence>22</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:08</date>
+  <millis>1485091088314</millis>
+  <sequence>23</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD modificada 1 fila	update partidaMultijugador set Turno=0,  dineroAliado=110,  dineroEnemigo=200,  puntuacionAliado='0',  puntuacionEnemigo='0',  fechapartida='22012017' where Partida='avsfff';</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:08</date>
+  <millis>1485091088321</millis>
+  <sequence>24</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:08</date>
+  <millis>1485091088324</millis>
+  <sequence>25</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD modificada 0 fila	delete from soldados where Partida='avsfff'</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:08</date>
+  <millis>1485091088324</millis>
+  <sequence>26</sequence>
+  <logger>BD.BD</logger>
+  <level>SEVERE</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Error en update de BD	delete from soldados where Partida='avsfff'</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:09</date>
+  <millis>1485091089383</millis>
+  <sequence>27</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:09</date>
+  <millis>1485091089388</millis>
+  <sequence>28</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where usuario1='a' OR usuario2='a'</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:12</date>
+  <millis>1485091092006</millis>
+  <sequence>29</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:12</date>
+  <millis>1485091092009</millis>
+  <sequence>30</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from soldados where Partida='avsb'</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:12</date>
+  <millis>1485091092022</millis>
+  <sequence>31</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:12</date>
+  <millis>1485091092026</millis>
+  <sequence>32</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where partida='avsb'</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:21</date>
+  <millis>1485091101257</millis>
+  <sequence>33</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:21</date>
+  <millis>1485091101280</millis>
+  <sequence>34</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD modificada 1 fila	update partidaMultijugador set Turno=1,  dineroAliado=135,  dineroEnemigo=350,  puntuacionAliado='0',  puntuacionEnemigo='0',  fechapartida='22012017' where Partida='avsb';</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:21</date>
+  <millis>1485091101292</millis>
+  <sequence>35</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:21</date>
+  <millis>1485091101296</millis>
+  <sequence>36</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD modificada 0 fila	delete from soldados where Partida='avsb'</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:21</date>
+  <millis>1485091101298</millis>
+  <sequence>37</sequence>
+  <logger>BD.BD</logger>
+  <level>SEVERE</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Error en update de BD	delete from soldados where Partida='avsb'</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:23</date>
+  <millis>1485091103481</millis>
+  <sequence>38</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:23</date>
+  <millis>1485091103484</millis>
+  <sequence>39</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where usuario1='a' OR usuario2='a'</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:25</date>
+  <millis>1485091105517</millis>
+  <sequence>40</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:25</date>
+  <millis>1485091105519</millis>
+  <sequence>41</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from soldados where Partida='avsfff'</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:25</date>
+  <millis>1485091105525</millis>
+  <sequence>42</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:25</date>
+  <millis>1485091105528</millis>
+  <sequence>43</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where partida='avsfff'</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:51</date>
+  <millis>1485091131614</millis>
+  <sequence>44</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:51</date>
+  <millis>1485091131637</millis>
+  <sequence>45</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD modificada 1 fila	update partidaMultijugador set Turno=0,  dineroAliado=75,  dineroEnemigo=200,  puntuacionAliado='0',  puntuacionEnemigo='0',  fechapartida='22012017' where Partida='avsfff';</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:51</date>
+  <millis>1485091131648</millis>
+  <sequence>46</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:51</date>
+  <millis>1485091131651</millis>
+  <sequence>47</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD modificada 0 fila	delete from soldados where Partida='avsfff'</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:51</date>
+  <millis>1485091131652</millis>
+  <sequence>48</sequence>
+  <logger>BD.BD</logger>
+  <level>SEVERE</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Error en update de BD	delete from soldados where Partida='avsfff'</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:54</date>
+  <millis>1485091134335</millis>
+  <sequence>49</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:54</date>
+  <millis>1485091134338</millis>
+  <sequence>50</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where usuario1='a' OR usuario2='a'</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:56</date>
+  <millis>1485091136811</millis>
+  <sequence>51</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:56</date>
+  <millis>1485091136814</millis>
+  <sequence>52</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from soldados where Partida='avsb'</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:56</date>
+  <millis>1485091136823</millis>
+  <sequence>53</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:18:56</date>
+  <millis>1485091136826</millis>
+  <sequence>54</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaMultijugador where partida='avsb'</message>
+</record>
+<record>
+  <date>2017-01-22T14:19:03</date>
+  <millis>1485091143677</millis>
+  <sequence>55</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:19:03</date>
+  <millis>1485091143721</millis>
+  <sequence>56</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD modificada 1 fila	update partidaMultijugador set Turno=0,  dineroAliado=185,  dineroEnemigo=400,  puntuacionAliado='0',  puntuacionEnemigo='0',  fechapartida='22012017' where Partida='avsb';</message>
+</record>
+<record>
+  <date>2017-01-22T14:19:03</date>
+  <millis>1485091143728</millis>
+  <sequence>57</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:19:03</date>
+  <millis>1485091143730</millis>
+  <sequence>58</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD modificada 0 fila	delete from soldados where Partida='avsb'</message>
+</record>
+<record>
+  <date>2017-01-22T14:19:03</date>
+  <millis>1485091143730</millis>
+  <sequence>59</sequence>
+  <logger>BD.BD</logger>
+  <level>SEVERE</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Error en update de BD	delete from soldados where Partida='avsb'</message>
+</record>
+<record>
+  <date>2017-01-22T14:19:06</date>
+  <millis>1485091146247</millis>
+  <sequence>60</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:19:06</date>
+  <millis>1485091146250</millis>
+  <sequence>61</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaLocal where usuario1='a'</message>
+</record>
+<record>
+  <date>2017-01-22T14:19:08</date>
+  <millis>1485091148690</millis>
+  <sequence>62</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:19:08</date>
+  <millis>1485091148693</millis>
+  <sequence>63</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from soldadoslocal where Partida='avssdaf'</message>
+</record>
+<record>
+  <date>2017-01-22T14:19:08</date>
+  <millis>1485091148701</millis>
+  <sequence>64</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>Conectada base de datos Local</message>
+</record>
+<record>
+  <date>2017-01-22T14:19:08</date>
+  <millis>1485091148704</millis>
+  <sequence>65</sequence>
+  <logger>BD.BD</logger>
+  <level>INFO</level>
+  <class>BD.BD</class>
+  <method>log</method>
+  <thread>12</thread>
+  <message>BD	select * from partidaLocal where partida='avssdaf'</message>
+</record>
