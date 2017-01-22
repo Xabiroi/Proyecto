@@ -178,9 +178,20 @@ public class Partida extends JDialog{
 			public void mouseClicked(MouseEvent arg0) { 
 				btnMover.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0)  {	
-						if(tablero[xobj][yobj]==null){System.out.println("Es null");UnidadActual.Mover(xobj, yobj);UnidadActual.setAcciones(UnidadActual.getAcciones()-1);}//Habria que meter el algoritmo de pathfinding (todavia con el simple)}//FIXME cambiar esto
-			        System.out.println("se ha movido la unidad a las coordenadas X="+xobj+" y="+yobj);
-			        System.out.println("Count of listeners: " + ((JButton) arg0.getSource()).getActionListeners().length);//Cuantos actionlistener hay activos					
+						if(tablero[xobj][yobj]==null){
+							try{
+						UnidadActual.AlgoritmoPathfinding(UnidadActual.getDistancia(), UnidadActual.getCordX(), UnidadActual.getCordY(), xobj, yobj, tablero);
+							}catch(NullPointerException e){
+							JFrame frame=new JFrame();
+							Object[] options = {"OK"};
+						    int n = JOptionPane.showOptionDialog(frame,
+					                "¡No esta permitido moverse tanto!","Cuidado",
+					                JOptionPane.PLAIN_MESSAGE,
+					                JOptionPane.QUESTION_MESSAGE,
+					                null,
+					                options,
+					                options[0]);}
+						UnidadActual.setAcciones(UnidadActual.getAcciones()-1);}			
 				}
 				});
 			

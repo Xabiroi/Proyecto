@@ -125,10 +125,11 @@ public class UnidadBD implements Cloneable{
 		
 		UnidadBD[][] aux=Ventanas.Partida.getTablero();
 		if(aux[x][y]==null){
+		aux[x][y]=u;
 		aux[u.getCordX()][u.getCordY()]=null; 
 		u.setCordX(x);
 		u.setCordY(y);
-		aux[x][y]=u;
+		
 		Ventanas.Partida.setTablero(aux);
 		}else{int input = JOptionPane.showOptionDialog(null, "Elija otra posicion valida", "Aviso", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 		
@@ -154,6 +155,7 @@ public class UnidadBD implements Cloneable{
 	 * 
 	 */
 //Si el algoritmo devuelve null abrir una ventana de error
+
 public UnidadBD[][] AlgoritmoPathfinding(int Movimientos,int x,int y,int xdest,int ydest, UnidadBD[][] Aux){
 	if(Aux[xdest][ydest] instanceof Colision){return null;}
 	UnidadBD[][] aAux=Aux;
@@ -162,25 +164,24 @@ public UnidadBD[][] AlgoritmoPathfinding(int Movimientos,int x,int y,int xdest,i
 
 	if(Movimientos==0){
 		//
-		if(this.getCordX()==x && this.getCordY()==y){this.Mover(x, y);limpiarColisiones(aAux);return aAux;}
+		if(xdest==x && ydest==y){aAux[xdest][ydest]=this;limpiarColisiones(aAux);return aAux;}
 	}
-	else if(Math.abs(x-this.getCordX())>Movimientos || Math.abs(y-this.getCordY())>Movimientos){//TODO no se puede mover(una ventana)//Si devolviera null se pararia el aloritmo pero hay que comprobar si se para el FOR	
+	else if(Math.abs(x-p.getX())+Math.abs(y-p.getY())>Movimientos){	
 	}
-	else if(Math.abs(x-this.getCordX())+Math.abs(y-this.getCordY())>Movimientos){//TODO no se puede mover(una ventana o algo)		
-	}
+
 	
 	else{
 
 		if(p==null){return null;}
-		//comprobar
-		if(p.getX()==x &&p.getY()==y){this.Mover(x, y);limpiarColisiones(aAux);return aAux;}
-		//sino colocar colision y avanzar//Al inicio colision tipo 1 para saber que es el inicio
-		else if((p.getX()!=x ||p.getY()!=y)){
 
-				aAux[(int) p.getX()][(int) p.getY()]=aAux[x][y];
+		if((int)p.getX()==xdest && (int)p.getY()==ydest){aAux[xdest][ydest]=this;limpiarColisiones(aAux);return aAux;}
+		
+		else if(((int)p.getX()!=xdest || (int)p.getY()!=ydest)){
+
+			aAux[(int) p.getX()][(int) p.getY()]=aAux[x][y];
 			
 			aAux[x][y]=new Colision(1);
-			//aAux[][]=;
+
 			AlgoritmoPathfinding(Movimientos-1,(int)p.getX(),(int)p.getY(),xdest,ydest,aAux);
 
 		}
@@ -197,21 +198,17 @@ public UnidadBD[][] AlgoritmoPathfinding(int Movimientos,int x,int y,int xdest,i
 
 }
 
-
-/*
- *Se podria optimizar para priorizar los puntos que esten mas cerca con un algoritmo de ordenacion en cuanto a proximidad 
- * 
- * 
- */
 		public ArrayList<Point> comprobar(UnidadBD[][] a,int x,int y){
 			
 			ArrayList<Point> array=new ArrayList<Point>();
 			try{
-			if(a[x+1][y]==null){array.add(new Point(x+1,y));}
-			if(a[x-1][y]==null){array.add(new Point(x-1,y));}
-			if(a[x][y+1]==null){array.add(new Point(x,y+1));}
-			if(a[x][y-1]==null){array.add(new Point(x,y-1));}
-			}catch(NullPointerException e){return null;}
+			if(a[x+1][y]==null){array.add(new Point(x+1,y));}}catch(ArrayIndexOutOfBoundsException e){}
+			try{
+			if(a[x-1][y]==null){array.add(new Point(x-1,y));}}catch(ArrayIndexOutOfBoundsException e){}
+			try{
+			if(a[x][y+1]==null){array.add(new Point(x,y+1));}}catch(ArrayIndexOutOfBoundsException e){}
+			try{
+			if(a[x][y-1]==null){array.add(new Point(x,y-1));}}catch(ArrayIndexOutOfBoundsException e){}
 			return array;
 		}
 //FIXME cambiar todavia el metodo (No tocar)
