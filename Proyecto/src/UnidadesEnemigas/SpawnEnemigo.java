@@ -3,6 +3,7 @@ package UnidadesEnemigas;
 import javax.swing.JOptionPane;
 
 import BD.UnidadBD;
+import LogicaBatallas.ArraysPartida;
 import LogicaBatallas.ElementosPartida;
 
 public class SpawnEnemigo extends UnidadEnemiga{
@@ -13,13 +14,14 @@ public class SpawnEnemigo extends UnidadEnemiga{
 		this.y = y;
 	}
 
-public UnidadBD[][] CrearSoldadoRasoEnemigo(ElementosPartida ep){
+
+public UnidadBD[][] CrearSoldadoRasoEnemigo(ElementosPartida ep,ArraysPartida a1){
 	UnidadBD[][] a=Ventanas.Partida.getTablero();
-	if(a[0][30]==null && ep.getDineroEnemigo()>=35){a[0][1]=new SoldadoRasoEnemigo(0,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-35);return a;}
-	else if(a[1][30]==null && ep.getDineroEnemigo()>=35){a[1][1]=new SoldadoRasoEnemigo(1,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-35);return a;}
-	else if(a[2][30]==null && ep.getDineroEnemigo()>=35){a[2][1]=new SoldadoRasoEnemigo(2,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-35);return a;}
-	else if(a[3][30]==null && ep.getDineroEnemigo()>=35){a[3][1]=new SoldadoRasoEnemigo(3,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-35);return a;}
-	else if(a[3][31]==null && ep.getDineroEnemigo()>=35){a[3][0]=new SoldadoRasoEnemigo(3,31);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-35);return a;}
+	if(a[31][1]==null && ep.getDineroAliado()>=35){SoldadoRasoEnemigo s=new SoldadoRasoEnemigo(0,30);a[0][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-35);return a;}
+	else if(a[30][1]==null && ep.getDineroAliado()>=35){SoldadoRasoEnemigo s=new SoldadoRasoEnemigo(1,30);a[1][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-35);return a;}
+	else if(a[29][1]==null && ep.getDineroAliado()>=35){SoldadoRasoEnemigo s=new SoldadoRasoEnemigo(2,30);a[2][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-35);return a;}
+	else if(a[28][1]==null && ep.getDineroAliado()>=35){SoldadoRasoEnemigo s=new SoldadoRasoEnemigo(3,30);a[3][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-35);return a;}
+	else if(a[28][0]==null && ep.getDineroAliado()>=35){SoldadoRasoEnemigo s=new SoldadoRasoEnemigo(3,31);a[3][31]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-35);return a;}
 	
 	else{ int input = JOptionPane.showOptionDialog(null, "No se puede crear la unidad", "Aviso", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 
@@ -29,13 +31,13 @@ public UnidadBD[][] CrearSoldadoRasoEnemigo(ElementosPartida ep){
 		
 		return a;}
 }
-public UnidadBD[][] CrearBazookaEnemigo(ElementosPartida ep){
+public UnidadBD[][] CrearBazookaEnemigo(ElementosPartida ep,ArraysPartida a1){
 	UnidadBD[][] a=Ventanas.Partida.getTablero();
-	if(a[0][30]==null && ep.getDineroEnemigo()>=50){a[0][30]=new BazookaEnemigo(0,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
-	else if(a[1][30]==null && ep.getDineroEnemigo()>=50){a[1][30]=new BazookaEnemigo(1,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
-	else if(a[2][30]==null && ep.getDineroEnemigo()>=50){a[2][30]=new BazookaEnemigo(2,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
-	else if(a[3][30]==null && ep.getDineroEnemigo()>=50){a[3][30]=new BazookaEnemigo(3,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
-	else if(a[3][31]==null && ep.getDineroEnemigo()>=50){a[3][31]=new BazookaEnemigo(3,31);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
+	if(a[31][1]==null && ep.getDineroAliado()>=50){BazookaEnemigo s=new BazookaEnemigo(0,30);a[0][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
+	else if(a[30][1]==null && ep.getDineroAliado()>=50){BazookaEnemigo s=new BazookaEnemigo(1,30);a[1][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
+	else if(a[29][1]==null && ep.getDineroAliado()>=50){BazookaEnemigo s=new BazookaEnemigo(2,30);a[2][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
+	else if(a[28][1]==null && ep.getDineroAliado()>=50){BazookaEnemigo s=new BazookaEnemigo(3,30);a[3][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
+	else if(a[28][0]==null && ep.getDineroAliado()>=50){BazookaEnemigo s=new BazookaEnemigo(3,31);a[3][31]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
 	
 	else{ int input = JOptionPane.showOptionDialog(null, "No se puede crear la unidad", "Aviso", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 
@@ -45,13 +47,13 @@ public UnidadBD[][] CrearBazookaEnemigo(ElementosPartida ep){
 		
 		return a;}
 }
-public UnidadBD[][] CrearFrancotiradorEnemigo(ElementosPartida ep){
+public UnidadBD[][] CrearFrancotiradorEnemigo(ElementosPartida ep,ArraysPartida a1){
 	UnidadBD[][] a=Ventanas.Partida.getTablero();
-	if(a[0][30]==null && ep.getDineroEnemigo()>=50){a[0][30]=new FrancotiradorEnemigo(0,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
-	else if(a[1][30]==null && ep.getDineroEnemigo()>=50){a[1][30]=new FrancotiradorEnemigo(1,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
-	else if(a[2][30]==null && ep.getDineroEnemigo()>=50){a[2][30]=new FrancotiradorEnemigo(2,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
-	else if(a[3][30]==null && ep.getDineroEnemigo()>=50){a[3][30]=new FrancotiradorEnemigo(3,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
-	else if(a[3][31]==null && ep.getDineroEnemigo()>=50){a[3][31]=new FrancotiradorEnemigo(3,31);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
+	if(a[31][1]==null && ep.getDineroAliado()>=50){FrancotiradorEnemigo s=new FrancotiradorEnemigo(0,30);a[0][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
+	else if(a[30][1]==null && ep.getDineroAliado()>=50){FrancotiradorEnemigo s=new FrancotiradorEnemigo(1,30);a[1][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
+	else if(a[29][1]==null && ep.getDineroAliado()>=50){FrancotiradorEnemigo s=new FrancotiradorEnemigo(2,30);a[2][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
+	else if(a[28][1]==null && ep.getDineroAliado()>=50){FrancotiradorEnemigo s=new FrancotiradorEnemigo(3,30);a[3][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
+	else if(a[28][0]==null && ep.getDineroAliado()>=50){FrancotiradorEnemigo s=new FrancotiradorEnemigo(3,31);a[3][31]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
 	
 	else{ int input = JOptionPane.showOptionDialog(null, "No se puede crear la unidad", "Aviso", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 
@@ -61,13 +63,13 @@ public UnidadBD[][] CrearFrancotiradorEnemigo(ElementosPartida ep){
 		
 		return a;}
 }
-public UnidadBD[][] CrearTanqueEnemigo(ElementosPartida ep){
+public UnidadBD[][] CrearTanqueEnemigo(ElementosPartida ep,ArraysPartida a1){
 	UnidadBD[][] a=Ventanas.Partida.getTablero();
-	if(a[0][30]==null && ep.getDineroEnemigo()>=90){a[0][30]=new TanqueEnemigo(0,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-90);return a;}
-	else if(a[1][30]==null && ep.getDineroEnemigo()>=90){a[1][30]=new TanqueEnemigo(1,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-90);return a;}
-	else if(a[2][30]==null && ep.getDineroEnemigo()>=90){a[2][30]=new TanqueEnemigo(2,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-90);return a;}
-	else if(a[3][30]==null && ep.getDineroEnemigo()>=90){a[3][30]=new TanqueEnemigo(3,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-90);return a;}
-	else if(a[3][31]==null && ep.getDineroEnemigo()>=90){a[3][31]=new TanqueEnemigo(3,31);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-90);return a;}
+	if(a[31][1]==null && ep.getDineroAliado()>=90){TanqueEnemigo s=new TanqueEnemigo(0,30);a[0][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-90);return a;}
+	else if(a[30][1]==null && ep.getDineroAliado()>=90){TanqueEnemigo s=new TanqueEnemigo(1,30);a[1][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-90);return a;}
+	else if(a[29][1]==null && ep.getDineroAliado()>=90){TanqueEnemigo s=new TanqueEnemigo(2,30);a[2][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-90);return a;}
+	else if(a[28][1]==null && ep.getDineroAliado()>=90){TanqueEnemigo s=new TanqueEnemigo(3,30);a[3][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-90);return a;}
+	else if(a[28][0]==null && ep.getDineroAliado()>=90){TanqueEnemigo s=new TanqueEnemigo(3,31);a[3][31]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-90);return a;}
 	
 	else{ int input = JOptionPane.showOptionDialog(null, "No se puede crear la unidad", "Aviso", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 
@@ -77,13 +79,13 @@ public UnidadBD[][] CrearTanqueEnemigo(ElementosPartida ep){
 		
 		return a;}
 }
-public UnidadBD[][] CrearSemiorugaEnemigo(ElementosPartida ep){
+public UnidadBD[][] CrearSemiorugaEnemigo(ElementosPartida ep,ArraysPartida a1){
 	UnidadBD[][] a=Ventanas.Partida.getTablero();
-	if(a[0][30]==null && ep.getDineroEnemigo()>=70){a[0][30]=new SemiorugaEnemigo(0,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-70);return a;}
-	else if(a[1][30]==null && ep.getDineroEnemigo()>=70){a[1][30]=new SemiorugaEnemigo(1,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-70);return a;}
-	else if(a[2][30]==null && ep.getDineroEnemigo()>=70){a[2][30]=new SemiorugaEnemigo(2,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-70);return a;}
-	else if(a[3][30]==null && ep.getDineroEnemigo()>=70){a[3][30]=new SemiorugaEnemigo(3,30);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-70);return a;}
-	else if(a[3][31]==null && ep.getDineroEnemigo()>=70){a[3][31]=new SemiorugaEnemigo(3,31);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-70);return a;}
+	if(a[31][1]==null && ep.getDineroAliado()>=70){SemiorugaEnemigo s=new SemiorugaEnemigo(0,30);a[0][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-70);return a;}
+	else if(a[30][1]==null && ep.getDineroAliado()>=70){SemiorugaEnemigo s=new SemiorugaEnemigo(1,30);a[1][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-70);return a;}
+	else if(a[29][1]==null && ep.getDineroAliado()>=70){SemiorugaEnemigo s=new SemiorugaEnemigo(2,30);a[2][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-70);return a;}
+	else if(a[28][1]==null && ep.getDineroAliado()>=70){SemiorugaEnemigo s=new SemiorugaEnemigo(3,30);a[3][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-70);return a;}
+	else if(a[28][0]==null && ep.getDineroAliado()>=70){SemiorugaEnemigo s=new SemiorugaEnemigo(3,31);a[3][31]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-70);return a;}
 	
 	else{ int input = JOptionPane.showOptionDialog(null, "No se puede crear la unidad", "Aviso", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 

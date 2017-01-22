@@ -14,6 +14,10 @@ import UnidadesAmigas.UnidadAliada;
 
 public class UnidadEnemiga extends UnidadBD implements Unidad{
 	protected ArrayList<UnidadAliada> aliados=new ArrayList<UnidadAliada>();
+	public UnidadEnemiga(){
+		this.equipo=2 ;
+		
+	}
 	
 	//Getters y setters
 ///////////////////////////////////////////////
@@ -29,11 +33,6 @@ this.aliados = aliados;
 }
 
 
-	public UnidadEnemiga(){
-		this.equipo=1;
-		
-	}
-	
 	
 
 

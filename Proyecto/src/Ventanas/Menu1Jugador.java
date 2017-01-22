@@ -212,38 +212,48 @@ public class Menu1Jugador extends JDialog{
 						nombre=u.getNombre();
 						switch(nombre){
 						case "Soldado":SoldadoRaso s=new SoldadoRaso(u.getCordX(),u.getCordY());
+						s.setPartida(u.getPartida());
 						s.setArma(u.getArma());
 						s.setArmas(u.getArmas());
-						s.setAcciones(u.getAcciones());
 						s.setSalud(u.getSalud());
+						s.setEquipo(u.getEquipo());
+						s.setAcciones(u.getAcciones());
 						UnidadesAliadas.add(s);
 						break;
 						case "Bazooka":Bazooka b=new Bazooka(u.getCordX(),u.getCordY());
+						b.setPartida(u.getPartida());
 						b.setArma(u.getArma());
 						b.setArmas(u.getArmas());
-						b.setAcciones(u.getAcciones());
 						b.setSalud(u.getSalud());
+						b.setEquipo(u.getEquipo());
+						b.setAcciones(u.getAcciones());
 						UnidadesAliadas.add(b);
 						break;
 						case "Francotirador":Francotirador f=new Francotirador(u.getCordX(),u.getCordY());
+						f.setPartida(u.getPartida());
 						f.setArma(u.getArma());
 						f.setArmas(u.getArmas());
-						f.setAcciones(u.getAcciones());
 						f.setSalud(u.getSalud());
+						f.setEquipo(u.getEquipo());
+						f.setAcciones(u.getAcciones());
 						UnidadesAliadas.add(f);
 						break;
 						case "Tanque":Tanque t=new Tanque(u.getCordX(),u.getCordY());
+						t.setPartida(u.getPartida());
 						t.setArma(u.getArma());
 						t.setArmas(u.getArmas());
-						t.setAcciones(u.getAcciones());
 						t.setSalud(u.getSalud());
+						t.setEquipo(u.getEquipo());
+						t.setAcciones(u.getAcciones());
 						UnidadesAliadas.add(t);
 						break;
 						case "Semioruga":Semioruga se=new Semioruga(u.getCordX(),u.getCordY());
+						se.setPartida(u.getPartida());
 						se.setArma(u.getArma());
 						se.setArmas(u.getArmas());
-						se.setAcciones(u.getAcciones());
 						se.setSalud(u.getSalud());
+						se.setEquipo(u.getEquipo());
+						se.setAcciones(u.getAcciones());
 						UnidadesAliadas.add(se);
 						break;
 						default:break;
@@ -260,38 +270,48 @@ public class Menu1Jugador extends JDialog{
 						nombre=u.getNombre();
 						switch(nombre){
 						case "Soldado":SoldadoRasoEnemigo s=new SoldadoRasoEnemigo(u.getCordX(),u.getCordY());
+						s.setPartida(u.getPartida());
 						s.setArma(u.getArma());
 						s.setArmas(u.getArmas());
-						s.setAcciones(u.getAcciones());
 						s.setSalud(u.getSalud());
+						s.setEquipo(u.getEquipo());
+						s.setAcciones(u.getAcciones());
 						UnidadesEnemigas.add(s);
 						break;
 						case "Bazooka":BazookaEnemigo b=new BazookaEnemigo(u.getCordX(),u.getCordY());
+						b.setPartida(u.getPartida());
 						b.setArma(u.getArma());
 						b.setArmas(u.getArmas());
-						b.setAcciones(u.getAcciones());
 						b.setSalud(u.getSalud());
+						b.setEquipo(u.getEquipo());
+						b.setAcciones(u.getAcciones());
 						UnidadesEnemigas.add(b);
 						break;
 						case "Francotirador":FrancotiradorEnemigo f=new FrancotiradorEnemigo(u.getCordX(),u.getCordY());
+						f.setPartida(u.getPartida());
 						f.setArma(u.getArma());
 						f.setArmas(u.getArmas());
 						f.setSalud(u.getSalud());
+						f.setEquipo(u.getEquipo());
 						f.setAcciones(u.getAcciones());
 						UnidadesEnemigas.add(f);
 						break;
 						case "Tanque":TanqueEnemigo t=new TanqueEnemigo(u.getCordX(),u.getCordY());
+						t.setPartida(u.getPartida());
 						t.setArma(u.getArma());
 						t.setArmas(u.getArmas());
-						t.setAcciones(u.getAcciones());
 						t.setSalud(u.getSalud());
+						t.setEquipo(u.getEquipo());
+						t.setAcciones(u.getAcciones());
 						UnidadesEnemigas.add(t);
 						break;
 						case "Semioruga":SemiorugaEnemigo se=new SemiorugaEnemigo(u.getCordX(),u.getCordY());
+						se.setPartida(u.getPartida());
 						se.setArma(u.getArma());
 						se.setArmas(u.getArmas());
-						se.setAcciones(u.getAcciones());
 						se.setSalud(u.getSalud());
+						se.setEquipo(u.getEquipo());
+						se.setAcciones(u.getAcciones());
 						UnidadesEnemigas.add(se);
 						break;
 						default:break;
@@ -309,14 +329,13 @@ public class Menu1Jugador extends JDialog{
 					lb.setListaEnemigos(UnidadesEnemigas);
 					lb.setListaAliados(UnidadesAliadas);
 					p1=BD.PartidaSelect1J(BD.usarBD(BD.initBD("Local")), "partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'").get(0);//FIXME aqui daria el error de que partida coge
-					UnidadBD[][] tablero1=Ventanas.Partida.getTablero();
-					for(UnidadAliada u:ArraysPartida.getListaAliados()){tablero1[u.getCordX()][u.getCordY()]=u;}
-					for(UnidadEnemiga u:ArraysPartida.getListaEnemigos()){tablero1[u.getCordX()][u.getCordY()]=u;}
+					UnidadBD[][] tablero1=Ventanas.Partida.crearTablero();
+					for(UnidadAliada u:lb.getListaAliados()){tablero1[u.getCordX()][u.getCordY()]=u;}
+					for(UnidadEnemiga u:lb.getListaEnemigos()){tablero1[u.getCordX()][u.getCordY()]=u;}
 					
 					
 					try {
 						p = new Ventanas.Partida(p1,lb);
-						Partida.setTablero(Partida.crearTablero());
 						Partida.setTablero(tablero1);
 						p.setSize(965, 940);
 						p.setResizable(false);

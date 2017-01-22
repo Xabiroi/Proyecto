@@ -195,59 +195,70 @@ public class MenuMultijugador extends JDialog{
 		btnJugar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				
 				Ventanas.Partida p=null;
 				LogicaBatallas.ArraysPartida lb=new LogicaBatallas.ArraysPartida();
-				
 				LogicaBatallas.ElementosPartida p1=new LogicaBatallas.ElementosPartida();
-				
-				ArrayList<UnidadBD> Unidades=BD.UnidadBDSelect(BD.usarBD(BD.initBD("Local")), "Partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'");
+				ArrayList<UnidadBD> Unidades=BD.UnidadBDSelect(BD.usarBD(BD.initBD("Local")), "Partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'");	
 				ArrayList<UnidadBD> UnidadesAliadas1=new ArrayList<UnidadBD>();
 				for(UnidadBD u:Unidades)if(u.getEquipo()==1){UnidadesAliadas1.add(u);}
+	
+				
 				ArrayList<UnidadBD> UnidadesEnemigas1=new ArrayList<UnidadBD>();
 				for(UnidadBD u:Unidades)if(u.getEquipo()==2){UnidadesEnemigas1.add(u);}
-				
-				
-				
-				ArrayList<UnidadAliada> UnidadesAliadas=new ArrayList<UnidadAliada>();
-			
-				ArrayList<UnidadEnemiga> UnidadesEnemigas=new ArrayList<UnidadEnemiga>();
 
 				
-				//TODO
-				//Comprobar que funciona bien (JTESTUNIT)
+
+				ArrayList<UnidadAliada> UnidadesAliadas=new ArrayList<UnidadAliada>();
+				ArrayList<UnidadEnemiga> UnidadesEnemigas=new ArrayList<UnidadEnemiga>();
 				
 				for(UnidadBD u:UnidadesAliadas1){
 					String nombre=null;
 					nombre=u.getNombre();
 					switch(nombre){
 					case "Soldado":SoldadoRaso s=new SoldadoRaso(u.getCordX(),u.getCordY());
+					s.setPartida(u.getPartida());
 					s.setArma(u.getArma());
 					s.setArmas(u.getArmas());
 					s.setSalud(u.getSalud());
+					s.setEquipo(u.getEquipo());
+					s.setAcciones(u.getAcciones());
 					UnidadesAliadas.add(s);
 					break;
 					case "Bazooka":Bazooka b=new Bazooka(u.getCordX(),u.getCordY());
+					b.setPartida(u.getPartida());
 					b.setArma(u.getArma());
 					b.setArmas(u.getArmas());
 					b.setSalud(u.getSalud());
+					b.setEquipo(u.getEquipo());
+					b.setAcciones(u.getAcciones());
 					UnidadesAliadas.add(b);
 					break;
 					case "Francotirador":Francotirador f=new Francotirador(u.getCordX(),u.getCordY());
+					f.setPartida(u.getPartida());
 					f.setArma(u.getArma());
 					f.setArmas(u.getArmas());
 					f.setSalud(u.getSalud());
+					f.setEquipo(u.getEquipo());
+					f.setAcciones(u.getAcciones());
 					UnidadesAliadas.add(f);
 					break;
 					case "Tanque":Tanque t=new Tanque(u.getCordX(),u.getCordY());
+					t.setPartida(u.getPartida());
 					t.setArma(u.getArma());
 					t.setArmas(u.getArmas());
 					t.setSalud(u.getSalud());
+					t.setEquipo(u.getEquipo());
+					t.setAcciones(u.getAcciones());
 					UnidadesAliadas.add(t);
 					break;
 					case "Semioruga":Semioruga se=new Semioruga(u.getCordX(),u.getCordY());
+					se.setPartida(u.getPartida());
 					se.setArma(u.getArma());
 					se.setArmas(u.getArmas());
 					se.setSalud(u.getSalud());
+					se.setEquipo(u.getEquipo());
+					se.setAcciones(u.getAcciones());
 					UnidadesAliadas.add(se);
 					break;
 					default:break;
@@ -264,33 +275,48 @@ public class MenuMultijugador extends JDialog{
 					nombre=u.getNombre();
 					switch(nombre){
 					case "Soldado":SoldadoRasoEnemigo s=new SoldadoRasoEnemigo(u.getCordX(),u.getCordY());
+					s.setPartida(u.getPartida());
 					s.setArma(u.getArma());
 					s.setArmas(u.getArmas());
 					s.setSalud(u.getSalud());
+					s.setEquipo(u.getEquipo());
+					s.setAcciones(u.getAcciones());
 					UnidadesEnemigas.add(s);
 					break;
 					case "Bazooka":BazookaEnemigo b=new BazookaEnemigo(u.getCordX(),u.getCordY());
+					b.setPartida(u.getPartida());
 					b.setArma(u.getArma());
 					b.setArmas(u.getArmas());
 					b.setSalud(u.getSalud());
+					b.setEquipo(u.getEquipo());
+					b.setAcciones(u.getAcciones());
 					UnidadesEnemigas.add(b);
 					break;
 					case "Francotirador":FrancotiradorEnemigo f=new FrancotiradorEnemigo(u.getCordX(),u.getCordY());
+					f.setPartida(u.getPartida());
 					f.setArma(u.getArma());
 					f.setArmas(u.getArmas());
 					f.setSalud(u.getSalud());
+					f.setEquipo(u.getEquipo());
+					f.setAcciones(u.getAcciones());
 					UnidadesEnemigas.add(f);
 					break;
 					case "Tanque":TanqueEnemigo t=new TanqueEnemigo(u.getCordX(),u.getCordY());
+					t.setPartida(u.getPartida());
 					t.setArma(u.getArma());
 					t.setArmas(u.getArmas());
 					t.setSalud(u.getSalud());
+					t.setEquipo(u.getEquipo());
+					t.setAcciones(u.getAcciones());
 					UnidadesEnemigas.add(t);
 					break;
 					case "Semioruga":SemiorugaEnemigo se=new SemiorugaEnemigo(u.getCordX(),u.getCordY());
+					se.setPartida(u.getPartida());
 					se.setArma(u.getArma());
 					se.setArmas(u.getArmas());
 					se.setSalud(u.getSalud());
+					se.setEquipo(u.getEquipo());
+					se.setAcciones(u.getAcciones());
 					UnidadesEnemigas.add(se);
 					break;
 					default:break;
@@ -301,23 +327,19 @@ public class MenuMultijugador extends JDialog{
 					
 					
 				}
-				
-				
-				
-				//TODO resolver lo de static
+
 				lb.setListaEnemigos(UnidadesEnemigas);
 				lb.setListaAliados(UnidadesAliadas);
-				p1=BD.PartidaSelect(BD.usarBD(BD.initBD("Local")), "partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'").get(0);//FIXMe erro aqui(?) comprobar si solucionado
-				UnidadBD[][] tablero1=Ventanas.Partida.getTablero();
-				for(UnidadAliada u:ArraysPartida.getListaAliados()){tablero1[u.getCordX()][u.getCordY()]=u;}
-				for(UnidadEnemiga u:ArraysPartida.getListaEnemigos()){tablero1[u.getCordX()][u.getCordY()]=u;}
-				
+				p1=BD.PartidaSelect(BD.usarBD(BD.initBD("Local")), "partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'").get(0);
+				UnidadBD[][] tablero1=Ventanas.Partida.crearTablero();
+				for(UnidadAliada u:lb.getListaAliados()){tablero1[u.getCordX()][u.getCordY()]=u;}
+				for(UnidadEnemiga u:lb.getListaEnemigos()){tablero1[u.getCordX()][u.getCordY()]=u;}
+
 				
 				
 				
 				try {
 					p = new Ventanas.Partida(p1,lb);
-					Partida.setTablero(Partida.crearTablero());
 					Partida.setTablero(tablero1);
 					p.setSize(965, 940);
 					p.setResizable(false);

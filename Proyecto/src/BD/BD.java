@@ -482,10 +482,10 @@ private static Exception lastError = null;  // Información de último error SQL o
 				u.setPartida(rs.getString("Partida"));
 				u.setArma(rs.getString("arma"));
 				u.setAcciones(Integer.parseInt(rs.getString("acciones")));
-				u.setCordX(Integer.parseInt(rs.getString("cordX")));
-				u.setCordY(Integer.parseInt(rs.getString("cordY")));
+				u.setCordX(Integer.parseInt(rs.getString("coordX")));
+				u.setCordY(Integer.parseInt(rs.getString("coordY")));
 				u.setEquipo(Integer.parseInt(rs.getString("equipo")));
-				u.setNombre("nombre");
+				u.setNombre(rs.getString("nombre"));
 				u.setSalud(Integer.parseInt(rs.getString("salud")));
 				u.setDistancia(Integer.parseInt(rs.getString("distancia")));
 				ret.add( u );
@@ -519,10 +519,10 @@ private static Exception lastError = null;  // Información de último error SQL o
 				u.setPartida(rs.getString("Partida"));
 				u.setArma(rs.getString("arma"));
 				u.setAcciones(Integer.parseInt(rs.getString("acciones")));
-				u.setCordX(Integer.parseInt(rs.getString("cordX")));
-				u.setCordY(Integer.parseInt(rs.getString("cordY")));
+				u.setCordX(Integer.parseInt(rs.getString("coordX")));
+				u.setCordY(Integer.parseInt(rs.getString("coordY")));
 				u.setEquipo(Integer.parseInt(rs.getString("equipo")));
-				u.setNombre("nombre");
+				u.setNombre(rs.getString("nombre"));
 				u.setSalud(Integer.parseInt(rs.getString("salud")));
 				u.setDistancia(Integer.parseInt(rs.getString("distancia")));
 				ret.add( u );

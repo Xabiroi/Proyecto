@@ -17,7 +17,7 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 	
 	
 	public UnidadAliada(){
-		this.equipo=0 ;
+		this.equipo=1 ;
 		
 	}
 
