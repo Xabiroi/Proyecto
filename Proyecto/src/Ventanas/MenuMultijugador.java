@@ -213,7 +213,8 @@ public class MenuMultijugador extends JDialog{
 				ArrayList<UnidadEnemiga> UnidadesEnemigas=new ArrayList<UnidadEnemiga>();
 
 				
-				//TODO Comprobar que funciona bien (JTESTUNIT)
+				//TODO
+				//Comprobar que funciona bien (JTESTUNIT)
 				
 				for(UnidadBD u:UnidadesAliadas1){
 					String nombre=null;
