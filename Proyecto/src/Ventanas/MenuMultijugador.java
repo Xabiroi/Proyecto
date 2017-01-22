@@ -95,6 +95,7 @@ public class MenuMultijugador extends JDialog{
 		JComboBox<LogicaBatallas.ElementosPartida> comboBox =new JComboBox<LogicaBatallas.ElementosPartida>();
 		for(LogicaBatallas.ElementosPartida p:a){comboBox.addItem(p);}
 		comboBox.setRenderer(new Renderer());
+		comboBox.setSelectedItem(0);
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(comboBox.getSelectedItem()!=null){

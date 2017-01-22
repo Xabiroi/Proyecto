@@ -87,7 +87,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 					+ "puntuacionAliado integer,"
 					+ "puntuacionEnemigo integer, "
 					+ "fechapartida bigint,"
-					+ "primary key(usuario1))");
+					+ "primary key(Partida))");
 			} catch (SQLException e) {} // Tabla ya existe. Nada que hacer
 			try {
 				statement.executeUpdate("create table partidaMultijugador " 
