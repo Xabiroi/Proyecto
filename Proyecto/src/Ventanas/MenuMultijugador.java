@@ -350,6 +350,7 @@ public class MenuMultijugador extends JDialog{
 				setVisible(false);
 				p.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				p.setVisible(true);
+				p.repintar();
 				
 			}
 		});

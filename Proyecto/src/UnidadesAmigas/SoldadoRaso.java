@@ -8,6 +8,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 
+import javax.swing.ImageIcon;
+
 import Interfaces.Persona;
 import Interfaces.Unidad;
 
@@ -24,12 +26,13 @@ public class SoldadoRaso extends UnidadAliada implements Persona,Unidad{
 	 */
 
 
-
 	//private Image image;
 	//Cada unidad tiene que tener su propio icono en el juego
 	//Hay que asignar en el constructor a cada unidad su icono
 
-	
+
+
+
 	public SoldadoRaso(int cordX, int cordY) {
 		//FIXME Un set image aqui(?)
 		Nombre="Soldado";
@@ -43,18 +46,15 @@ public class SoldadoRaso extends UnidadAliada implements Persona,Unidad{
 		
 	}
 
-/***
-	@SuppressWarnings("unused")
-	private void initCraft() {
+
+	private ImageIcon initCraft() {
         
-        ImageIcon ii = new ImageIcon("craft.png");
-        image = ii.getImage();
-        x = 26;
-        y = 26;               
+        ImageIcon ii = new ImageIcon("SoldadoRaso.png");
+		return ii;               
     }
-    **/
+ 
 	
-	
+	/*
 	private Image SoldadoRaso = null;
 	
 		public void pintarSoldadoRaso(Graphics g){
@@ -79,11 +79,11 @@ public class SoldadoRaso extends UnidadAliada implements Persona,Unidad{
 			}
 			return tempImage;
 	}
-
+*/
 
 
 	
-//TODO Prueba
+//FIXME Prueba quitar
 	public static void main(String[] args) {
 		SoldadoRaso x=new SoldadoRaso(0,0);
 		System.out.println("Patata");

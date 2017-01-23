@@ -148,6 +148,7 @@ public class Juego{
 				
 				//TODO abrir las otras ventanas principales
 				MenuPrincipal mp=new MenuPrincipal();
+				
 				frame.setVisible(false);
 				mp.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				mp.setVisible(true);

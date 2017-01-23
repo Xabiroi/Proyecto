@@ -3,6 +3,8 @@ package Ventanas;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.event.ActionListener;
@@ -25,12 +27,22 @@ import BD.BD;
 import BD.UnidadBD;
 import LogicaBatallas.ElementosPartida;
 import LoginLogica.LoginManager;
+import UnidadesAmigas.Bazooka;
+import UnidadesAmigas.Francotirador;
+import UnidadesAmigas.Semioruga;
+import UnidadesAmigas.SoldadoRaso;
 import UnidadesAmigas.Spawn;
+import UnidadesAmigas.Tanque;
 import UnidadesAmigas.UnidadAliada;
+import UnidadesEnemigas.BazookaEnemigo;
+import UnidadesEnemigas.FrancotiradorEnemigo;
+import UnidadesEnemigas.SemiorugaEnemigo;
+import UnidadesEnemigas.SoldadoRasoEnemigo;
 import UnidadesEnemigas.SpawnEnemigo;
+import UnidadesEnemigas.TanqueEnemigo;
 import UnidadesEnemigas.UnidadEnemiga;
 
-public class Partida extends JDialog{
+public class Partida extends JDialog implements Runnable{
 
 	/**
 	 * 
@@ -55,6 +67,7 @@ public class Partida extends JDialog{
 	private LogicaBatallas.ArraysPartida lp;
 	private static LogicaBatallas.ElementosPartida p;
 	public static UnidadBD[][] tablero=crearTablero();
+	private gridpanel gp=new gridpanel();
 
 	public static ElementosPartida getPartida() {
 		return p;
@@ -157,32 +170,59 @@ public class Partida extends JDialog{
 		this.initialize();
 	}
 
+	 Runnable myRunnable = new Runnable(){
+
+	     public void run(){
+	    	 repintar();
+	     }
+	   };
+
 	
+	  
+
 	
-	   
+	   //FIXME
 	 /*
-		public static RefrecarPantalla refrescarPantalla;
-		public static class RefrecarPantalla extends Thread{
+	//  public static RefrecarPantalla refrescarPantalla;
+	//	public static class RefrecarPantalla extends Thread{
 			private boolean X = true;
 			public void Stop(){
 				X = false;
-				interrupt();
+		//		interrupt();
 			}
 			public void run(){
+
 				int decimas = 0;
 				while (X){
 					decimas++;
 					if (decimas %10 == 0){ //un segundo
-						Partida.actualiza();
+						this.repaint();
 					}
 				}
-				logger.log(Level.INFO, "Final de hilo de actualización de mapa");
-			}
+				//logger.log(Level.INFO, "Final de hilo de actualización de mapa");
+	//		}
 		}
 		
 	   */
 	
-	
+	public void repintar(){
+		for(int i=0;i<32;i++){
+			for(int j=0;j<32;j++){
+				if(Partida.getTablero()[i][j]==null){Partida.this.getGp().getGridButton(i,j).setIcon(null);}
+				else if(Partida.getTablero()[i][j] instanceof SoldadoRaso){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/SoldadoRaso.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
+				else if(Partida.getTablero()[i][j] instanceof Francotirador){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/Francotirador.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
+				else if(Partida.getTablero()[i][j] instanceof Bazooka){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/Bazooka.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
+				else if(Partida.getTablero()[i][j] instanceof Tanque){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/Tanque.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
+				else if(Partida.getTablero()[i][j] instanceof Semioruga){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/Semioruga.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
+				else if(Partida.getTablero()[i][j] instanceof SoldadoRasoEnemigo){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/SoldadoRasoEnemigo.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
+				else if(Partida.getTablero()[i][j] instanceof FrancotiradorEnemigo){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/FrancotiradorEnemigo.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
+				else if(Partida.getTablero()[i][j] instanceof BazookaEnemigo){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/BazookaEnemigo.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
+				else if(Partida.getTablero()[i][j] instanceof TanqueEnemigo){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/TanqueEnemigo.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
+				else if(Partida.getTablero()[i][j] instanceof SemiorugaEnemigo){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/SemiorugaEnemigo.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}            
+			
+			}
+		}
+	}
 	
 	
 	
@@ -211,6 +251,8 @@ public class Partida extends JDialog{
 						if(tablero[xobj][yobj]==null){
 							try{
 						tablero=UnidadActual.AlgoritmoPathfinding(UnidadActual.getDistancia(), UnidadActual.getCordX(), UnidadActual.getCordY(), xobj, yobj, tablero);
+						   Thread thread = new Thread(myRunnable);
+						   thread.start();
 							}catch(NullPointerException e){}
 					//	UnidadActual.setAcciones(UnidadActual.getAcciones()-1);}			
 					}}
@@ -575,8 +617,8 @@ public class Partida extends JDialog{
         setBounds(154, 114, 1200, 800);
         setResizable(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        getContentPane().add(createGridPanel());
-        pack();
+        getContentPane().add(gp.createGridPanel());
+        pack();//FIXME
         setLocationRelativeTo(null);
         setVisible(true);
 	
@@ -638,7 +680,7 @@ public class Partida extends JDialog{
 	}
 	
 
-	
+	public class gridpanel extends Thread{
     private static final int N = 32;
     private final List<JButton> list = new ArrayList<JButton>();
 
@@ -783,16 +825,23 @@ public class Partida extends JDialog{
 	            gb.setOpaque(false);
 	            gb.setText("P"); //FIXME Cambiando esto se consigue en invisible (para el mapa y eso)
 	            gb.setBorder(null);
+	            
+	           // gb.setIcon(new ImageIcon(getClass().getResource("/resources/SoldadoRaso.png"))); para poner todos los soldados FIXME
 	            gb.setBorderPainted(false);
 	            gb.setContentAreaFilled(false);
+	           // new Thread ().start();
+
 	            list.add(gb);
 	            Dimension d=new Dimension(100,100);
 	            p.setPreferredSize(d);
 	            p.add(gb);
 	        }
+	        Thread t=new Thread();
+	        t.start();
 	        return p;
 	    }
-	
+
+	 
 	  private BufferedImage requestImage() {
 	        BufferedImage image = null;
 
@@ -810,17 +859,41 @@ public class Partida extends JDialog{
 	        b.addActionListener(new ActionListener() {   	
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
-	                JButton gb =Partida.this.getGridButton(row, col);
-	                System.out.println("r" + row + ",c" + col
-	                    + " " + (b == gb)
-	                    + " " + (b.equals(gb)));
+	            	new Thread().start();
 	            }
 	        });
+
 	        return b;
 	    }
+	   //FIXME Prueba
 
 
-	
+		private boolean X = true;
+		public void Stop(){
+			X = false;
+
+		}
+		public void run(){
+			while (X){
+				try {
+					wait(10);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+					for(int i=0;i<32;i++){
+						for(int j=0;j<32;j++){
+							if(Partida.getTablero()[i][j]==null){getGridButton(i,j).setIcon(null);}
+							else if(Partida.getTablero()[i][j] instanceof SoldadoRaso){getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/SoldadoRaso.png")));getGridButton(i, j).repaint();}
+							
+						}
+					}
+					//this.repaint();
+				}
+			}
+		
+	}
+	   
 	
 	public LogicaBatallas.ArraysPartida getLp() {
 		return lp;
@@ -905,6 +978,20 @@ public class Partida extends JDialog{
 	public void setBtnGuardar(JButton btnGuardar) {
 		this.btnGuardar = btnGuardar;
 	}
+	public gridpanel getGp() {
+		return gp;
+	}
+	public void setGp(gridpanel gp) {
+		this.gp = gp;
+	}
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 
 
 }

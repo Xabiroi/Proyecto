@@ -9,6 +9,7 @@ import UnidadesEnemigas.SpawnEnemigo;
 import Ventanas.Colision;
 import Ventanas.MenuPrincipal;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 

@@ -10,11 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-
 import BD.BD;
 import LogicaBatallas.ElementosPartida;
-import LoginData.Usuario;
 import LoginLogica.LoginManager;
 
 import java.awt.event.MouseAdapter;
@@ -108,6 +105,7 @@ public class CrearPartidaLocal extends JDialog{
 					p.setVisible(true);
 					p.setSize(970, 950);
 					p.setResizable(false);
+					p.repintar();
 					
 					BD.usarCrearTablasBD(BD.initBD("Local"));
 					p.setP(pa);

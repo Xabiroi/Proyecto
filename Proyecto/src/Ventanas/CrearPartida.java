@@ -86,7 +86,9 @@ public class CrearPartida extends JDialog{
 					p.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					p.setVisible(true);
 					p.setSize(970, 950);
-					p.setResizable(false);}
+					p.setResizable(false);
+					p.repintar();
+					}
 					
 					try{
 				p.setP(pa);

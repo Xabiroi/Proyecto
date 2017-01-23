@@ -346,6 +346,7 @@ public class Menu1Jugador extends JDialog{
 					setVisible(false);
 					p.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					p.setVisible(true);
+					p.repintar();
 					
 				}
 			});
