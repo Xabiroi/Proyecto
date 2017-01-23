@@ -206,8 +206,8 @@ public class Partida extends JDialog implements Runnable{
 	   */
 	
 	public void repintar(){
-		for(int i=0;i<32;i++){
-			for(int j=0;j<32;j++){
+		for(int i=0;i<Partida.getTablero().length;i++){
+			for(int j=0;j<Partida.getTablero()[0].length;j++){
 				if(Partida.getTablero()[i][j]==null){Partida.this.getGp().getGridButton(i,j).setIcon(null);}
 				else if(Partida.getTablero()[i][j] instanceof SoldadoRaso){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/SoldadoRaso.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
 				else if(Partida.getTablero()[i][j] instanceof Francotirador){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/Francotirador.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
@@ -244,19 +244,25 @@ public class Partida extends JDialog implements Runnable{
 	
 		btnMover = new JButton("Mover");
 		btnMover.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent arg0) { 
-				btnMover.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0)  {	
+				Thread thread = new Thread(myRunnable);
+
 						if(tablero[xobj][yobj]==null){
 							try{
 						tablero=UnidadActual.AlgoritmoPathfinding(UnidadActual.getDistancia(), UnidadActual.getCordX(), UnidadActual.getCordY(), xobj, yobj, tablero);
-						   Thread thread = new Thread(myRunnable);
+						
 						   thread.start();
+							try {
+								thread.join();
+							} catch (InterruptedException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							}catch(NullPointerException e){}
 					//	UnidadActual.setAcciones(UnidadActual.getAcciones()-1);}			
-					}}
-				});
+
+					}
+			
 			
 				 
 			}
@@ -276,6 +282,14 @@ public class Partida extends JDialog implements Runnable{
 					UnidadActual.atacar(xobj,yobj);
 					UnidadActual.setAcciones(UnidadActual.getAcciones()-1);
 					actualiza();
+					Thread thread = new Thread(myRunnable);
+					thread.start();
+					try {
+						thread.join();
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					if(Ventanas.Partida.getUnidadObjetivo().getSalud()<=0 && Ventanas.Partida.getUnidadObjetivo() instanceof SpawnEnemigo){
 						JFrame frame=new JFrame();
 						Object[] options = {"OK"};
@@ -309,6 +323,14 @@ public class Partida extends JDialog implements Runnable{
 					UnidadObjetivo=tablero[xobj][yobj];
 					UnidadActual.atacar(xobj,yobj);
 					actualiza();
+					Thread thread = new Thread(myRunnable);
+					thread.start();
+					try {
+						thread.join();
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					if(Ventanas.Partida.getUnidadObjetivo().getSalud()<=0 && Ventanas.Partida.getUnidadObjetivo() instanceof Spawn){
 						JFrame frame=new JFrame();
 						Object[] options = {"OK"};
@@ -402,6 +424,14 @@ public class Partida extends JDialog implements Runnable{
 		btnFinalizarTurno.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Thread thread = new Thread(myRunnable);
+				thread.start();
+				try {
+					thread.join();
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				p.setDineroAliado(p.getDineroAliado()+50);
 				p.setDineroEnemigo(p.getDineroEnemigo()+50);
 				for(int i=0;i<tablero.length;i++){

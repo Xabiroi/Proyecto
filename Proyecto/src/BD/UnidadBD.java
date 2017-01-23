@@ -28,7 +28,12 @@ public class UnidadBD implements Cloneable{
 	protected int acciones=2;
 
 
+	 Runnable myRunnable = new Runnable(){
 
+	     public void run(){
+	    	 //repintar();
+	     }
+	   };
 	public int getAcciones() {
 		return acciones;
 	}
