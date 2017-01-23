@@ -113,8 +113,10 @@ public class VentanaRegistro extends JDialog {
 							u = new Usuario(txtUsuario.getText(),
 									new String(pswField.getPassword()),
 									txtNombreReal.getText());
-							Statement st=BD.usarBD(BD.initBD("Local"));//FIXME
+							Statement st=BD.usarBD(BD.initBDOnline("Remote"));
+							Statement st1=BD.usarBD(BD.initBD("Local"));
 									BD.usuarioInsert(st,u);
+									BD.usuarioInsert(st1,u);
 							
 						}
 						

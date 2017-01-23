@@ -26,16 +26,40 @@ private static Exception lastError = null;  // Información de último error SQL o
 //FIXME Poner otro metodo para las conexiones en la abse de datos remota
 	public static Connection initBD( String nombreBD ) {
 		try {
-		    try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
+		    try {//sql8.freemysqlhosting.net
+		    	Class.forName("com.mysql.jdbc.Driver").newInstance();
+				//Class.forName("com.mysql.jdbc.Driver").newInstance();
 			} catch (InstantiationException e) {
 				
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
 				
 				e.printStackTrace();
-			}
+			}													//sql8.freemysqlhosting.net
 		    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+nombreBD+"?autoReconnect=true&useSSL=false","root","root");
+			log( Level.INFO, "Conectada base de datos " + nombreBD, null );
+		    return con;
+		} catch (ClassNotFoundException | SQLException e) {
+			lastError = e;
+			log( Level.SEVERE, "Error en conexión de base de datos " + nombreBD, e );
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static Connection initBDOnline( String nombreBD ) {
+		try {
+		    try {//sql8.freemysqlhosting.net
+		    	Class.forName("com.mysql.jdbc.Driver").newInstance();
+				//Class.forName("com.mysql.jdbc.Driver").newInstance();
+			} catch (InstantiationException e) {
+				
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				
+				e.printStackTrace();
+			}													//sql8.freemysqlhosting.net
+		    Connection con = DriverManager.getConnection("jdbc:mysql://sql8.freesqldatabase.com:3306/sql8155268"+"?autoReconnect=true&useSSL=false","sql8155268","HfxmfBTMeP");
 			log( Level.INFO, "Conectada base de datos " + nombreBD, null );
 		    return con;
 		} catch (ClassNotFoundException | SQLException e) {

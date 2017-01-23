@@ -213,6 +213,7 @@ public class Menu1Jugador extends JDialog{
 						switch(nombre){
 						case "Soldado":SoldadoRaso s=new SoldadoRaso(u.getCordX(),u.getCordY());
 						s.setPartida(u.getPartida());
+						s.setArmas(new String[] {"Fusil", "Pistola", "CCC" });
 						s.setArma(u.getArma());
 						s.setArmas(u.getArmas());
 						s.setSalud(u.getSalud());
@@ -223,6 +224,7 @@ public class Menu1Jugador extends JDialog{
 						case "Bazooka":Bazooka b=new Bazooka(u.getCordX(),u.getCordY());
 						b.setPartida(u.getPartida());
 						b.setArma(u.getArma());
+						b.setArmas(new String[] {"Bazooka", "Pistola"});
 						b.setArmas(u.getArmas());
 						b.setSalud(u.getSalud());
 						b.setEquipo(u.getEquipo());
@@ -232,7 +234,7 @@ public class Menu1Jugador extends JDialog{
 						case "Francotirador":Francotirador f=new Francotirador(u.getCordX(),u.getCordY());
 						f.setPartida(u.getPartida());
 						f.setArma(u.getArma());
-						f.setArmas(u.getArmas());
+						f.setArmas(new String[] {"Rifle", "Pistola"});
 						f.setSalud(u.getSalud());
 						f.setEquipo(u.getEquipo());
 						f.setAcciones(u.getAcciones());
@@ -241,7 +243,7 @@ public class Menu1Jugador extends JDialog{
 						case "Tanque":Tanque t=new Tanque(u.getCordX(),u.getCordY());
 						t.setPartida(u.getPartida());
 						t.setArma(u.getArma());
-						t.setArmas(u.getArmas());
+						t.setArmas(new String[] {"Misil", "Ametralladora"});
 						t.setSalud(u.getSalud());
 						t.setEquipo(u.getEquipo());
 						t.setAcciones(u.getAcciones());
@@ -250,7 +252,7 @@ public class Menu1Jugador extends JDialog{
 						case "Semioruga":Semioruga se=new Semioruga(u.getCordX(),u.getCordY());
 						se.setPartida(u.getPartida());
 						se.setArma(u.getArma());
-						se.setArmas(u.getArmas());
+						se.setArmas(new String[] {"Ametralladora" });
 						se.setSalud(u.getSalud());
 						se.setEquipo(u.getEquipo());
 						se.setAcciones(u.getAcciones());

@@ -132,7 +132,7 @@ public class Juego{
 
 		
 			//FIXME base de datos 
-			Connection c=BD.initBD( "Local" );
+			Connection c=BD.initBDOnline( "Remoto" );
 			Statement st=BD.usarBD(c);
 			BD.usarCrearTablasBD(c);
 			ArrayList<Usuario> u=BD.usuarioSelect( st, "NOMBRE="+"'"+txtUsuario.getText()+"'"+" AND CONTRASEÑA="+"'"+ new String(pswField.getPassword())+"'" );
@@ -142,11 +142,11 @@ public class Juego{
 			
 			
 			
-			//Cambiar que se obtena de la base de datos FIXME
+		
 			
 			if(lm.login(u1.getNombre(),u1.getContraseña())){
 				
-				//TODO abrir las otras ventanas principales
+
 				MenuPrincipal mp=new MenuPrincipal();
 				
 				frame.setVisible(false);
