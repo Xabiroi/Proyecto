@@ -12,12 +12,14 @@ import UnidadesAmigas.Bazooka;
 import UnidadesAmigas.Francotirador;
 import UnidadesAmigas.Semioruga;
 import UnidadesAmigas.SoldadoRaso;
+import UnidadesAmigas.Spawn;
 import UnidadesAmigas.Tanque;
 import UnidadesAmigas.UnidadAliada;
 import UnidadesEnemigas.BazookaEnemigo;
 import UnidadesEnemigas.FrancotiradorEnemigo;
 import UnidadesEnemigas.SemiorugaEnemigo;
 import UnidadesEnemigas.SoldadoRasoEnemigo;
+import UnidadesEnemigas.SpawnEnemigo;
 import UnidadesEnemigas.TanqueEnemigo;
 import UnidadesEnemigas.UnidadEnemiga;
 
@@ -263,6 +265,12 @@ public class MenuMultijugador extends JDialog{
 					se.setAcciones(u.getAcciones());
 					UnidadesAliadas.add(se);
 					break;
+					case "Spawn":Spawn sp=new Spawn(u.getCordX(),u.getCordY());
+					sp.setPartida(u.getPartida());
+					sp.setSalud(u.getSalud());
+					sp.setEquipo(u.getEquipo());
+					sp.setAcciones(u.getAcciones());
+					UnidadesAliadas.add(sp);
 					default:break;
 
 					}
@@ -321,6 +329,12 @@ public class MenuMultijugador extends JDialog{
 					se.setAcciones(u.getAcciones());
 					UnidadesEnemigas.add(se);
 					break;
+					case "Spawn":SpawnEnemigo sp=new SpawnEnemigo(u.getCordX(),u.getCordY());
+					sp.setPartida(u.getPartida());
+					sp.setSalud(u.getSalud());
+					sp.setEquipo(u.getEquipo());
+					sp.setAcciones(u.getAcciones());
+					UnidadesEnemigas.add(sp);
 					default:break;
 
 					}

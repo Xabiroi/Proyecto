@@ -63,6 +63,7 @@ public class Partida extends JDialog{
 	private JTextField textFieldArma;
 	private JButton btnCambiarArma;
 	private JButton btnMover;
+	private JButton btnSalir;
 	private JButton btnAtacar;
 	private JButton btnFinalizarTurno;
 	private JButton btnGuardar;
@@ -291,8 +292,8 @@ public class Partida extends JDialog{
 
 	//Boton que aplica el algoritmo de pathfinding y actualiza el tablero con el hilo
 		btnMover = new JButton("Mover");
-		btnMover.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent arg0) { 
+		btnMover.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)  {
 				Thread thread = new Thread(myRunnable);
 
 						if(tablero[xobj][yobj]==null){
@@ -415,9 +416,8 @@ public class Partida extends JDialog{
 		panel.add(btnAtacar);
 		//Boton que hace guardar la partida
 		btnGuardar = new JButton("Guardar");
-		btnGuardar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)  {
 				//Distincion entre local y multijugador
 				if(p.getUsuario2()==null){
 					
@@ -454,6 +454,24 @@ public class Partida extends JDialog{
 		});
 		btnGuardar.setBounds(30, 298, 101, 23);
 		panel.add(btnGuardar);
+		btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)  {
+				if(p.getUsuario2()==null){
+					setVisible(false);
+					Menu1Jugador mj=new Menu1Jugador();
+					mj.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					mj.setVisible(true);}
+				else{	setVisible(false);
+				MenuMultijugador mm=new MenuMultijugador();
+				mm.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				mm.setVisible(true);
+					
+				}
+			}
+		});
+		btnSalir.setBounds(30, 400, 101, 23);
+		panel.add(btnSalir);
 		//Boton que permite cambiar de arma, dependiendo de la situacion
 		btnCambiarArma = new JButton("Cambiar arma");
 		btnCambiarArma.addActionListener(new ActionListener() {
@@ -474,17 +492,49 @@ public class Partida extends JDialog{
 				catch(NullPointerException e){}
 			}
 		});
-		btnCambiarArma.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnCambiarArma.setBounds(30, 139, 101, 46);
 		panel.add(btnCambiarArma);
-		//Boton que finaliza turno y deja jugar al jugador siuiente
+		//Boton que finaliza turno y deja jugar al jugador siguiente
 		btnFinalizarTurno = new JButton("Finalizar Turno");
-		btnFinalizarTurno.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		btnFinalizarTurno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)  {
+				if(p.getUsuario2()==null){
+					if(p.getTurno()==0){p.setTurno(1);
+					BD.PartidaUpdate1J(BD.usarBD(BD.initBD("Local")),p);
+					p.setTurno(0);
+					}else{p.setTurno(0);
+						BD.PartidaUpdate1J(BD.usarBD(BD.initBD("Local")),p);
+						p.setTurno(1);
+					}
+					
+				//Se eliminan todos los soldados relacionados con esa partida
+				BD.SoldadosLocalEliminar(BD.usarBD(BD.initBD("Local")),p);
+				//Se insertan los nuevos soldados (aliera tramites de comprobacion y update en caso de que sigan vivos)
+				for(UnidadBD u:lp.getListaAliados()){
+					BD.UnidadesInsertLocal(BD.usarBD(BD.initBD("Local")),u);}
+				for(UnidadBD u:lp.getListaEnemigos()){
+					BD.UnidadesInsertLocal(BD.usarBD(BD.initBD("Local")),u);}
+				}
+				
+				else{
+					//Lo mismo pero para un partidamultijugador
+					if(p.getTurno()==0){p.setTurno(1);
+					BD.PartidaUpdate(BD.usarBD(BD.initBDOnline("Local")),p);
+					p.setTurno(0);
+					}else{p.setTurno(0);
+						BD.PartidaUpdate(BD.usarBD(BD.initBDOnline("Local")),p);
+						p.setTurno(1);
+					}
+					
+				
+
+				BD.SoldadosEliminar(BD.usarBD(BD.initBDOnline("Remoto")),p);
+				for(UnidadBD u:lp.getListaAliados()){
+					BD.UnidadesInsert(BD.usarBD(BD.initBDOnline("Remoto")),u);}
+				for(UnidadBD u:lp.getListaEnemigos()){
+					BD.UnidadesInsert(BD.usarBD(BD.initBDOnline("Remoto")),u);}
+					}
+				
 				Thread thread = new Thread(myRunnable);
 				thread.start();
 				try {
@@ -502,7 +552,8 @@ public class Partida extends JDialog{
 				}
 			
 				actualiza();
-				if(Partida.p.getTurno()==0){if(p.getUsuario2()!=null){textFieldPropietario.setText(p.getUsuario2());}else{textFieldPropietario.setText("J2 Local");}
+				if(Partida.p.getTurno()==0){
+					if(p.getUsuario2()!=null){textFieldPropietario.setText(p.getUsuario2());}else{textFieldPropietario.setText("J2 Local");}
 			Partida.p.setTurno(1);JOptionPane.showMessageDialog(null, "Turno terminado");
 				//Ccomprobar los turnos de los diferentes jugadores
 					if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario2())){
@@ -593,7 +644,9 @@ public class Partida extends JDialog{
 				}
 
 				}UnidadActual=new UnidadBD();UnidadObjetivo=new UnidadBD(); //Para no poder mover los soldados seleccionados anteriormente
-			}
+				//Se actualizan los valores	
+				
+				}
 		});
 
 		
@@ -768,13 +821,29 @@ public class Partida extends JDialog{
 		
 		if(p.getTurno()==0){
 			
-		if(UnidadActual.getAcciones()>0 && p.getUsuario().equals(LoginManager.getUsuario().getNombre())){btnMover.setEnabled(true);
-		btnAtacar.setEnabled(true);
+		if(UnidadActual.getAcciones()>0 && p.getUsuario().equals(LoginManager.getUsuario().getNombre())){btnAtacar.setEnabled(true);
+		btnAtacar.setFocusable(true);
+		btnGuardar.setEnabled(true);
+		btnGuardar.setFocusable(true);
+		btnMover.setEnabled(true);
+		btnMover.setFocusable(true);
 		btnCambiarArma.setEnabled(true);
+		btnCambiarArma.setFocusable(true);
+		btnFinalizarTurno.setEnabled(true);
+		btnFinalizarTurno.setFocusable(true);
+
 		
-		}else{btnMover.setEnabled(false);
-		btnAtacar.setEnabled(false);
-		btnCambiarArma.setEnabled(false);}
+		}else{btnAtacar.setEnabled(false);
+		btnAtacar.setFocusable(false);
+		btnGuardar.setEnabled(false);
+		btnGuardar.setFocusable(false);
+		btnMover.setEnabled(false);
+		btnMover.setFocusable(false);
+		btnCambiarArma.setEnabled(false);
+		btnCambiarArma.setFocusable(false);
+		btnFinalizarTurno.setEnabled(false);
+		btnFinalizarTurno.setFocusable(false);
+}
 		
 		textFieldPropietario.setText(p.getUsuario());}
 		
@@ -782,22 +851,52 @@ public class Partida extends JDialog{
 		else if(p.getTurno()==1){
 			if(p.getUsuario2()!=null){
 			if(UnidadActual.getAcciones()>0 && p.getUsuario2().equals(LoginManager.getUsuario().getNombre())){
-			btnMover.setEnabled(true);
-			btnAtacar.setEnabled(true);
-			btnCambiarArma.setEnabled(true);}
+				btnAtacar.setEnabled(true);
+				btnAtacar.setFocusable(true);
+				btnGuardar.setEnabled(true);
+				btnGuardar.setFocusable(true);
+				btnMover.setEnabled(true);
+				btnMover.setFocusable(true);
+				btnCambiarArma.setEnabled(true);
+				btnCambiarArma.setFocusable(true);
+				btnFinalizarTurno.setEnabled(true);
+				btnFinalizarTurno.setFocusable(true);
+}
 			
-			else{btnMover.setEnabled(false);
-			btnAtacar.setEnabled(false);
-			btnCambiarArma.setEnabled(false);}
+			else{btnAtacar.setEnabled(false);
+			btnAtacar.setFocusable(false);
+			btnGuardar.setEnabled(false);
+			btnGuardar.setFocusable(false);
+			btnMover.setEnabled(false);
+			btnMover.setFocusable(false);
+			btnCambiarArma.setEnabled(false);
+			btnCambiarArma.setFocusable(false);
+			btnFinalizarTurno.setEnabled(false);
+			btnFinalizarTurno.setFocusable(false);}
 			}
 			
 			else{if(UnidadActual.getAcciones()>0){
-				btnMover.setEnabled(true);
 				btnAtacar.setEnabled(true);
-				btnCambiarArma.setEnabled(true);}else{
-				btnMover.setEnabled(false);
-				btnAtacar.setEnabled(false);
-				btnCambiarArma.setEnabled(false);}
+				btnAtacar.setFocusable(true);
+				btnGuardar.setEnabled(true);
+				btnGuardar.setFocusable(true);
+				btnMover.setEnabled(true);
+				btnMover.setFocusable(true);
+				btnCambiarArma.setEnabled(true);
+				btnCambiarArma.setFocusable(true);
+				btnFinalizarTurno.setEnabled(true);
+				btnFinalizarTurno.setFocusable(true);
+}else{
+	btnAtacar.setEnabled(false);
+	btnAtacar.setFocusable(false);
+	btnGuardar.setEnabled(false);
+	btnGuardar.setFocusable(false);
+	btnMover.setEnabled(false);
+	btnMover.setFocusable(false);
+	btnCambiarArma.setEnabled(false);
+	btnCambiarArma.setFocusable(false);
+	btnFinalizarTurno.setEnabled(false);
+	btnFinalizarTurno.setFocusable(false);}
 			}
 	
 			
@@ -875,11 +974,11 @@ public class Partida extends JDialog{
 	    					         soldados, 
 	    					         soldados[0]);
 	    					     //Se crean unidades al lado del spawn
-	    					     if(SoldadoCreado.equals("Soldado raso")){tablero=((Spawn) tablero[31][0]).CrearSoldadoRaso(Partida.p,lp);}
-	    					     else if(SoldadoCreado.equals("Francotirador")){tablero=((Spawn) tablero[31][0]).CrearFrancotirador(Partida.p,lp);}
-	    					     else if(SoldadoCreado.equals("Bazooka")){tablero=((Spawn) tablero[31][0]).CrearBazooka(Partida.p,lp);}
-	    					     else if(SoldadoCreado.equals("Semioruga")){tablero=((Spawn) tablero[31][0]).CrearSemioruga(Partida.p,lp);}
-	    					     else if(SoldadoCreado.equals("Tanque")){tablero=((Spawn) tablero[31][0]).CrearTanque(Partida.p,lp);}
+	    					     if(SoldadoCreado.equals("Soldado raso")){tablero=((Spawn) tablero[31][0]).CrearSoldadoRaso(Partida.p,lp);repintar2();}
+	    					     else if(SoldadoCreado.equals("Francotirador")){tablero=((Spawn) tablero[31][0]).CrearFrancotirador(Partida.p,lp);repintar2();}
+	    					     else if(SoldadoCreado.equals("Bazooka")){tablero=((Spawn) tablero[31][0]).CrearBazooka(Partida.p,lp);repintar2();}
+	    					     else if(SoldadoCreado.equals("Semioruga")){tablero=((Spawn) tablero[31][0]).CrearSemioruga(Partida.p,lp);repintar2();}
+	    					     else if(SoldadoCreado.equals("Tanque")){tablero=((Spawn) tablero[31][0]).CrearTanque(Partida.p,lp);repintar2();}
 	    				   	}catch(NullPointerException e1){}
 	    					  }	   
 	    				   
@@ -904,11 +1003,11 @@ public class Partida extends JDialog{
 		    					         soldados, 
 		    					         soldados[0]);
 		    					     
-		    					     if(SoldadoCreado.equals("Soldado raso")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSoldadoRasoEnemigo(Partida.p,lp);repintar();}
-		    					     else if(SoldadoCreado.equals("Francotirador")){tablero=((SpawnEnemigo) tablero[0][31]).CrearFrancotiradorEnemigo(Partida.p,lp);repintar();}
-		    					     else if(SoldadoCreado.equals("Bazooka")){tablero=((SpawnEnemigo) tablero[0][31]).CrearBazookaEnemigo(Partida.p,lp);repintar();}
-		    					     else if(SoldadoCreado.equals("Semioruga")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSemiorugaEnemigo(Partida.p,lp);repintar();}
-		    					     else if(SoldadoCreado.equals("Tanque")){tablero=((SpawnEnemigo) tablero[0][31]).CrearTanqueEnemigo(Partida.p,lp);repintar();}
+		    					     if(SoldadoCreado.equals("Soldado raso")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSoldadoRasoEnemigo(Partida.p,lp);repintar2();}
+		    					     else if(SoldadoCreado.equals("Francotirador")){tablero=((SpawnEnemigo) tablero[0][31]).CrearFrancotiradorEnemigo(Partida.p,lp);repintar2();}
+		    					     else if(SoldadoCreado.equals("Bazooka")){tablero=((SpawnEnemigo) tablero[0][31]).CrearBazookaEnemigo(Partida.p,lp);repintar2();}
+		    					     else if(SoldadoCreado.equals("Semioruga")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSemiorugaEnemigo(Partida.p,lp);repintar2();}
+		    					     else if(SoldadoCreado.equals("Tanque")){tablero=((SpawnEnemigo) tablero[0][31]).CrearTanqueEnemigo(Partida.p,lp);repintar2();}
 		    					}catch(NullPointerException e1){}
 		    				   }
 		    				   else if(tablero[row][col] instanceof SpawnEnemigo && Partida.p.getUsuario2().equals(LoginManager.getUsuario().getNombre())){
@@ -923,11 +1022,11 @@ public class Partida extends JDialog{
 		    					         soldados, 
 		    					         soldados[0]);
 		    					     
-		    					     if(SoldadoCreado.equals("Soldado raso")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSoldadoRasoEnemigo(Partida.p,lp);repintar();}
-		    					     else if(SoldadoCreado.equals("Francotirador")){tablero=((SpawnEnemigo) tablero[0][31]).CrearFrancotiradorEnemigo(Partida.p,lp);repintar();}
-		    					     else if(SoldadoCreado.equals("Bazooka")){tablero=((SpawnEnemigo) tablero[0][31]).CrearBazookaEnemigo(Partida.p,lp);repintar();}
-		    					     else if(SoldadoCreado.equals("Semioruga")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSemiorugaEnemigo(Partida.p,lp);repintar();}
-		    					     else if(SoldadoCreado.equals("Tanque")){tablero=((SpawnEnemigo) tablero[0][31]).CrearTanqueEnemigo(Partida.p,lp);repintar();}
+		    					     if(SoldadoCreado.equals("Soldado raso")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSoldadoRasoEnemigo(Partida.p,lp);repintar2();}
+		    					     else if(SoldadoCreado.equals("Francotirador")){tablero=((SpawnEnemigo) tablero[0][31]).CrearFrancotiradorEnemigo(Partida.p,lp);repintar2();}
+		    					     else if(SoldadoCreado.equals("Bazooka")){tablero=((SpawnEnemigo) tablero[0][31]).CrearBazookaEnemigo(Partida.p,lp);repintar2();}
+		    					     else if(SoldadoCreado.equals("Semioruga")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSemiorugaEnemigo(Partida.p,lp);repintar2();}
+		    					     else if(SoldadoCreado.equals("Tanque")){tablero=((SpawnEnemigo) tablero[0][31]).CrearTanqueEnemigo(Partida.p,lp);repintar2();}
 		    					}catch(NullPointerException e1){}
 		    				   }
 
