@@ -17,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import BD.BD;
 import BD.UnidadBD;
-import LogicaBatallas.ArraysPartida;
 import LogicaBatallas.ElementosPartida;
 import UnidadesAmigas.Bazooka;
 import UnidadesAmigas.Francotirador;
@@ -33,12 +32,14 @@ import UnidadesEnemigas.TanqueEnemigo;
 import UnidadesEnemigas.UnidadEnemiga;
 
 
-
+/**
+ * 
+ *Menu para jugar en local (1 ordenador)
+ *
+ */
 public class Menu1Jugador extends JDialog{
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 3L;
 	private JFrame frame;
 	private JTextField textDinero1;
@@ -65,14 +66,14 @@ public class Menu1Jugador extends JDialog{
 	}
 
 	/**
-	 * Create the application.
+	 * Constructor
 	 */
 	public Menu1Jugador() {
 		initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Metodo que inicializa los objetos y valores de la ventana
 	 */
 	private void initialize() {
 
@@ -85,15 +86,18 @@ public class Menu1Jugador extends JDialog{
 			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
 			lblNewLabel.setBounds(498, 62, 241, 60);
 			 getContentPane().add(lblNewLabel);
-			
+			//Elige las partidas que tenga como usuario el mismo jugador
 			 ArrayList<LogicaBatallas.ElementosPartida> a=BD.PartidaSelect1J( BD.usarBD(BD.initBD("Local")),"usuario1="+"'"+Juego.getLM().getUsuario().getNombre()+"'");
+			 //Añade las partidas a un comboBox, y en caso de seleccionar una, se muestran los valores de la partida
 				JComboBox<LogicaBatallas.ElementosPartida> comboBox =new JComboBox<LogicaBatallas.ElementosPartida>();
 				for(LogicaBatallas.ElementosPartida p:a){comboBox.addItem(p);}
+				//Para mostrar solo el nombre, se ha añadido un rendere al comboBox
 				comboBox.setRenderer(new Renderer());
 				comboBox.setSelectedItem(0);
 				comboBox.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(comboBox.getSelectedItem()!=null){
+							//Se muestran los valores si el item seleccionado existe
 							textDinero1.setText(""+a.get(comboBox.getSelectedIndex()).getDineroAliado());
 							textpuntos1.setText(""+a.get(comboBox.getSelectedIndex()).getPuntuacionAliado());
 							textdinero2.setText(""+a.get(comboBox.getSelectedIndex()).getDineroEnemigo());
@@ -182,31 +186,26 @@ public class Menu1Jugador extends JDialog{
 			textFecha.setEditable(false);
 			 getContentPane().add(textFecha);
 			textFecha.setColumns(10);
-			
+			//Boton que inicia la partida
 			JButton btnJugar = new JButton("JUGAR!");
 			btnJugar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
+					//Evitar errores inicializando valores con null o de manera estandar
 					Ventanas.Partida p=null;
 					LogicaBatallas.ArraysPartida lb=new LogicaBatallas.ArraysPartida();
-					
 					LogicaBatallas.ElementosPartida p1=new LogicaBatallas.ElementosPartida();
-					
+					//Selecciona las unidades con el nombre elegido
 					ArrayList<UnidadBD> Unidades=BD.UnidadBDSelectlocal(BD.usarBD(BD.initBD("Local")), "Partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'");
+					//Se reparten los soldados en dos equipos depende del flag de equipo que tengan
 					ArrayList<UnidadBD> UnidadesAliadas1=new ArrayList<UnidadBD>();
 					for(UnidadBD u:Unidades)if(u.getEquipo()==1){UnidadesAliadas1.add(u);}
 					ArrayList<UnidadBD> UnidadesEnemigas1=new ArrayList<UnidadBD>();
 					for(UnidadBD u:Unidades)if(u.getEquipo()==2){UnidadesEnemigas1.add(u);}
-					
-					
-					
+					//Se crean las listas definitivas que contienen los soldados que iran en el constructor de la partida
 					ArrayList<UnidadAliada> UnidadesAliadas=new ArrayList<UnidadAliada>();
-				
 					ArrayList<UnidadEnemiga> UnidadesEnemigas=new ArrayList<UnidadEnemiga>();
-
-					
-					//TODO Comprobar que funciona bien (JTESTUNIT)
-					
+					//Se clasifican las unidades dependiendo de su nombre y se les asigna valores
 					for(UnidadBD u:UnidadesAliadas1){
 						String nombre=null;
 						nombre=u.getNombre();
@@ -266,7 +265,7 @@ public class Menu1Jugador extends JDialog{
 						
 						
 					}
-					
+					//Lo mismo para las unidades enemigas
 					for(UnidadBD u:UnidadesEnemigas1){
 						String nombre=null;
 						nombre=u.getNombre();
@@ -327,34 +326,36 @@ public class Menu1Jugador extends JDialog{
 					
 					
 					
-					//TODO resolver lo de static
+					//Se asigna las listas definitivas al objeto lb
 					lb.setListaEnemigos(UnidadesEnemigas);
 					lb.setListaAliados(UnidadesAliadas);
-					p1=BD.PartidaSelect1J(BD.usarBD(BD.initBD("Local")), "partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'").get(0);//FIXME aqui daria el error de que partida coge
+					p1=BD.PartidaSelect1J(BD.usarBD(BD.initBD("Local")), "partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'").get(0);//Coge una partida (local)
+					//Se crea un tablero
 					UnidadBD[][] tablero1=Ventanas.Partida.crearTablero();
+					//Se colocan las unidades de las listas en el tablero
 					for(UnidadAliada u:lb.getListaAliados()){tablero1[u.getCordX()][u.getCordY()]=u;}
 					for(UnidadEnemiga u:lb.getListaEnemigos()){tablero1[u.getCordX()][u.getCordY()]=u;}
 					
-					
+					//Se intenta crear la ventana de la partida con los valores que hemos obtenido
 					try {
 						p = new Ventanas.Partida(p1,lb);
-						Partida.setTablero(tablero1);
+						Partida.setTablero(tablero1);//Se le asigna el nuevo tablero con las unidades recuperadas
 						p.setSize(965, 940);
 						p.setResizable(false);
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					setVisible(false);
 					p.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					p.setVisible(true);
+					//Se repinta al crear la ventana
 					p.repintar();
 					
 				}
 			});
 			btnJugar.setBounds(358, 681, 127, 23);
 			 getContentPane().add(btnJugar);
-			
+			//Boton que vuelve a abrir el menu principal
 			JButton btnVolver = new JButton("Volver");
 			btnVolver.addMouseListener(new MouseAdapter() {
 				@Override
@@ -368,7 +369,7 @@ public class Menu1Jugador extends JDialog{
 			});
 			btnVolver.setBounds(681, 681, 89, 23);
 			 getContentPane().add(btnVolver);
-			 
+			 //Boton que abre la ventana de crear partida local
 			 JButton btnCrearPartida = new JButton("Crear partida");
 			 btnCrearPartida.addActionListener(new ActionListener() {
 			 	public void actionPerformed(ActionEvent arg0) {

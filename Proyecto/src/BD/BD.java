@@ -19,11 +19,11 @@ public class BD {
 
 private static Exception lastError = null;  // Información de último error SQL ocurrido
 	
-	/** Inicializa una BD SQLITE y devuelve una conexión con ella
+	/** Inicializa una BD MySQL y devuelve una conexión con ella
 	 * @param nombreBD	Nombre de fichero de la base de datos
 	 * @return	Conexión con la base de datos indicada. Si hay algún error, se devuelve null
 	 */
-//FIXME Poner otro metodo para las conexiones en la abse de datos remota
+
 	public static Connection initBD( String nombreBD ) {
 		try {
 		    try {//sql8.freemysqlhosting.net
@@ -46,7 +46,10 @@ private static Exception lastError = null;  // Información de último error SQL o
 			return null;
 		}
 	}
-	
+	/** Inicializa una BD MySQL y devuelve una conexión con ella
+	 * @param nombreBD	Tipo de conexion
+	 * @return	Conexión con la base de datos online indicada. Si hay algún error, se devuelve null
+	 */
 	public static Connection initBDOnline( String nombreBD ) {
 		try {
 		    try {//sql8.freemysqlhosting.net
@@ -491,7 +494,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 			return null;
 		}
 	}
-//FIXME hacer el separador de arrays dependiendo del numero de equipo
+
 	public static ArrayList<UnidadBD> UnidadBDSelect( Statement st, String codigoSelect ) {
 		String sentSQL = "";
 		ArrayList<UnidadBD> ret = new ArrayList<>();
@@ -600,7 +603,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 	public static boolean PartidaUpdate( Statement st, ElementosPartida p ) {
 		String sentSQL = "";
 		try {
-			//FIXME
+			
 			
 			sentSQL = "update partidaMultijugador set" +
 
@@ -611,7 +614,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 					" puntuacionEnemigo='" + p.getPuntuacionEnemigo() + "', " +
 					" fechapartida='" + p.getFechaPartida() + "'" +
 					" where Partida='" + p.getPartida() + "';";
-			// System.out.println( sentSQL );  // para ver lo que se hace en consola
+
 			int val = st.executeUpdate( sentSQL );
 			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
 			if (val!=1) {  // Se tiene que modificar 1 - error si no
@@ -629,7 +632,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 	public static boolean PartidaUpdate1J( Statement st, ElementosPartida p ) {
 		String sentSQL = "";
 		try {
-			//FIXME
+			
 			
 			sentSQL = "update partidaLocal set" +
 
@@ -640,10 +643,10 @@ private static Exception lastError = null;  // Información de último error SQL o
 					" puntuacionEnemigo='" + p.getPuntuacionEnemigo() + "', " +
 					" fechapartida='" + p.getFechaPartida() + "'" +
 					" where Partida='" + p.getPartida() + "';";
-			// System.out.println( sentSQL );  // para ver lo que se hace en consola
+
 			int val = st.executeUpdate( sentSQL );
 			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
-			if (val!=1) {  // Se tiene que modificar 1 - error si no
+			if (val!=1) { 
 				log( Level.SEVERE, "Error en update de BD\t" + sentSQL, null );
 				return false;  
 			}
@@ -670,7 +673,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 					" coordX=" + u.getCordX() + ", " +
 					" coordY='" + u.getCordY() + "'" +
 					" where Partida='" + u.getPartida() + "'";
-			// System.out.println( sentSQL );  // para ver lo que se hace en consola
+
 			int val = st.executeUpdate( sentSQL );
 			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
 			if (val!=1) {  // Se tiene que modificar 1 - error si no
@@ -765,9 +768,9 @@ private static Exception lastError = null;  // Información de último error SQL o
 					" where Partida='" + u.getPartida() + "'";
 			// System.out.println( sentSQL );  // para ver lo que se hace en consola
 			int val = st.executeUpdate( sentSQL );
-			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
+			log( Level.INFO, "Soldado eliminado " + val + " fila\t" + sentSQL, null );
 			if (val!=1) {  // Se tiene que modificar 1 - error si no
-				log( Level.SEVERE, "Error en update de BD\t" + sentSQL, null );
+				log( Level.SEVERE, "Error en eliminacion de BD\t" + sentSQL, null );
 				return false;  
 			}
 			return true;
@@ -786,9 +789,9 @@ private static Exception lastError = null;  // Información de último error SQL o
 					" where Partida='" + u.getPartida() + "'";
 			// System.out.println( sentSQL );  // para ver lo que se hace en consola
 			int val = st.executeUpdate( sentSQL );
-			log( Level.INFO, "BD modificada " + val + " fila\t" + sentSQL, null );
+			log( Level.INFO, "Soldado eliminado " + val + " fila\t" + sentSQL, null );
 			if (val!=1) {  // Se tiene que modificar 1 - error si no
-				log( Level.SEVERE, "Error en update de BD\t" + sentSQL, null );
+				log( Level.SEVERE, "Error en eliminacion de BD\t" + sentSQL, null );
 				return false;  
 			}
 			return true;

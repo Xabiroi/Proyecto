@@ -10,11 +10,14 @@ public class LoginManager implements ILogin {
 	
 	public LoginManager(){	}
 	
-	
+	/**
+	 * Metodo que nos devuelve el usuario que esta logueado
+	 * @return Usuario
+	 */
 	public static Usuario getUsuario(){return aUsuarios.get(0);}
 	
 	/**
-	 * Método que hace el login y lo comprueba con el array
+	 * Método que hace el login y lo comprueba con el array de usuarios
 	 */
 	@Override
 	public boolean login(String usuario, String contraseña) {
@@ -30,11 +33,14 @@ public class LoginManager implements ILogin {
 		return resultado;
 		
 	}
-	//FIXME añadir a la base de datos
+	/**
+	 * Registra el usuario
+	 * 
+	 */
 	@Override
 	public boolean registro(Usuario u) {
 		boolean registrado = false;
-		// TODO Auto-generated method stub
+	
 		for(Usuario u1 : aUsuarios){
 			if(u1.getNombre().equals(u.getNombre())){
 				return registrado;
@@ -46,9 +52,12 @@ public class LoginManager implements ILogin {
 		}
 		return registrado;
 	}
+
 	/**
-	 * Método que devuelve la contraseña de un usuario dado.
+	 * Método que devuelve la contraseña de un usuario dado
 	 */
+	 // NO IMPLEMENTADO
+	 
 	@Override
 	public String recuperarContraseña(String usuario) {
 		String contraseña = null;
@@ -61,11 +70,11 @@ public class LoginManager implements ILogin {
 		}
 		return contraseña;
 	}
+	
+
 
 	public static void main(String[] args) {
 		LoginManager lm = new LoginManager();
-		
-		// TODO Auto-generated method stub
 		Usuario u1 = new Usuario("a","a");
 		Usuario u2 = new Usuario("b","b");
 		
@@ -89,5 +98,6 @@ public class LoginManager implements ILogin {
 		
 
 	}
+
 
 }

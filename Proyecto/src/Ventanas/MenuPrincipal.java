@@ -6,14 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
 
 public class MenuPrincipal extends JDialog{
@@ -23,13 +18,10 @@ public class MenuPrincipal extends JDialog{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
-	//private BufferedImage image;
-
-	   
 
 	 
 	/**
-	 * Launch the application.
+	 * Lanza el Main
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -44,41 +36,17 @@ public class MenuPrincipal extends JDialog{
 		});
 	}
 
+
+
 	/**
-	 * Create the application.
+	 * Crea la ventana
 	 */
 	public MenuPrincipal() {
 		initialize();
 	}
 	
-	
-	
-	
-	
-/*
-	 FIXME
-	   protected void paintComponent(Graphics g) {
-	        super.paintComponent(g);
-	        g.drawImage(image, 0, 0, this); // see javadoc for more info on the parameters            
-	    }
-
-	}
-	 
-	 //TODO probar este codigo de fondo de pantalla
- ImageIcon background = new ImageIcon("Background/background.png");
-JLabel label = new JLabel();
-label.setBounds(0, 0, x, y);
-label.setIcon(background);
-
-JPanel panel = new JPanel();
-panel.setLayout(null);
-panel.add(label);
-	 */
-	 
-	 
-	 
 	/**
-	 * Initialize the contents of the frame.
+	 * Inicializa el contenido de la ventana
 	 */
 	
 	private void initialize() {
@@ -87,7 +55,7 @@ panel.add(label);
 		setBounds(100, 100, 744, 561);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
-		
+		//Boton que abre la ventana de Menu1Jugador
 		JButton btnUn_jugador = new JButton("Local");
 		btnUn_jugador.setBounds(256, 200, 173, 23);
 		 btnUn_jugador.addMouseListener(new MouseAdapter() {
@@ -101,7 +69,7 @@ panel.add(label);
 			});
 		 getContentPane().add(btnUn_jugador);
 		
-		
+		//Boton que abre la ventana de MenuMultijugador
 		JButton btnMultijuador = new JButton("Multijugador");
 		btnMultijuador.setBounds(256, 246, 173, 23);
 		btnMultijuador.addMouseListener(new MouseAdapter() {
@@ -114,20 +82,7 @@ panel.add(label);
 				}
 			});
 		 getContentPane().add(btnMultijuador);
-	/*	
-		JButton btnOpciones = new JButton("Opciones");
-		btnOpciones.setBounds(256, 294, 173, 23);
-		btnOpciones.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					MenuOpciones mo=new MenuOpciones();
-					setVisible(false);
-					mo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					mo.setVisible(true);
-				}
-			});
-		 getContentPane().add(btnOpciones);
-		*/
+		 //Boton que termina la aplicacion
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.setBounds(256, 353, 173, 23);
 		btnSalir.addMouseListener(new MouseAdapter() {

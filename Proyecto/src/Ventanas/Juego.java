@@ -23,22 +23,26 @@ import LoginData.Usuario;
 import LoginGui.VentanaRegistro;
 import LoginLogica.LoginManager;
 import java.awt.Font;
-
+/**
+ * Clase principal que ejecuta 2D Wars
+ * @author -Xabier Sarrionandia
+ * @author -Ander Villate
+ */
 public class Juego{
 
-	/**
-	 * 
-	 */
-
+	
+//Atributos para el login 
 	private JFrame frame;
 	private JTextField txtUsuario;
 	private JPasswordField pswField;
 	public static LoginManager lm = new LoginManager();
-	
-	public static LoginManager getLM(){return lm;}
-
 	/**
-	 * Launch the application.
+	 * 
+	 * @return Devuelve el login manager que se esta utilizando
+	 */
+	public static LoginManager getLM(){return lm;}
+	/**
+	 * Main de la aplicacion.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -55,9 +59,8 @@ public class Juego{
 			}
 		});
 	}
-
 	/**
-	 * Create the application.
+	 * Constructor de la aplicacion
 	 */
 	public Juego(){
 	frame = new JFrame();
@@ -121,9 +124,9 @@ public class Juego{
 	btnAceptar.setBounds(367, 5, 100, 23);
 	
 	
-	/////////////////////////////////////////////////////////////////////
-	//METODO DE LAS VENTANAS
-	/////////////////////////////////////////////////////////////////////
+	////////////////////////////
+	//LISTENER PARA EL LOGIN///
+	//////////////////////////
 	
 	
 	btnAceptar.addMouseListener(new MouseAdapter() {
@@ -131,40 +134,35 @@ public class Juego{
 		public void mouseClicked(MouseEvent arg0) {
 
 		
-			//FIXME base de datos 
+			//Se autentifica via online (es necesario internet y acceso a la base de datos)
 			Connection c=BD.initBDOnline( "Remoto" );
 			Statement st=BD.usarBD(c);
+			//Crea las tablas en caso de necesitarlas
 			BD.usarCrearTablasBD(c);
+			//Selecciona al usuario que tenga por nombre y contraseña esos datos
 			ArrayList<Usuario> u=BD.usuarioSelect( st, "NOMBRE="+"'"+txtUsuario.getText()+"'"+" AND CONTRASEÑA="+"'"+ new String(pswField.getPassword())+"'" );
-			Usuario u1=u.get(0);			
-			lm.registro(u1);
-			
-			
-			
-			
-		
-			
+			Usuario u1=null;
+			try{
+			u1=u.get(0);
+			lm.registro(u1);}catch(IndexOutOfBoundsException e){JOptionPane.showMessageDialog(null, "Login Erroneo");}
+			//Se hace login con el usuario y contraseña
+			try{
 			if(lm.login(u1.getNombre(),u1.getContraseña())){
-				
-
+				//Si hace login se lanza la ventana principal con el mensaje de login correcto
 				MenuPrincipal mp=new MenuPrincipal();
-				
 				frame.setVisible(false);
 				mp.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				mp.setVisible(true);
 			JOptionPane.showMessageDialog(null, "Login Correcto");
 
 		}
-			else
-				JOptionPane.showMessageDialog(null, "Error en el login", "Error", JOptionPane.ERROR_MESSAGE);
-			
-		}
-	});
+		}catch(NullPointerException e){}
+		}});
 	pnlBotones.setLayout(null);
 	pnlBotones.add(btnAceptar);
-	
+	//Boton que cierra la aplicacion
 	JButton btnCancelar = new JButton("Salir");
-	btnCancelar.setBounds(482, 5, 100, 23);//FIXME system.exit(0);
+	btnCancelar.setBounds(482, 5, 100, 23);
 	btnCancelar.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
@@ -172,30 +170,18 @@ public class Juego{
 		}
 	});
 	pnlBotones.add(btnCancelar);
-	
+	//Ventana que inicia el registro de los jugadores
 	JButton btnRegistrar = new JButton("Registrar");
 	btnRegistrar.setBounds(592, 5, 100, 23);
 	btnRegistrar.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			//TODO Guardar en la base de datos los jugadores
 			VentanaRegistro dialog = new VentanaRegistro(lm);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		}
 	});
 	pnlBotones.add(btnRegistrar);
-	/*
-	JButton btnRecuperar = new JButton("Recuperar");
-	btnRecuperar.setBounds(702, 5, 100, 23);
-	btnRecuperar.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			VentanaContraseña dialog = new VentanaContraseña(lm);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		}
-	});
-	pnlBotones.add(btnRecuperar);*/
+
 }
 }

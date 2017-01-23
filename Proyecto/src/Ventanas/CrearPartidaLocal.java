@@ -19,35 +19,22 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
+/**
+ * 
+ *Clase que permite crear partidas locales
+ *
+ */
+//Clase con la misma estructura que CrearPartida pero con funcionalidad un poco distinta
 public class CrearPartidaLocal extends JDialog{
 
-	/**
-	 * 
-	 */
+	//Atributos
 	private static final long serialVersionUID = 6L;
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CrearPartidaLocal window = new CrearPartidaLocal();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
+	 * Constructor de la aplicacion.
 	 */
 	public CrearPartidaLocal() {
 		setFrame(new JFrame());
@@ -62,20 +49,16 @@ public class CrearPartidaLocal extends JDialog{
 				Ventanas.Partida p=null;
 				LogicaBatallas.ArraysPartida lb=new LogicaBatallas.ArraysPartida();
 				LogicaBatallas.ElementosPartida p1=new LogicaBatallas.ElementosPartida();
+				//Variable para solucionar un problema posterior con partidas existentes, si existe ya, la variable cambia de valor y no se ejecuta la creacion de la ventana
 				int n=0;
-				//FIXME mirar si hay una aprtida con esos jugadores y si la hay, enviar una alerta (joption pane)
-				//////TEMPORAL
+				
+				//Conexiones a la base de datos local
 				BD.usarCrearTablasBD(BD.initBD("Local"));
 				Statement st=BD.usarBD(BD.initBD("Local"));
-				
 				LogicaBatallas.ElementosPartida pa=new LogicaBatallas.ElementosPartida(textField.getText(),textField_1.getText(),textField.getText()+" vs "+textField_1.getText());
-				
-			
-	
-				
-					ArrayList<ElementosPartida> a1=BD.PartidaSelect1J(st,"");
+				ArrayList<ElementosPartida> a1=BD.PartidaSelect1J(st,"");
 					
-					for(LogicaBatallas.ElementosPartida l:a1){
+					for(LogicaBatallas.ElementosPartida l:a1){//Partida existente
 						if(l.getPartida().equals(textField.getText()+"vs"+textField_1.getText())){
 						n=1;
 						JFrame frame=new JFrame();
@@ -91,7 +74,7 @@ public class CrearPartidaLocal extends JDialog{
 					    Menu1Jugador mm=new Menu1Jugador();
 						mm.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 						mm.setVisible(true);}}
-					
+					//En caso de que la variable n siga con el valor 0, es decir, no haya partida existente con ese nombre
 					if(n==0){
 						try {
 							p = new Ventanas.Partida(p1, lb);
@@ -106,7 +89,7 @@ public class CrearPartidaLocal extends JDialog{
 					p.setSize(970, 950);
 					p.setResizable(false);
 					p.repintar();
-					
+					//Conexion local y operaciones locales
 					BD.usarCrearTablasBD(BD.initBD("Local"));
 					p.setP(pa);
 					BD.Partida1JInsert(st, p.getP());;
@@ -118,7 +101,7 @@ public class CrearPartidaLocal extends JDialog{
 		});
 		btnCrear.setBounds(81, 115, 114, 23);
 		getContentPane().add(btnCrear);
-		
+		//Boton volver
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
@@ -161,10 +144,17 @@ public class CrearPartidaLocal extends JDialog{
 	void initialize() {
 	}
 
+	/**
+	 * Devuelve el frame principal
+	 * @return frame principal
+	 */
 	public JFrame getFrame() {
 		return frame;
 	}
-
+	/**
+	 * Modifica el frame principal
+	 * @param frame indicado
+	 */
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
 	}

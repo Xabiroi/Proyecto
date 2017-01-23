@@ -1,9 +1,10 @@
 package Ventanas;
-
+//CLase que representa el objeto de colision en el mapa
 public class Colision extends BD.UnidadBD{
-	private int Tipo=0; //IMPORTANTE para el algoritmo de pathfinding se colocaran los de tipo uno para no repetir camino, y si no encuentra camino
-	//con un for se quitan todos del tipo 1
+	//Las colisiones del mapa son de tipo 0 (default) y los de tipo 1 seran los puestos por el algoritmo de pathfinding
+	private int Tipo=0; 
 	
+	//Getters y setters
  public int getTipo() {
 		return Tipo;
 	}
@@ -11,7 +12,7 @@ public class Colision extends BD.UnidadBD{
 	public void setTipo(int tipo) {
 		Tipo = tipo;
 	}
-
+	//Constructor de colisiones
 	public Colision(){
 	}
 	public Colision(int tipo){

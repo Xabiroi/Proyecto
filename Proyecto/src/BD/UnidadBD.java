@@ -7,7 +7,11 @@ import BD.UnidadBD;
 import Ventanas.Colision;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
+/**
+ * Clase principal de la que descienden todos los elementos del tablero
+ * @author Xabier
+ *
+ */
 public class UnidadBD implements Cloneable{
 	protected String Nombre;
 	protected String[] armas= new String[5]; 
@@ -22,7 +26,7 @@ public class UnidadBD implements Cloneable{
 	protected int equipo; //1 o 0
 	protected int acciones=2;
 
-
+//Getters y setters
 
 	public int getAcciones() {
 		return acciones;
@@ -63,7 +67,9 @@ public class UnidadBD implements Cloneable{
 		this.coste = coste;
 	}
 	
-	
+	/**
+	 * Comprueba si la unidad objetivo ha muerto, y le añade cinco puntos al marcador
+	 */
 
 	public void comprobarMuerto(){
 		if(Ventanas.Partida.getUnidadObjetivo().getSalud()<=0){
@@ -76,6 +82,13 @@ public class UnidadBD implements Cloneable{
 		Ventanas.Partida.getPartida().setPuntuacionAliado(Ventanas.Partida.getPartida().getPuntuacionEnemigo()+5);
 		}
 	}
+	/**
+	 * 
+	 * Ataca a la unidad objetivo
+	 * si esta fuera del alcance salta error
+	 * @param x coordenada x del objetivo
+	 * @param y coordenada y del objetivo
+	 */
 	public void ataca(int x,int y){
 		if(Math.abs(Ventanas.Partida.getUnidadObjetivo().getCordX()-this.getCordX())<x){
 			if(Ventanas.Partida.getUnidadObjetivo().getCordY()-this.getCordY()<x){
@@ -103,20 +116,13 @@ public class UnidadBD implements Cloneable{
                 options[0]);}
 	}
 	
-	
+	/**
+	 * Metodo de mover basico
+	 * @param x coordenada x del objetivo
+	 * @param y coordenada y del objetivo
+	 */
 	public void Mover(int x,int y) {
-		
-		/**Mover básico que se cambiara por un algoritmo de pathfinding mas complicado en caso de tener tiempo, sino--->
-		 * Comprobar que 
-		 * 
-		 * Obtener coordenadas de donde esta y a donde se clicka con el mouse
-		 * El movimiento estara limitado dependiendo de la unidad, permitiendo solo mover una cantidad de x y de y
-		 * Habria que ajustar el hitbox dependiendo de las dimensiones de las imagenes de los soldados y reajustar los calculos de movimiento en base a las coordenadas
-		 * 
-		 * 
-		 * 
-		 */
-		
+	
 		UnidadBD u=this;
 		
 		UnidadBD[][] aux=Ventanas.Partida.getTablero();
@@ -175,18 +181,15 @@ public UnidadBD[][] AlgoritmoPathfinding(int Movimientos,int x,int y,int xdest,i
 		if((int)p.getX()==xdest && (int)p.getY()==ydest){
 			aAux[xdest][ydest]=this;
 			aAux[x][y]=null;
-			//aAux[this.getCordX()][this.getCordY()]=null;
 			this.setCordX(xdest);
 			this.setCordY(ydest);
 			this.setAcciones(this.getAcciones()-1);
 			limpiarColisiones(aAux);
 			return aAux;}
 		
-		
-		//Cuando no llega al destino en el salto
+
 		else if(((int)p.getX()!=xdest || (int)p.getY()!=ydest)){
 
-			//aAux[(int) p.getX()][(int) p.getY()]=aAux[x][y];
 			if(aAux[x][y]==null)
 			aAux[x][y]=new Colision(1);
 
@@ -206,7 +209,13 @@ public UnidadBD[][] AlgoritmoPathfinding(int Movimientos,int x,int y,int xdest,i
 	return aAux;//FIXME en la parte donde se implemente Ventanas.Partida.setTablero(aAux);
 
 }
-
+/**
+ * Metodo que comprueba si las coordenadas de los puntos cardinales estan libre de obstaculos
+ * @param a array de closiones
+ * @param x coordenada centro
+ * @param y coordenada centro
+ * @return array de puntos posibles sin obstaculos
+ */
 		public ArrayList<Point> comprobar(UnidadBD[][] a,int x,int y){
 			
 			ArrayList<Point> array=new ArrayList<Point>();
@@ -220,7 +229,10 @@ public UnidadBD[][] AlgoritmoPathfinding(int Movimientos,int x,int y,int xdest,i
 			if(a[x][y-1]==null){array.add(new Point(x,y-1));}}catch(ArrayIndexOutOfBoundsException e){}
 			return array;
 		}
-//FIXME cambiar todavia el metodo (No tocar)
+/**
+ * Metodo que limpia las colisiones puestas por el aloritmo de pathfinding
+ * @param a array que representa el tablero
+ */
 public void limpiarColisiones(UnidadBD[][] a){
 	for(int i=0;i<a.length;i++){
 		for(int j=0;j<a[0].length;j++){
@@ -233,30 +245,15 @@ public void limpiarColisiones(UnidadBD[][] a){
 	
 	
 }
-	
-/**
- * Parte de ventanas:
- * -Mostrar la lista de armas
- * -Elegir una
- * -Pasar por parametro el string
- * -Cambiar arma
- * 
- */
+
 	public void CambiarArma(String arma) {
 		this.setArma(arma);
-	
 		
 	}
 	public void atacar(int x,int y) {
-
-	
 		
 	}
-	
-	
-	
-	
-	
+
 	public int getEquipo() {
 		return equipo;
 	}

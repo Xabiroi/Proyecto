@@ -2,34 +2,28 @@ package Ventanas;
 
 import static org.junit.Assert.*;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
-import javax.swing.JComboBox;
 
 import org.junit.Test;
 
 import BD.BD;
 import BD.UnidadBD;
-import LogicaBatallas.ElementosPartida;
 import UnidadesAmigas.Bazooka;
 import UnidadesAmigas.Francotirador;
 import UnidadesAmigas.Semioruga;
 import UnidadesAmigas.SoldadoRaso;
 import UnidadesAmigas.Tanque;
 import UnidadesAmigas.UnidadAliada;
-
+//Tests que prueban diferentes funciones
 public class MenuMultijugadorTest {
 
 	@Test
 	public void test() {
 		 ArrayList<LogicaBatallas.ElementosPartida> a=BD.PartidaSelect( BD.usarBD(BD.initBD("Local")),"");
-		//FIXME Cambiar la conexion de local a base de datos remoto
-		assertEquals(3,a.size());
+		assertEquals(6,a.size());//El valor 6 aqui sera diferente dependiendo de las partidas que haya actualmente
 		
 		ArrayList<UnidadBD> Unidades=BD.UnidadBDSelect(BD.usarBD(BD.initBD("Local")), "Partida='avsb'");
-		assertEquals(1,Unidades.size());
+		assertEquals(14,Unidades.size());
 	}
 	@Test
 	public void test1() {

@@ -20,12 +20,14 @@ import javax.swing.JPasswordField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Statement;
-
+/**
+ * 
+ * Ventana que sirve para registrar al usuario
+ *
+ */
 public class VentanaRegistro extends JDialog {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUsuario;
@@ -33,7 +35,7 @@ public class VentanaRegistro extends JDialog {
 	private JTextField txtNombreReal;
 
 	/**
-	 * Launch the application.
+	 * Main de la ventana
 	 */
 	public static void main(String[] args) {
 		try {
@@ -47,8 +49,8 @@ public class VentanaRegistro extends JDialog {
 	}
 
 	/**
-	 * Create the dialog.
-	 * @param lm 
+	 * Constructor de la ventana
+	 * @param lm Login manager
 	 */
 	public VentanaRegistro(LoginManager lm) {
 		setBounds(100, 100, 450, 300);
@@ -113,6 +115,7 @@ public class VentanaRegistro extends JDialog {
 							u = new Usuario(txtUsuario.getText(),
 									new String(pswField.getPassword()),
 									txtNombreReal.getText());
+							//Reistra al usuario en la base de datos local y remota
 							Statement st=BD.usarBD(BD.initBDOnline("Remote"));
 							Statement st1=BD.usarBD(BD.initBD("Local"));
 									BD.usuarioInsert(st,u);

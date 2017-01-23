@@ -41,12 +41,14 @@ import UnidadesEnemigas.SoldadoRasoEnemigo;
 import UnidadesEnemigas.SpawnEnemigo;
 import UnidadesEnemigas.TanqueEnemigo;
 import UnidadesEnemigas.UnidadEnemiga;
+/**
+ * 
+ * Clase que contiene la ventana y metodos para jugar (botones principales)
+ *
+ */
+public class Partida extends JDialog{
 
-public class Partida extends JDialog implements Runnable{
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JTextField textFieldPartida;
 	private JTextField textFieldJugador1;
@@ -64,60 +66,76 @@ public class Partida extends JDialog implements Runnable{
 	private JButton btnAtacar;
 	private JButton btnFinalizarTurno;
 	private JButton btnGuardar;
-	private LogicaBatallas.ArraysPartida lp;
+	private LogicaBatallas.ArraysPartida lp;//Elementos importantes
 	private static LogicaBatallas.ElementosPartida p;
-	public static UnidadBD[][] tablero=crearTablero();
-	private gridpanel gp=new gridpanel();
-
+	public static UnidadBD[][] tablero=crearTablero();//Tablero donde se juega
+	private gridpanel gp=new gridpanel();//gridpanel en el que se basan las mecanicas del juego
+/**
+ * 
+ * @return Objeto ElementosPartida actual
+ */
 	public static ElementosPartida getPartida() {
 		return p;
 	}
+	/**
+	 * 
+	 * @return Objeto ArraysPartida actual
+	 */
 	private ArraysPartida getArrays() {
 		return lp;
 	}
+	/**
+	 * Metodo que devuelve el tablero original
+	 * @return tablero de 32x32 sin unidades
+	 */
 	public static UnidadBD[][] crearTablero() {
 		UnidadBD[][] tab={  
 				{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new SpawnEnemigo(0,31) },
-				{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, null, null, null, null, new Colision(0) },
-				{ null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, null, null, null, new Colision(0), null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0) },
-				{ null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, new Colision(0), null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null },
-				{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null },
-				{ new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, new Colision(0), null, null, null, new Colision(0), null, null, null, new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null },
-				{ new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null },
-				{ new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, null, null },
-				{ null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null },
-				{ null, null, null, null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null },
-				{ null, null, null, null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, null, null, new Colision(0), null, null },
-				{ null, null, new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, null, new Colision(0), null, null },
-				{ null, null, new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, new Colision(0), null, null, new Colision(0), null, null },
-				{ null, new Colision(0), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, new Colision(0), new Colision(0), null, null, null, null, new Colision(0), null, null, null, null, null },
-				{ new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null },
-				{ new Colision(0), new Colision(0), null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0), null, null },
-				{ null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, new Colision(0), null, null },
-				{ null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), null, null, new Colision(0), new Colision(0), null, null, null, null },
-				{ null, null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, new Colision(0), null, null, null, new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
-				{ null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, new Colision(0), null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0) },
-				{ null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, null },
-				{ null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, null },
-				{ new Colision(0), null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, new Colision(0), null, null },
-				{ new Colision(0), null, null, new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, new Colision(0), null, null },
-				{ null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0) },
-				{ null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, new Colision(0), null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0) },
-				{ null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, new Colision(0), null, null, null, null, new Colision(0), null, null, null, new Colision(0), null, new Colision(0), new Colision(0), null, null, null, new Colision(0), null, null, new Colision(0), null, null, new Colision(0), new Colision(0), new Colision(0) },
-				{ null, null, null, null, null, null, null, new Colision(0), null, null, null, null, null, null, null, null, null, null, null, new Colision(0), null, null, new Colision(0), new Colision(0), new Colision(0), null, new Colision(0), null, new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
-				{ null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, null, new Colision(0), null, null, null, new Colision(0), null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
-				{ new Colision(0), null, null, null, null, new Colision(0), new Colision(0), null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
-				{ new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) },
-				{ new Spawn(31,0), null, null, null, null, null, null, null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), null, null, null, null, null, null, new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0), new Colision(0) }
+				{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision( ), new Colision( ), null, null, new Colision( ), null, null, null, null, null, null, null, null, new Colision( ) },
+				{ null, null, null, null, null, null, null, null, null, null, null, new Colision( ), null, null, null, null, null, null, null, null, new Colision( ), null, new Colision( ), new Colision( ), null, null, null, null, null, null, null, new Colision( ) },
+				{ null, null, null, null, null, null, null, null, null, null, null, new Colision( ), null, null, null, null, null, new Colision( ), null, null, new Colision( ), new Colision( ), new Colision( ), null, null, null, null, null, null, null, null, null },
+				{ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, null, null, null, null },
+				{ new Colision( ), new Colision( ), new Colision( ), null, null, null, null, null, null, new Colision( ), null, null, null, new Colision( ), null, null, null, new Colision( ), new Colision( ), null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, null, null, null, null },
+				{ new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision( ), new Colision( ), null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, null, null, null, null },
+				{ new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, null, null, new Colision( ), null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, new Colision( ), null, null, null, null, null, null },
+				{ null, null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, null, null, null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, null, null, null, null, null, null, null },
+				{ null, null, null, null, new Colision( ), new Colision( ), null, null, null, new Colision( ), new Colision( ), new Colision( ), null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, null, null, null, null, null, null, null, null },
+				{ null, null, null, null, new Colision( ), new Colision( ), null, null, null, new Colision( ), new Colision( ), new Colision( ), null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, new Colision( ), null, null, null, null, null, null, new Colision( ), null, null },
+				{ null, null, new Colision( ), null, null, null, null, new Colision( ), new Colision( ), null, new Colision( ), new Colision( ), null, null, null, null, null, null, null, null, null, null, new Colision( ), null, null, null, null, null, null, new Colision( ), null, null },
+				{ null, null, new Colision( ), null, null, null, null, new Colision( ), new Colision( ), null, new Colision( ), new Colision( ), null, null, null, null, null, null, null, null, new Colision( ), new Colision( ), null, null, null, null, new Colision( ), null, null, new Colision( ), null, null },
+				{ null, new Colision( ), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision( ), null, null, new Colision( ), new Colision( ), null, null, null, null, new Colision( ), null, null, null, null, null },
+				{ new Colision( ), new Colision( ), null, null, null, null, null, null, null, null, null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, null, new Colision( ), new Colision( ), null, null, null, null, null, null, null, null, null, null },
+				{ new Colision( ), new Colision( ), null, null, null, null, null, new Colision( ), new Colision( ), new Colision( ), null, null, new Colision( ), null, null, null, null, null, null, null, new Colision( ), new Colision( ), null, null, null, null, null, null, null, new Colision( ), null, null },
+				{ null, null, null, null, null, null, null, new Colision( ), new Colision( ), new Colision( ), null, null, new Colision( ), null, null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, null, null, null, null, null, null, new Colision( ), null, null },
+				{ null, null, null, null, null, null, null, null, null, null, null, null, null, new Colision( ), null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, new Colision( ), new Colision( ), null, null, new Colision( ), new Colision( ), null, null, null, null },
+				{ null, null, null, null, new Colision( ), new Colision( ), new Colision( ), null, null, null, null, null, null, new Colision( ), null, null, null, new Colision( ), null, null, null, null, new Colision( ), new Colision( ), null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ) },
+				{ null, null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, new Colision( ), null, null, null, null, null, null, null, null, null, null, null, null, new Colision( ), null, null, null, null, null, null, new Colision( ), new Colision( ), new Colision( ) },
+				{ null, null, null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, null, null, null, null, null, null, new Colision( ), new Colision( ), null, null, null, null, null, null, null, null, null, null, null, null },
+				{ null, null, null, null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, null, null, null, null, null, null, null, null, null, null },
+				{ new Colision( ), null, null, null, null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, new Colision( ), null, null },
+				{ new Colision( ), null, null, new Colision( ), null, null, null, null, new Colision( ), new Colision( ), null, null, null, null, null, null, null, new Colision( ), new Colision( ), null, null, null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, new Colision( ), null, null },
+				{ null, null, null, new Colision( ), new Colision( ), new Colision( ), null, null, null, null, null, null, null, null, null, null, null, new Colision( ), new Colision( ), new Colision( ), null, null, null, null, new Colision( ), new Colision( ), null, null, null, new Colision( ), new Colision( ), new Colision( ) },
+				{ null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, null, null, null, null, null, null, null, null, new Colision( ), null, new Colision( ), new Colision( ), null, null, null, null, null, null, null, null, null, new Colision( ), new Colision( ), new Colision( ) },
+				{ null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, new Colision( ), null, null, null, null, new Colision( ), null, null, null, new Colision( ), null, new Colision( ), new Colision( ), null, null, null, new Colision( ), null, null, new Colision( ), null, null, new Colision( ), new Colision( ), new Colision( ) },
+				{ null, null, null, null, null, null, null, new Colision( ), null, null, null, null, null, null, null, null, null, null, null, new Colision( ), null, null, new Colision( ), new Colision( ), new Colision( ), null, new Colision( ), null, new Colision( ), new Colision( ), new Colision( ), new Colision( ) },
+				{ null, null, null, null, null, new Colision( ), new Colision( ), null, null, null, null, null, null, new Colision( ), new Colision( ), null, null, null, null, new Colision( ), null, null, null, new Colision( ), null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ) },
+				{ new Colision( ), null, null, null, null, new Colision( ), new Colision( ), null, new Colision( ), new Colision( ), null, null, null, new Colision( ), new Colision( ), null, null, null, null, null, null, null, null, null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ) },
+				{ new Colision( ), null, null, null, null, null, null, null, new Colision( ), new Colision( ), null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, null, null, null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ) },
+				{ new Spawn(31,0), null, null, null, null, null, null, null, null, null, null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), null, null, null, null, null, null, new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ), new Colision( ) }
 				  };
 		return tab;
 	}
+	/**
+	 * Establece el objeto pasado por parametro como el objeto 
+	 * ElementosPartida de la partida actual
+	 * @param p1 Objeto ElementosPartida
+	 */
 	public static void setPartida(ElementosPartida p1) {
 		p=p1;;
 	}
 	
 	
-		/*Como queda con las colisiones a modo de array
+		/*Como queda con las colisiones a modo de array  A=colision
 		{  
 		{ *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, s },
 		{ *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, a, a, *, *, a, *, *, *, *, *, *, *, *, a },
@@ -155,18 +173,24 @@ public class Partida extends JDialog implements Runnable{
 	*/
 	
 	
-//TODO array que tenga los componentes, y su equivalente en gridlayout para que sea utilizable
-	private int xobj,yobj;
-	static UnidadBD UnidadActual=new UnidadBD();//FIXME de prueba 
-	static UnidadBD UnidadObjetivo=new UnidadBD();//FIXME cambiar la visibilidad del package acaso(?)
+	//Atributos que son la base del juego
+	private int xobj,yobj;//coordenadas donde se clicka
+	static UnidadBD UnidadActual=new UnidadBD();//Unidad que se esta controlando actualmente
+	static UnidadBD UnidadObjetivo=new UnidadBD();//Unidad a la que se desea atacar
 
-	public static void setUnidadActual(ElementosPartida p1) {
-		p=p1;;
-	}
+	/**
+	 * Metodo que cambia el tablero de la partida actual
+	 * @param tablero1 tablero de dos dimensiones de unidadBD
+	 */
 	public static void setTablero(UnidadBD[][] tablero1) {
 		tablero = tablero1;
 	}
-
+/**
+ * Constructor de Partida
+ * @param p ElementosPartida que lleva informacion
+ * @param lp ArraysPartida que lleva las unidades
+ * @throws IOException
+ */
 	public Partida(LogicaBatallas.ElementosPartida p,LogicaBatallas.ArraysPartida lp) throws IOException {
 		Partida.p=p;
 		this.lp=lp;
@@ -174,37 +198,20 @@ public class Partida extends JDialog implements Runnable{
 	}
 
 	 Runnable myRunnable = new Runnable(){
-
+/**
+ * Hilo con dos metodos de repintar para que no haya errores
+ */
 		 public void run(){
 					repintar2();
 					repintar();
 				}
 	   };
 
-	
-	/*
-	  public static RefrecarPantalla refrescarPantalla;
-		public static class RefrecarPantalla extends Thread{
-			private boolean X = true;
-			public void Stop(){
-				X = false;
-
-			}
-			public void run(){
-
-				int decimas = 0;
-				while (X){
-					decimas++;
-					if (decimas %10 == 0){ //un segundo
-						repintar();
-					}
-				}
-
-			}
-		}
-
-	*/
+	/**
+	 * Metodo repintar que asigna imagenes a los botones segun las coordenadas que tengan (provienen de los arrays de soldados)
+	 */
 		public void repintar2(){
+			//Recupera los soldados y los divide en dos grupos
 			ArraysPartida a=getArrays();
 			ArrayList<UnidadAliada> ua=a.getListaAliados();
 			ArrayList<UnidadEnemiga> ue=a.getListaEnemigos();
@@ -228,6 +235,7 @@ public class Partida extends JDialog implements Runnable{
 				else if(Partida.getTablero()[u.getCordX()][u.getCordY()] instanceof SemiorugaEnemigo){Partida.this.getGp().getGridButton(u.getCordX(),u.getCordY()).setIcon(new ImageIcon(getClass().getResource("/resources/SemiorugaEnemigo.png")));Partida.this.getGp().getGridButton(u.getCordX(), u.getCordY()).repaint();}
 
 			}
+			//Elimina los botones que no tengan soldados en su posicion
 			for(int i=0;i<Partida.getTablero().length;i++){
 				for(int j=0;j<Partida.getTablero()[0].length;j++){
 					if(Partida.getTablero()[i][j]==null){Partida.this.getGp().getGridButton(i,j).setIcon(null);}
@@ -239,7 +247,9 @@ public class Partida extends JDialog implements Runnable{
 			
 			
 		}
-		
+		/**
+		 * Metodo de repintar que comprueba que todos los botones tengan asignado el valor que deberia segun los soldados que haya en el tablero
+		 */
 	public void repintar(){
 		for(int i=0;i<Partida.getTablero().length;i++){
 			for(int j=0;j<Partida.getTablero()[0].length;j++){
@@ -262,7 +272,10 @@ public class Partida extends JDialog implements Runnable{
 	
 	
 	
-
+/**
+ * Inicializa el panel de partida
+ * @throws IOException
+ */
 	private void initialize() throws IOException {
 		new JFrame();
 		setBounds(100, 100, 330, 141);
@@ -276,50 +289,38 @@ public class Partida extends JDialog implements Runnable{
 		
 		
 
-	
+	//Boton que aplica el algoritmo de pathfinding y actualiza el tablero con el hilo
 		btnMover = new JButton("Mover");
 		btnMover.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) { 
 				Thread thread = new Thread(myRunnable);
 
 						if(tablero[xobj][yobj]==null){
-							try{
-								UnidadBD[][] tablero1=getTablero();
-								
+							try{				
 								int x=UnidadActual.getCordX();
 								int y=UnidadActual.getCordY();
-								
-							//	UnidadBD reserva=UnidadActual;
-							//	UnidadBD reserva2=UnidadActual;
-							
-								
 						tablero=UnidadActual.AlgoritmoPathfinding(UnidadActual.getDistancia(), UnidadActual.getCordX(), UnidadActual.getCordY(), xobj, yobj, tablero);
 						if(tablero[xobj][yobj]==UnidadActual)
 						tablero[x][y]=null;
-						
 						   thread.start();
 							try {
 								thread.join();
 							} catch (InterruptedException e1) {
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-							}catch(NullPointerException e){System.out.println("ERROR QUE HAcE DESAPARECER A ESTOS");}//FIXME quitar
-					//	UnidadActual.setAcciones(UnidadActual.getAcciones()-1);}			
-
+							}catch(NullPointerException e){}
 					}
-			
-			
-				 
 			}
 		});
 		btnMover.setBounds(30, 25, 101, 46);
 		panel.add(btnMover);
-		
+		//Boton atacar que depende de cual sea el objetivo ataca o no
 		btnAtacar = new JButton("Atacar");
 		btnAtacar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)  {
 			actualiza();
+			//Si el turno es el del jugador 1, solo podra atacar a al otro jugador
+			//No recibe a sus unidades como objetivo
 			if(p.getTurno()==0){
 				if(tablero[xobj][yobj]==null){}
 				else if(tablero[xobj][yobj] instanceof Colision){}
@@ -333,9 +334,10 @@ public class Partida extends JDialog implements Runnable{
 					try {
 						thread.join();
 					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
+						
 						e1.printStackTrace();
 					}
+					//En caso de destruir el spawn enemigo,se da la partida por ganada
 					if(Ventanas.Partida.getUnidadObjetivo().getSalud()<=0 && Ventanas.Partida.getUnidadObjetivo() instanceof SpawnEnemigo){
 						JFrame frame=new JFrame();
 						Object[] options = {"OK"};
@@ -347,7 +349,9 @@ public class Partida extends JDialog implements Runnable{
 				                options,
 				                options[0]);
 					    
-					    setVisible(false); //FIXME poner aqui el codigo de BD remoto
+					    setVisible(false); 
+					    //Diferencia de si se esta jugando en local o en multijugador
+					    //Se comprueba el segundo usuario
 					    if(p.getUsuario2()!=null){
 					    BD.PartidaEliminar(BD.usarBD(BD.initBDOnline("Remoto")), p);
 					    MenuPrincipal mp=new MenuPrincipal();
@@ -359,9 +363,14 @@ public class Partida extends JDialog implements Runnable{
 						    mp.setVisible(true);
 						    }
 					}
+					
+					//Se reduce la cantidad de acciones que puede hacer
+					UnidadActual.setAcciones(UnidadActual.getAcciones()-1);
+					//actualiza los valores de la aprtida
 					actualiza();
-		        System.out.println("se ha atacado a la unidad de las coordenadas X="+xobj+" y="+yobj);} //FIXME quitar
+		        } 
 			}
+			//Este caso es lo contrario a lo que pasaria al turno 0
 			else if(p.getTurno()==1){
 				if(tablero[xobj][yobj]==null){}
 				else if(tablero[xobj][yobj] instanceof Colision){}
@@ -374,7 +383,6 @@ public class Partida extends JDialog implements Runnable{
 					try {
 						thread.join();
 					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					if(Ventanas.Partida.getUnidadObjetivo().getSalud()<=0 && Ventanas.Partida.getUnidadObjetivo() instanceof Spawn){
@@ -393,8 +401,11 @@ public class Partida extends JDialog implements Runnable{
 					    mp.setVisible(true);
 
 					}
+					//Se reduce la cantidad de acciones que puede hacer
 					UnidadActual.setAcciones(UnidadActual.getAcciones()-1);
-		        System.out.println("se ha atacado a la unidad de las coordenadas X="+xobj+" y="+yobj);}
+					//actualiza los valores de la aprtida
+					actualiza();
+		       }
 			}
 			
 				
@@ -402,21 +413,24 @@ public class Partida extends JDialog implements Runnable{
 		});
 		btnAtacar.setBounds(30, 82, 101, 46);
 		panel.add(btnAtacar);
-		
+		//Boton que hace guardar la partida
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				//Distincion entre local y multijugador
 				if(p.getUsuario2()==null){
 					
-					
+				//Se actualizan los valores	
 				BD.PartidaUpdate1J(BD.usarBD(BD.initBD("Local")),p);
+				//Se eliminan todos los soldados relacionados con esa partida
 				BD.SoldadosLocalEliminar(BD.usarBD(BD.initBD("Local")),p);
+				//Se insertan los nuevos soldados (aliera tramites de comprobacion y update en caso de que sigan vivos)
 				for(UnidadBD u:lp.getListaAliados()){
 					BD.UnidadesInsertLocal(BD.usarBD(BD.initBD("Local")),u);}
 				for(UnidadBD u:lp.getListaEnemigos()){
 					BD.UnidadesInsertLocal(BD.usarBD(BD.initBD("Local")),u);}
+				//Se vuelve al menu principal
 				setVisible(false);
 				MenuPrincipal mp=new MenuPrincipal();
 				mp.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -424,7 +438,7 @@ public class Partida extends JDialog implements Runnable{
 				}
 				
 				else{
-					
+					//Lo mismo pero para un partida multijugador
 				BD.PartidaUpdate(BD.usarBD(BD.initBDOnline("Remoto")),p);
 				BD.SoldadosEliminar(BD.usarBD(BD.initBDOnline("Remoto")),p);
 				for(UnidadBD u:lp.getListaAliados()){
@@ -440,7 +454,7 @@ public class Partida extends JDialog implements Runnable{
 		});
 		btnGuardar.setBounds(30, 298, 101, 23);
 		panel.add(btnGuardar);
-		
+		//Boton que permite cambiar de arma, dependiendo de la situacion
 		btnCambiarArma = new JButton("Cambiar arma");
 		btnCambiarArma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)  {
@@ -457,7 +471,7 @@ public class Partida extends JDialog implements Runnable{
 				    tablero[UnidadActual.getCordX()][UnidadActual.getY()].setArma(arma);
 				    UnidadActual.setAcciones(UnidadActual.getAcciones()-1);
 				    	}
-				catch(NullPointerException e){System.out.println("NO SE HA ELEGIDO NINGUNA PERSONA");}//FIXME cambiar por una alerta(?)
+				catch(NullPointerException e){}
 			}
 		});
 		btnCambiarArma.addActionListener(new ActionListener() {
@@ -466,7 +480,7 @@ public class Partida extends JDialog implements Runnable{
 		});
 		btnCambiarArma.setBounds(30, 139, 101, 46);
 		panel.add(btnCambiarArma);
-		
+		//Boton que finaliza turno y deja jugar al jugador siuiente
 		btnFinalizarTurno = new JButton("Finalizar Turno");
 		btnFinalizarTurno.addMouseListener(new MouseAdapter() {
 			@Override
@@ -476,7 +490,7 @@ public class Partida extends JDialog implements Runnable{
 				try {
 					thread.join();
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
+
 					e1.printStackTrace();
 				}
 				p.setDineroAliado(p.getDineroAliado()+50);
@@ -486,12 +500,11 @@ public class Partida extends JDialog implements Runnable{
 						if(tablero[i][j] instanceof UnidadAliada || tablero[i][j] instanceof UnidadEnemiga){tablero[i][j].setAcciones(2);}
 					}
 				}
-				
+			
 				actualiza();
-				if(Partida.p.getTurno()==0){textFieldPropietario.setText(p.getUsuario2());
-			Partida.p.setTurno(1);JOptionPane.showMessageDialog(null, "Turno terminado");//FIXME meter en el crearpartidalocal que el usuario 2 tenga el nombre que insertes
-				//FIXME sera para comprobar los turnos de los diferentes jugadores
-				//no se deshabilitara el boton de finalizar turno para ver si se puede hacer deshabilitar y habilitar los botones al pasar de turno
+				if(Partida.p.getTurno()==0){if(p.getUsuario2()!=null){textFieldPropietario.setText(p.getUsuario2());}else{textFieldPropietario.setText("J2 Local");}
+			Partida.p.setTurno(1);JOptionPane.showMessageDialog(null, "Turno terminado");
+				//Ccomprobar los turnos de los diferentes jugadores
 					if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario2())){
 						btnAtacar.setEnabled(true);
 						btnAtacar.setFocusable(true);
@@ -501,8 +514,9 @@ public class Partida extends JDialog implements Runnable{
 						btnMover.setFocusable(true);
 						btnCambiarArma.setEnabled(true);
 						btnCambiarArma.setFocusable(true);
-						
-//FIXME enablear/disablear el boton de finalizar turno tambien, pero hasta que se haga pruebas no
+						btnFinalizarTurno.setEnabled(true);
+						btnFinalizarTurno.setFocusable(true);
+
 					}
 				else if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario())){
 						btnAtacar.setEnabled(false);
@@ -513,6 +527,9 @@ public class Partida extends JDialog implements Runnable{
 						btnMover.setFocusable(false);
 						btnCambiarArma.setEnabled(false);
 						btnCambiarArma.setFocusable(false);
+						btnFinalizarTurno.setEnabled(false);
+						btnFinalizarTurno.setFocusable(false);
+						
 					}
 				else if(p.getUsuario2()==null){
 					btnAtacar.setEnabled(true);
@@ -523,9 +540,12 @@ public class Partida extends JDialog implements Runnable{
 					btnMover.setFocusable(true);
 					btnCambiarArma.setEnabled(true);
 					btnCambiarArma.setFocusable(true);
+					btnFinalizarTurno.setEnabled(true);
+					btnFinalizarTurno.setFocusable(true);
+					
 
 				}
-				
+					UnidadActual=new UnidadBD();UnidadObjetivo=new UnidadBD(); //Para no poder mover los soldados seleccionados anteriormente
 					
 				}
 				else{Partida.p.setTurno(0);textFieldPropietario.setText(p.getUsuario());JOptionPane.showMessageDialog(null, "Turno terminado");
@@ -538,6 +558,9 @@ public class Partida extends JDialog implements Runnable{
 					btnMover.setFocusable(false);
 					btnCambiarArma.setEnabled(false);
 					btnCambiarArma.setFocusable(false);
+					btnFinalizarTurno.setEnabled(false);
+					btnFinalizarTurno.setFocusable(false);
+					
 
 				
 				}
@@ -550,6 +573,9 @@ public class Partida extends JDialog implements Runnable{
 					btnMover.setFocusable(true);
 					btnCambiarArma.setEnabled(true);
 					btnCambiarArma.setFocusable(true);
+					btnFinalizarTurno.setEnabled(true);
+					btnFinalizarTurno.setFocusable(true);
+					
 
 				}
 				else if(p.getUsuario2()==null){
@@ -561,6 +587,9 @@ public class Partida extends JDialog implements Runnable{
 					btnMover.setFocusable(true);
 					btnCambiarArma.setEnabled(true);
 					btnCambiarArma.setFocusable(true);
+					btnFinalizarTurno.setEnabled(true);
+					btnFinalizarTurno.setFocusable(true);
+					
 				}
 
 				}UnidadActual=new UnidadBD();UnidadObjetivo=new UnidadBD(); //Para no poder mover los soldados seleccionados anteriormente
@@ -716,17 +745,19 @@ public class Partida extends JDialog implements Runnable{
         setBounds(154, 114, 1200, 800);
         setResizable(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //Crea el gridpanel que contendra los botones
         getContentPane().add(gp.createGridPanel());
-        pack();//FIXME
+        pack();
         setLocationRelativeTo(null);
         setVisible(true);
 	
 	}
-	
+	/**
+	 * Metodo que actualiza los valores de la partida
+	 * y deja los botones inhabilitados para los que no tengan
+	 * acciones disponibles
+	 */
 	private void actualiza(){
-
-		
-		
 		textFieldJugador2.setText(p.getUsuario2());
 		textFieldPuntosJ1.setText(""+p.getPuntuacionAliado());
 		textFieldPuntosJ2.setText(""+p.getPuntuacionEnemigo());
@@ -787,9 +818,12 @@ public class Partida extends JDialog implements Runnable{
 	
 	
 	
+	/**
+	 * 
+	 * Clase que se encara del panel de botones
+	 */
 	
-	
-	public class gridpanel implements Runnable{
+	public class gridpanel{
 		
 
 	private static final int N = 32;
@@ -804,9 +838,6 @@ public class Partida extends JDialog implements Runnable{
 	 private JPanel createGridPanel() {
 	    	final Image image=requestImage();
 	    	 JPanel p = new JPanel(new GridLayout(32, 32)){
-	    		/**
-				 * 
-				 */
 				private static final long serialVersionUID = 1L;
 
 				@Override
@@ -820,16 +851,11 @@ public class Partida extends JDialog implements Runnable{
 	            int row = i / 32;
 	            int col = i % 32;
 	            JButton gb = createGridButton(row, col);
+	            //añade btones que cambian de utilidad cuando se es clickado encima de ellos bien con el click derecho o el izquierdo
 	            gb.addMouseListener(new MouseAdapter() {
 	    			@Override
 	    			public void mouseClicked(MouseEvent e) {
 	    				actualiza();
-	    				if(tablero[row][col] instanceof UnidadAliada)gb.setText("X");//FIXME QUITAR ESTO; SOLO ES PARA PRUEBAS
-	    				else if(tablero[row][col] instanceof UnidadEnemiga)gb.setText("Y");
-	    				else if(tablero[row][col] instanceof Colision)gb.setText("C");
-	    				else if(tablero[row][col]==null)gb.setText("P");
-	    				
-	    				
 	    			   if(e.getButton() == MouseEvent.BUTTON1)
 	        	    {
 	    				   if(Partida.p.getTurno()==0){
@@ -838,6 +864,7 @@ public class Partida extends JDialog implements Runnable{
 	    				   else if(tablero[row][col] instanceof UnidadEnemiga){}
 	    				   else if(tablero[row][col] instanceof Spawn && Partida.p.getUsuario().equals(LoginManager.getUsuario().getNombre())){
 	    					  try{
+	    						  //El spawn crea unidades
 	    					   final String[] soldados = { "Soldado raso", "Francotirador", "Bazooka", "Semioruga","Tanque" };
 	    					     JFrame frame = new JFrame("Crear Soldados");
 	    					     String SoldadoCreado = (String) JOptionPane.showInputDialog(frame, 
@@ -847,7 +874,7 @@ public class Partida extends JDialog implements Runnable{
 	    					         null, 
 	    					         soldados, 
 	    					         soldados[0]);
-	    					     
+	    					     //Se crean unidades al lado del spawn
 	    					     if(SoldadoCreado.equals("Soldado raso")){tablero=((Spawn) tablero[31][0]).CrearSoldadoRaso(Partida.p,lp);}
 	    					     else if(SoldadoCreado.equals("Francotirador")){tablero=((Spawn) tablero[31][0]).CrearFrancotirador(Partida.p,lp);}
 	    					     else if(SoldadoCreado.equals("Bazooka")){tablero=((Spawn) tablero[31][0]).CrearBazooka(Partida.p,lp);}
@@ -858,8 +885,8 @@ public class Partida extends JDialog implements Runnable{
 	    				   
 	    				   
 	    				   else{xobj=row;yobj=col;}
-	        	      System.out.println("Click izquierdo col="+col+" row="+row);
 	        	      actualiza();
+	        	      //Lo mismo pero para el enemigo
 	    				   }else if(Partida.p.getTurno()==1){
 	    					   if(tablero[row][col] instanceof UnidadEnemiga && !(tablero[row][col] instanceof SpawnEnemigo)){
 		    				   UnidadActual=tablero[row][col];xobj=row;yobj=col;}
@@ -905,12 +932,11 @@ public class Partida extends JDialog implements Runnable{
 		    				   }
 
 		    				   else{xobj=row;yobj=col;}
-		        	      System.out.println("Click izquierdo col="+col+" row="+row);
 		        	      actualiza();
 		        	      }
 	        	    }  
 	    				   
-	        	        
+	        	        //En caso de que se haga click derecho la funcion es diferente
 	        	    else if(e.getButton() == MouseEvent.BUTTON3)
 	        	    {
 
@@ -920,7 +946,6 @@ public class Partida extends JDialog implements Runnable{
 	    				   UnidadObjetivo=tablero[row][col];xobj=row;yobj=col;}
 	    				   else if(tablero[row][col] instanceof Colision){}
 	    				   else{xobj=row;yobj=col;}
-	        	      System.out.println("Click derecho col="+col+" row="+row);
 	        	      actualiza();
 	    				   }else if(Partida.p.getTurno()==1){
 	    					   if(tablero[row][col] instanceof SpawnEnemigo){ UnidadObjetivo=tablero[row][col];xobj=row;yobj=col;}
@@ -928,14 +953,13 @@ public class Partida extends JDialog implements Runnable{
 		    				   UnidadObjetivo=tablero[row][col];xobj=row;yobj=col;}
 	    					   else if(tablero[row][col] instanceof Colision){}
 		    				   else{xobj=row;yobj=col;}
-		        	      System.out.println("Click derecho col="+col+" row="+row);
 		        	      actualiza();
 		        	      }
 	        	    }	   				
 	    			}
 	    		});
 	            gb.setOpaque(false);
-	            gb.setText("P"); //FIXME Cambiando esto se consigue en invisible (para el mapa y eso)
+	            gb.setText(""); //Botones vacios e invisibles
 	            gb.setBorder(null);
 	            gb.setBorderPainted(false);
 	            gb.setContentAreaFilled(false);
@@ -948,7 +972,10 @@ public class Partida extends JDialog implements Runnable{
 	        return p;
 	    }
 
-	 
+	 /**
+	  * Se le asigna la imagen del mapa al panel
+	  * @return imagen del mapa
+	  */
 	  private BufferedImage requestImage() {
 	        BufferedImage image = null;
 
@@ -960,45 +987,18 @@ public class Partida extends JDialog implements Runnable{
 
 	        return image;
 	    }
-	
+	/**
+	 * Crea los botones que se usaran en el panel
+	 * @param row fila donde esta el boton
+	 * @param col columna donde esta el boton
+	 * @return boton creado
+	 */
 	   private JButton createGridButton(final int row, final int col) {
 	        final JButton b = new JButton("r" + row + ",c" + col);
-	        b.addActionListener(new ActionListener() {   	
-	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	            	new Thread().start();
-	            }
-	        });
-
 	        return b;
 	    }
-	   //FIXME Prueba
 
 
-		private boolean X = true;
-		public void Stop(){
-			X = false;
-
-		}
-		public void run(){
-			while (X){
-				try {
-					wait(10);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-					for(int i=0;i<32;i++){
-						for(int j=0;j<32;j++){
-							if(Partida.getTablero()[i][j]==null){getGridButton(i,j).setIcon(null);}
-							else if(Partida.getTablero()[i][j] instanceof SoldadoRaso){getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/SoldadoRaso.png")));getGridButton(i, j).repaint();}
-							
-						}
-					}
-					//this.repaint();
-				}
-			}
-		
 	}
 	   
 	
@@ -1091,12 +1091,6 @@ public class Partida extends JDialog implements Runnable{
 	public void setGp(gridpanel gp) {
 		this.gp = gp;
 	}
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 
 

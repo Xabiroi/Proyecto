@@ -191,7 +191,8 @@ public class MenuMultijugador extends JDialog{
 		textFecha.setEditable(false);
 		 getContentPane().add(textFecha);
 		textFecha.setColumns(10);
-		
+		//Este boton tiene la misma funcionalidad que su semejante de la ventana Menu1Jugador
+		//Las conexiones se hacen a la base de datos en la nube
 		JButton btnJugar = new JButton("JUGAR!");
 		btnJugar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -356,7 +357,7 @@ public class MenuMultijugador extends JDialog{
 		});
 		btnJugar.setBounds(358, 681, 127, 23);
 		 getContentPane().add(btnJugar);
-		
+		//Boton que hace volver al menu principal
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
@@ -370,12 +371,11 @@ public class MenuMultijugador extends JDialog{
 		});
 		btnVolver.setBounds(681, 681, 89, 23);
 		 getContentPane().add(btnVolver);
-		 
+		 //Boton que abre la ventana para crear la partida multijugador
 		 JButton btnCrearPartida = new JButton("Crear partida");
 		 btnCrearPartida.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent arg0) {
 		 		CrearPartida cp=new CrearPartida();
-		 		cp.initialize();
 		 		cp.setBounds(100, 100, 363, 192);
 				cp.getContentPane().setLayout(null);
 		 		setVisible(false);
