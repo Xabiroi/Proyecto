@@ -14,7 +14,7 @@ import Interfaces.Vehiculo;
 public class SemiorugaEnemigo extends UnidadEnemiga implements Vehiculo,Unidad{
 	public SemiorugaEnemigo(int cordX, int cordY) {
 	
-		//Un set image aqui(?)
+		//Atributos de la unidad Semioruga
 		Nombre="Semioruga";
 		arma="Ametralladora";
 		this.armas= new String[] {"Ametralladora" };
@@ -33,7 +33,7 @@ public class SemiorugaEnemigo extends UnidadEnemiga implements Vehiculo,Unidad{
 	
 
 
-	
+	//Método que pinta el Semioruga en el mapa
 	private Image SemiorugaEnemigo = null;
 	
 		public void pintarSemiorugaEnemigo(Graphics g){

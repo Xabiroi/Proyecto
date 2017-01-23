@@ -3,6 +3,7 @@ package Interfaces;
 import java.awt.Image;
 
 public interface Unidad {
+	//Atributos generales de las unidades
 	public String getArma();
 	public String getNombre();
 	public String[] getArmas();

@@ -33,7 +33,7 @@ public class SoldadoRasoEnemigo extends UnidadEnemiga implements Persona,Unidad{
 	
 	public SoldadoRasoEnemigo(int cordX, int cordY) {
 		
-		//FIXME Un set image aqui(?)
+		//Atributos de la unidad Soldado raso
 		Nombre="Soldado";
 		arma="Fusil";
 		this.armas= new String[] {"Fusil", "Pistola", "CCC" };//CCC=combate cuerpo a cuerpo
@@ -45,7 +45,7 @@ public class SoldadoRasoEnemigo extends UnidadEnemiga implements Persona,Unidad{
 	}
 
 
-	
+	//Método que pinta el Soldado raso enemigo en el mapa
 	private Image SoldadoRasoEnemigo = null;
 	
 		public void pintarSoldadoRasoEnemigo(Graphics g){

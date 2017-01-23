@@ -7,7 +7,9 @@ import BD.UnidadBD;
 import LogicaBatallas.ArraysPartida;
 import LogicaBatallas.ElementosPartida;
 
+//Clase de Spawn de tropas enemigas (unidades en camiflaje rojo)
 public class SpawnEnemigo extends UnidadEnemiga{
+	//Spawn enemigo y sus atributos
 	public SpawnEnemigo(int x, int y){
 		Nombre="Spawn";
 		Salud = 100;
@@ -15,7 +17,7 @@ public class SpawnEnemigo extends UnidadEnemiga{
 		this.y = y;
 	}
 
-
+//Método que crea un Soldado raso al lado del Spawn enemigo, comprueba la base de datos y si el dinero y los cuadros proximos al Spawn aliado permiten su creacion, lo crea.
 public UnidadBD[][] CrearSoldadoRasoEnemigo(ElementosPartida ep,ArraysPartida a1){
 	UnidadBD[][] a=Ventanas.Partida.getTablero();
 	if(a[0][30]==null && ep.getDineroAliado()>=35){SoldadoRasoEnemigo s=new SoldadoRasoEnemigo(0,30);a[0][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-35);return a;}
@@ -36,6 +38,8 @@ public UnidadBD[][] CrearSoldadoRasoEnemigo(ElementosPartida ep,ArraysPartida a1
 
 		return a;}
 
+
+//Método que crea un Bazooka al lado del Spawn enemigo, comprueba la base de datos y si el dinero y los cuadros proximos al Spawn aliado permiten su creacion, lo crea.
 public UnidadBD[][] CrearBazookaEnemigo(ElementosPartida ep,ArraysPartida a1){
 	UnidadBD[][] a=Ventanas.Partida.getTablero();
 	if(a[0][30]==null && ep.getDineroAliado()>=50){BazookaEnemigo s=new BazookaEnemigo(0,30);a[0][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
@@ -55,6 +59,9 @@ public UnidadBD[][] CrearBazookaEnemigo(ElementosPartida ep,ArraysPartida a1){
             options[0]);}
 
 		return a;}
+
+
+//Método que crea un Francotirador al lado del Spawn enemigo, comprueba la base de datos y si el dinero y los cuadros proximos al Spawn aliado permiten su creacion, lo crea.
 public UnidadBD[][] CrearFrancotiradorEnemigo(ElementosPartida ep,ArraysPartida a1){
 	UnidadBD[][] a=Ventanas.Partida.getTablero();
 	if(a[0][30]==null && ep.getDineroAliado()>=50){FrancotiradorEnemigo s=new FrancotiradorEnemigo(0,30);a[0][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-50);return a;}
@@ -74,6 +81,9 @@ public UnidadBD[][] CrearFrancotiradorEnemigo(ElementosPartida ep,ArraysPartida 
             options[0]);}
 
 		return a;}
+
+
+//Método que crea un Tanque al lado del Spawn enemigo, comprueba la base de datos y si el dinero y los cuadros proximos al Spawn aliado permiten su creacion, lo crea.
 public UnidadBD[][] CrearTanqueEnemigo(ElementosPartida ep,ArraysPartida a1){
 	UnidadBD[][] a=Ventanas.Partida.getTablero();
 	if(a[0][30]==null && ep.getDineroAliado()>=90){TanqueEnemigo s=new TanqueEnemigo(0,30);a[0][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-90);return a;}
@@ -93,6 +103,9 @@ public UnidadBD[][] CrearTanqueEnemigo(ElementosPartida ep,ArraysPartida a1){
             options[0]);}
 
 		return a;}
+
+
+//Método que crea un Semioruga al lado del Spawn enemigo, comprueba la base de datos y si el dinero y los cuadros proximos al Spawn aliado permiten su creacion, lo crea.
 public UnidadBD[][] CrearSemiorugaEnemigo(ElementosPartida ep,ArraysPartida a1){
 	UnidadBD[][] a=Ventanas.Partida.getTablero();
 	if(a[0][1]==null && ep.getDineroAliado()>=70){SemiorugaEnemigo s=new SemiorugaEnemigo(0,30);a[0][30]=s;s.setPartida(ep.getPartida());a1.getListaEnemigos().add(s);Ventanas.Partida.getPartida().setDineroAliado(Ventanas.Partida.getPartida().getDineroAliado()-70);return a;}

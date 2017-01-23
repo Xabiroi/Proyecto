@@ -31,10 +31,10 @@ public class SoldadoRaso extends UnidadAliada implements Persona,Unidad{
 	//Hay que asignar en el constructor a cada unidad su icono
 
 
-
+	
 
 	public SoldadoRaso(int cordX, int cordY) {
-		//FIXME Un set image aqui(?)
+		//Atributos de la unidad Soldado raso
 		Nombre="Soldado";
 		arma="Fusil";
 		this.armas= new String[] {"Fusil", "Pistola", "CCC" };//CCC=combate cuerpo a cuerpo
@@ -46,7 +46,8 @@ public class SoldadoRaso extends UnidadAliada implements Persona,Unidad{
 		
 	}
 
-
+	//Método que pinta el Soldado raso en el mapa
+	
 	private ImageIcon initCraft() {
         
         ImageIcon ii = new ImageIcon("SoldadoRaso.png");

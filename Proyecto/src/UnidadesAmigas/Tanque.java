@@ -13,7 +13,7 @@ import Interfaces.Vehiculo;
 public class Tanque extends UnidadAliada implements Vehiculo,Unidad{
 	public Tanque(int cordX, int cordY) {
 		
-		//Un set image aqui(?)
+		//Atributos de la unidad tanque
 		Nombre="Tanque";
 		arma="Misil";
 		this.armas= new String[] {"Misil", "Ametralladora"};
@@ -25,6 +25,7 @@ public class Tanque extends UnidadAliada implements Vehiculo,Unidad{
 		
 	}
 
+	//Método que señala el daño que hace el Tanque al explotar
 	@Override
 	public int explotar() {
 		//Daño en area cuando muere(?)
@@ -33,6 +34,7 @@ public class Tanque extends UnidadAliada implements Vehiculo,Unidad{
 	}
 	
 
+	//Método que pinta la unidad Tanque en el mapa
 	
 	private Image Tanque = null;
 	

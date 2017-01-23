@@ -27,7 +27,7 @@ public class VentanaContraseña extends JDialog {
 	private LoginManager lm;
 
 	/**
-	 * Launch the application.
+	 * main que lanza la ventana de contraseña
 	 */
 	public static void main(String[] args) {
 		try {
@@ -41,7 +41,7 @@ public class VentanaContraseña extends JDialog {
 	}
 
 	/**
-	 * Create the dialog.
+	 * crea dialogo para introdcir la contraseña
 	 * @param lm 
 	 */
 	public VentanaContraseña(LoginManager lm) {
@@ -52,7 +52,7 @@ public class VentanaContraseña extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
-			JLabel lblUsuario = new JLabel("Usuario:");
+			JLabel lblUsuario = new JLabel("Usuario:"); //label al lado de la casilla usuario
 			contentPanel.add(lblUsuario);
 		}
 		{
@@ -65,24 +65,24 @@ public class VentanaContraseña extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("OK"); //boton de afirmacion
 				okButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						String contraseña = lm.recuperarContraseña(txtContraseña.getText());
 						if(contraseña.length() > 0)
-							JOptionPane.showMessageDialog(null, "Contraseña: " + contraseña);
+							JOptionPane.showMessageDialog(null, "Contraseña: " + contraseña); //label al lado de la casilla contraseña
 						else
-							JOptionPane.showMessageDialog(null, "Error el usuario no existe", "Error", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Error el usuario no existe", "Error", JOptionPane.ERROR_MESSAGE); //mensage de error si el usuaro intruducido es erroneo
 						dispose();
 					}
 				});
-				okButton.setActionCommand("OK");
+				okButton.setActionCommand("OK"); 
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Cancel"); //boton de calncelacion
 				cancelButton.setActionCommand("Cancel");
 				cancelButton.addMouseListener(new MouseAdapter() {
 					@Override

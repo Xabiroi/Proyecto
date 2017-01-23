@@ -14,7 +14,7 @@ public class BazookaEnemigo extends UnidadEnemiga implements Persona,Unidad{
 	
 	public BazookaEnemigo(int cordX, int cordY) {
 		
-		//Un set image aqui(?)
+		//Atributos de la unidad Bazooka
 		Nombre="Bazooka";
 		arma="Bazooka";
 		this.armas= new String[] {"Bazooka", "Pistola"};
@@ -26,6 +26,7 @@ public class BazookaEnemigo extends UnidadEnemiga implements Persona,Unidad{
 	}
 	
 
+	//Método que pinta el Bazooka enemigo en el mapa
 	private Image BazookaEnemigo = null;
 	
 		public void pintarBazookaEnemigo(Graphics g){

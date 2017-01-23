@@ -15,7 +15,7 @@ public class FrancotiradorEnemigo extends UnidadEnemiga implements Persona,Unida
 
 	public FrancotiradorEnemigo(int cordX, int cordY) {
 		
-		//Un set image aqui(?)
+		//Atributos de la unidad Francotirador
 		Nombre="Francotirador";
 		arma="Rifle";
 		this.armas= new String[] {"Rifle", "Pistola"};
@@ -27,7 +27,7 @@ public class FrancotiradorEnemigo extends UnidadEnemiga implements Persona,Unida
 	}
 
 
-
+	//Método que pinta el Francotirador enemigo en el mapa
 	
 	private Image FrancotiradorEnemigo = null;
 	

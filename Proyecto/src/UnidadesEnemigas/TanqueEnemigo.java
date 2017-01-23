@@ -13,7 +13,7 @@ import Interfaces.Vehiculo;
 
 public class TanqueEnemigo extends UnidadEnemiga implements Vehiculo,Unidad{
 	public TanqueEnemigo(int cordX, int cordY) {
-		//Un set image aqui(?)
+		//Atributos de la unidad Tanque
 		Nombre="Tanque";
 		arma="Misil";
 		this.armas= new String[] {"Misil", "Ametralladora"};

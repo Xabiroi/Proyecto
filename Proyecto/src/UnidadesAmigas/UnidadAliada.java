@@ -40,7 +40,7 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 
 	/**
 	 * Metodo que dependiendo de que soldado se trate el que ataque
-	 * variara en efectividad
+	 * variara en efectividad entre armas contra las diastintas unidades
 	 * 
 	 * 
 	 * 

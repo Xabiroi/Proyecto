@@ -13,7 +13,7 @@ import Interfaces.Vehiculo;
 public class Semioruga extends UnidadAliada implements Vehiculo,Unidad{
 	public Semioruga(int cordX, int cordY) {
 		
-		//Un set image aqui(?)
+		//Atributos de la unidad Semioruga
 		Nombre="Semioruga";
 		arma="Ametralladora";
 		this.armas= new String[] {"Ametralladora" };
@@ -25,6 +25,8 @@ public class Semioruga extends UnidadAliada implements Vehiculo,Unidad{
 		
 	}
 
+	
+	//Método que señala el daño que hace el Semioruga al explotar
 	@Override
 	public int explotar() {
 		// TODO Auto-generated method stub
@@ -32,6 +34,7 @@ public class Semioruga extends UnidadAliada implements Vehiculo,Unidad{
 	}
 	
 
+	//Método que pinta la unidad Semioriga en el mapa
 	
 	private Image Semioruga = null;
 	

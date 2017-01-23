@@ -49,7 +49,7 @@ public class VentanaRegistro extends JDialog {
 	}
 
 	/**
-	 * Constructor de la ventana
+	 * Constructor de la ventana de registro
 	 * @param lm Login manager
 	 */
 	public VentanaRegistro(LoginManager lm) {
@@ -62,7 +62,7 @@ public class VentanaRegistro extends JDialog {
 			JPanel pnlUsuario = new JPanel();
 			contentPanel.add(pnlUsuario);
 			{
-				JLabel lblUsuario = new JLabel("Usuario");
+				JLabel lblUsuario = new JLabel("Usuario"); //recoje el nombre de usuario
 				pnlUsuario.add(lblUsuario);
 			}
 			{
@@ -75,7 +75,7 @@ public class VentanaRegistro extends JDialog {
 			JPanel pnlContraseña = new JPanel();
 			contentPanel.add(pnlContraseña);
 			{
-				JLabel lblContrasea = new JLabel("Contrase\u00F1a: ");
+				JLabel lblContrasea = new JLabel("Contrase\u00F1a: "); //recoje la contraseña
 				pnlContraseña.add(lblContrasea);
 			}
 			{
@@ -88,7 +88,7 @@ public class VentanaRegistro extends JDialog {
 			JPanel pnlNombreReal = new JPanel();
 			contentPanel.add(pnlNombreReal);
 			{
-				JLabel lblNombreReal = new JLabel("Nombre Real: ");
+				JLabel lblNombreReal = new JLabel("Nombre Real: "); //recoje el nombre real de el usuario
 				pnlNombreReal.add(lblNombreReal);
 			}
 			{
@@ -103,7 +103,7 @@ public class VentanaRegistro extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("OK"); //boton de afirmacion
 				okButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
@@ -138,7 +138,7 @@ public class VentanaRegistro extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Cancel"); //boton de calncelacion
 				cancelButton.setActionCommand("Cancel");
 				cancelButton.addMouseListener(new MouseAdapter() {
 					@Override

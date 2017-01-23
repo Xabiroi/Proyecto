@@ -14,7 +14,7 @@ public class Francotirador extends UnidadAliada implements Persona,Unidad{
 
 	public Francotirador(int cordX, int cordY) {
 		
-		//Un set image aqui(?)
+		//Atributos de el soldado Francotirador
 		Nombre="Francotirador";
 		arma="Rifle";
 		this.armas= new String[] {"Rifle", "Pistola"};
@@ -27,7 +27,7 @@ public class Francotirador extends UnidadAliada implements Persona,Unidad{
 	}
 	
 
-
+	//Método que pinta el soldado Francotirador en el mapa
 	
 	private Image Francotirador = null;
 	

@@ -41,8 +41,8 @@ public static void main(String[] args) {
 }
 
 /**
- * Create the dialog.
- * @param lm 
+ * creacion de la ventana principal de el programa
+ * contiene titulo, modo local, multijugador, opciones y salir del programa
  */
 public prueba() {
 	setBounds(100, 100, 450, 300);

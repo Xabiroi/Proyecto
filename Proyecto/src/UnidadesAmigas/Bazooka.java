@@ -14,7 +14,7 @@ public class Bazooka extends UnidadAliada implements Persona,Unidad{
 	
 	public Bazooka(int cordX, int cordY) {
 		
-		//Un set image aqui(?)
+		//Atributos de el soldado Bazooka
 		Nombre="Bazooka";
 		arma="Bazooka";
 		this.armas= new String[] {"Bazooka", "Pistola"};
@@ -26,7 +26,7 @@ public class Bazooka extends UnidadAliada implements Persona,Unidad{
 		
 	}
 	
-	
+	//Método que pinta el soldado en el mapa
 	
 	private Image Bazooka = null;
 	
