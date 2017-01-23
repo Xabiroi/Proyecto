@@ -3,7 +3,6 @@ package Ventanas;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -25,6 +24,7 @@ import javax.swing.JTextField;
 
 import BD.BD;
 import BD.UnidadBD;
+import LogicaBatallas.ArraysPartida;
 import LogicaBatallas.ElementosPartida;
 import LoginLogica.LoginManager;
 import UnidadesAmigas.Bazooka;
@@ -71,6 +71,9 @@ public class Partida extends JDialog implements Runnable{
 
 	public static ElementosPartida getPartida() {
 		return p;
+	}
+	private ArraysPartida getArrays() {
+		return lp;
 	}
 	public static UnidadBD[][] crearTablero() {
 		UnidadBD[][] tab={  
@@ -172,23 +175,20 @@ public class Partida extends JDialog implements Runnable{
 
 	 Runnable myRunnable = new Runnable(){
 
-	     public void run(){
-	    	 repintar();
-	     }
+		 public void run(){
+					repintar2();
+					repintar();
+				}
 	   };
 
 	
-	  
-
-	
-	   //FIXME
-	 /*
-	//  public static RefrecarPantalla refrescarPantalla;
-	//	public static class RefrecarPantalla extends Thread{
+	/*
+	  public static RefrecarPantalla refrescarPantalla;
+		public static class RefrecarPantalla extends Thread{
 			private boolean X = true;
 			public void Stop(){
 				X = false;
-		//		interrupt();
+
 			}
 			public void run(){
 
@@ -196,29 +196,64 @@ public class Partida extends JDialog implements Runnable{
 				while (X){
 					decimas++;
 					if (decimas %10 == 0){ //un segundo
-						this.repaint();
+						repintar();
 					}
 				}
-				//logger.log(Level.INFO, "Final de hilo de actualización de mapa");
-	//		}
+
+			}
+		}
+
+	*/
+		public void repintar2(){
+			ArraysPartida a=getArrays();
+			ArrayList<UnidadAliada> ua=a.getListaAliados();
+			ArrayList<UnidadEnemiga> ue=a.getListaEnemigos();
+
+			for(UnidadAliada u:ua){
+				
+				if(Partida.getTablero()[u.getCordX()][u.getCordY()] instanceof SoldadoRaso){Partida.this.getGp().getGridButton(u.getCordX(),u.getCordY()).setIcon(new ImageIcon(getClass().getResource("/resources/SoldadoRaso.png")));Partida.this.getGp().getGridButton(u.getCordX(), u.getCordY()).repaint();}
+				else if(Partida.getTablero()[u.getCordX()][u.getCordY()] instanceof Francotirador){Partida.this.getGp().getGridButton(u.getCordX(),u.getCordY()).setIcon(new ImageIcon(getClass().getResource("/resources/Francotirador.png")));Partida.this.getGp().getGridButton(u.getCordX(), u.getCordY()).repaint();}
+				else if(Partida.getTablero()[u.getCordX()][u.getCordY()] instanceof Bazooka){Partida.this.getGp().getGridButton(u.getCordX(),u.getCordY()).setIcon(new ImageIcon(getClass().getResource("/resources/Bazooka.png")));Partida.this.getGp().getGridButton(u.getCordX(), u.getCordY()).repaint();}
+				else if(Partida.getTablero()[u.getCordX()][u.getCordY()] instanceof Tanque){Partida.this.getGp().getGridButton(u.getCordX(),u.getCordY()).setIcon(new ImageIcon(getClass().getResource("/resources/Tanque.png")));Partida.this.getGp().getGridButton(u.getCordX(), u.getCordY()).repaint();}
+				else if(Partida.getTablero()[u.getCordX()][u.getCordY()] instanceof Semioruga){Partida.this.getGp().getGridButton(u.getCordX(),u.getCordY()).setIcon(new ImageIcon(getClass().getResource("/resources/Semioruga.png")));Partida.this.getGp().getGridButton(u.getCordX(), u.getCordY()).repaint();}
+				
+				
+
+			}
+			for(UnidadEnemiga u:ue){
+				if(Partida.getTablero()[u.getCordX()][u.getCordY()] instanceof SoldadoRasoEnemigo){Partida.this.getGp().getGridButton(u.getCordX(),u.getCordY()).setIcon(new ImageIcon(getClass().getResource("/resources/SoldadoRasoEnemigo.png")));Partida.this.getGp().getGridButton(u.getCordX(), u.getCordY()).repaint();}
+				else if(Partida.getTablero()[u.getCordX()][u.getCordY()] instanceof FrancotiradorEnemigo){Partida.this.getGp().getGridButton(u.getCordX(),u.getCordY()).setIcon(new ImageIcon(getClass().getResource("/resources/FrancotiradorEnemigo.png")));Partida.this.getGp().getGridButton(u.getCordX(), u.getCordY()).repaint();}
+				else if(Partida.getTablero()[u.getCordX()][u.getCordY()] instanceof BazookaEnemigo){Partida.this.getGp().getGridButton(u.getCordX(),u.getCordY()).setIcon(new ImageIcon(getClass().getResource("/resources/BazookaEnemigo.png")));Partida.this.getGp().getGridButton(u.getCordX(), u.getCordY()).repaint();}
+				else if(Partida.getTablero()[u.getCordX()][u.getCordY()] instanceof TanqueEnemigo){Partida.this.getGp().getGridButton(u.getCordX(),u.getCordY()).setIcon(new ImageIcon(getClass().getResource("/resources/TanqueEnemigo.png")));Partida.this.getGp().getGridButton(u.getCordX(), u.getCordY()).repaint();}
+				else if(Partida.getTablero()[u.getCordX()][u.getCordY()] instanceof SemiorugaEnemigo){Partida.this.getGp().getGridButton(u.getCordX(),u.getCordY()).setIcon(new ImageIcon(getClass().getResource("/resources/SemiorugaEnemigo.png")));Partida.this.getGp().getGridButton(u.getCordX(), u.getCordY()).repaint();}
+
+			}
+			for(int i=0;i<Partida.getTablero().length;i++){
+				for(int j=0;j<Partida.getTablero()[0].length;j++){
+					if(Partida.getTablero()[i][j]==null){Partida.this.getGp().getGridButton(i,j).setIcon(null);}
+				}
+				
+			}
+			
+			
+			
+			
 		}
 		
-	   */
-	
 	public void repintar(){
 		for(int i=0;i<Partida.getTablero().length;i++){
 			for(int j=0;j<Partida.getTablero()[0].length;j++){
 				if(Partida.getTablero()[i][j]==null){Partida.this.getGp().getGridButton(i,j).setIcon(null);}
-				else if(Partida.getTablero()[i][j] instanceof SoldadoRaso){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/SoldadoRaso.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
-				else if(Partida.getTablero()[i][j] instanceof Francotirador){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/Francotirador.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
-				else if(Partida.getTablero()[i][j] instanceof Bazooka){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/Bazooka.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
-				else if(Partida.getTablero()[i][j] instanceof Tanque){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/Tanque.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
-				else if(Partida.getTablero()[i][j] instanceof Semioruga){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/Semioruga.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
-				else if(Partida.getTablero()[i][j] instanceof SoldadoRasoEnemigo){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/SoldadoRasoEnemigo.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
-				else if(Partida.getTablero()[i][j] instanceof FrancotiradorEnemigo){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/FrancotiradorEnemigo.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
-				else if(Partida.getTablero()[i][j] instanceof BazookaEnemigo){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/BazookaEnemigo.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
-				else if(Partida.getTablero()[i][j] instanceof TanqueEnemigo){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/TanqueEnemigo.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}
-				else if(Partida.getTablero()[i][j] instanceof SemiorugaEnemigo){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/SemiorugaEnemigo.png")));Partida.this.getGp().getGridButton(i, j).repaint();repaint();}            
+				else if(Partida.getTablero()[i][j] instanceof SoldadoRaso){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/SoldadoRaso.png")));Partida.this.getGp().getGridButton(i, j).repaint();}
+				else if(Partida.getTablero()[i][j] instanceof Francotirador){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/Francotirador.png")));Partida.this.getGp().getGridButton(i, j).repaint();}
+				else if(Partida.getTablero()[i][j] instanceof Bazooka){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/Bazooka.png")));Partida.this.getGp().getGridButton(i, j).repaint();}
+				else if(Partida.getTablero()[i][j] instanceof Tanque){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/Tanque.png")));Partida.this.getGp().getGridButton(i, j).repaint();}
+				else if(Partida.getTablero()[i][j] instanceof Semioruga){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/Semioruga.png")));Partida.this.getGp().getGridButton(i, j).repaint();}
+				else if(Partida.getTablero()[i][j] instanceof SoldadoRasoEnemigo){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/SoldadoRasoEnemigo.png")));Partida.this.getGp().getGridButton(i, j).repaint();}
+				else if(Partida.getTablero()[i][j] instanceof FrancotiradorEnemigo){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/FrancotiradorEnemigo.png")));Partida.this.getGp().getGridButton(i, j).repaint();}
+				else if(Partida.getTablero()[i][j] instanceof BazookaEnemigo){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/BazookaEnemigo.png")));Partida.this.getGp().getGridButton(i, j).repaint();}
+				else if(Partida.getTablero()[i][j] instanceof TanqueEnemigo){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/TanqueEnemigo.png")));Partida.this.getGp().getGridButton(i, j).repaint();}
+				else if(Partida.getTablero()[i][j] instanceof SemiorugaEnemigo){Partida.this.getGp().getGridButton(i,j).setIcon(new ImageIcon(getClass().getResource("/resources/SemiorugaEnemigo.png")));Partida.this.getGp().getGridButton(i, j).repaint();}           
 			
 			}
 		}
@@ -249,7 +284,18 @@ public class Partida extends JDialog implements Runnable{
 
 						if(tablero[xobj][yobj]==null){
 							try{
+								UnidadBD[][] tablero1=getTablero();
+								
+								int x=UnidadActual.getCordX();
+								int y=UnidadActual.getCordY();
+								
+							//	UnidadBD reserva=UnidadActual;
+							//	UnidadBD reserva2=UnidadActual;
+							
+								
 						tablero=UnidadActual.AlgoritmoPathfinding(UnidadActual.getDistancia(), UnidadActual.getCordX(), UnidadActual.getCordY(), xobj, yobj, tablero);
+						if(tablero[xobj][yobj]==UnidadActual)
+						tablero[x][y]=null;
 						
 						   thread.start();
 							try {
@@ -258,7 +304,7 @@ public class Partida extends JDialog implements Runnable{
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-							}catch(NullPointerException e){}
+							}catch(NullPointerException e){System.out.println("ERROR QUE HAcE DESAPARECER A ESTOS");}//FIXME quitar
 					//	UnidadActual.setAcciones(UnidadActual.getAcciones()-1);}			
 
 					}
@@ -710,9 +756,22 @@ public class Partida extends JDialog implements Runnable{
 	}
 	
 
-	public class gridpanel extends Thread{
-    private static final int N = 32;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public class gridpanel implements Runnable{
+		
+
+	private static final int N = 32;
     private final List<JButton> list = new ArrayList<JButton>();
+
 
     private JButton getGridButton(int r, int c) {
         int index = r * N + c;
@@ -795,11 +854,11 @@ public class Partida extends JDialog implements Runnable{
 		    					         soldados, 
 		    					         soldados[0]);
 		    					     
-		    					     if(SoldadoCreado.equals("Soldado raso")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSoldadoRasoEnemigo(Partida.p,lp);}
-		    					     else if(SoldadoCreado.equals("Francotirador")){tablero=((SpawnEnemigo) tablero[0][31]).CrearFrancotiradorEnemigo(Partida.p,lp);}
-		    					     else if(SoldadoCreado.equals("Bazooka")){tablero=((SpawnEnemigo) tablero[0][31]).CrearBazookaEnemigo(Partida.p,lp);}
-		    					     else if(SoldadoCreado.equals("Semioruga")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSemiorugaEnemigo(Partida.p,lp);}
-		    					     else if(SoldadoCreado.equals("Tanque")){tablero=((SpawnEnemigo) tablero[0][31]).CrearTanqueEnemigo(Partida.p,lp);}
+		    					     if(SoldadoCreado.equals("Soldado raso")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSoldadoRasoEnemigo(Partida.p,lp);repintar();}
+		    					     else if(SoldadoCreado.equals("Francotirador")){tablero=((SpawnEnemigo) tablero[0][31]).CrearFrancotiradorEnemigo(Partida.p,lp);repintar();}
+		    					     else if(SoldadoCreado.equals("Bazooka")){tablero=((SpawnEnemigo) tablero[0][31]).CrearBazookaEnemigo(Partida.p,lp);repintar();}
+		    					     else if(SoldadoCreado.equals("Semioruga")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSemiorugaEnemigo(Partida.p,lp);repintar();}
+		    					     else if(SoldadoCreado.equals("Tanque")){tablero=((SpawnEnemigo) tablero[0][31]).CrearTanqueEnemigo(Partida.p,lp);repintar();}
 		    					}catch(NullPointerException e1){}
 		    				   }
 		    				   else if(tablero[row][col] instanceof SpawnEnemigo && Partida.p.getUsuario2().equals(LoginManager.getUsuario().getNombre())){
@@ -814,11 +873,11 @@ public class Partida extends JDialog implements Runnable{
 		    					         soldados, 
 		    					         soldados[0]);
 		    					     
-		    					     if(SoldadoCreado.equals("Soldado raso")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSoldadoRasoEnemigo(Partida.p,lp);}
-		    					     else if(SoldadoCreado.equals("Francotirador")){tablero=((SpawnEnemigo) tablero[0][31]).CrearFrancotiradorEnemigo(Partida.p,lp);}
-		    					     else if(SoldadoCreado.equals("Bazooka")){tablero=((SpawnEnemigo) tablero[0][31]).CrearBazookaEnemigo(Partida.p,lp);}
-		    					     else if(SoldadoCreado.equals("Semioruga")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSemiorugaEnemigo(Partida.p,lp);}
-		    					     else if(SoldadoCreado.equals("Tanque")){tablero=((SpawnEnemigo) tablero[0][31]).CrearTanqueEnemigo(Partida.p,lp);}
+		    					     if(SoldadoCreado.equals("Soldado raso")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSoldadoRasoEnemigo(Partida.p,lp);repintar();}
+		    					     else if(SoldadoCreado.equals("Francotirador")){tablero=((SpawnEnemigo) tablero[0][31]).CrearFrancotiradorEnemigo(Partida.p,lp);repintar();}
+		    					     else if(SoldadoCreado.equals("Bazooka")){tablero=((SpawnEnemigo) tablero[0][31]).CrearBazookaEnemigo(Partida.p,lp);repintar();}
+		    					     else if(SoldadoCreado.equals("Semioruga")){tablero=((SpawnEnemigo) tablero[0][31]).CrearSemiorugaEnemigo(Partida.p,lp);repintar();}
+		    					     else if(SoldadoCreado.equals("Tanque")){tablero=((SpawnEnemigo) tablero[0][31]).CrearTanqueEnemigo(Partida.p,lp);repintar();}
 		    					}catch(NullPointerException e1){}
 		    				   }
 
@@ -855,19 +914,14 @@ public class Partida extends JDialog implements Runnable{
 	            gb.setOpaque(false);
 	            gb.setText("P"); //FIXME Cambiando esto se consigue en invisible (para el mapa y eso)
 	            gb.setBorder(null);
-	            
-	           // gb.setIcon(new ImageIcon(getClass().getResource("/resources/SoldadoRaso.png"))); para poner todos los soldados FIXME
 	            gb.setBorderPainted(false);
 	            gb.setContentAreaFilled(false);
-	           // new Thread ().start();
-
 	            list.add(gb);
 	            Dimension d=new Dimension(100,100);
 	            p.setPreferredSize(d);
 	            p.add(gb);
 	        }
-	        Thread t=new Thread();
-	        t.start();
+
 	        return p;
 	    }
 

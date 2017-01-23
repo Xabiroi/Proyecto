@@ -4,12 +4,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
 import BD.UnidadBD;
-import UnidadesAmigas.Spawn;
-import UnidadesEnemigas.SpawnEnemigo;
 import Ventanas.Colision;
-import Ventanas.MenuPrincipal;
-
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -28,12 +23,7 @@ public class UnidadBD implements Cloneable{
 	protected int acciones=2;
 
 
-	 Runnable myRunnable = new Runnable(){
 
-	     public void run(){
-	    	 //repintar();
-	     }
-	   };
 	public int getAcciones() {
 		return acciones;
 	}
@@ -170,32 +160,37 @@ public UnidadBD[][] AlgoritmoPathfinding(int Movimientos,int x,int y,int xdest,i
 
 	if(Movimientos==0){
 		//
-		if(xdest==x && ydest==y){aAux[xdest][ydest]=this;aAux[this.getCordX()][this.getCordY()]=null;this.setCordX(xdest);this.setCordY(ydest);this.setAcciones(this.getAcciones()-1);limpiarColisiones(aAux);return aAux;}
-		else{limpiarColisiones(aAux);return aAux;}
-	}
-	else if(Math.abs(x-p.getX())+Math.abs(y-p.getY())>Movimientos){JFrame frame=new JFrame();
-	Object[] options = {"OK"};
-    int n = JOptionPane.showOptionDialog(frame,
-            "¡No esta permitido moverse tanto!","Cuidado",
-            JOptionPane.PLAIN_MESSAGE,
-            JOptionPane.QUESTION_MESSAGE,
-            null,
-            options,
-            options[0]);
+		if(xdest==x && ydest==y){
+			aAux[xdest][ydest]=this;
+		aAux[this.getCordX()][this.getCordY()]=null;
+		this.setCordX(xdest);this.setCordY(ydest);
+		this.setAcciones(this.getAcciones()-1);
+		limpiarColisiones(aAux);return aAux;}
+		
+		else{return Ventanas.Partida.getTablero();}
 	}
 
-	
 	else{
 
-		if((int)p.getX()==xdest && (int)p.getY()==ydest){aAux[xdest][ydest]=this;aAux[this.getCordX()][this.getCordY()]=null;this.setCordX(xdest);this.setCordY(ydest);this.setAcciones(this.getAcciones()-1);limpiarColisiones(aAux);return aAux;}
+		if((int)p.getX()==xdest && (int)p.getY()==ydest){
+			aAux[xdest][ydest]=this;
+			aAux[x][y]=null;
+			//aAux[this.getCordX()][this.getCordY()]=null;
+			this.setCordX(xdest);
+			this.setCordY(ydest);
+			this.setAcciones(this.getAcciones()-1);
+			limpiarColisiones(aAux);
+			return aAux;}
 		
+		
+		//Cuando no llega al destino en el salto
 		else if(((int)p.getX()!=xdest || (int)p.getY()!=ydest)){
 
 			//aAux[(int) p.getX()][(int) p.getY()]=aAux[x][y];
 			if(aAux[x][y]==null)
 			aAux[x][y]=new Colision(1);
 
-			AlgoritmoPathfinding(Movimientos-1,(int)p.getX(),(int)p.getY(),xdest,ydest,aAux);
+			aAux=AlgoritmoPathfinding(Movimientos-1,(int)p.getX(),(int)p.getY(),xdest,ydest,aAux);
 
 		}
 
@@ -207,6 +202,7 @@ public UnidadBD[][] AlgoritmoPathfinding(int Movimientos,int x,int y,int xdest,i
 	}
 	
 	limpiarColisiones(aAux);
+	
 	return aAux;//FIXME en la parte donde se implemente Ventanas.Partida.setTablero(aAux);
 
 }
