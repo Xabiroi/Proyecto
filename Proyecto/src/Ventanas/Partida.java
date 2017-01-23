@@ -349,7 +349,7 @@ public class Partida extends JDialog implements Runnable{
 					    
 					    setVisible(false); //FIXME poner aqui el codigo de BD remoto
 					    if(p.getUsuario2()!=null){
-					    BD.PartidaEliminar(BD.usarBD(BD.initBD("Local")), p);
+					    BD.PartidaEliminar(BD.usarBD(BD.initBDOnline("Remoto")), p);
 					    MenuPrincipal mp=new MenuPrincipal();
 					    mp.setVisible(true);
 					    }
@@ -407,6 +407,7 @@ public class Partida extends JDialog implements Runnable{
 		btnGuardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 				if(p.getUsuario2()==null){
 					
 					
@@ -424,12 +425,12 @@ public class Partida extends JDialog implements Runnable{
 				
 				else{
 					
-				BD.PartidaUpdate(BD.usarBD(BD.initBD("Local")),p);
-				BD.SoldadosEliminar(BD.usarBD(BD.initBD("Local")),p);
+				BD.PartidaUpdate(BD.usarBD(BD.initBDOnline("Remoto")),p);
+				BD.SoldadosEliminar(BD.usarBD(BD.initBDOnline("Remoto")),p);
 				for(UnidadBD u:lp.getListaAliados()){
-					BD.UnidadesInsert(BD.usarBD(BD.initBD("Local")),u);}
+					BD.UnidadesInsert(BD.usarBD(BD.initBDOnline("Remoto")),u);}
 				for(UnidadBD u:lp.getListaEnemigos()){
-					BD.UnidadesInsert(BD.usarBD(BD.initBD("Local")),u);}
+					BD.UnidadesInsert(BD.usarBD(BD.initBDOnline("Remoto")),u);}
 				setVisible(false);
 				MenuPrincipal mp=new MenuPrincipal();
 				mp.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -493,24 +494,35 @@ public class Partida extends JDialog implements Runnable{
 				//no se deshabilitara el boton de finalizar turno para ver si se puede hacer deshabilitar y habilitar los botones al pasar de turno
 					if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario2())){
 						btnAtacar.setEnabled(true);
+						btnAtacar.setFocusable(true);
 						btnGuardar.setEnabled(true);
+						btnGuardar.setFocusable(true);
 						btnMover.setEnabled(true);
+						btnMover.setFocusable(true);
 						btnCambiarArma.setEnabled(true);
+						btnCambiarArma.setFocusable(true);
 						
 //FIXME enablear/disablear el boton de finalizar turno tambien, pero hasta que se haga pruebas no
 					}
 				else if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario())){
 						btnAtacar.setEnabled(false);
+						btnAtacar.setFocusable(false);
 						btnGuardar.setEnabled(false);
+						btnGuardar.setFocusable(false);
 						btnMover.setEnabled(false);
+						btnMover.setFocusable(false);
 						btnCambiarArma.setEnabled(false);
-
+						btnCambiarArma.setFocusable(false);
 					}
 				else if(p.getUsuario2()==null){
 					btnAtacar.setEnabled(true);
+					btnAtacar.setFocusable(true);
 					btnGuardar.setEnabled(true);
+					btnGuardar.setFocusable(true);
 					btnMover.setEnabled(true);
+					btnMover.setFocusable(true);
 					btnCambiarArma.setEnabled(true);
+					btnCambiarArma.setFocusable(true);
 
 				}
 				
@@ -519,25 +531,36 @@ public class Partida extends JDialog implements Runnable{
 				else{Partida.p.setTurno(0);textFieldPropietario.setText(p.getUsuario());JOptionPane.showMessageDialog(null, "Turno terminado");
 				if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario2())){
 					btnAtacar.setEnabled(false);
+					btnAtacar.setFocusable(false);
 					btnGuardar.setEnabled(false);
+					btnGuardar.setFocusable(false);
 					btnMover.setEnabled(false);
+					btnMover.setFocusable(false);
 					btnCambiarArma.setEnabled(false);
+					btnCambiarArma.setFocusable(false);
 
 				
 				}
 				else if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario())){
 					btnAtacar.setEnabled(true);
+					btnAtacar.setFocusable(true);
 					btnGuardar.setEnabled(true);
+					btnGuardar.setFocusable(true);
 					btnMover.setEnabled(true);
+					btnMover.setFocusable(true);
 					btnCambiarArma.setEnabled(true);
+					btnCambiarArma.setFocusable(true);
 
 				}
 				else if(p.getUsuario2()==null){
 					btnAtacar.setEnabled(true);
+					btnAtacar.setFocusable(true);
 					btnGuardar.setEnabled(true);
+					btnGuardar.setFocusable(true);
 					btnMover.setEnabled(true);
+					btnMover.setFocusable(true);
 					btnCambiarArma.setEnabled(true);
-
+					btnCambiarArma.setFocusable(true);
 				}
 
 				}UnidadActual=new UnidadBD();UnidadObjetivo=new UnidadBD(); //Para no poder mover los soldados seleccionados anteriormente

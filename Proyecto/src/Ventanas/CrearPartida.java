@@ -70,9 +70,9 @@ public class CrearPartida extends JDialog{
 				LogicaBatallas.ElementosPartida pa=new LogicaBatallas.ElementosPartida(textField.getText(),textField_1.getText(),textField.getText()+" vs "+textField_1.getText());
 				
 				
-				ArrayList<ElementosPartida> p2=BD.PartidaSelect(BD.usarBD(BD.initBD("Local")),"usuario1='"+textField_1.getText()+"' and usuario2='"+textField.getText()+"' or usuario1='"+textField.getText()+"' and usuario2='"+textField_1.getText()+"'");
+				ArrayList<ElementosPartida> p2=BD.PartidaSelect(BD.usarBD(BD.initBDOnline("Remoto")),"usuario1='"+textField_1.getText()+"' and usuario2='"+textField.getText()+"' or usuario1='"+textField.getText()+"' and usuario2='"+textField_1.getText()+"'");
 				if(p2.size()==0){
-					ArrayList<Usuario> a=BD.usuarioSelect(BD.usarBD(BD.initBD("Local")),"nombre='"+textField_1.getText()+"'");
+					ArrayList<Usuario> a=BD.usuarioSelect(BD.usarBD(BD.initBDOnline("Remoto")),"nombre='"+textField_1.getText()+"'");
 					
 					if(a.size()!=0 ){try {
 						p = new Ventanas.Partida(p1, lb);
@@ -92,7 +92,7 @@ public class CrearPartida extends JDialog{
 					
 					try{
 				p.setP(pa);
-				Statement st=BD.usarBD(BD.initBD("Local"));
+				Statement st=BD.usarBD(BD.initBDOnline("Remoto"));
 				BD.PartidaInsert(st, p.getP());
 				}catch(NullPointerException e){System.out.println("No existe esa persona");//FIXME sustituir por logger
 				JFrame frame=new JFrame();

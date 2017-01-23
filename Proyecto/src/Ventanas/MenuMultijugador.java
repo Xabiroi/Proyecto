@@ -87,7 +87,7 @@ public class MenuMultijugador extends JDialog{
 		 getContentPane().add(lblNewLabel);
 		 
 		 
-		 ArrayList<LogicaBatallas.ElementosPartida> a=BD.PartidaSelect( BD.usarBD(BD.initBD("Local")),"usuario1="+"'"+Juego.getLM().getUsuario().getNombre()+"'"+" OR usuario2="+"'"+Juego.getLM().getUsuario().getNombre()+"'");//FIXME cambiar la conexion
+		 ArrayList<LogicaBatallas.ElementosPartida> a=BD.PartidaSelect( BD.usarBD(BD.initBDOnline("Remoto")),"usuario1="+"'"+Juego.getLM().getUsuario().getNombre()+"'"+" OR usuario2="+"'"+Juego.getLM().getUsuario().getNombre()+"'");//FIXME cambiar la conexion
 		//FIXME Cambiar la conexion de local a base de datos remoto
 		
 
@@ -200,7 +200,7 @@ public class MenuMultijugador extends JDialog{
 				Ventanas.Partida p=null;
 				LogicaBatallas.ArraysPartida lb=new LogicaBatallas.ArraysPartida();
 				LogicaBatallas.ElementosPartida p1=new LogicaBatallas.ElementosPartida();
-				ArrayList<UnidadBD> Unidades=BD.UnidadBDSelect(BD.usarBD(BD.initBD("Local")), "Partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'");	
+				ArrayList<UnidadBD> Unidades=BD.UnidadBDSelect(BD.usarBD(BD.initBDOnline("Remoto")), "Partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'");	
 				ArrayList<UnidadBD> UnidadesAliadas1=new ArrayList<UnidadBD>();
 				for(UnidadBD u:Unidades)if(u.getEquipo()==1){UnidadesAliadas1.add(u);}
 	
@@ -220,7 +220,7 @@ public class MenuMultijugador extends JDialog{
 					case "Soldado":SoldadoRaso s=new SoldadoRaso(u.getCordX(),u.getCordY());
 					s.setPartida(u.getPartida());
 					s.setArma(u.getArma());
-					s.setArmas(u.getArmas());
+					s.setArmas(new String[] {"Fusil", "Pistola", "CCC" });
 					s.setSalud(u.getSalud());
 					s.setEquipo(u.getEquipo());
 					s.setAcciones(u.getAcciones());
@@ -229,7 +229,7 @@ public class MenuMultijugador extends JDialog{
 					case "Bazooka":Bazooka b=new Bazooka(u.getCordX(),u.getCordY());
 					b.setPartida(u.getPartida());
 					b.setArma(u.getArma());
-					b.setArmas(u.getArmas());
+					b.setArmas(new String[] {"Bazooka", "Pistola"});
 					b.setSalud(u.getSalud());
 					b.setEquipo(u.getEquipo());
 					b.setAcciones(u.getAcciones());
@@ -238,7 +238,7 @@ public class MenuMultijugador extends JDialog{
 					case "Francotirador":Francotirador f=new Francotirador(u.getCordX(),u.getCordY());
 					f.setPartida(u.getPartida());
 					f.setArma(u.getArma());
-					f.setArmas(u.getArmas());
+					f.setArmas(new String[] {"Rifle", "Pistola"});
 					f.setSalud(u.getSalud());
 					f.setEquipo(u.getEquipo());
 					f.setAcciones(u.getAcciones());
@@ -247,7 +247,7 @@ public class MenuMultijugador extends JDialog{
 					case "Tanque":Tanque t=new Tanque(u.getCordX(),u.getCordY());
 					t.setPartida(u.getPartida());
 					t.setArma(u.getArma());
-					t.setArmas(u.getArmas());
+					t.setArmas(new String[] {"Misil", "Ametralladora"});
 					t.setSalud(u.getSalud());
 					t.setEquipo(u.getEquipo());
 					t.setAcciones(u.getAcciones());
@@ -256,7 +256,7 @@ public class MenuMultijugador extends JDialog{
 					case "Semioruga":Semioruga se=new Semioruga(u.getCordX(),u.getCordY());
 					se.setPartida(u.getPartida());
 					se.setArma(u.getArma());
-					se.setArmas(u.getArmas());
+					se.setArmas(new String[] {"Ametralladora" });
 					se.setSalud(u.getSalud());
 					se.setEquipo(u.getEquipo());
 					se.setAcciones(u.getAcciones());
@@ -331,7 +331,7 @@ public class MenuMultijugador extends JDialog{
 
 				lb.setListaEnemigos(UnidadesEnemigas);
 				lb.setListaAliados(UnidadesAliadas);
-				p1=BD.PartidaSelect(BD.usarBD(BD.initBD("Local")), "partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'").get(0);
+				p1=BD.PartidaSelect(BD.usarBD(BD.initBDOnline("Remoto")), "partida='"+((ElementosPartida) comboBox.getSelectedItem()).getPartida()+"'").get(0);
 				UnidadBD[][] tablero1=Ventanas.Partida.crearTablero();
 				for(UnidadAliada u:lb.getListaAliados()){tablero1[u.getCordX()][u.getCordY()]=u;}
 				for(UnidadEnemiga u:lb.getListaEnemigos()){tablero1[u.getCordX()][u.getCordY()]=u;}
