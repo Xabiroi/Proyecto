@@ -30,7 +30,7 @@ public class test {
 	}
 
 	/**
-	 * Create the application.
+	 * Create the application. 
 	 */
 	public test() {
 		initialize();
