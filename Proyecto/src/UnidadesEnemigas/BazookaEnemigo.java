@@ -26,17 +26,6 @@ public class BazookaEnemigo extends UnidadEnemiga implements Persona,Unidad{
 	}
 	
 
-/***
-	@SuppressWarnings("unused")
-	private void initCraft() {
-        
-        ImageIcon ii = new ImageIcon("craft.png");
-        image = ii.getImage();
-        x = 26;
-        y = 26;             
-    }
-    **/
-	
 	private Image BazookaEnemigo = null;
 	
 		public void pintarBazookaEnemigo(Graphics g){

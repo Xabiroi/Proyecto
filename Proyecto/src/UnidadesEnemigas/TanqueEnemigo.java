@@ -31,17 +31,6 @@ public class TanqueEnemigo extends UnidadEnemiga implements Vehiculo,Unidad{
 		return 0;
 	}
 	
-	/**
-	@SuppressWarnings("unused")
-	private void initCraft() {
-        
-        ImageIcon ii = new ImageIcon("craft.png");
-        image = ii.getImage();
-        x = 26;
-        y = 26;               
-    }
-    **/
-	
 	
 	private Image TanqueEnemigo = null;
 	

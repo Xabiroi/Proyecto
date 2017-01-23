@@ -54,7 +54,7 @@ public class SoldadoRaso extends UnidadAliada implements Persona,Unidad{
     }
  
 	
-	/*
+	
 	private Image SoldadoRaso = null;
 	
 		public void pintarSoldadoRaso(Graphics g){
@@ -79,7 +79,7 @@ public class SoldadoRaso extends UnidadAliada implements Persona,Unidad{
 			}
 			return tempImage;
 	}
-*/
+
 
 
 	
