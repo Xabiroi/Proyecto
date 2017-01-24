@@ -1,31 +1,28 @@
-package Informacion;
+package Test;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
-import LoginLogica.LoginManager;
+/**
+ * Construye una ventana principal no funcional para probar localizaciones de botones
+ * @author Xabier
+ *
+ */
 public class prueba extends JDialog {
 /**
  * 
  */
 private static final long serialVersionUID = 1L;
 private final JPanel contentPanel = new JPanel();
-private JTextField txtContraseña;
-private LoginManager lm;
+
 
 /**
  * Launch the application.
@@ -51,7 +48,7 @@ public prueba() {
 	contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 	getContentPane().add(contentPanel, BorderLayout.CENTER);
 	
-	//FIXME image = ImageIO.read(new File("image name and path"));
+
 	setBounds(100, 100, 744, 561);
 	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	getContentPane().setLayout(null);
@@ -64,7 +61,7 @@ public prueba() {
 	btnUn_jugador.setBounds(256, 200, 173, 23);
 	 getContentPane().add(btnUn_jugador);
 	
-	JButton btnMultijuador = new JButton("Multijuador");
+	JButton btnMultijuador = new JButton("Multijugador");
 	btnMultijuador.setBounds(256, 246, 173, 23);
 	 getContentPane().add(btnMultijuador);
 	

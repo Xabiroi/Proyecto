@@ -2,19 +2,11 @@ package UnidadesAmigas;
 
 
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.net.URL;
 
-import javax.swing.ImageIcon;
-
-import Interfaces.Persona;
 import Interfaces.Unidad;
 
 
-public class SoldadoRaso extends UnidadAliada implements Persona,Unidad{
+public class SoldadoRaso extends UnidadAliada implements Unidad{
 
 	/**
 	 * Atributos de los soldados normales:
@@ -24,14 +16,6 @@ public class SoldadoRaso extends UnidadAliada implements Persona,Unidad{
 	 * Icono
 	 * 
 	 */
-
-
-	//private Image image;
-	//Cada unidad tiene que tener su propio icono en el juego
-	//Hay que asignar en el constructor a cada unidad su icono
-
-
-	
 
 	public SoldadoRaso(int cordX, int cordY) {
 		//Atributos de la unidad Soldado raso
@@ -46,49 +30,6 @@ public class SoldadoRaso extends UnidadAliada implements Persona,Unidad{
 		
 	}
 
-	//Método que pinta el Soldado raso en el mapa
-	
-	private ImageIcon initCraft() {
-        
-        ImageIcon ii = new ImageIcon("SoldadoRaso.png");
-		return ii;               
-    }
- 
-	
-	
-	private Image SoldadoRaso = null;
-	
-		public void pintarSoldadoRaso(Graphics g){
-			if (SoldadoRaso == null)
-				SoldadoRaso = getImage("SoldadoRaso.png");
-		
-			Graphics2D g2 = (Graphics2D) g;
-			g2.drawImage(SoldadoRaso, x, y, 26, 26, null); //x e y diran donde se coloca el soldado
-		}
-	
-		public Image getImage(String path){
-		
-			Image tempImage = null;
-			try{
-				URL imageURL = SoldadoRaso.class.getResource(path);
-				tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
-			}
-			//en caso de que la imagen no exista
-			catch (Exception e){
-				System.out.println("imagen no existente" + e.getMessage());
-			
-			}
-			return tempImage;
-	}
 
-
-
-	
-//FIXME Prueba quitar
-	public static void main(String[] args) {
-		SoldadoRaso x=new SoldadoRaso(0,0);
-		System.out.println("Patata");
-	}
-	
 
 }

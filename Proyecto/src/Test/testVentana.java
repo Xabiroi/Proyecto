@@ -1,4 +1,4 @@
-package Ventanas;
+package Test;
 
 import java.awt.EventQueue;
 import java.io.IOException;
@@ -7,9 +7,14 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import LogicaBatallas.ElementosPartida;
+import Ventanas.Partida;
 import LogicaBatallas.ArraysPartida;
-
-public class test {
+/**
+ * 
+ * Test que genera la ventana de mapa
+ *
+ */
+public class testVentana {
 
 	private JFrame frame;
 
@@ -20,7 +25,7 @@ public class test {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					test window = new test();
+					testVentana window = new testVentana();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,7 +37,7 @@ public class test {
 	/**
 	 * Create the application. 
 	 */
-	public test() {
+	public testVentana() {
 		initialize();
 	}
 

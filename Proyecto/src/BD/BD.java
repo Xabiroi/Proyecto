@@ -35,7 +35,7 @@ private static Exception lastError = null;  // Información de último error SQL o
 			} catch (IllegalAccessException e) {
 				
 				e.printStackTrace();
-			}													//sql8.freemysqlhosting.net
+			}													
 		    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+nombreBD+"?autoReconnect=true&useSSL=false","root","root");
 			log( Level.INFO, "Conectada base de datos " + nombreBD, null );
 		    return con;

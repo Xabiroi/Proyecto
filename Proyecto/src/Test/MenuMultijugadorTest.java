@@ -1,4 +1,4 @@
-package Ventanas;
+package Test;
 
 import static org.junit.Assert.*;
 

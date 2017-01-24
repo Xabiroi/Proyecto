@@ -7,7 +7,7 @@ import BD.UnidadBD;
 import LogicaBatallas.ArraysPartida;
 import LogicaBatallas.ElementosPartida;
 
-//Clase de Spawn de tropas aliadas (unidades en camiflaje verde)
+//Clase de Spawn de tropas aliadas (unidades en camuflaje verde)
 public class Spawn extends UnidadAliada{
 //Spawn aliado y sus atributos
 public Spawn(int x, int y){

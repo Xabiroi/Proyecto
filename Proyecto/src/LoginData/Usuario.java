@@ -5,11 +5,14 @@ public class Usuario {
 	private String nombre;
 	private String contraseña;
 	private String nick;
-	//FIXME añadir arraylist de partidas locales y online para la base de datos(?)
 	public Usuario() {}
 	
 	
-	
+	/**
+	 * Constructor usuario
+	 * @param usuario nombre
+	 * @param contraseña contraseña personal
+	 */
 	public Usuario(String usuario, String contraseña) {
 		super();
 		this.nombre = usuario;
@@ -17,7 +20,12 @@ public class Usuario {
 	}
 
 
-
+	/**
+	 * Constructor usuario
+	 * @param usuario nombre
+	 * @param contraseña contraseña personal
+	 * @param nick para buscar diferencia en caso de usuarios con nombre similar
+	 */
 	public Usuario(String usuario, String contraseña, String nick) {
 		super();
 		this.nombre = usuario;
@@ -28,24 +36,25 @@ public class Usuario {
 
 
 	/**
-	 * @return the usuario
+	 * @return nombre del usuario
 	 */
 	public String getNombre() {
 		return nombre;
 	}
 	/**
-	 * @param usuario the usuario to set
+	 * Cambia el nombre de usuario
+	 * @param nombre del usuario
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 	/**
-	 * @return the contraseña
+	 * @return contraseña
 	 */
 	public String getContraseña() {
 		return contraseña;
 	}
-	/**
+	/**Establece la contraseña
 	 * @param contraseña Cambiar la contraseña a la que especifiquemos
 	 */
 	public void setContraseña(String contraseña) {
@@ -57,8 +66,8 @@ public class Usuario {
 	public String getNick() {
 		return nick;
 	}
-	/**
-	 * @param nombreCompleto the nombreCompleto to set
+	/**Establece el nick del usuario
+	 * @param nick del usuario
 	 */
 	public void setNick(String nick) {
 		this.nick = nick;

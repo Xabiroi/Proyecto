@@ -140,7 +140,7 @@ public class UnidadBD implements Cloneable{
 			
 		  
 		}
-			//TODO que salte una ventana de que no puede, o una alerta de sonido
+		
 		
 			
 
@@ -159,14 +159,20 @@ public class UnidadBD implements Cloneable{
 
 
 public UnidadBD[][] AlgoritmoPathfinding(int Movimientos,int x,int y,int xdest,int ydest, UnidadBD[][] Aux){
+	//Si es una colision el objetivo, termina el algoritmo
 	if(Aux[xdest][ydest] instanceof Colision){return null;}
+	//El valor del array pasado por parametro se copia en uno nuevo
 	UnidadBD[][] aAux=Aux;
+	//Se comprueba con el metodo comprobar los puntos adyacentes
 	ArrayList<Point> ap=comprobar(aAux, x, y);
+	//Por cada punto compruba si es el destino, y si no es asi, vuelve a llamar al algoritmo
 	for(Point p:ap){
-
+		
+		//Si tiene 0 movimientos disponibles, y el punto no es el objetivo, devuelve el tablero
 	if(Movimientos==0){
 		//
 		if(xdest==x && ydest==y){
+			//Cambia los atributos si ha llegado a la posicion
 			aAux[xdest][ydest]=this;
 		aAux[this.getCordX()][this.getCordY()]=null;
 		this.setCordX(xdest);this.setCordY(ydest);
@@ -177,36 +183,32 @@ public UnidadBD[][] AlgoritmoPathfinding(int Movimientos,int x,int y,int xdest,i
 	}
 
 	else{
-
+		//Si tiene mas movimientos se comprueba si ha llegado al destino y se e resta un punto de movimiento
 		if((int)p.getX()==xdest && (int)p.getY()==ydest){
 			aAux[xdest][ydest]=this;
 			aAux[x][y]=null;
 			this.setCordX(xdest);
 			this.setCordY(ydest);
 			this.setAcciones(this.getAcciones()-1);
+			//Limpia el array de colisiones tipo 1 dejados por este algoritmo y lo devuelve con las nuevas posiciones
 			limpiarColisiones(aAux);
 			return aAux;}
 		
-
+		//Si no es el destino, coloca una colision y llama de nuevo a este algoritmo
 		else if(((int)p.getX()!=xdest || (int)p.getY()!=ydest)){
-
+			
 			if(aAux[x][y]==null)
 			aAux[x][y]=new Colision(1);
-
+			//Los parametros corresponderan al primer punto evaluado
 			aAux=AlgoritmoPathfinding(Movimientos-1,(int)p.getX(),(int)p.getY(),xdest,ydest,aAux);
 
 		}
-
-				
-				
-
-		
 		}
 	}
-	
+	//Limpia el array de colisiones
 	limpiarColisiones(aAux);
-	
-	return aAux;//FIXME en la parte donde se implemente Ventanas.Partida.setTablero(aAux);
+	//devuelve el array
+	return aAux;
 
 }
 /**
@@ -245,6 +247,7 @@ public void limpiarColisiones(UnidadBD[][] a){
 	
 	
 }
+//Getters y setters
 
 	public void CambiarArma(String arma) {
 		this.setArma(arma);

@@ -60,6 +60,7 @@ public class ElementosPartida {
 		this.Turno=Turno;
 	}
 	
+	//Getters y setters
 	
 	public int getTurno() {
 		return Turno;

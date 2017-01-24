@@ -1,16 +1,10 @@
 package UnidadesAmigas;
 
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.net.URL;
-
 import Interfaces.Unidad;
-import Interfaces.Vehiculo;
 
-public class Tanque extends UnidadAliada implements Vehiculo,Unidad{
+
+public class Tanque extends UnidadAliada implements Unidad{
 	public Tanque(int cordX, int cordY) {
 		
 		//Atributos de la unidad tanque
@@ -25,40 +19,5 @@ public class Tanque extends UnidadAliada implements Vehiculo,Unidad{
 		
 	}
 
-	//Método que señala el daño que hace el Tanque al explotar
-	@Override
-	public int explotar() {
-		//Daño en area cuando muere(?)
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-
-	//Método que pinta la unidad Tanque en el mapa
-	
-	private Image Tanque = null;
-	
-		public void pintarTanque(Graphics g){
-			if (Tanque == null)
-				Tanque = getImage("Tanque.png");
-		
-			Graphics2D g2 = (Graphics2D) g;
-			g2.drawImage(Tanque, x, y, 26, 26, null); //x e y diran donde se coloca el soldado
-		}
-	
-		public Image getImage(String path){
-		
-			Image tempImage = null;
-			try{
-				URL imageURL = Tanque.class.getResource(path);
-				tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
-			}
-			//en caso de que la imagen no exista
-			catch (Exception e){
-				System.out.println("imagen no existente" + e.getMessage());
-			
-			}
-			return tempImage;
-	}
 
 }

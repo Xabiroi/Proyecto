@@ -176,8 +176,8 @@ public class Partida extends JDialog{
 	
 	//Atributos que son la base del juego
 	private int xobj,yobj;//coordenadas donde se clicka
-	static UnidadBD UnidadActual=new UnidadBD();//Unidad que se esta controlando actualmente
-	static UnidadBD UnidadObjetivo=new UnidadBD();//Unidad a la que se desea atacar
+	public static UnidadBD UnidadActual=new UnidadBD();//Unidad que se esta controlando actualmente
+	public static UnidadBD UnidadObjetivo=new UnidadBD();//Unidad a la que se desea atacar
 
 	/**
 	 * Metodo que cambia el tablero de la partida actual
@@ -830,10 +830,23 @@ public class Partida extends JDialog{
 		btnCambiarArma.setEnabled(true);
 		btnCambiarArma.setFocusable(true);
 		btnFinalizarTurno.setEnabled(true);
-		btnFinalizarTurno.setFocusable(true);
+		btnFinalizarTurno.setFocusable(true);}
+		
+		else if(p.getUsuario2().equals(LoginManager.getUsuario().getNombre())){
+			btnAtacar.setEnabled(false);
+			btnAtacar.setFocusable(false);
+			btnGuardar.setEnabled(false);
+			btnGuardar.setFocusable(false);
+			btnMover.setEnabled(false);
+			btnMover.setFocusable(false);
+			btnCambiarArma.setEnabled(false);
+			btnCambiarArma.setFocusable(false);
+			btnFinalizarTurno.setEnabled(false);
+			btnFinalizarTurno.setFocusable(false);
+}
 
 		
-		}else{btnAtacar.setEnabled(false);
+		else{btnAtacar.setEnabled(false);
 		btnAtacar.setFocusable(false);
 		btnGuardar.setEnabled(false);
 		btnGuardar.setFocusable(false);
@@ -841,9 +854,7 @@ public class Partida extends JDialog{
 		btnMover.setFocusable(false);
 		btnCambiarArma.setEnabled(false);
 		btnCambiarArma.setFocusable(false);
-		btnFinalizarTurno.setEnabled(false);
-		btnFinalizarTurno.setFocusable(false);
-}
+		}
 		
 		textFieldPropietario.setText(p.getUsuario());}
 		
@@ -862,8 +873,7 @@ public class Partida extends JDialog{
 				btnFinalizarTurno.setEnabled(true);
 				btnFinalizarTurno.setFocusable(true);
 }
-			
-			else{btnAtacar.setEnabled(false);
+			else if(p.getUsuario().equals(LoginManager.getUsuario().getNombre())){btnAtacar.setEnabled(false);
 			btnAtacar.setFocusable(false);
 			btnGuardar.setEnabled(false);
 			btnGuardar.setFocusable(false);
@@ -873,6 +883,16 @@ public class Partida extends JDialog{
 			btnCambiarArma.setFocusable(false);
 			btnFinalizarTurno.setEnabled(false);
 			btnFinalizarTurno.setFocusable(false);}
+			
+			else{btnAtacar.setEnabled(false);
+			btnAtacar.setFocusable(false);
+			btnGuardar.setEnabled(false);
+			btnGuardar.setFocusable(false);
+			btnMover.setEnabled(false);
+			btnMover.setFocusable(false);
+			btnCambiarArma.setEnabled(false);
+			btnCambiarArma.setFocusable(false);
+			}
 			}
 			
 			else{if(UnidadActual.getAcciones()>0){
@@ -896,7 +916,8 @@ public class Partida extends JDialog{
 	btnCambiarArma.setEnabled(false);
 	btnCambiarArma.setFocusable(false);
 	btnFinalizarTurno.setEnabled(false);
-	btnFinalizarTurno.setFocusable(false);}
+	btnFinalizarTurno.setFocusable(false);
+}
 			}
 	
 			

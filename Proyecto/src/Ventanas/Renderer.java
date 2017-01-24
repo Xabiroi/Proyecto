@@ -6,7 +6,11 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 
 import LogicaBatallas.ElementosPartida;
-
+/**
+ * 
+ * Renderer que hace que el comboBox enseñe valores legibles. 
+ *En este caso los Strings de la partida
+ */
 public class Renderer extends DefaultListCellRenderer {
     /**
 	 * 

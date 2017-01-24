@@ -11,7 +11,11 @@ import UnidadesEnemigas.SoldadoRasoEnemigo;
 import UnidadesEnemigas.SpawnEnemigo;
 import UnidadesEnemigas.TanqueEnemigo;
 import UnidadesEnemigas.UnidadEnemiga;
-
+/**
+ * Clase padre de todas las unidades de la faccion aliada
+ * 
+ *
+ */
 public class UnidadAliada extends UnidadBD implements Unidad{
 	protected ArrayList<UnidadEnemiga> enemigos=new ArrayList<UnidadEnemiga>();
 	
@@ -43,13 +47,10 @@ public class UnidadAliada extends UnidadBD implements Unidad{
 	 * variara en efectividad entre armas contra las diastintas unidades
 	 * 
 	 * 
-	 * 
+	 * @param x coordenada x del punto donde se clicka para atacar al objetivo
+	 * @param y coordenada y del punto donde se clicka para atacar al objetivo
 	 */
 
-
-	
-	
-	//FIXME poner un random de atacar o fallar para  que sea mas emocionante
 	@Override
 	public void atacar(int x,int y){
 		

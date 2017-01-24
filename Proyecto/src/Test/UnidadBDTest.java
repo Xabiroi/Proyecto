@@ -1,13 +1,14 @@
-package BD;
+package Test;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import BD.UnidadBD;
 import UnidadesAmigas.SoldadoRaso;
 
 public class UnidadBDTest {
-
+//caso normal
 	@Test
 	public void test() {
 		SoldadoRaso u=new SoldadoRaso(0,0);
@@ -17,6 +18,7 @@ public class UnidadBDTest {
 		tabla=u.AlgoritmoPathfinding(u.getDistancia(), 0, 0, 2, 2, tabla);
 		assertEquals(tabla[2][2].getNombre(),"Soldado");
 	}
+	//Demasiado lejos
 	@Test
 	public void test1() {
 		SoldadoRaso u=new SoldadoRaso(0,0);
@@ -28,6 +30,7 @@ public class UnidadBDTest {
 		assertEquals(tabla[6][6].getNombre(),null);}catch(NullPointerException e){}
 		assertEquals(tabla[0][0].getNombre(),"Soldado");
 	}
+	//Usando toda la distancia posible
 	@Test
 	public void test2() {
 		SoldadoRaso u=new SoldadoRaso(0,0);
@@ -37,7 +40,7 @@ public class UnidadBDTest {
 		tabla=u.AlgoritmoPathfinding(u.getDistancia(), 0, 0, 2, 3, tabla);
 		assertEquals(tabla[2][3].getNombre(),"Soldado");
 	}
-	//Desaparicion de unidades
+	//Retrocediendo
 	@Test
 	public void test3() {
 		SoldadoRaso u=new SoldadoRaso(31,1);

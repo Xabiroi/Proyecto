@@ -49,7 +49,7 @@ public class Juego{
 			public void run() {
 				try {
 
-					BD.usarCrearTablasBD(BD.initBD("Local"));
+					BD.usarCrearTablasBD(BD.initBDOnline("Remoto"));
 					Juego window1 = new Juego();
 					window1.frame.setVisible(true);
 
