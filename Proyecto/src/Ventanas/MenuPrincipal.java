@@ -9,6 +9,9 @@ import javax.swing.JDialog;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
+
+import BD.BD;
+
 import java.awt.Font;
 
 public class MenuPrincipal extends JDialog{
@@ -61,6 +64,7 @@ public class MenuPrincipal extends JDialog{
 		 btnUn_jugador.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					BD.usarCrearTablasBD((BD.initBD("Local")));
 					Menu1Jugador m1j=new Menu1Jugador();
 					setVisible(false);
 					m1j.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

@@ -570,6 +570,7 @@ public class Partida extends JDialog{
 
 					}
 				else if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario())){
+					if(p.getUsuario2()!=null){
 						btnAtacar.setEnabled(false);
 						btnAtacar.setFocusable(false);
 						btnGuardar.setEnabled(false);
@@ -580,7 +581,19 @@ public class Partida extends JDialog{
 						btnCambiarArma.setFocusable(false);
 						btnFinalizarTurno.setEnabled(false);
 						btnFinalizarTurno.setFocusable(false);
+					}//CAMBIO
+					else{btnAtacar.setEnabled(true);
+					btnAtacar.setFocusable(true);
+					btnGuardar.setEnabled(true);
+					btnGuardar.setFocusable(true);
+					btnMover.setEnabled(true);
+					btnMover.setFocusable(true);
+					btnCambiarArma.setEnabled(true);
+					btnCambiarArma.setFocusable(true);
+					btnFinalizarTurno.setEnabled(true);
+					btnFinalizarTurno.setFocusable(true);
 						
+					}
 					}
 				else if(p.getUsuario2()==null){
 					btnAtacar.setEnabled(true);
@@ -599,6 +612,9 @@ public class Partida extends JDialog{
 					UnidadActual=new UnidadBD();UnidadObjetivo=new UnidadBD(); //Para no poder mover los soldados seleccionados anteriormente
 					
 				}
+				
+				
+				//Turno 1
 				else{Partida.p.setTurno(0);textFieldPropietario.setText(p.getUsuario());JOptionPane.showMessageDialog(null, "Turno terminado");
 				if(Juego.getLM().getUsuario().getNombre().equals(p.getUsuario2())){
 					btnAtacar.setEnabled(false);
